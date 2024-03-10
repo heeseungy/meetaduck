@@ -1,4 +1,16 @@
 package com.ssafy.duck.domain.party.exception;
 
-public class PartyException {
+import org.zalando.problem.AbstractThrowableProblem;
+
+public class PartyException extends AbstractThrowableProblem {
+
+    public PartyException(PartyErrorCode errorCode) {
+        super(
+                null,
+                errorCode.getStatus().name(),
+                errorCode.getStatus(),
+                errorCode.getDetail()
+        );
+    }
+
 }
