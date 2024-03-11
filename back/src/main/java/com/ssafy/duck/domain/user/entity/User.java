@@ -1,6 +1,5 @@
 package com.ssafy.duck.domain.user.entity;
 
-import com.ssafy.duck.domain.party.entity.Party;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;

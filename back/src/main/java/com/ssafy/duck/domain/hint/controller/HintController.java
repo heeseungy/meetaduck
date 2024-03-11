@@ -30,7 +30,7 @@ public class HintController {
 
         List<HintRes> hintResList = hintService.getHintQuestion(indexs);
         for (HintRes hintRes : hintResList) {
-            System.out.println(hintResList.toString());
+            System.out.println(hintResList);
         }
 
 

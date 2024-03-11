@@ -2,14 +2,13 @@ package com.ssafy.duck.domain.party.controller;
 
 import com.ssafy.duck.domain.party.dto.request.CreateReq;
 import com.ssafy.duck.domain.party.dto.request.DeleteReq;
+import com.ssafy.duck.domain.party.dto.response.CreateRes;
 import com.ssafy.duck.domain.party.dto.response.PartyRes;
 import com.ssafy.duck.domain.party.service.PartyService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.URI;
 
 @RestController
 @RequestMapping("/api/parties")
@@ -33,9 +32,9 @@ public class PartyController {
 
     @PostMapping("")
     @Operation(summary = "파티: 생성")
-    public ResponseEntity<String> create(@RequestBody CreateReq createReq) {
+    public ResponseEntity<CreateRes> create(@RequestBody CreateReq createReq) {
         // 정상 유저 검증 로직 향후 추가 (JWT, OAuth)
-        String accessCode = partyService.create(createReq);
+        CreateRes createRes = partyService.create(createReq);
 
         // 1안: 경로를 준다
 //        URI location = URI.create("/api/parties/" + accessCode);
@@ -46,7 +45,7 @@ public class PartyController {
 //        return ResponseEntity.ok().body(partyRes);
 
         // 3안 accessCode만 준다
-        return ResponseEntity.ok().body(accessCode);
+        return ResponseEntity.ok().body(createRes);
     }
 
     // @PatchMapping("")

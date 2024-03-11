@@ -1,4 +1,4 @@
-package com.ssafy.duck.domain.party.dto.request;
+package com.ssafy.duck.domain.party.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Getter
-public class CreateReq {
+public class CreateRes {
 
-    private Long userId;
-    private String partyName;
+    private String accessCode;
 
 }

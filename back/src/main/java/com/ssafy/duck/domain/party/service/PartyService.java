@@ -1,6 +1,7 @@
 package com.ssafy.duck.domain.party.service;
 
 import com.ssafy.duck.domain.party.dto.request.CreateReq;
+import com.ssafy.duck.domain.party.dto.response.CreateRes;
 import com.ssafy.duck.domain.party.dto.response.PartyRes;
 import com.ssafy.duck.domain.party.entity.Party;
 import com.ssafy.duck.domain.party.repository.PartyRepository;
@@ -9,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.print.DocFlavor;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Service
@@ -38,7 +38,7 @@ public class PartyService {
     }
 
     // create new party
-    public String create(CreateReq createReq) {
+    public CreateRes create(CreateReq createReq) {
         String chracters = "abcdefghijklmnopqrstuvwxyz0123456789";
         String accessCode = ThreadLocalRandom.current()
                 .ints(6, 0, chracters.length())
@@ -54,7 +54,7 @@ public class PartyService {
                 .user(userRepository.findByUserId(createReq.getUserId()))
                 .build();
         partyRepository.save(party);
-        return accessCode;
+        return CreateRes.builder().accessCode(accessCode).build();
     }
 
     // start this party
