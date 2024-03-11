@@ -4,7 +4,7 @@ spring:
       on-profile : dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: testurl
+    url: testurlurl
     username: ssafy
     password: ssafy
   hikari:
