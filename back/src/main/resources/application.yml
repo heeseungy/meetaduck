@@ -1,14 +1,10 @@
-server:
-  port: 8080
-
 spring:
-  web:
-    resources:
-      add-mappings: false
-  jpa:
-    properties:
-      hibernate:
-        default_batch_fetch_size: 1000
-  h2:
-    console:
-      enabled: false
+  profiles:
+    active : dev
+  cache :
+    type : redis
+
+server:
+  servlet:
+    context-path: /
+  forward-headers-strategy: framework

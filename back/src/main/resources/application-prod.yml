@@ -1,0 +1,61 @@
+spring:
+  config:
+    activate:
+      on-profile : prod
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url:
+    username:
+    password:
+  hikari:
+    maximum-pool-size: 50
+    minimum-idle: 50
+    connection-timeout: 5000
+    connection-test-query: /*CONNECTION TEST QUERY*/SELECT NOW() FROM DUAL
+    idle-timeout: 600000
+    max-lifetime: 1800000
+    auto-commit: true
+    pool-name: DevLogHikariCP
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  data:
+    redis:
+      host: redis
+      port: 6379
+      password : floweringRedis2024
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+          max-wait: 2000ms
+  jwt:
+    access: MEETADUCKACCESSKEYMEETADUCKACCESSKEYMEETADUCKACCESSKEY
+    refresh: MEETADUCKREFRESHKEYMEETADUCKREFRESHKEMEETADUCKREFRESHKEY
+    accesstime: 86400000
+    refreshtime: 604800000
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            client-id: 22e2b2f13382410c41cd0cdc617fe6ed
+            client-secret: Gmh1INUTfN6XcgG6Y6i6Wg64UevpAbEt
+            redirect-uri: http://i10c106.p.ssafy.io/api/login/oauth2/code/kakao
+            authorization-grant-type: authorization_code
+            client-authentication-method: client_secret_post
+            client-name: Kakao
+            scope: profile_nickname, profile_image, account_email, name, gender, birthday, birthyear
+
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
+
+iamport:
+  key:
+  secret:
