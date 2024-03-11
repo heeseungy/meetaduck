@@ -20,9 +20,9 @@ public class HintService {
     @Autowired
     private final HintRepository hintRepository;
 
+    // 힌트 질문 가져오기
     public List<HintRes> getHintQuestion(List<Long> indexList){
-        Optional<Hint> hintList = hintRepository.findById(Long.valueOf(1));
-        System.out.println("aaaabbbb");
+        List<Hint> hintList = hintRepository.findAllById(indexList);
         List<HintRes> hintResList = hintList.stream().map(HintRes::toDto)
                 .collect(Collectors.toList());
 

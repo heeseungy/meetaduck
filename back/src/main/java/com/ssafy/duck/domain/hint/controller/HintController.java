@@ -18,18 +18,12 @@ public class HintController {
 
     @GetMapping("/{guestId}")
     public ResponseEntity<List<HintRes>> getHintQnA(@PathVariable("guestId") Long guestId){
+        // 파티가 시작되면 랜덤 힌트 번호를 받아옴 - 수정 필요
         List<Long> indexs = new ArrayList<>();
         indexs.add(1L);
         indexs.add(3L);
-        System.out.println(guestId);
-
-        System.out.println("aaaaaaa");
 
         List<HintRes> hintResList = hintService.getHintQuestion(indexs);
-        for (HintRes hintRes : hintResList) {
-            System.out.println(hintResList.toString());
-        }
-
 
         return ResponseEntity.ok(hintResList);
     }
