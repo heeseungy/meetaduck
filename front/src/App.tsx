@@ -1,5 +1,5 @@
 import './App.css';
-import Frame from './components/Frame';
+import Frame from './components/commons/Frame';
 
 function App() {
   return (

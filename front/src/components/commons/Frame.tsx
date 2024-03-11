@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-import styles from '../styles/Frame.module.css';
+import styles from '../../styles/Frame.module.css';
 
 type FrameProps = {
   children: ReactNode;
