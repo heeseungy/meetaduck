@@ -3,6 +3,7 @@ package com.ssafy.duck.domain.hint.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 @Entity
 @Table(name = "`hints`")
@@ -10,6 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Getter
+@Slf4j // 로깅
 public class Hint {
 
     @Id
