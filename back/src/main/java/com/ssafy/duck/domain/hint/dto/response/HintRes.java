@@ -15,7 +15,7 @@ public class HintRes {
     private Long hintId;
     private String hintContent;
 
-    public static HintRes toDto(Hint hint){
+    public static HintRes toDto(Hint hint) {
         HintRes hintRes = HintRes.builder()
                 .hintId(hint.getHintId())
                 .hintContent(hint.getHintContent())
