@@ -1,3 +1,6 @@
+-- 외래키 제약조건 무시
+SET foreign_key_checks = 0;
+
 -- users
 INSERT INTO users (kakao_id, nickname, profile_url, thumbnail_url, birthday, phonenumber) VALUES
 (10001, '강지수', 'http://example.com/profiles/kang', 'http://example.com/thumbnails/kang', '0101', '010-1234-5678'),
@@ -8,22 +11,31 @@ INSERT INTO users (kakao_id, nickname, profile_url, thumbnail_url, birthday, pho
 (10006, '최지웅', 'http://example.com/profiles/choi', 'http://example.com/thumbnails/choi', '0606', '010-6789-0123');
 
 
+-- parties
+INSERT INTO parties (party_id, access_code, party_name, start_time, end_time, deleted, user_id) VALUES
+(1, 'abc123', '블랙펄', NOW(), (NOW() + INTERVAL 7 DAY), 0, 1);
+
+-- chats 
+INSERT INTO chats (maniti_id, created_time, party_id) VALUES
+(12, NOW(), 1),
+(13, NOW(), 1),
+(14, NOW(), 1),
+(15, NOW(), 1),
+(16, NOW(), 1),
+(11, NOW(), 1);
+
 -- guests
 INSERT INTO guests (guest_id, maniti_id, voted_id, party_id, chat_id, user_id) VALUES
-(11, 12, NULL, 1, 111, 10001),
-(12, 13, NULL, 1, 222, 10002),
-(13, 14, NULL, 1, 333, 10003),
-(14, 15, NULL, 1, 444, 10004),
-(15, 16, NULL, 1, 555, 10005),
-(16, 11, NULL, 1, 666, 10006);
+(11, 12, NULL, 1, 1, 10001),
+(12, 13, NULL, 1, 2, 10002),
+(13, 14, NULL, 1, 3, 10003),
+(14, 15, NULL, 1, 4, 10004),
+(15, 16, NULL, 1, 5, 10005),
+(16, 11, NULL, 1, 6, 10006);
 
 
 -- 서버 시간대를 UTC로 초기화
 -- SET GLOBAL time_zone = '+00:00';
-
--- parties
-INSERT INTO parties (party_id, access_code, party_name, start_time, end_time, deleted, user_id) VALUES
-(1, 'abc123', '블랙펄', NOW(), (NOW() + INTERVAL 7 DAY), 0, 10001);
 
 -- hints
 INSERT INTO hints (hint_content) VALUES 
