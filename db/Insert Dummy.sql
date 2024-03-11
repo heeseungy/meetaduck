@@ -26,12 +26,12 @@ INSERT INTO chats (maniti_id, created_time, party_id) VALUES
 
 -- guests
 INSERT INTO guests (guest_id, maniti_id, voted_id, party_id, chat_id, user_id) VALUES
-(11, 12, NULL, 1, 1, 10001),
-(12, 13, NULL, 1, 2, 10002),
-(13, 14, NULL, 1, 3, 10003),
-(14, 15, NULL, 1, 4, 10004),
-(15, 16, NULL, 1, 5, 10005),
-(16, 11, NULL, 1, 6, 10006);
+(11, 12, NULL, 1, 1, 1),
+(12, 13, NULL, 1, 2, 2),
+(13, 14, NULL, 1, 3, 3),
+(14, 15, NULL, 1, 4, 4),
+(15, 16, NULL, 1, 5, 5),
+(16, 11, NULL, 1, 6, 6);
 
 
 -- 서버 시간대를 UTC로 초기화

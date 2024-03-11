@@ -1,7 +1,6 @@
 package com.ssafy.duck.domain.hint.service;
 
 import com.ssafy.duck.domain.hint.dto.response.HintRes;
-import com.ssafy.duck.domain.hint.dto.response.HintStatusRes;
 import com.ssafy.duck.domain.hint.entity.Hint;
 import com.ssafy.duck.domain.hint.repository.HintRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +19,7 @@ public class HintService {
     @Autowired
     private final HintRepository hintRepository;
 
-    public List<HintRes> getHintQuestion(List<Long> indexList){
+    public List<HintRes> getHintQuestion(List<Long> indexList) {
         Optional<Hint> hintList = hintRepository.findById(Long.valueOf(1));
         System.out.println("aaaabbbb");
         List<HintRes> hintResList = hintList.stream().map(HintRes::toDto)
