@@ -15,7 +15,7 @@ public class PartyService {
     private final PartyRepository partyRepository;
 
     // get Party Info
-    public PartyRes findParty(String accessCode) {
+    public PartyRes find(String accessCode) {
         return toPartyRes(partyRepository.findByAccessCode(accessCode));
     }
 
@@ -33,6 +33,12 @@ public class PartyService {
 
     // create new party
     // start this party
+
     // delete this party
+    public void delete(String accessCode) {
+        Party party = partyRepository.findByAccessCode(accessCode);
+        party.delete();
+        partyRepository.save(party);
+    }
 
 }

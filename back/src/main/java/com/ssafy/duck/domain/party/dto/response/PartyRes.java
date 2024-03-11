@@ -21,4 +21,8 @@ public class PartyRes {
     private boolean deleted;
     private Long userId;
 
+    public boolean getDeleted() {
+        return this.deleted;
+    }
+
 }

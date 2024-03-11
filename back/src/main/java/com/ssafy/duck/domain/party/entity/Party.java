@@ -42,4 +42,8 @@ public class Party {
     @JoinColumn(name = "`user_id`", nullable = false, updatable = false)
     private User user;
 
+    public void delete() {
+        this.deleted = true;
+    }
+
 }
