@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface HintStatusRepository  extends JpaRepository<HintStatus, Long> {
     List<HintStatus> findAllByGuestGuestId(Long guestId);
+    HintStatus findByGuestGuestIdAndHintHintId(Long guestId, Long hintId);
 }

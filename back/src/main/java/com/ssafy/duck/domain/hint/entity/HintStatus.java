@@ -31,4 +31,10 @@ public class HintStatus {
     @JoinColumn(name = "guest_id", nullable = false, updatable = false)
     private Guest guest;
 
+    public void updateAnswer(Long hintStatusId, String hintStatusAnswer, Hint hint, Guest guest) {
+        this.hintStatusId = hintStatusId;
+        this.hintStatusAnswer = hintStatusAnswer;
+        this.hint = hint;
+        this.guest = guest;
+    }
 }

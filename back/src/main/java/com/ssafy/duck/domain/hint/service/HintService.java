@@ -3,6 +3,7 @@ package com.ssafy.duck.domain.hint.service;
 import com.ssafy.duck.domain.guest.dto.response.GuestRes;
 import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.service.GuestService;
+import com.ssafy.duck.domain.hint.dto.request.HintStatusReq;
 import com.ssafy.duck.domain.hint.dto.response.HintRes;
 import com.ssafy.duck.domain.hint.dto.response.HintStatusRes;
 import com.ssafy.duck.domain.hint.entity.Hint;
@@ -73,7 +74,7 @@ public class HintService {
         System.out.println(curLocalTime +"/" + endLocalTime + " period " + period);
 
         //힌트 개수 가져오기
-        int totalCount = (int) hintRepository.count();
+        long totalCount =  hintRepository.count();
 //        System.out.println("total count " + totalCount);
 
         List<Long> totalIndex = new ArrayList<>();
@@ -95,7 +96,7 @@ public class HintService {
         return selectedList;
     }
 
-    // 힌트status에 저장
+    // 힌트status에 질문 저장
     public void set(List<Long> indexList, Long partyId){
         // 파티아이디로 전체 guest id 가져오기
         List<GuestRes> guestList = guestService.getAllGuest(partyId);
@@ -118,6 +119,13 @@ public class HintService {
     }
 
 
-
-
+    // 힌트 작성하기
+    public void setStatus(Long guestId, List<HintStatusReq> hintStatusReq) {
+        for (HintStatusReq req : hintStatusReq) {
+            HintStatus hintStatus = hintStatusRepository.findByGuestGuestIdAndHintHintId(guestId, req.getHintId());
+            hintStatus.updateAnswer(hintStatus.getHintStatusId(), req.getHintStatusAnswer(), hintStatus.getHint(), hintStatus.getGuest());
+//            System.out.println(req.getHintId() + " / " +hintStatus.getHintStatusId());
+            hintStatusRepository.save(hintStatus);
+        }
+    }
 }
