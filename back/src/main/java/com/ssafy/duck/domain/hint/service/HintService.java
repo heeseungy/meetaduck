@@ -75,7 +75,7 @@ public class HintService {
 //        System.out.println("total count " + totalCount);
 
         List<Long> totalIndex = new ArrayList<>();
-        for (long i = 0; i < totalCount; i++) {
+        for (long i = 1; i <= totalCount; i++) {
             totalIndex.add(i);
         }
 
