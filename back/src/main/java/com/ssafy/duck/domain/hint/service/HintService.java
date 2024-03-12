@@ -11,8 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.*;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,6 +39,43 @@ public class HintService {
         return hintResList;
 
     }
+
+    //종료시간과 현재시간 비교해서 날짜개수만큼 랜덤으로 힌트 가져오기
+    public List<Long> fetch(Instant endTime){
+        Instant current = Instant.now();
+        System.out.println("current "+ LocalDateTime.ofInstant(current, ZoneId.systemDefault()));
+        System.out.println("endTime " +LocalDateTime.ofInstant(endTime, ZoneId.systemDefault()));
+
+        //day 수 구하기
+        int curLocalTime = LocalDateTime.ofInstant(current, ZoneId.systemDefault()).getDayOfMonth();
+        int endLocalTime = LocalDateTime.ofInstant(endTime, ZoneId.systemDefault()).getDayOfMonth();
+        int period = endLocalTime - curLocalTime;
+        System.out.println(curLocalTime +"/" + endLocalTime + " period " + period);
+
+        //힌트 개수 가져오기
+        int totalCount = (int) hintRepository.count();
+        System.out.println("total count " + totalCount);
+
+        List<Long> totalIndex = new ArrayList<>();
+        for (long i = 0; i < totalCount; i++) {
+             totalIndex.add(i);
+        }
+
+        List<Long> selectedList = new ArrayList<>();
+        for (long i = 0; i < period; i++) {
+             int random = ThreadLocalRandom.current().nextInt(totalIndex.size());
+             selectedList.add(totalIndex.remove(random));
+        }
+
+        System.out.println("---selected");
+        for (Long l : selectedList) {
+            System.out.print(l + " ");
+        }
+
+        return selectedList;
+    }
+
+
 
     /*
     * 1. guest id 조회해서 answer있는지 확인

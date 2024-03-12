@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +30,8 @@ public class HintController {
         indexs.add(300L);
 
         List<HintRes> hintResList = hintService.getHintQuestion(indexs);
+
+        hintService.fetch(Instant.now().plus(4*24+5, ChronoUnit.HOURS));
 
         return ResponseEntity.ok(hintResList);
     }
