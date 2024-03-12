@@ -3,6 +3,8 @@ package com.ssafy.duck.domain.hint.service;
 import com.ssafy.duck.domain.hint.dto.response.HintRes;
 import com.ssafy.duck.domain.hint.dto.response.HintStatusRes;
 import com.ssafy.duck.domain.hint.entity.Hint;
+import com.ssafy.duck.domain.hint.exception.HintErrorCode;
+import com.ssafy.duck.domain.hint.exception.HintException;
 import com.ssafy.duck.domain.hint.repository.HintRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,10 @@ public class HintService {
     // 힌트 질문 가져오기
     public List<HintRes> getHintQuestion(List<Long> indexList){
         List<Hint> hintList = hintRepository.findAllById(indexList);
+//        if(hintList.isEmpty()){
+//            throw new HintException("no hint", HintErrorCode.HINT_QUESTION_NOT_FOUND);
+//        }
+
         List<HintRes> hintResList = hintList.stream().map(HintRes::toDto)
                 .collect(Collectors.toList());
 
