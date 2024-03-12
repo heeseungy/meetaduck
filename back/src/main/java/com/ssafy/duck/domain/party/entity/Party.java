@@ -46,4 +46,9 @@ public class Party {
         this.deleted = true;
     }
 
+    public void start(Instant endTime) {
+        this.startTime = Instant.now();
+        this.endTime = endTime;
+    }
+
 }

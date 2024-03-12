@@ -5,13 +5,16 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
-public class CreateReq {
+public class StartReq {
 
-    private String partyName;
+    private String accessCode;
+    private Instant endTime;
     private Long userId;
 
 }
