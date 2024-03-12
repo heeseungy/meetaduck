@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @Builder
 @Getter
+@ToString
 @Slf4j // 로깅
 public class Hint {
 

@@ -7,9 +7,9 @@ import com.ssafy.duck.domain.guest.repository.GuestRepository;
 import com.ssafy.duck.domain.party.repository.PartyRepository;
 import com.ssafy.duck.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -20,10 +20,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class GuestService {
 
+    @Autowired
     private final UserRepository userRepository;
     private final PartyRepository partyRepository;
     private final GuestRepository guestRepository;
-
     private final ChatService chatService;
 
     public void create(String accessCode, Long userId) {
@@ -70,4 +70,13 @@ public class GuestService {
         return guestResList;
     }
 
+    public List<GuestRes> getAllGuest(Long partyId){
+
+        List<Guest> guestList = guestRepository.findAllByPartyPartyId(partyId);
+        List<GuestRes> guestResList = toGuestResList(guestList);
+        return guestResList;
+
+
+
+    }
 }
