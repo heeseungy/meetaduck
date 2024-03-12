@@ -72,7 +72,7 @@ public class GuestService {
 
     public List<GuestRes> getAllGuest(Long partyId){
 
-        List<Guest> guestList = guestRepository.findAllByPartyPartyId(partyId);
+        List<Guest> guestList = guestRepository.findByParty_PartyId(partyId);
         List<GuestRes> guestResList = toGuestResList(guestList);
         return guestResList;
 
