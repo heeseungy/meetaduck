@@ -5,7 +5,6 @@ import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.service.GuestService;
 import com.ssafy.duck.domain.hint.dto.request.HintStatusReq;
 import com.ssafy.duck.domain.hint.dto.response.HintRes;
-import com.ssafy.duck.domain.hint.dto.response.HintStatusRes;
 import com.ssafy.duck.domain.hint.entity.Hint;
 import com.ssafy.duck.domain.hint.entity.HintStatus;
 import com.ssafy.duck.domain.hint.exception.HintErrorCode;

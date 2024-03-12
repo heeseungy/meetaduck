@@ -1,0 +1,7 @@
+function LoginPage() {
+  return (
+    <h1>Hi</h1>
+  )
+}
+
+export default LoginPage;

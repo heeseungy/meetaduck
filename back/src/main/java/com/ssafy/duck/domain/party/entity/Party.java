@@ -42,4 +42,13 @@ public class Party {
     @JoinColumn(name = "`user_id`", nullable = false, updatable = false)
     private User user;
 
+    public void delete() {
+        this.deleted = true;
+    }
+
+    public void start(Instant endTime) {
+        this.startTime = Instant.now();
+        this.endTime = endTime;
+    }
+
 }

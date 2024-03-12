@@ -16,7 +16,7 @@ public class HintStatusRes {
 
     private String hintStatusAnswer;
 
-    public static HintStatusRes toDto(HintStatus hintStatus){
+    public static HintStatusRes toDto(HintStatus hintStatus) {
         HintStatusRes hintStatusRes = HintStatusRes.builder()
                 .hintId(hintStatus.getHint().getHintId())
                 .hintContent(hintStatus.getHint().getHintContent())
