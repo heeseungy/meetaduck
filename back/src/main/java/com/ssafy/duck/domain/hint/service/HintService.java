@@ -37,8 +37,19 @@ public class HintService {
     private GuestService guestService;
 
     // 힌트 질문 가져오기
-    public List<HintRes> getHintQuestion(List<Long> indexList){
-        List<Hint> hintList = hintRepository.findAllById(indexList);
+    public List<HintRes> getHintQuestion(Long guestId){
+        //힌트 id 가져오기
+        List<HintStatus> hintStatusList = hintStatusRepository.findAllByGuestGuestId(guestId);
+
+        //힌트 질문 가져오기
+        List<Hint> hintList = new ArrayList<>();
+        for (HintStatus hs : hintStatusList) {
+            Optional<Hint> hint = hintRepository.findById(hs.getHint().getHintId());
+            if(hint.isPresent()){
+                hintList.add(hint.get());
+            }
+        }
+
 //        if(hintList.isEmpty()){
 //            throw new HintException("no hint", HintErrorCode.HINT_QUESTION_NOT_FOUND);
 //        }
@@ -47,7 +58,6 @@ public class HintService {
                 .collect(Collectors.toList());
 
         return hintResList;
-
     }
 
     //종료시간과 현재시간 비교해서 날짜개수만큼 랜덤으로 힌트 가져오기
@@ -68,13 +78,13 @@ public class HintService {
 
         List<Long> totalIndex = new ArrayList<>();
         for (long i = 0; i < totalCount; i++) {
-             totalIndex.add(i);
+            totalIndex.add(i);
         }
 
         List<Long> selectedList = new ArrayList<>();
         for (long i = 0; i < period; i++) {
-             int random = ThreadLocalRandom.current().nextInt(totalIndex.size());
-             selectedList.add(totalIndex.remove(random));
+            int random = ThreadLocalRandom.current().nextInt(totalIndex.size());
+            selectedList.add(totalIndex.remove(random));
         }
 
         System.out.println("---selected");
@@ -93,8 +103,8 @@ public class HintService {
         for (GuestRes guestRes : guestList) {
             System.out.println(guestRes.getGuestId());
         }
+
         // guest 마다 hint status에 데이터 추가하기
-        int i = 0;
         for (GuestRes guestRes : guestList) {
             for (Long index : indexList) {
                 System.out.println("index " + index);
@@ -105,8 +115,6 @@ public class HintService {
                 hintStatusRepository.save(hintStatus);
             }
         }
-
-
     }
 
 

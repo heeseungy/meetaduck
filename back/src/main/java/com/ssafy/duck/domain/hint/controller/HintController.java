@@ -24,12 +24,7 @@ public class HintController {
 
     @GetMapping("/{guestId}")
     public ResponseEntity<List<HintRes>> getHintQuestion(@PathVariable("guestId") Long guestId){
-        // 파티가 시작되면 랜덤 힌트 번호를 받아옴 - 수정 필요
-        List<Long> indexs = new ArrayList<>();
-        indexs.add(100L);
-        indexs.add(300L);
-
-        List<HintRes> hintResList = hintService.getHintQuestion(indexs); 
+        List<HintRes> hintResList = hintService.getHintQuestion(guestId);
         return ResponseEntity.ok(hintResList);
     }
 
