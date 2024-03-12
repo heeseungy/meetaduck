@@ -51,8 +51,9 @@ public class HintService {
             }
         }
 
+        //힌트 질문이 비어있으면 예외처리
 //        if(hintList.isEmpty()){
-//            throw new HintException("no hint", HintErrorCode.HINT_QUESTION_NOT_FOUND);
+//            throw new HintException(HintErrorCode.HINT_QUESTION_NOT_FOUND);
 //        }
 
         List<HintRes> hintResList = hintList.stream().map(HintRes::toDto)
