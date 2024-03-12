@@ -23,6 +23,8 @@ import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
+import static com.ssafy.duck.domain.hint.exception.HintErrorCode.QUESTION_NOT_FOUND;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -44,16 +46,11 @@ public class HintService {
         //힌트 질문 가져오기
         List<Hint> hintList = new ArrayList<>();
         for (HintStatus hs : hintStatusList) {
-            Optional<Hint> hint = hintRepository.findById(hs.getHint().getHintId());
-            if(hint.isPresent()){
-                hintList.add(hint.get());
-            }
-        }
+            Hint hint = hintRepository.findById(hs.getHint().getHintId())
+                    .orElseThrow(() -> new HintException(HintErrorCode.QUESTION_NOT_FOUND));
+            hintList.add(hint);
 
-        //힌트 질문이 비어있으면 예외처리
-//        if(hintList.isEmpty()){
-//            throw new HintException(HintErrorCode.HINT_QUESTION_NOT_FOUND);
-//        }
+        }
 
         List<HintRes> hintResList = hintList.stream().map(HintRes::toDto)
                 .collect(Collectors.toList());
@@ -88,10 +85,10 @@ public class HintService {
             selectedList.add(totalIndex.remove(random));
         }
 
-        System.out.println("---selected");
-        for (Long l : selectedList) {
-            System.out.print(l + " ");
-        }
+//        System.out.println("---selected");
+//        for (Long l : selectedList) {
+//            System.out.print(l + " ");
+//        }
 
         return selectedList;
     }
