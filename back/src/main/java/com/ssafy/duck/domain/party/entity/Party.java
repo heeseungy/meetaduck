@@ -1,11 +1,15 @@
 package com.ssafy.duck.domain.party.entity;
 
+import com.ssafy.duck.domain.chat.entity.Chat;
+import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.user.entity.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
 
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 @Table(name = "`parties`")
@@ -44,6 +48,11 @@ public class Party {
 
     public void delete() {
         this.deleted = true;
+    }
+
+    public void start(Instant endTime) {
+        this.startTime = Instant.now();
+        this.endTime = endTime;
     }
 
 }

@@ -1,7 +1,7 @@
 package com.ssafy.duck.domain.party.service;
 
-import com.ssafy.duck.domain.party.dto.request.CreateReq;
-import com.ssafy.duck.domain.party.dto.response.CreateRes;
+import com.ssafy.duck.domain.guest.repository.GuestRepository;
+import com.ssafy.duck.domain.party.dto.request.StartReq;
 import com.ssafy.duck.domain.party.dto.response.PartyRes;
 import com.ssafy.duck.domain.party.entity.Party;
 import com.ssafy.duck.domain.party.repository.PartyRepository;
@@ -19,26 +19,15 @@ public class PartyService {
 
     private final PartyRepository partyRepository;
     private final UserRepository userRepository;
+    private final GuestRepository guestRepository;
 
     // get Party Info
-    public PartyRes find(String accessCode) {
-        return toPartyRes(partyRepository.findByAccessCode(accessCode));
-    }
-
-    public PartyRes toPartyRes(Party party) {
-        return PartyRes.builder()
-                .partyId(party.getPartyId())
-                .accessCode(party.getAccessCode())
-                .partyName(party.getPartyName())
-                .startTime(party.getStartTime())
-                .endTime(party.getEndTime())
-                .deleted(party.isDeleted())
-                .userId(party.getUser().getUserId())
-                .build();
+    public Party find(String accessCode) {
+        return partyRepository.findByAccessCode(accessCode);
     }
 
     // create new party
-    public CreateRes create(CreateReq createReq) {
+    public String create(String partyName, Long userId) {
         String chracters = "abcdefghijklmnopqrstuvwxyz0123456789";
         String accessCode = ThreadLocalRandom.current()
                 .ints(6, 0, chracters.length())
@@ -47,14 +36,14 @@ public class PartyService {
                 .toString();
         Party party = Party.builder()
                 .accessCode(accessCode)
-                .partyName(createReq.getPartyName())
+                .partyName(partyName)
                 .startTime(null)
                 .endTime(null)
                 .deleted(false)
-                .user(userRepository.findByUserId(createReq.getUserId()))
+                .user(userRepository.findByUserId(userId))
                 .build();
         partyRepository.save(party);
-        return CreateRes.builder().accessCode(accessCode).build();
+        return accessCode;
     }
 
     // start this party
@@ -64,6 +53,28 @@ public class PartyService {
         Party party = partyRepository.findByAccessCode(accessCode);
         party.delete();
         partyRepository.save(party);
+    }
+
+    public void start(PartyRes partyRes, StartReq startReq) {
+        // 시작시간, 종료시간 업데이트
+        Party party = partyRepository.findByAccessCode(partyRes.getAccessCode());
+        party.start(startReq.getEndTime());
+        partyRepository.save(party);
+    }
+
+    public PartyRes toPartyRes(Party party) {
+        if (party.getPartyId() == null) {
+            return null;
+        }
+        return PartyRes.builder()
+                .partyId(party.getPartyId())
+                .accessCode(party.getAccessCode())
+                .partyName(party.getPartyName())
+                .startTime(party.getStartTime())
+                .endTime(party.getEndTime())
+                .deleted(party.isDeleted())
+                .userId(party.getUser().getUserId())
+                .build();
     }
 
 }

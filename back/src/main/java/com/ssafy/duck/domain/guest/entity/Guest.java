@@ -17,27 +17,29 @@ public class Guest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "`guest_id`", nullable = false, updatable = false)
+    @Column(name = "guest_id", nullable = false, updatable = false)
     private Long guestId;
 
-    @Null
-    @Column(name = "`maniti_id`")
+    @Column(name = "maniti_id")
     private Long manitiId;
 
-    @Null
-    @Column(name = "`voted_id`")
+    @Column(name = "voted_id")
     private Long votedId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "`party_id`", nullable = false, updatable = false)
+    @JoinColumn(name = "party_id", nullable = false, updatable = false)
     private Party party;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "`chat_id`", nullable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "chat_id", nullable = false, updatable = false)
     private Chat chat;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "`user_id`", nullable = false, updatable = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false, updatable = false)
     private User user;
+
+    public void updateManiti(Long manitiId) {
+        this.manitiId = manitiId;
+    }
 
 }
