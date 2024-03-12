@@ -29,10 +29,7 @@ public class HintController {
         indexs.add(100L);
         indexs.add(300L);
 
-        List<HintRes> hintResList = hintService.getHintQuestion(indexs);
-
-        hintService.fetch(Instant.now().plus(4*24+5, ChronoUnit.HOURS));
-
+        List<HintRes> hintResList = hintService.getHintQuestion(indexs); 
         return ResponseEntity.ok(hintResList);
     }
 
@@ -44,6 +41,14 @@ public class HintController {
 //
 //        return ResponseEntity.ok(hintStatusResList);
 //    }
+
+    @GetMapping("/test")
+    public void getHintTest(){
+        hintService.set(
+                hintService.fetch(Instant.now().plus(4*24+5, ChronoUnit.HOURS)), 1L
+        );
+    }
+
 
 
 }

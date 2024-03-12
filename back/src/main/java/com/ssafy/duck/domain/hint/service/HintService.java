@@ -1,11 +1,16 @@
 package com.ssafy.duck.domain.hint.service;
 
+import com.ssafy.duck.domain.guest.dto.response.GuestRes;
+import com.ssafy.duck.domain.guest.entity.Guest;
+import com.ssafy.duck.domain.guest.service.GuestService;
 import com.ssafy.duck.domain.hint.dto.response.HintRes;
 import com.ssafy.duck.domain.hint.dto.response.HintStatusRes;
 import com.ssafy.duck.domain.hint.entity.Hint;
+import com.ssafy.duck.domain.hint.entity.HintStatus;
 import com.ssafy.duck.domain.hint.exception.HintErrorCode;
 import com.ssafy.duck.domain.hint.exception.HintException;
 import com.ssafy.duck.domain.hint.repository.HintRepository;
+import com.ssafy.duck.domain.hint.repository.HintStatusRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +30,12 @@ public class HintService {
     @Autowired
     private final HintRepository hintRepository;
 
+    @Autowired
+    private final HintStatusRepository hintStatusRepository;
+
+    @Autowired
+    private GuestService guestService;
+
     // 힌트 질문 가져오기
     public List<HintRes> getHintQuestion(List<Long> indexList){
         List<Hint> hintList = hintRepository.findAllById(indexList);
@@ -42,8 +53,8 @@ public class HintService {
     //종료시간과 현재시간 비교해서 날짜개수만큼 랜덤으로 힌트 가져오기
     public List<Long> fetch(Instant endTime){
         Instant current = Instant.now();
-        System.out.println("current "+ LocalDateTime.ofInstant(current, ZoneId.systemDefault()));
-        System.out.println("endTime " +LocalDateTime.ofInstant(endTime, ZoneId.systemDefault()));
+//        System.out.println("current "+ LocalDateTime.ofInstant(current, ZoneId.systemDefault()));
+//        System.out.println("endTime " +LocalDateTime.ofInstant(endTime, ZoneId.systemDefault()));
 
         //day 수 구하기
         int curLocalTime = LocalDateTime.ofInstant(current, ZoneId.systemDefault()).getDayOfMonth();
@@ -53,7 +64,7 @@ public class HintService {
 
         //힌트 개수 가져오기
         int totalCount = (int) hintRepository.count();
-        System.out.println("total count " + totalCount);
+//        System.out.println("total count " + totalCount);
 
         List<Long> totalIndex = new ArrayList<>();
         for (long i = 0; i < totalCount; i++) {
@@ -77,12 +88,23 @@ public class HintService {
     // 힌트status에 저장
     public void set(List<Long> indexList, Long partyId){
         // 파티아이디로 전체 guest id 가져오기
+        List<GuestRes> guestList = guestService.getAllGuest(partyId);
+
+        for (GuestRes guestRes : guestList) {
+            System.out.println(guestRes.getGuestId());
+        }
         // guest 마다 hint status에 데이터 추가하기
-
-        List<Long> guestList = new ArrayList<>();
-
-
-
+        int i = 0;
+        for (GuestRes guestRes : guestList) {
+            for (Long index : indexList) {
+                System.out.println("index " + index);
+                HintStatus hintStatus = HintStatus.builder()
+                        .guest(Guest.builder().guestId(guestRes.getGuestId()).build())
+                        .hint(Hint.builder().hintId(index).build())
+                        .build();
+                hintStatusRepository.save(hintStatus);
+            }
+        }
 
 
     }
