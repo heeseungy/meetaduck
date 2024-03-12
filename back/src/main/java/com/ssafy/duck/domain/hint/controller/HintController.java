@@ -2,15 +2,9 @@ package com.ssafy.duck.domain.hint.controller;
 
 import com.ssafy.duck.domain.hint.dto.request.HintStatusReq;
 import com.ssafy.duck.domain.hint.dto.response.HintRes;
-import com.ssafy.duck.domain.hint.dto.response.HintStatusRes;
-import com.ssafy.duck.domain.hint.exception.HintErrorCode;
-import com.ssafy.duck.domain.hint.exception.HintErrorResponse;
-import com.ssafy.duck.domain.hint.exception.HintException;
 import com.ssafy.duck.domain.hint.service.HintService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
