@@ -4,7 +4,6 @@ import com.ssafy.duck.domain.chat.service.ChatService;
 import com.ssafy.duck.domain.guest.dto.response.GuestRes;
 import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.repository.GuestRepository;
-import com.ssafy.duck.domain.party.entity.Party;
 import com.ssafy.duck.domain.party.repository.PartyRepository;
 import com.ssafy.duck.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -48,7 +47,6 @@ public class GuestService {
             guestRepository.save(guest);
         }
         return guests;
-
     }
 
     public boolean find(Long userId) {

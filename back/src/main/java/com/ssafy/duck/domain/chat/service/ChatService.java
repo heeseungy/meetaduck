@@ -19,7 +19,6 @@ public class ChatService {
     private final PartyRepository partyRepository;
     private final ChatRepository chatRepository;
 
-
     public Chat create(String accessCode) {
         Chat chat = Chat.builder()
                 .manitiId(null)
@@ -33,19 +32,9 @@ public class ChatService {
     public void updateManiti(List<Guest> guests) {
         for (Guest guest : guests) {
             Chat chat = chatRepository.findByChatId(guest.getChat().getChatId());
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
             System.out.println(chat.getChatId());
             System.out.println(chat.getManitiId());
             System.out.println(chat.getCratedTime());
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
             chat.updateManiti(guest.getManitiId());
             chatRepository.save(chat);
         }

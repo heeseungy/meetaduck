@@ -1,6 +1,5 @@
 package com.ssafy.duck.domain.party.service;
 
-import com.ssafy.duck.domain.guest.repository.GuestRepository;
 import com.ssafy.duck.domain.party.dto.request.StartReq;
 import com.ssafy.duck.domain.party.dto.response.PartyRes;
 import com.ssafy.duck.domain.party.entity.Party;
@@ -19,14 +18,11 @@ public class PartyService {
 
     private final PartyRepository partyRepository;
     private final UserRepository userRepository;
-    private final GuestRepository guestRepository;
 
-    // get Party Info
     public Party find(String accessCode) {
         return partyRepository.findByAccessCode(accessCode);
     }
 
-    // create new party
     public String create(String partyName, Long userId) {
         String chracters = "abcdefghijklmnopqrstuvwxyz0123456789";
         String accessCode = ThreadLocalRandom.current()
@@ -46,9 +42,6 @@ public class PartyService {
         return accessCode;
     }
 
-    // start this party
-
-    // delete this party
     public void delete(String accessCode) {
         Party party = partyRepository.findByAccessCode(accessCode);
         party.delete();
@@ -56,7 +49,6 @@ public class PartyService {
     }
 
     public void start(PartyRes partyRes, StartReq startReq) {
-        // 시작시간, 종료시간 업데이트
         Party party = partyRepository.findByAccessCode(partyRes.getAccessCode());
         party.start(startReq.getEndTime());
         partyRepository.save(party);

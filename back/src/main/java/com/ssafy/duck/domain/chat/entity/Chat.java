@@ -1,13 +1,11 @@
 package com.ssafy.duck.domain.chat.entity;
 
-import com.ssafy.duck.common.BaseTimeEntity;
 import com.ssafy.duck.domain.party.entity.Party;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.annotation.Nullable;
 import java.time.Instant;
 
 @Entity
@@ -17,15 +15,14 @@ import java.time.Instant;
 @AllArgsConstructor
 @Builder
 @Getter
-public class Chat{
+public class Chat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "`chat_id`", nullable = false, updatable = false)
     private Long chatId;
 
-    @Nullable
-    @Column(name = "`maniti_id`", updatable = false)
+    @Column(name = "`maniti_id`")
     private Long manitiId;
 
     @NotNull

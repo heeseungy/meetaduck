@@ -1,12 +1,9 @@
 package com.ssafy.duck.domain.guest.dto.response;
 
-import com.ssafy.duck.domain.guest.entity.Guest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor

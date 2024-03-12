@@ -4,7 +4,6 @@ import com.ssafy.duck.domain.chat.entity.Chat;
 import com.ssafy.duck.domain.party.entity.Party;
 import com.ssafy.duck.domain.user.entity.User;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Null;
 import lombok.*;
 
 @Entity
