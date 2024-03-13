@@ -1,5 +1,9 @@
 function HintProfile() {
-  return <h1>HintProfile</h1>;
+  return (
+    <>
+      <img src="@/assets/images/pairChat.png" alt="hintProfileImage" />;
+    </>
+  );
 }
 
 export default HintProfile;
