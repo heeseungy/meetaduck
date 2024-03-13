@@ -1,4 +1,5 @@
 import styles from '../../styles/LoginPage.module.css';
+import duckLogo from '@/assets/images/RubberDuckBase.png'
 
 function LoginPage() {
   const loginHandler = () => {
@@ -20,7 +21,7 @@ function LoginPage() {
       <main>
         <p>나의 마니또는 누구일까요?</p>
         <p>채팅과 미션을 통해 알아보세요!</p>
-        <div>이미지 공간입니다</div>
+        <img src={duckLogo} alt="Logo" />
       </main>
       <button onClick={loginHandler}>카카오로 로그인하기</button>
     </>
