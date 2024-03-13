@@ -1,3 +1,15 @@
+.HeadFont {
+  font-size: 48px;
+}
+
+.HeadDark {
+  color: #4D4637;
+}
+
+.HeadWhite {
+  color: white;
+}
+
 .Box {
   background-color: red;
 }
