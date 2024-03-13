@@ -75,7 +75,7 @@ public class HintService {
 //        System.out.println("total count " + totalCount);
 
         List<Long> totalIndex = new ArrayList<>();
-        for (long i = 0; i < totalCount; i++) {
+        for (long i = 1; i <= totalCount; i++) {
             totalIndex.add(i);
         }
 
@@ -85,10 +85,7 @@ public class HintService {
             selectedList.add(totalIndex.remove(random));
         }
 
-//        System.out.println("---selected");
-//        for (Long l : selectedList) {
-//            System.out.print(l + " ");
-//        }
+        System.out.println("--- hint selected " + selectedList);
 
         return selectedList;
     }
@@ -98,14 +95,13 @@ public class HintService {
         // 파티아이디로 전체 guest id 가져오기
         List<GuestRes> guestList = guestService.getAllGuest(partyId);
 
-        for (GuestRes guestRes : guestList) {
-            System.out.println(guestRes.getGuestId());
-        }
+
+        System.out.println("--- hint guest List " + guestList);
 
         // guest 마다 hint status에 데이터 추가하기
         for (GuestRes guestRes : guestList) {
             for (Long index : indexList) {
-                System.out.println("index " + index);
+//                System.out.println("index " + index);
                 HintStatus hintStatus = HintStatus.builder()
                         .guest(Guest.builder().guestId(guestRes.getGuestId()).build())
                         .hint(Hint.builder().hintId(index).build())

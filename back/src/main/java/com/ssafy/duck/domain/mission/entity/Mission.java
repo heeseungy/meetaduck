@@ -13,12 +13,13 @@ import lombok.*;
 public class Mission {
 
     @Id
+    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "`mission_id`", nullable = false, updatable = false)
+    @Column(name = "`mission_id`", insertable = false, nullable = false, updatable = false)
     private Long missionId;
 
     @NotNull
-    @Column(name = "`mission_content`", nullable = false, updatable = false)
+    @Column(name = "`mission_content`", insertable = false, nullable = false, updatable = false)
     private String missionContent;
 
 }
