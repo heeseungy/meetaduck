@@ -1,13 +1,13 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import ChattingPage from './chatting/ChattingPage';
-import HintPage from './hint/HintPage';
-import HomePage from './home/HomePage';
-import LoginPage from './login/LoginPage';
-import MissionPage from './mission/MissionPage';
-import ResultPage from './result/ResultPage';
-import RootPage from './root/RootPage';
-import VotePage from './vote/VotePage';
+import ChattingPage from '@/pages/chatting/ChattingPage';
+import HintPage from '@/pages/hint/HintPage';
+import HomePage from '@/pages/home/HomePage';
+import LoginPage from '@/pages/login/LoginPage';
+import MissionPage from '@/pages/mission/MissionPage';
+import ResultPage from '@/pages/result/ResultPage';
+import RootPage from '@/pages/root/RootPage';
+import VotePage from '@/pages/vote/VotePage';
 
 const router = createBrowserRouter([
   {

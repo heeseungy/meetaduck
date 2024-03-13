@@ -1,4 +1,4 @@
-import HintProfile from '../../components/hint/HintProfile';
+import HintProfile from '@/components/hint/HintProfile';
 
 function HintFirst() {
   return (
