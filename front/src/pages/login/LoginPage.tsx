@@ -1,5 +1,7 @@
+import duckLogo from '@/assets/images/RubberDuckBase.png';
+import kakaoLogo from '@/assets/images/kakao_login_large_wide.png';
+
 import styles from '../../styles/LoginPage.module.css';
-import duckLogo from '@/assets/images/RubberDuckBase.png'
 
 function LoginPage() {
   const loginHandler = () => {
@@ -23,7 +25,7 @@ function LoginPage() {
         <p>채팅과 미션을 통해 알아보세요!</p>
         <img src={duckLogo} alt="Logo" />
       </main>
-      <button onClick={loginHandler}>카카오로 로그인하기</button>
+      <img src={kakaoLogo} alt="kakaoLogin" className={styles.kakaoButton} onClick={loginHandler} />
     </>
   );
 }

@@ -13,3 +13,16 @@
 .Box {
   background-color: red;
 }
+
+.kakaoButton {
+  width: 240px;
+  height: 45px;
+  background-color: #FEE500;
+  border: 1px solid #FEE500;
+  border-radius: 12px;
+}
+
+.kakaoButton {
+  width: 280px;
+  height: auto;
+}
