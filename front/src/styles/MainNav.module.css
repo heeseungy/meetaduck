@@ -1,5 +1,6 @@
 nav {
   overflow: hidden;
+  border-top: 2px solid grey;
 }
 
 nav > div {
@@ -9,10 +10,15 @@ nav > div {
   width: 25%;
 
   /* 세로길이 설정 */
-  height: 45px;
-  line-height: 45px;
+  height: 70px;
+  line-height: 85px;
+  
 }
 
 .wrapper {
-
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
 }
