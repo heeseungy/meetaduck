@@ -39,7 +39,7 @@ public class HintController {
     }
 
 
-    @GetMapping("/answers/{guest_id}")
+    @GetMapping("/answers/{guestId}")
     public ResponseEntity<List<HintStatusRes>> getHintQnA(@PathVariable("guestId") Long guestId){
         List<HintStatusRes> hintStatusResList = hintService.getHintQnA(guestId);
         return ResponseEntity.ok(hintStatusResList);

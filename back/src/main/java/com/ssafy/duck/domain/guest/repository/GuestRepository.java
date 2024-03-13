@@ -9,4 +9,6 @@ public interface GuestRepository extends JpaRepository<Guest, Long> {
     List<Guest> findByParty_PartyId(Long partyId);
 
     Optional<Guest> findByUser_UserId(Long userId);
+
+    Guest findByManitiId(Long manitiId);
 }

@@ -61,6 +61,18 @@ public class GuestService {
         return toGuestRes(guest);
     }
 
+    public List<GuestRes> getAllGuest(Long partyId){
+
+        List<Guest> guestList = guestRepository.findByParty_PartyId(partyId);
+        List<GuestRes> guestResList = toGuestResList(guestList);
+        return guestResList;
+    }
+
+    public GuestRes findManito(Long guestId){
+        Guest manito = guestRepository.findByManitiId(guestId);
+        return toGuestRes(manito);
+    }
+
     public GuestRes toGuestRes(Guest guest){
         GuestRes res = GuestRes.builder()
                 .guestId(guest.getGuestId())
@@ -83,13 +95,4 @@ public class GuestService {
         return guestResList;
     }
 
-    public List<GuestRes> getAllGuest(Long partyId){
-
-        List<Guest> guestList = guestRepository.findByParty_PartyId(partyId);
-        List<GuestRes> guestResList = toGuestResList(guestList);
-        return guestResList;
-
-
-
-    }
 }
