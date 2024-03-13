@@ -5,6 +5,7 @@ import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.service.GuestService;
 import com.ssafy.duck.domain.hint.dto.request.HintStatusReq;
 import com.ssafy.duck.domain.hint.dto.response.HintRes;
+import com.ssafy.duck.domain.hint.dto.response.HintStatusRes;
 import com.ssafy.duck.domain.hint.entity.Hint;
 import com.ssafy.duck.domain.hint.entity.HintStatus;
 import com.ssafy.duck.domain.hint.exception.HintErrorCode;
@@ -121,4 +122,18 @@ public class HintService {
             hintStatusRepository.save(hintStatus);
         }
     }
+
+    //힌트 질문+답변 조회
+    public List<HintStatusRes> getHintQnA(Long guestId){
+        //마니또 아이디 찾기
+        // 예상 마니또 있는지 확인
+        // 있으면 hint status 전부 가져오기
+        // 없으면 mission확인하고 개수만큼 가져오기
+
+        List<HintStatusRes> hintStatusResList = new ArrayList<>();
+
+        return hintStatusResList;
+    }
+
+
 }

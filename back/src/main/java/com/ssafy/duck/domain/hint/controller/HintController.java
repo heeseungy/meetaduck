@@ -2,6 +2,7 @@ package com.ssafy.duck.domain.hint.controller;
 
 import com.ssafy.duck.domain.hint.dto.request.HintStatusReq;
 import com.ssafy.duck.domain.hint.dto.response.HintRes;
+import com.ssafy.duck.domain.hint.dto.response.HintStatusRes;
 import com.ssafy.duck.domain.hint.service.HintService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -38,14 +39,11 @@ public class HintController {
     }
 
 
-//    @GetMapping("/answers/{guest_id}")
-//    public ResponseEntity<List<HintStatusRes>> getHintQnA(@PathVariable("guestId") Long guestId){
-//
-//
-//        List<HintStatusRes> hintStatusResList = hintService.
-//
-//        return ResponseEntity.ok(hintStatusResList);
-//    }
+    @GetMapping("/answers/{guest_id}")
+    public ResponseEntity<List<HintStatusRes>> getHintQnA(@PathVariable("guestId") Long guestId){
+        List<HintStatusRes> hintStatusResList = hintService.getHintQnA(guestId);
+        return ResponseEntity.ok(hintStatusResList);
+    }
 
     @GetMapping("/test")
     public void getHintTest(){
