@@ -3,6 +3,7 @@ package com.ssafy.duck.domain.mission.service;
 import com.ssafy.duck.domain.guest.dto.response.GuestRes;
 import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.service.GuestService;
+import com.ssafy.duck.domain.mission.dto.response.MissionResultRes;
 import com.ssafy.duck.domain.mission.entity.Mission;
 import com.ssafy.duck.domain.mission.entity.MissionStatus;
 import com.ssafy.duck.domain.mission.repository.MissionRepository;
@@ -108,5 +109,31 @@ public class MissionService {
         }
         System.out.println("failCount " + failCount);
         return failCount;
+    }
+
+    // 내 미션 수행 반환
+    // 수행한 미션 : imageUrl / 실패한 미션 : null
+    public List<MissionResultRes> getMyMissionResult(Long guestId) {
+        GuestRes guestRes = guestService.findByGuestId(guestId);    // 내 정보
+
+        List<MissionStatus> missionStatusList = missionStatusRepository.findAllByGuestGuestId(guestId);
+        List<MissionResultRes> missionResultResList = null;
+        for (MissionResultRes mrRes : missionResultResList) {
+            System.out.println(mrRes.getMissionStatusId() +" / "+ mrRes.getMissionContent() +" / "+ mrRes.getMissionImageUrl() );
+        }
+        return missionResultResList;
+    }
+
+    // 마니또의 미션 수행 반환
+    // 수행한 미션 : imageUrl / 실패한 미션 : null
+    public List<MissionResultRes> getManitoMissionResult(Long guestId) {
+        GuestRes manito = guestService.findManito(guestId);         // 마니또 정보
+
+//        List<MissionResultRes> missionResultResList = missionStatusRepository.findAllByGuestGuestIdAndGetTimeBefore(manitoId,today);
+        List<MissionResultRes> missionResultResList = null;
+        for (MissionResultRes mrRes : missionResultResList) {
+            System.out.println(mrRes.getMissionStatusId() +" / "+ mrRes.getMissionContent() +" / "+ mrRes.getMissionImageUrl() );
+        }
+        return missionResultResList;
     }
 }
