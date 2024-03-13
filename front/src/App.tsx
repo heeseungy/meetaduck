@@ -1,10 +1,11 @@
 import './App.css';
 import Frame from './components/commons/Frame';
+import Route from './pages/Route';
 
 function App() {
   return (
     <Frame>
-      <h1>Hello PJT</h1>
+      <Route />
     </Frame>
   );
 }
