@@ -10,5 +10,5 @@ public interface GuestRepository extends JpaRepository<Guest, Long> {
 
     Optional<Guest> findByUser_UserId(Long userId);
 
-    Guest findByManitiId(Long manitiId);
+    Optional<Guest> findByManitiId(Long manitiId);
 }

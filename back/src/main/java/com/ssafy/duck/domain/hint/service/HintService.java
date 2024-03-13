@@ -128,9 +128,12 @@ public class HintService {
         // 내 정보
         GuestRes guestRes = guestService.findByGuestId(guestId);
         System.out.println("my " + guestRes.toString());
-        // 예상 마니또 있는지 확인
 
         //마니또 정보
+        GuestRes manito = guestService.findManito(guestId);
+        System.out.println("manito " +manito.toString());
+
+        // 예상 마니또 있는지 확인
 
         // 있으면 hint status 전부 가져오기
         // 없으면 mission확인하고 개수만큼 가져오기

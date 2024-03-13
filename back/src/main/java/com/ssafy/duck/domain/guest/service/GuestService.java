@@ -69,7 +69,7 @@ public class GuestService {
     }
 
     public GuestRes findManito(Long guestId){
-        Guest manito = guestRepository.findByManitiId(guestId);
+        Guest manito = guestRepository.findByManitiId(guestId).orElseThrow(()-> new GuestException(GuestErrorCode.MANITO_NOT_FOUND));
         return toGuestRes(manito);
     }
 
