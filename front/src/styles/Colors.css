@@ -1,0 +1,47 @@
+.FontBasic {
+  color: #4d4637;
+}
+
+.FontComment {
+  color: #b3aa99;
+}
+
+.FontWhite {
+  color: #f8f9fb;
+}
+
+.FontYellow {
+  color: #ffd656;
+}
+
+.FontOrange {
+  color: #eea23e;
+}
+
+.FontRed {
+  color: #ff5952;
+}
+
+.FontGreen {
+  color: #4fc775;
+}
+
+.BackgroundGray {
+  background-color: #e5e5e7;
+}
+
+.BackgroundYellow {
+  background-color: #ffd656;
+}
+
+.BackgroundOrange {
+  background-color: #eea23e;
+}
+
+.BackgroundRed {
+  background-color: #ff5952;
+}
+
+.BackgroundGreen {
+  background-color: #4fc775;
+}

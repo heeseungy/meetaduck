@@ -1,0 +1,27 @@
+.TextContent {
+  word-break: break-all;
+  white-space: normal;
+  min-width: 1rem;
+  max-width: 15rem;
+}
+.TextBox {
+  display: flex;
+  justify-content: center;
+  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+}
+.Message {
+  background-color: #f8f9fb;
+}
+.MyMessage {
+  border: 0.125rem solid #ffd656;
+  border-radius: 0.5rem 0.5rem 0rem 0.5rem;
+  display: flex;
+  justify-content: end;
+}
+
+.YourMessage {
+  border: 0.125rem solid #4fc775;
+  border-radius: 0.5rem 0.5rem 0.5rem 0rem;
+  display: flex;
+  justify-content: start;
+}
