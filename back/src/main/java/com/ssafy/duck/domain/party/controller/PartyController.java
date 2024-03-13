@@ -71,8 +71,8 @@ public class PartyController {
         partyService.start(partyRes, startReq);
         chatService.updateManiti(guestService.updateManiti(partyRes.getPartyId()));
         chatService.create(partyRes.getAccessCode());
-//         missionService.set(missionService.fetch(startReq.getEndTime()));
-//         hintService.set(hintService.fetch(startReq.getEndTime()));
+         missionService.set(missionService.fetch(startReq.getEndTime()), partyRes.getPartyId());
+         hintService.set(hintService.fetch(startReq.getEndTime()), partyRes.getPartyId());
         return ResponseEntity.ok().build();
 
     }

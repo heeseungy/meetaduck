@@ -18,7 +18,7 @@ public class MissionController {
     @GetMapping("/test")
     public void getMissionTest(){
 //        missionService.set(
-                missionService.fetch(Instant.now().plus(4*24+5, ChronoUnit.HOURS));
+                missionService.fetch(Instant.now().plus(3*24+5, ChronoUnit.HOURS));
 //                        , 1L);
     }
 }
