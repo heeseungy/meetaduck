@@ -125,8 +125,11 @@ public class HintService {
 
     //힌트 질문+답변 조회
     public List<HintStatusRes> getHintQnA(Long guestId){
+        GuestRes guestRes = guestService.findByGuestId(guestId);
         //마니또 아이디 찾기
+
         // 예상 마니또 있는지 확인
+
         // 있으면 hint status 전부 가져오기
         // 없으면 mission확인하고 개수만큼 가져오기
 
