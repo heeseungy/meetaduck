@@ -3,6 +3,8 @@ package com.ssafy.duck.domain.guest.service;
 import com.ssafy.duck.domain.chat.service.ChatService;
 import com.ssafy.duck.domain.guest.dto.response.GuestRes;
 import com.ssafy.duck.domain.guest.entity.Guest;
+import com.ssafy.duck.domain.guest.exception.GuestErrorCode;
+import com.ssafy.duck.domain.guest.exception.GuestException;
 import com.ssafy.duck.domain.guest.repository.GuestRepository;
 import com.ssafy.duck.domain.party.repository.PartyRepository;
 import com.ssafy.duck.domain.user.repository.UserRepository;
@@ -54,20 +56,9 @@ public class GuestService {
         return guestOptional.isPresent();
     }
 
-    public List<GuestRes> toGuestResList(List<Guest> guests) {
-        List<GuestRes> guestResList = new ArrayList<>();
-        for (Guest guest : guests) {
-            GuestRes guestRes = GuestRes.builder()
-                    .guestId(guest.getGuestId())
-                    .manatiId(guest.getManitiId())
-                    .votedId(guest.getVotedId())
-                    .partyId(guest.getParty().getPartyId())
-                    .chatId(guest.getChat().getChatId())
-                    .userId(guest.getUser().getUserId())
-                    .build();
-            guestResList.add(guestRes);
-        }
-        return guestResList;
+    public GuestRes findByGuestId(Long guestId) {
+        Guest guest = guestRepository.findById(guestId).orElseThrow(()-> new GuestException(GuestErrorCode.GUEST_NOT_FOUND));
+        return toGuestRes(guest);
     }
 
     public List<GuestRes> getAllGuest(Long partyId){
@@ -75,8 +66,33 @@ public class GuestService {
         List<Guest> guestList = guestRepository.findByParty_PartyId(partyId);
         List<GuestRes> guestResList = toGuestResList(guestList);
         return guestResList;
-
-
-
     }
+
+    public GuestRes findManito(Long guestId){
+        Guest manito = guestRepository.findByManitiId(guestId).orElseThrow(()-> new GuestException(GuestErrorCode.MANITO_NOT_FOUND));
+        return toGuestRes(manito);
+    }
+
+    public GuestRes toGuestRes(Guest guest){
+        GuestRes res = GuestRes.builder()
+                .guestId(guest.getGuestId())
+                .manatiId(guest.getManitiId())
+                .votedId(guest.getVotedId())
+                .partyId(guest.getParty().getPartyId())
+                .chatId(guest.getChat().getChatId())
+                .userId(guest.getUser().getUserId())
+                .build();
+        return res;
+    }
+
+
+    public List<GuestRes> toGuestResList(List<Guest> guests) {
+        List<GuestRes> guestResList = new ArrayList<>();
+        for (Guest guest : guests) {
+            GuestRes guestRes = toGuestRes(guest);
+            guestResList.add(guestRes);
+        }
+        return guestResList;
+    }
+
 }

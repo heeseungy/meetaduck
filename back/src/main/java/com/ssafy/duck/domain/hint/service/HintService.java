@@ -5,12 +5,15 @@ import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.service.GuestService;
 import com.ssafy.duck.domain.hint.dto.request.HintStatusReq;
 import com.ssafy.duck.domain.hint.dto.response.HintRes;
+import com.ssafy.duck.domain.hint.dto.response.HintStatusRes;
 import com.ssafy.duck.domain.hint.entity.Hint;
 import com.ssafy.duck.domain.hint.entity.HintStatus;
 import com.ssafy.duck.domain.hint.exception.HintErrorCode;
 import com.ssafy.duck.domain.hint.exception.HintException;
 import com.ssafy.duck.domain.hint.repository.HintRepository;
 import com.ssafy.duck.domain.hint.repository.HintStatusRepository;
+import com.ssafy.duck.domain.mission.repository.MissionRepository;
+import com.ssafy.duck.domain.mission.service.MissionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +40,9 @@ public class HintService {
 
     @Autowired
     private GuestService guestService;
+
+    @Autowired
+    private MissionService missionService;
 
     // 힌트 질문 가져오기
     public List<HintRes> getHintQuestion(Long guestId){
@@ -121,4 +127,52 @@ public class HintService {
             hintStatusRepository.save(hintStatus);
         }
     }
+
+    //힌트 질문+답변 조회
+    public List<HintStatusRes> getHintQnA(Long guestId){
+        GuestRes guestRes = guestService.findByGuestId(guestId);    // 내 정보
+        GuestRes manito = guestService.findManito(guestId);         // 마니또 정보
+        System.out.println("my " + guestRes.toString() + " / manito " +manito.toString());
+
+        List<HintStatusRes> hintStatusResList = new ArrayList<>();
+        List<HintStatus> hintStatusList = hintStatusRepository.findAllByGuestGuestId(manito.getGuestId());
+        // 예상 마니또 있는지 확인
+        // 없으면 mission확인하고 개수만큼 가져오기
+        if(guestRes.getVotedId() == null){
+            int hintCount = missionService.calcMissionFailCount(manito.getGuestId());
+            for (int i = 0; i < hintCount; i++) {
+                HintStatus eachHs = hintStatusList.get(i);
+                Hint hint = hintRepository.findById(eachHs.getHint().getHintId()).orElseThrow(() -> new HintException(HintErrorCode.QUESTION_NOT_FOUND));
+                HintStatusRes res = HintStatusRes.builder()
+                        .hintContent(hint.getHintContent())
+                        .hintId(hint.getHintId())
+                        .hintStatusAnswer(eachHs.getHintStatusAnswer())
+                        .build();
+                hintStatusResList.add(res);
+            }
+        }
+        // 있으면 hint status 전부 가져오기
+        else{
+            for (HintStatus hs : hintStatusList) {
+                Hint hint = hintRepository.findById(hs.getHint().getHintId()).orElseThrow(() -> new HintException(HintErrorCode.QUESTION_NOT_FOUND));
+                HintStatusRes res = HintStatusRes.builder()
+                        .hintContent(hint.getHintContent())
+                        .hintId(hint.getHintId())
+                        .hintStatusAnswer(hs.getHintStatusAnswer())
+                        .build();
+                hintStatusResList.add(res);
+            }
+
+            System.out.println("--- hint question + answer list");
+            for (HintStatusRes hsRes : hintStatusResList) {
+                System.out.println(hsRes.getHintContent() + "/" + hsRes.getHintStatusAnswer());
+            }
+        }
+
+
+
+        return hintStatusResList;
+    }
+
+
 }
