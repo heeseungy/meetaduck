@@ -1,0 +1,15 @@
+.container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.marginTop {
+  margin-top: 4rem;
+}
+
+.joinTitle {
+  margin-top: 4rem;
+}
