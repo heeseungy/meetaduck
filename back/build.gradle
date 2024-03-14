@@ -38,7 +38,6 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'com.h2database:h2'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     runtimeOnly 'com.mysql:mysql-connector-j'
@@ -51,6 +50,9 @@ dependencies {
 
     // https://github.com/zalando/problem-spring-web
     implementation 'org.zalando:problem-spring-web-starter:0.29.1'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
+
 
 }
 
