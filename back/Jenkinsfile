@@ -19,7 +19,7 @@ pipeline {
             steps {
                 dir('back') {
                     withCredentials([file(credentialsId: 'application', variable: 'application')]) {
-                       sh 'sudo cp ${application}  src/main/resources/application.yml'
+                       sh 'cp ${application}  src/main/resources/application.yml'
                     }
                 }
             }
