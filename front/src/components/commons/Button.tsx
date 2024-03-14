@@ -1,9 +1,9 @@
 import styles from '@/styles/Button.module.css'
 
-function Button({ children }) {
+function Button({ children, bgc }) {
   return (
     <>
-      <button className={`FontM ${styles.box}`}>{children}</button>
+      <button className={`FontM ${styles.box} ${styles[bgc]}`}>{children}</button>
     </>
   );
 }

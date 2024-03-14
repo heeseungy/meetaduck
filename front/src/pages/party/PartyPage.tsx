@@ -12,7 +12,7 @@ function PartyPage() {
         <Input />
       </div>
       <div className={styles.marginTop}>
-        <Button>참여하기</Button>
+        <Button bgc="filled">참여하기</Button>
       </div>
     </div>
   );
