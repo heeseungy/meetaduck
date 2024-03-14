@@ -3,7 +3,6 @@ package com.ssafy.duck.domain.user.dto.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ssafy.duck.domain.user.dto.request.UserSignUpReq;
-import com.ssafy.duck.domain.user.entity.User;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -16,6 +15,16 @@ public class KakaoUserInfo {
 
     @JsonProperty("kakao_account")
     Account account;
+
+    public static UserSignUpReq toUserSignUpReq(KakaoUserInfo userInfo) {
+        UserSignUpReq userSignUpReq = UserSignUpReq.builder()
+                .kakaoId(userInfo.getId())
+                .nickname(userInfo.getAccount().getProfile().getNickname())
+                .profileUrl(userInfo.getAccount().getProfile().getProfileImageURL())
+                .thumbnailUrl(userInfo.getAccount().getProfile().getThumbnailImageURL())
+                .build();
+        return userSignUpReq;
+    }
 
     @Getter
     @ToString
@@ -36,16 +45,6 @@ public class KakaoUserInfo {
             @JsonProperty("profile_image_url")
             private String profileImageURL;
         }
-    }
-
-    public static UserSignUpReq toUserSignUpReq(KakaoUserInfo userInfo) {
-        UserSignUpReq userSignUpReq = UserSignUpReq.builder()
-                .kakaoId(userInfo.getId())
-                .nickname(userInfo.getAccount().getProfile().getNickname())
-                .profileUrl(userInfo.getAccount().getProfile().getProfileImageURL())
-                .thumbnailUrl(userInfo.getAccount().getProfile().getThumbnailImageURL())
-                .build();
-        return userSignUpReq;
     }
 
 }

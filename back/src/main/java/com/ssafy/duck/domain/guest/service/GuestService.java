@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -77,32 +78,34 @@ public class GuestService {
             guest.updateManiti(manitiId);
             guestRepository.save(guest);
         }
+
         return guests;
     }
 
     public boolean isGuest(Long userId) {
         Optional<Guest> guestOptional = guestRepository.findByUser_UserId(userId);
+
         return guestOptional.isPresent();
     }
 
     public GuestRes findByGuestId(Long guestId) {
-        Guest guest = guestRepository.findById(guestId).orElseThrow(()-> new GuestException(GuestErrorCode.GUEST_NOT_FOUND));
+        Guest guest = guestRepository.findById(guestId).orElseThrow(() -> new GuestException(GuestErrorCode.GUEST_NOT_FOUND));
         return toGuestRes(guest);
     }
 
-    public List<GuestRes> getAllGuest(Long partyId){
+    public List<GuestRes> getAllGuest(Long partyId) {
 
         List<Guest> guestList = guestRepository.findByParty_PartyId(partyId);
         List<GuestRes> guestResList = toGuestResList(guestList);
         return guestResList;
     }
 
-    public GuestRes findManito(Long guestId){
-        Guest manito = guestRepository.findByManitiId(guestId).orElseThrow(()-> new GuestException(GuestErrorCode.MANITO_NOT_FOUND));
+    public GuestRes findManito(Long guestId) {
+        Guest manito = guestRepository.findByManitiId(guestId).orElseThrow(() -> new GuestException(GuestErrorCode.MANITO_NOT_FOUND));
         return toGuestRes(manito);
     }
 
-    public GuestRes toGuestRes(Guest guest){
+    public GuestRes toGuestRes(Guest guest) {
         GuestRes res = GuestRes.builder()
                 .guestId(guest.getGuestId())
                 .manatiId(guest.getManitiId())
@@ -113,7 +116,6 @@ public class GuestService {
                 .build();
         return res;
     }
-
 
     public List<GuestRes> toGuestResList(List<Guest> guests) {
         List<GuestRes> guestResList = new ArrayList<>();

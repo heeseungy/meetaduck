@@ -8,13 +8,13 @@ import com.ssafy.duck.domain.party.dto.request.CreateReq;
 import com.ssafy.duck.domain.party.dto.request.DeleteReq;
 import com.ssafy.duck.domain.party.dto.request.StartReq;
 import com.ssafy.duck.domain.party.dto.response.PartyRes;
-import com.ssafy.duck.domain.party.exception.PartyErrorCode;
-import com.ssafy.duck.domain.party.exception.PartyException;
 import com.ssafy.duck.domain.party.service.PartyService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.Instant;
 
 @RestController
 @RequestMapping("/api/parties")
@@ -29,23 +29,19 @@ public class PartyController {
 
     @PostMapping("")
     @Operation(summary = "파티: 생성")
-    public ResponseEntity<PartyRes> create(@RequestBody CreateReq createReq) {
-        // TODO: 정상 유저 검증 로직 향후 추가
-        if (guestService.isGuest(createReq.getUserId())) {
-            throw new PartyException(PartyErrorCode.MAXIMUM_OF_1_PARTY_ALLOWED);
-        }
-        else {
-            String accessCode = partyService.create(createReq.getPartyName(), createReq.getUserId());
-            guestService.createGuest(accessCode, createReq.getUserId());
+    public ResponseEntity<String> create(@RequestBody CreateReq createReq) {
+        String accessCode = partyService.create(createReq.getPartyName(), createReq.getUserId());
+        guestService.createGuest(accessCode, createReq.getUserId());
 
-        }
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(accessCode);
+
     }
 
     @GetMapping("/{accessCode}/users/{userId}")
     @Operation(summary = "파티: 조회")
     public ResponseEntity<PartyRes> find(@PathVariable String accessCode, @PathVariable Long userId) {
         PartyRes partyRes = partyService.find(accessCode);
+        // TODO: 파티가 있는데 isDeleted=true인 경우에는 if문 진입하도록 하는 엣지케이스 추가
         if (!guestService.isGuest(userId)) {
             guestService.createGuest(accessCode, userId);   // 아직 파티가 없는 경우
         }
@@ -60,8 +56,8 @@ public class PartyController {
         partyService.start(partyRes, startReq);
         chatService.setManiti(guestService.setManiti(partyRes.getPartyId()));
         chatService.create(partyRes.getAccessCode());
-        missionService.set(missionService.fetch(startReq.getEndTime()), partyRes.getPartyId());
-        hintService.set(hintService.fetch(startReq.getEndTime()), partyRes.getPartyId());
+        missionService.set(missionService.fetch(), startReq);
+        hintService.set(hintService.fetch(Instant.parse(startReq.getEndTime())), partyRes.getPartyId());
 
         return ResponseEntity.ok().build();
     }

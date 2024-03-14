@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Getter
 @Slf4j
-public class HintException extends RuntimeException{
+public class HintException extends RuntimeException {
     private final HintErrorCode errorCode;
 
     public HintException(HintErrorCode e) {

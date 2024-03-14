@@ -42,7 +42,7 @@ public class Guest {
     }
 
     public Long updateVotedId(Long votedId) {
-        this.votedId =  votedId;
+        this.votedId = votedId;
         return this.votedId;
     }
 }

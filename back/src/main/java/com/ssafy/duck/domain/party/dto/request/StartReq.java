@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.Instant;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -14,7 +12,7 @@ import java.time.Instant;
 public class StartReq {
 
     private String accessCode;
-    private Instant endTime;
+    private String endTime;
     private Long userId;
 
 }
