@@ -23,6 +23,7 @@ public class MissionController {
 
     @GetMapping("/result/{guestId}")
     public ResponseEntity<List<List<MissionResultRes>>> getMissionResult(@PathVariable("guestId") Long guestId){
+        System.out.println("getMyMissionResult controller");
         List<List<MissionResultRes>> missionResultResList = new ArrayList<>();
         List<MissionResultRes> myResult = missionService.getMyMissionResult(guestId);
         List<MissionResultRes> manitoResult = missionService.getManitoMissionResult(guestId);
