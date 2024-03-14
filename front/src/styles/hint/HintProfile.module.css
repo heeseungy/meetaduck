@@ -1,14 +1,23 @@
-.HintAvatar {
-  width: 1.75rem;
-  height: 1.75rem;
-  background-color: #f8f9fb;
+.HintImage {
+  width: 1.25rem;
+  height: 1.25rem;
   border-radius: 5rem;
 }
 
+.HintAvatar {
+  width: 1.75rem;
+  height: 1.75rem;
+  background-color: white;
+  border-radius: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .MyAvatar {
-  border: 0.125rem solid #ffd656;
+  border: 0.15rem solid #ffd656;
 }
 
 .YourAvatar {
-  border: 0.125rem solid #4fc775;
+  border: 0.15rem solid #4fc775;
 }

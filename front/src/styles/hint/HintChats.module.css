@@ -1,5 +1,14 @@
 .Chats {
   display: flex;
+  align-items: end;
   gap: 0.5rem;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.MyChat {
+  justify-content: end;
+}
+
+.YourChat {
+  justify-content: start;
 }

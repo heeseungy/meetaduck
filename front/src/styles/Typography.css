@@ -23,31 +23,50 @@ http://scripts.sil.org/OFL
 }
 
 .FontXXL {
+  /* Head */
+  /* 32pt */
   font-size: 2.667rem;
   font-family: 'JalnanGothic', sans-serif;
 }
 
 .FontXL {
+  /* Title */
+  /* 28pt */
   font-size: 2.333rem;
   font-family: 'JalnanGothic', sans-serif;
 }
 
 .FontL {
+  /* Content */
+  /* 20pt */
   font-size: 1.667rem;
   font-family: 'JalnanGothic', sans-serif;
 }
 
+.FontSTitle {
+  /* Text */
+  /* 16pt */
+  font-size: 1rem;
+  font-family: 'JalnanGothic', sans-serif;
+}
+
 .FontM {
+  /* Text */
+  /* 16pt */
   font-size: 1.333rem;
   font-family: 'Pretendard', sans-serif;
 }
 
 .FontS {
+  /* Annotation */
+  /* 12pt */
   font-size: 1rem;
   font-family: 'Pretendard', sans-serif;
 }
 
 .FontXS {
+  /* Comment */
+  /* 8pt */
   font-size: 0.667rem;
   font-family: 'Pretendard', sans-serif;
 }
