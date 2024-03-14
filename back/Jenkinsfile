@@ -20,6 +20,7 @@ pipeline {
         	    echo "pwd"
             	withCredentials([file(credentialsId: 'application', variable: 'applicationFile')]) {
                 	script {
+                	    sh 'chmod +wx ./back/src/main/resources'
                     	sh 'cp $applicationFile ./back/src/main/resources/application.yml'
                     }
         		}
