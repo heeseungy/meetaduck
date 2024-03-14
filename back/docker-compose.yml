@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  nginx:
+    container_name: nginx
+    image:
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "81:81"
+    networks:
+      - jenkins-network
+    volumes:
+      - /policy:/usr/share/nginx/html
+    depends_on:
+      - back
+
+  front:
+    container_name: front
+    image:
+    build:
+      context: ../front
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    networks:
+      - jenkins-network
+
+  back:
+    container_name: back
+    image:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    networks:
+      - jenkins-network
+    environment:
+      - USE_PROFILE=prod
+      - SPRING_PROFILES_ACTIVE=prod
+
+  redis:
+    container_name: redis
+    hostname: redis
+    image: redis:alpine
+    restart: unless-stopped
+    networks:
+      - jenkins-network
+    volumes:
+      - ~/redis/data:/data
+    user: root
+    ports:
+      - "6379:6379"
