@@ -63,7 +63,7 @@ public class GuestService {
                 .votedId(null)
                 .party(partyRepository.findByAccessCode(accessCode)
                         .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY)))
-                .chat(chatService.create(accessCode))
+                .chat(chatService.createChat(accessCode))
                 .user(userRepository.findByUserId(userId))
                 .build();
         guestRepository.save(guest);

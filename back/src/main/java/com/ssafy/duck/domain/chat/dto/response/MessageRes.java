@@ -12,10 +12,13 @@ import java.time.Instant;
 @NoArgsConstructor
 @Builder
 @Getter
-public class ChatRes {
+public class MessageRes {
 
-    private Long groupChatId;
-    private Long manitoChatId;
-    private Long manitiChatId;
+    private Long messageId;
+    private boolean messageType;
+    private String content;
+    private Instant createdTime;
+    private Long senderId;
+    private Long chatId;
 
 }

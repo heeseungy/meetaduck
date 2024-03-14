@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import javax.annotation.Nullable;
 import java.time.Instant;
 
 @Entity
@@ -22,6 +23,7 @@ public class Chat {
     @Column(name = "`chat_id`", nullable = false, updatable = false)
     private Long chatId;
 
+    @Nullable
     @Column(name = "`maniti_id`")
     private Long manitiId;
 
