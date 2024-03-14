@@ -41,4 +41,8 @@ public class Guest {
         this.manitiId = manitiId;
     }
 
+    public Long updateVotedId(Long votedId) {
+        this.votedId =  votedId;
+        return this.votedId;
+    }
 }

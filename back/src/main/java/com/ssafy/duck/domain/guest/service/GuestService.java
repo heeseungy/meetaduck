@@ -1,7 +1,9 @@
 package com.ssafy.duck.domain.guest.service;
 
 import com.ssafy.duck.domain.chat.service.ChatService;
+import com.ssafy.duck.domain.guest.dto.request.VoteReq;
 import com.ssafy.duck.domain.guest.dto.response.GuestRes;
+import com.ssafy.duck.domain.guest.dto.response.VoteRes;
 import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.exception.GuestErrorCode;
 import com.ssafy.duck.domain.guest.exception.GuestException;
@@ -27,6 +29,26 @@ public class GuestService {
     private final PartyRepository partyRepository;
     private final GuestRepository guestRepository;
     private final ChatService chatService;
+
+    public VoteRes vote(VoteReq voteReq) {
+
+        Long guestId = voteReq.getGuestId();
+        Guest guest = guestRepository.findByGuestId(guestId)
+                .orElseThrow(() -> new GuestException(GuestErrorCode.GUEST_NOT_FOUND));
+
+        Long votedId = voteReq.getVotedId();
+        Guest votedGuest = guestRepository.findByGuestId(votedId)
+                .orElseThrow(() -> new GuestException(GuestErrorCode.VOTED_GUEST_NOT_FOUND));
+
+        guest.updateVotedId(votedId);
+
+        VoteRes voteRes = VoteRes.builder()
+                .guestId(guestId)
+                .votedId(votedId)
+                .build();
+
+        return voteRes;
+    }
 
     public void create(String accessCode, Long userId) {
         Guest guest = Guest.builder()
