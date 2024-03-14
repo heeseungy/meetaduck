@@ -45,14 +45,11 @@ public class MissionService {
 
     public void set(List<Mission> allMissions, StartReq startReq) {
         int period = partyService.calcDate(Instant.now() + "", startReq.getEndTime());
-
         Collections.shuffle(allMissions);
         List<Mission> subMissions = allMissions.subList(0, period * 3);
         Party party = partyRepository.findByAccessCode(startReq.getAccessCode())
                 .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
-
         List<Guest> guests = guestRepository.findByParty_PartyId(party.getPartyId());
-
         for (Guest guest : guests) {
             Instant now = Instant.now();
             int day = 0, count = 0;
@@ -63,8 +60,7 @@ public class MissionService {
                         .confirmTime(null)
                         .successTime(null)
                         .missionImageUrl(null)
-                        .mission(missionRepository.findById(mission.getMissionId())
-                                .orElseThrow(() -> new MissionException(MissionErrorCode.MISSION_STATUS_NOT_FOUND)))
+                        .mission(mission)
                         .guest(guest)
                         .build();
                 missionStatusRepository.save(missionStatus);
