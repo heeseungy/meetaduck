@@ -5,9 +5,11 @@ import HintPage from '@/pages/hint/HintPage';
 import HomePage from '@/pages/home/HomePage';
 import LoginPage from '@/pages/login/LoginPage';
 import MissionPage from '@/pages/mission/MissionPage';
+import PartyPage from '@/pages/party/PartyPage';
 import ResultPage from '@/pages/result/ResultPage';
 import RootPage from '@/pages/root/RootPage';
 import VotePage from '@/pages/vote/VotePage';
+import PartyCreatePage from './party/PartyCreatePage';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,8 @@ const router = createBrowserRouter([
     ],
   },
   { path: '/login', element: <LoginPage /> },
+  { path: '/party', element: <PartyPage /> },
+  { path: '/partycreate', element: <PartyCreatePage /> },
 ]);
 
 function Route() {

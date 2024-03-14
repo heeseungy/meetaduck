@@ -1,28 +1,37 @@
-.HeadFont {
-  font-size: 48px;
+header, main {
+  text-align: center;
 }
 
-.HeadDark {
-  color: #4D4637;
+main {
+  line-height: 1.5rem;
 }
 
-.HeadWhite {
-  color: white;
+.paddingTop {
+  padding-top: 8rem;
 }
 
-.Box {
-  background-color: red;
+.marginTop {
+  margin-top: 3rem;
+}
+
+.horizonCenter {
+  text-align: center;
+}
+
+.logoImg {
+  margin-top: 6rem;
+}
+
+.kakaoButtonWrapper {
+  text-align: center;
 }
 
 .kakaoButton {
-  width: 240px;
-  height: 45px;
   background-color: #FEE500;
   border: 1px solid #FEE500;
   border-radius: 12px;
-}
-
-.kakaoButton {
   width: 280px;
-  height: auto;
+  /* height: auto; */
+  margin-top: 3rem;
+  
 }
