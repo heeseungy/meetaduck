@@ -47,7 +47,7 @@ pipeline {
         stage("Kill exist container") {
             steps {
                 script {
-                    sudo docker kill $(docker ps | grep back | tr ' ' '\t' | cut -f1)
+                    sudo docker rm -f $(docker ps -q -f name=back)
                     sudo docker system prune -af
                 }
             }
