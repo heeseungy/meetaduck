@@ -14,7 +14,13 @@ function PartyCreatePage() {
       <div className={styles.marginTop}>
         <Button bgc="filled">파티열기</Button>
       </div>
-      <div className={styles.noPartySection}>파티가 없으신가요?</div>
+      <div className={styles.noPartySection}>
+        <div>오늘의 명언(삭제예정)</div>
+        <div>먼저핀꽃은 먼저진다</div>
+        <div>남보다 먼저 공을 세우려고</div>
+        <div>조급히 서둘것이 아니다</div>
+        <div>– 채근담</div>
+        </div>
     </div>
   );
 }
