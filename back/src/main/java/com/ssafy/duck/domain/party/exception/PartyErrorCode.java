@@ -8,10 +8,11 @@ import org.zalando.problem.Status;
 @AllArgsConstructor
 public enum PartyErrorCode {
 
-    NOT_FOUND_ROOM(Status.NOT_FOUND, "찾을 수 없는 파티입니다."),
-    NOT_FOUND_CREATOR(Status.NOT_FOUND, "찾을 수 없는 파티 생성자입니다."),
+    ALREADY_STARTED_PARTY(Status.BAD_REQUEST, "이미 시작한 파티입니다."),
+    MAXIMUM_OF_1_PARTY_ALLOWED(Status.BAD_REQUEST, "파티는 최대 1개만 생성 할 수 있습니다."),
+    NOT_FOUND_PARTY(Status.NOT_FOUND, "찾을 수 없는 파티입니다."),
     NOT_FOUND_GUEST(Status.NOT_FOUND, "찾을 수 없는 파티 참가자입니다."),
-    UNAUTHORIZED_USER(Status.UNAUTHORIZED, "해당 방에 대해 권한이 없는 사용자입니다.");
+    FORBIDDEN_USER(Status.FORBIDDEN, "해당 파티에 권한이 없는 유저입니다.");
 
     private final Status status;
     private final String detail;

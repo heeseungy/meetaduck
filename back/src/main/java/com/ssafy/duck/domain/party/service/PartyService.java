@@ -3,6 +3,8 @@ package com.ssafy.duck.domain.party.service;
 import com.ssafy.duck.domain.party.dto.request.StartReq;
 import com.ssafy.duck.domain.party.dto.response.PartyRes;
 import com.ssafy.duck.domain.party.entity.Party;
+import com.ssafy.duck.domain.party.exception.PartyErrorCode;
+import com.ssafy.duck.domain.party.exception.PartyException;
 import com.ssafy.duck.domain.party.repository.PartyRepository;
 import com.ssafy.duck.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +20,6 @@ public class PartyService {
 
     private final PartyRepository partyRepository;
     private final UserRepository userRepository;
-
-    public Party find(String accessCode) {
-        return partyRepository.findByAccessCode(accessCode);
-    }
 
     public String create(String partyName, Long userId) {
         String chracters = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -42,15 +40,39 @@ public class PartyService {
         return accessCode;
     }
 
-    public void delete(String accessCode) {
-        Party party = partyRepository.findByAccessCode(accessCode);
-        party.delete();
-        partyRepository.save(party);
+    public PartyRes find(String accessCode) {
+        Party party = partyRepository.findByAccessCode(accessCode)
+                .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
+        PartyRes partyRes = toPartyRes(party);
+
+        if (partyRes.getDeleted()) {
+            throw new PartyException(PartyErrorCode.NOT_FOUND_PARTY);
+        }
+
+        return partyRes;
     }
 
     public void start(PartyRes partyRes, StartReq startReq) {
-        Party party = partyRepository.findByAccessCode(partyRes.getAccessCode());
+        if (partyRes.getDeleted()) {
+            throw new PartyException(PartyErrorCode.NOT_FOUND_PARTY);
+        }
+        if (!partyRes.getUserId().equals(startReq.getUserId())) {
+            throw new PartyException(PartyErrorCode.FORBIDDEN_USER);
+        }
+        if (partyRes.getStartTime() != null) {
+            throw new PartyException(PartyErrorCode.ALREADY_STARTED_PARTY);
+        }
+        Party party = partyRepository.findByAccessCode(partyRes.getAccessCode())
+                .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
         party.start(startReq.getEndTime());
+
+        partyRepository.save(party);
+    }
+
+    public void delete(String accessCode) {
+        Party party = partyRepository.findByAccessCode(accessCode)
+                .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
+        party.delete();
         partyRepository.save(party);
     }
 

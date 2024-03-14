@@ -8,6 +8,8 @@ import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.exception.GuestErrorCode;
 import com.ssafy.duck.domain.guest.exception.GuestException;
 import com.ssafy.duck.domain.guest.repository.GuestRepository;
+import com.ssafy.duck.domain.party.exception.PartyErrorCode;
+import com.ssafy.duck.domain.party.exception.PartyException;
 import com.ssafy.duck.domain.party.repository.PartyRepository;
 import com.ssafy.duck.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -54,18 +56,19 @@ public class GuestService {
         guestRepository.deleteById(guestId);
     }
 
-    public void create(String accessCode, Long userId) {
+    public void createGuest(String accessCode, Long userId) {
         Guest guest = Guest.builder()
                 .manitiId(null)
                 .votedId(null)
-                .party(partyRepository.findByAccessCode(accessCode))
+                .party(partyRepository.findByAccessCode(accessCode)
+                        .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY)))
                 .chat(chatService.create(accessCode))
                 .user(userRepository.findByUserId(userId))
                 .build();
         guestRepository.save(guest);
     }
 
-    public List<Guest> updateManiti(Long partyId) {
+    public List<Guest> setManiti(Long partyId) {
         List<Guest> guests = guestRepository.findByParty_PartyId(partyId);
         Collections.shuffle(guests);
         for (int i = 0; i < guests.size(); i++) {
@@ -77,7 +80,7 @@ public class GuestService {
         return guests;
     }
 
-    public boolean find(Long userId) {
+    public boolean isGuest(Long userId) {
         Optional<Guest> guestOptional = guestRepository.findByUser_UserId(userId);
         return guestOptional.isPresent();
     }
