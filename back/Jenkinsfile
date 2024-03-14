@@ -15,6 +15,16 @@ pipeline {
             }
         }
 
+        stage('Add Env') {
+            steps {
+                dir('back') {
+                    withCredentials([file(credentialsId: 'application', variable: 'application')]) {
+                       sh 'cp ${application}  src/main/resources/application.yml'
+                    }
+                }
+            }
+        }
+
         stage('Build Common-Server .JAR') {
             steps {
                 script {
@@ -35,6 +45,8 @@ pipeline {
                 }
             }
         }
+
+
 
         stage('Build Common Image') {
             steps {
