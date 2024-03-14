@@ -1,0 +1,73 @@
+pipeline {
+    environment {
+        dockerImage = ''
+    }
+
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    // 코드 체크아웃
+                    checkout scm
+                }
+            }
+        }
+
+        stage('Build Common-Server .JAR') {
+            steps {
+                script {
+                    // 변경된 브랜치와 머지 대상 브랜치 출력
+                    // 현재 빌드 중인 브랜치명 확인
+                    def currentBranch = env.BRANCH_NAME
+                    echo "Merge Target Branch: \${CHANGE_TARGET}"
+                    echo "Current Branch: \${currentBranch}"
+
+                    echo "back end 입니다."
+                    // gradlew 빌드
+                    //rwx
+                    sh 'chmod +x ./back/gradlew'
+                    sh '''
+                        cd ./back
+                        ./gradlew clean build
+                    '''
+                }
+            }
+        }
+
+        stage('Build Common Image') {
+            steps {
+                script {
+                    dockerImage = docker.build("Back", "-f back/Dockerfile ./back")
+                }
+            }
+        }
+
+        stage("Kill exist container") {
+            steps {
+                script {
+                    sudo docker kill $(docker ps | grep back | tr ' ' '\t' | cut -f1)
+                    sudo docker system prune -af
+                }
+            }
+        }
+
+        stage("run container") {
+            steps {
+                script {
+                    sudo docker rm -f back
+                    "sudo docker run -d -p 8080:8080 --name back "
+                }
+            }
+        }
+
+        stage('Clean Common Image') {
+            steps {
+                script {
+                    sh "docker rmi \${repository}:Common_\${BUILD_NUMBER}"
+                }
+            }
+        }
+    }
+}
