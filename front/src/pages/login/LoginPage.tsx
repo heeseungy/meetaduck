@@ -10,22 +10,24 @@ function LoginPage() {
 
   return (
     <>
-      <header className={styles.HeadFont}>
-        <div>
-          <span className={styles.HeadDark}>믿어, </span>
-          <span className={styles.HeadWhite}>덕.</span>
+      <header className={`${styles.headFont}`}>
+        <div className={styles.paddingTop}>
+          <span className={`FontBasic`}>믿어, </span>
+          <span className={`FontWhite`}>덕.</span>
         </div>
-        <div>
-          <span className={styles.HeadDark}>Meet, A </span>
-          <span className={styles.HeadWhite}>Duck.</span>
+        <div className={styles.marginTop}>
+          <span className={`FontBasic`}>Meet, A </span>
+          <span className={`FontWhite`}>Duck.</span>
         </div>
       </header>
-      <main>
+      <main className={styles.marginTop}>
         <p>나의 마니또는 누구일까요?</p>
         <p>채팅과 미션을 통해 알아보세요!</p>
-        <img src={duckLogo} alt="Logo" />
+        <img src={duckLogo} alt="Logo" className={styles.logoImg} />
       </main>
-      <img src={kakaoLogo} alt="kakaoLogin" className={styles.kakaoButton} onClick={loginHandler} />
+      <div className={styles.kakaoButtonWrapper}>
+        <img src={kakaoLogo} alt="kakaoLogin" className={styles.kakaoButton} onClick={loginHandler} />
+      </div>
     </>
   );
 }
