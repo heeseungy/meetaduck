@@ -39,5 +39,4 @@ public class User {
     @Nullable
     @Column(name = "`phonenumber`", length = 20)
     private String phonenumber;
-
 }

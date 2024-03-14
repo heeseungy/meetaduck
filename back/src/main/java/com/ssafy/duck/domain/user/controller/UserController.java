@@ -134,7 +134,7 @@ public class UserController {
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Authorization", "Bearer " + jwtToken);
-
+        
         return ResponseEntity.ok()
                 .headers(responseHeaders)
                 .body(userRes);
