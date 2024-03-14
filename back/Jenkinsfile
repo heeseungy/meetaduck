@@ -47,7 +47,7 @@ pipeline {
         stage("Kill exist container") {
             steps {
                 script {
-                    sudo docker rm -f $(docker ps -q -f name=back)
+                    sudo docker ps -q --filter "name=back" | grep -q . && docker stop rabbitmq && docker rm -fv back
                     sudo docker system prune -af
                 }
             }
