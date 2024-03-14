@@ -21,7 +21,7 @@ pipeline {
             	withCredentials([file(credentialsId: 'application', variable: 'applicationFile')]) {
                 	script {
                 	    sh 'ls'
-                    	sh 'cp $applicationFile ./back/src/main/resources'
+                    	sh 'sudo cp $applicationFile ./back/src/main/resources/application.yml'
                     	sh 'ls'
                     }
         		}
