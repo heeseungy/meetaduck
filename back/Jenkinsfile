@@ -47,7 +47,10 @@ pipeline {
         stage("Kill exist container") {
             steps {
                 script {
-                    sudo docker ps -q --filter "name=back" | grep -q . && docker stop back && docker rm -fv back
+                    def existingContainers = sh(script: "docker ps -aq -f name=back", returnStdout: true).trim()
+                    if (existingContainers) {
+                        sh "sudo docker rm -f ${existingContainers}"
+                    }
                     sudo docker system prune -af
                 }
             }
