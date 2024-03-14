@@ -1,14 +1,7 @@
 -- 외래키 제약조건 무시
 SET foreign_key_checks = 0;
 
--- users
-INSERT INTO users (kakao_id, nickname, profile_url, thumbnail_url, birthday, phonenumber) VALUES
-(10001, '강지수', 'http://example.com/profiles/kang', 'http://example.com/thumbnails/kang', '0101', '010-1234-5678'),
-(10002, '김현영', 'http://example.com/profiles/kim', 'http://example.com/thumbnails/kim', '0202', '010-2345-6789'),
-(10003, '안준선', 'http://example.com/profiles/ahn', 'http://example.com/thumbnails/ahn', '0303', '010-3456-7890'),
-(10004, '양희승', 'http://example.com/profiles/yang', 'http://example.com/thumbnails/yang', '0404', '010-4567-8901'),
-(10005, '전원빈', 'http://example.com/profiles/jeon', 'http://example.com/thumbnails/jeon', '0505', '010-5678-9012'),
-(10006, '최지웅', 'http://example.com/profiles/choi', 'http://example.com/thumbnails/choi', '0606', '010-6789-0123');
+
 
 
 -- parties
@@ -36,6 +29,16 @@ INSERT INTO guests (guest_id, maniti_id, voted_id, party_id, chat_id, user_id) V
 
 -- 서버 시간대를 UTC로 초기화
 -- SET GLOBAL time_zone = '+00:00';
+
+-- users
+INSERT INTO users (kakao_id, nickname, profile_url, thumbnail_url, birthday, phonenumber) VALUES
+(10001, '강지수', 'http://example.com/profiles/kang', 'http://example.com/thumbnails/kang', '0101', '010-1234-5678'),
+(10002, '김현영', 'http://example.com/profiles/kim', 'http://example.com/thumbnails/kim', '0202', '010-2345-6789'),
+(10003, '안준선', 'http://example.com/profiles/ahn', 'http://example.com/thumbnails/ahn', '0303', '010-3456-7890'),
+(10004, '양희승', 'http://example.com/profiles/yang', 'http://example.com/thumbnails/yang', '0404', '010-4567-8901'),
+(10005, '전원빈', 'http://example.com/profiles/jeon', 'http://example.com/thumbnails/jeon', '0505', '010-5678-9012'),
+(10006, '최지웅', 'http://example.com/profiles/choi', 'http://example.com/thumbnails/choi', '0606', '010-6789-0123');
+
 
 -- hints
 INSERT INTO hints (hint_content) VALUES 

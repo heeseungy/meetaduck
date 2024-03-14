@@ -2,7 +2,6 @@ package com.ssafy.duck.domain.mission.entity;
 
 import com.ssafy.duck.domain.guest.entity.Guest;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import javax.annotation.Nullable;
@@ -21,8 +20,8 @@ public class MissionStatus {
     @Column(name = "`mission_status_id`", nullable = false, updatable = false)
     private Long missionStatusId;
 
-    @NotNull
-    @Column(name = "`get_time`", nullable = false, updatable = false)
+    @Nullable
+    @Column(name = "`get_time`")
     private Instant getTime;
 
     @Nullable

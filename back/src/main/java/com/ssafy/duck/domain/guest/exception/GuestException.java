@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Getter
 @Slf4j
-public class GuestException extends RuntimeException{
+public class GuestException extends RuntimeException {
     private final GuestErrorCode errorCode;
 
     public GuestException(GuestErrorCode e) {
