@@ -1,0 +1,36 @@
+.CardContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  width: 22.5rem;
+  height: 50rem;
+}
+.Card {
+  width: 20.4rem;
+  border-radius: 2.25rem;
+  background-color: white;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+}
+.Card1 {
+  height: 40.3rem;
+}
+.BackgroundDuck {
+  position: absolute;
+  top: 6.813rem;
+  left: 15.5rem;
+}
+
+.Card2 {
+  height: 46.75rem;
+}
+
+.Card3 {
+  height: 44.44rem;
+}
+
+.CardContent {
+  position: relative;
+  margin-top: 1.6rem;
+  padding: 1.5rem 0.75rem 6.625rem 0.75rem;
+}
