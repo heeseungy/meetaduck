@@ -50,8 +50,6 @@ dependencies {
 
     // https://github.com/zalando/problem-spring-web
     implementation 'org.zalando:problem-spring-web-starter:0.29.1'
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
 
 
 }
