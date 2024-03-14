@@ -15,7 +15,7 @@ function PartyPage() {
         <Button bgc="filled">참여하기</Button>
       </div>
       <div className={styles.noPartySection}>파티가 없으신가요?</div>
-      <Button bgc='empty'>만들기</Button>
+      <Button bgc="empty">만들기</Button>
     </div>
   );
 }
