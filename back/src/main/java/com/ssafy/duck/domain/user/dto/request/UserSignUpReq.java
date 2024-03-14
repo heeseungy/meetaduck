@@ -1,13 +1,13 @@
-package com.ssafy.duck.domain.user.dto.response;
+package com.ssafy.duck.domain.user.dto.request;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
 @ToString
-@Getter
 @Builder
-public class UserRes {
+@Getter
+public class UserSignUpReq {
 
     private Long kakaoId;
     private String nickname;
