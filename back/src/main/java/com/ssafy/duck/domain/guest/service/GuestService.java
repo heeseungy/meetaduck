@@ -33,11 +33,11 @@ public class GuestService {
     public VoteRes vote(VoteReq voteReq) {
 
         Long guestId = voteReq.getGuestId();
-        Guest guest = guestRepository.findByGuestId(guestId)
+        Guest guest = guestRepository.findById(guestId)
                 .orElseThrow(() -> new GuestException(GuestErrorCode.GUEST_NOT_FOUND));
 
         Long votedId = voteReq.getVotedId();
-        Guest votedGuest = guestRepository.findByGuestId(votedId)
+        Guest votedGuest = guestRepository.findById(votedId)
                 .orElseThrow(() -> new GuestException(GuestErrorCode.VOTED_GUEST_NOT_FOUND));
 
         guest.updateVotedId(votedId);
@@ -48,6 +48,10 @@ public class GuestService {
                 .build();
 
         return voteRes;
+    }
+
+    public void deleteByGuestId(Long guestId) {
+        guestRepository.deleteById(guestId);
     }
 
     public void create(String accessCode, Long userId) {
