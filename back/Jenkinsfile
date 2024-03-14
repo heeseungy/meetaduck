@@ -17,7 +17,7 @@ pipeline {
 
         stage('secret.yml download') {
         	steps {
-        	    sh "pwd"
+        	    sh "whoami"
             	withCredentials([file(credentialsId: 'application', variable: 'applicationFile')]) {
                 	script {
                 	    sh 'ls'
