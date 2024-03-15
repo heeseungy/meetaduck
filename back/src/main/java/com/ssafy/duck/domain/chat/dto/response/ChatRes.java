@@ -1,12 +1,9 @@
 package com.ssafy.duck.domain.chat.dto.response;
 
-import com.ssafy.duck.domain.chat.entity.Chat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.Instant;
 
 @AllArgsConstructor
 @NoArgsConstructor

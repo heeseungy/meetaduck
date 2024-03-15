@@ -40,20 +40,16 @@ public class ChatService {
         return chat;
     }
 
-
     public ChatRes getMyChatList(Long guestId) {
-        // 그룹채팅 = partyId=partyId고 manittiId == null인 방
-        // (나의)마니또채팅 = partyId=partyId고 chats.getManitiId = guest.getGuestId();
-        // (나의)마니띠채팅 = partyId=partyId고 chats.getManitiId = guest.getManitiId();
+        // 그룹채팅방ID = partyId=partyId고 manittiId == null인 방
+        // (나의)마니또채팅방ID = partyId=partyId고 chats.getManitiId = guest.getGuestId();
+        // (나의)마니띠채팅방ID = partyId=partyId고 chats.getManitiId = guest.getManitiId();
 
         Guest guest = guestRepository.findById(guestId)
                 .orElseThrow(() -> new GuestException(GuestErrorCode.GUEST_NOT_FOUND));
         Party party = partyRepository.findById(guest.getParty().getPartyId())
                 .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
 
-        System.out.println(party.getPartyId());
-        System.out.println(guest.getGuestId());
-        System.out.println(guest.getManitiId());
         return ChatRes.builder()
                 .groupChatId(chatRepository.findChatIdByPartyIdAndManitiIdCustom(party.getPartyId(), null))
                 .manitoChatId(chatRepository.findChatIdByPartyIdAndManitiIdCustom(party.getPartyId(), guestId))
@@ -70,10 +66,10 @@ public class ChatService {
     public void setManiti(Long partyId) {
         List<Guest> guests = guestRepository.findByParty_PartyId(partyId);
         for (Guest guest : guests) {
-             Chat chat = chatRepository.findById(guest.getChat().getChatId())
-                     .orElseThrow(() -> new ChatException(ChatErrorCode.NOT_FOUND_CHAT));
-             chat.updateManiti(guest.getManitiId());
-             chatRepository.save(chat);
+            Chat chat = chatRepository.findById(guest.getChat().getChatId())
+                    .orElseThrow(() -> new ChatException(ChatErrorCode.NOT_FOUND_CHAT));
+            chat.setManiti(guest.getManitiId());
+            chatRepository.save(chat);
         }
     }
 

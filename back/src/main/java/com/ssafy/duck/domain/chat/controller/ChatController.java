@@ -1,15 +1,14 @@
 package com.ssafy.duck.domain.chat.controller;
 
-import com.ssafy.duck.domain.chat.dto.request.MessageReq;
-import com.ssafy.duck.domain.chat.dto.response.MessageRes;
 import com.ssafy.duck.domain.chat.dto.response.ChatRes;
 import com.ssafy.duck.domain.chat.service.ChatService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/chats")
