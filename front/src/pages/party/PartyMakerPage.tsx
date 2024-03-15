@@ -9,37 +9,40 @@ function PartyMakerPage() {
   const tempJoinNumber = 0;
 
   const children = (
-    <div className={styles.cardWrapper}>
-      <div className={`${styles.marginBottom}`}>
+    <div className={styles.cardMargin}>
+      <div className={`${styles.marginBottom} ${styles.spaceB}`}>
         <span className={`FontM`}>참여 현황</span>
-        <span className={`${styles.marginLeft}`}>{tempJoinNumber}명 창여중</span>
+        <span>{tempJoinNumber}명 창여중</span>
       </div>
       <ProfileName />
     </div>
   );
   return (
     <div className={styles.margin}>
-      <header>
+      <header className={styles.spaceB}>
         <span className={`FontL`}>블랙펄 마니또</span>
-        <span className={styles.marginLeft}>
+        <span>
           <ShareButton>참여 코드 공유</ShareButton>
-          <Card {...{ tag: 4, children: children }} />
-          <div className={styles.endWrapper}>
-            <div className={`FontM`}>종료 시간</div>
-            <div className={`${styles.inputWrapper}`}>
-              <Input />
-            </div>
-            <div className={`${styles.buttonWrapper}`}>
-              <span className={`${styles.oneButton}`}>
-                <Button bgc="filled">시작하기</Button>
-              </span>
-              <span>
-                <Button bgc="empty">파티닫기</Button>
-              </span>
-            </div>
-          </div>
         </span>
       </header>
+        <div className={styles.cardContainer}>
+          <Card {...{ tag: 4, children: children }} />
+        </div>
+        <div className={styles.endWrapper}>
+          <div className={`FontM`}>종료 시간</div>
+          <div className={`${styles.inputWrapper}`}>
+            <Input />
+          </div>
+          <div className={`${styles.buttonWrapper}`}>
+            <span className={`${styles.oneButton}`}>
+              <Button bgc="filled">시작하기</Button>
+            </span>
+            <span>
+              <Button bgc="empty">파티닫기</Button>
+            </span>
+          </div>
+        </div>
+
     </div>
   );
 }

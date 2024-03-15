@@ -9,6 +9,7 @@ import PartyPage from '@/pages/party/PartyPage';
 import ResultPage from '@/pages/result/ResultPage';
 import RootPage from '@/pages/root/RootPage';
 
+import HintInputFormPage from './hint/HintInputFormPage';
 import PartyCreatePage from './party/PartyCreatePage';
 import PartyJoinerPage from './party/PartyJoinerPage';
 import PartyMakerPage from './party/PartyMakerPage';
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
   { path: '/partycreate', element: <PartyCreatePage /> },
   { path: '/partymaker', element: <PartyMakerPage /> },
   { path: '/partyjoiner', element: <PartyJoinerPage /> },
+  { path: '/hintinputform', element: <HintInputFormPage /> },
 ]);
 
 function Route() {

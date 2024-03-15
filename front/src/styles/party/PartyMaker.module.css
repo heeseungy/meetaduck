@@ -1,6 +1,7 @@
 .margin {
   margin-top: 4rem;
-  margin-left: 1rem;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .share {
@@ -11,13 +12,17 @@
   font-weight: bold;
 }
 
-.marginLeft {
-  margin-left: 4rem;
-}
+/* .marginLeft {
+  margin-left: 1rem;
+} */
 
 .endWrapper {
   margin-top: 4rem;
-  margin-left: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* margin-left: 2rem; */
 }
 
 .inputWrapper {
@@ -26,21 +31,30 @@
 
 .buttonWrapper {
   margin-top: 4rem;
-  margin-left: 1rem;
+  text-align: center;
 }
 
 .oneButton {
   margin-right: 1rem;
 }
 
-.cardWrapper {
+.cardMargin {
   margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .marginBottom {
   margin-bottom: 2rem;
 }
 
-.marginLeft {
-  margin-left: 6rem;
+.spaceB {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

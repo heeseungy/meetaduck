@@ -8,7 +8,7 @@
 }
 
 .TopCardContainer {
-  width: 23rem;
+  width: 20rem;
   display: flex;
   margin-top: 2rem;
 }
@@ -45,7 +45,7 @@
 }
 
 .Card4 {
-  height: 30rem;
+  height: 25rem;
 }
 
 .CardContent {
