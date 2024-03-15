@@ -80,7 +80,9 @@ pipeline {
         stage('Clean Common Image') {
             steps {
                 script {
-                    sh "docker rmi \${repository}:Common_\${BUILD_NUMBER}"
+                    def repository = "my_repository"
+                    def imageName = "${repository}:Common_${BUILD_NUMBER}"
+                    sh "docker rmi ${imageName}"
                 }
             }
         }
