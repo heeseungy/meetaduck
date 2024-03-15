@@ -1,11 +1,3 @@
-header, main {
-  text-align: center;
-}
-
-main {
-  line-height: 1.5rem;
-}
-
 .paddingTop {
   padding-top: 8rem;
 }
@@ -35,3 +27,4 @@ main {
   margin-top: 3rem;
   
 }
+

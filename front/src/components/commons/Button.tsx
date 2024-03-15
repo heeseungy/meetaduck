@@ -1,4 +1,4 @@
-import styles from '@/styles/Button.module.css';
+import styles from '@/styles/commons/Button.module.css';
 import { ButtonProps } from '@/types/button';
 
 function Button({ children, bgc = 'filled' }: ButtonProps) {

@@ -6,12 +6,27 @@
   width: 22.5rem;
   height: 50rem;
 }
+
+.TopCardContainer {
+  width: 20rem;
+  display: flex;
+  margin-top: 2rem;
+}
+
 .Card {
   width: 20.4rem;
   border-radius: 2.25rem;
   background-color: white;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
 }
+
+.PartyCard {
+  width: 23rem;
+  border-radius: 2.25rem;
+  background-color: white;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+}
+
 .Card1 {
   height: 40.3rem;
 }
@@ -27,6 +42,10 @@
 
 .Card3 {
   height: 44.44rem;
+}
+
+.Card4 {
+  height: 25rem;
 }
 
 .CardContent {

@@ -8,7 +8,10 @@ import MissionPage from '@/pages/mission/MissionPage';
 import PartyPage from '@/pages/party/PartyPage';
 import ResultPage from '@/pages/result/ResultPage';
 import RootPage from '@/pages/root/RootPage';
-// import VotePage from '@/pages/vote/VotePage';
+import HintInputFormPage from './hint/HintInputFormPage';
+import PartyCreatePage from './party/PartyCreatePage';
+import PartyJoinerPage from './party/PartyJoinerPage';
+import PartyMakerPage from './party/PartyMakerPage';
 import PartyCreatePage from './party/PartyCreatePage';
 import TestPage from './webSocketTest/TestPage';
 
@@ -21,13 +24,15 @@ const router = createBrowserRouter([
       { path: '/mission', element: <MissionPage /> },
       { path: '/chatting', element: <ChattingPage /> },
       { path: '/hint', element: <HintPage /> },
-      // { path: '/vote', element: <VotePage /> },
       { path: '/result', element: <ResultPage /> },
     ],
   },
   { path: '/login', element: <LoginPage /> },
   { path: '/party', element: <PartyPage /> },
   { path: '/partycreate', element: <PartyCreatePage /> },
+  { path: '/partymaker', element: <PartyMakerPage /> },
+  { path: '/partyjoiner', element: <PartyJoinerPage /> },
+  { path: '/hintinputform', element: <HintInputFormPage /> },
   { path: '/testpage', element: <TestPage /> },
 ]);
 

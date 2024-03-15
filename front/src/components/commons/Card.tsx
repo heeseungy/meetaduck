@@ -26,10 +26,18 @@ function Card(cardProps: CardPorps) {
         </div>
       </div>
     );
-  } else {
+  } else if (cardProps.tag === 3) {
     return (
       <div className={styles.CardContainer}>
         <div className={`${styles.Card3} ${styles.Card}`}>
+          <div className={styles.CardContent}>{cardProps.children}</div>
+        </div>
+      </div>
+    );
+  } else if (cardProps.tag === 4) {
+    return (
+      <div className={styles.TopCardContainer}>
+        <div className={`${styles.Card4} ${styles.PartyCard}`}>
           <div className={styles.CardContent}>{cardProps.children}</div>
         </div>
       </div>
