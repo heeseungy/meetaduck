@@ -17,10 +17,10 @@ pipeline {
 
         stage('secret.yml download') {
         	steps {
-        	    sh "whoami"
             	withCredentials([file(credentialsId: 'application', variable: 'applicationFile')]) {
                 	script {
                 	    sh 'ls'
+                	    sh 'chmod 755 $applicationFile'
                     	sh 'cp $applicationFile ./back/src/main/resources/application.yml'
                     	sh 'ls'
                     }
