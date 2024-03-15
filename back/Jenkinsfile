@@ -22,7 +22,7 @@ pipeline {
                 	    sh 'ls'
                 	    sh 'chmod +rwx $applicationFile'
                 	    sh 'chmod +rwx ./back/src/main/resources/'
-                    	sh 'cp $applicationFile ./back/src/main/resources'
+                    	sh 'cp $applicationFile ./back/src/main/resources/'
                     	sh 'ls'
                     }
         		}
