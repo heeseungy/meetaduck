@@ -20,7 +20,7 @@ pipeline {
             	withCredentials([file(credentialsId: 'application', variable: 'applicationFile')]) {
                 	script {
                 	    sh 'ls'
-                	    sh 'chmod +wx application.yml'
+                	    sh 'chmod +wx $applicationFile'
                 	    sh 'chmod +wx ./back/src/main/resources/'
                     	sh 'cp $applicationFile ./back/src/main/resources/application.yml'
                     	sh 'ls'
