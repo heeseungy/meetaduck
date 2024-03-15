@@ -15,6 +15,16 @@ pipeline {
             }
         }
 
+        stage('secret.yml download') {
+        	steps {
+            	withCredentials([file(credentialsId: 'application', variable: 'applicationFile')]) {
+                	script {
+                    	sh 'cp -f $applicationFile ./back/src/main/resources/'
+                    }
+        		}
+        	}
+        }
+
         stage('Build Common-Server .JAR') {
             steps {
                 script {
@@ -36,10 +46,12 @@ pipeline {
             }
         }
 
+
+
         stage('Build Common Image') {
             steps {
                 script {
-                    dockerImage = docker.build("Back", "-f back/Dockerfile ./back")
+                    dockerImage = docker.build("backend", "-f back/Dockerfile ./back")
                 }
             }
         }
@@ -47,11 +59,11 @@ pipeline {
         stage("Kill exist container") {
             steps {
                 script {
-                    def existingContainers = sh(script: "docker ps -aq -f name=back", returnStdout: true).trim()
+                    def existingContainers = sh(script: "docker ps -aq -f name=backend", returnStdout: true).trim()
                     if (existingContainers) {
-                        sh "sudo docker rm -f ${existingContainers}"
+                        sh "docker rm -f ${existingContainers}"
                     }
-                    sudo docker system prune -af
+//                     sh "docker system prune -af"
                 }
             }
         }
@@ -59,17 +71,15 @@ pipeline {
         stage("run container") {
             steps {
                 script {
-                    sudo docker rm -f back
-                    "sudo docker run -d -p 8080:8080 --name back "
+                    sh 'docker rm -f backend'
+                    sh "docker run -d -p 8080:8080 --name backend backend"
                 }
             }
         }
 
         stage('Clean Common Image') {
             steps {
-                script {
-                    sh "docker rmi \${repository}:Common_\${BUILD_NUMBER}"
-                }
+                sh "docker system prune -af"
             }
         }
     }
