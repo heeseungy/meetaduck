@@ -63,7 +63,7 @@ pipeline {
                     if (existingContainers) {
                         sh "sudo docker rm -f ${existingContainers}"
                     }
-                    sudo docker system prune -af
+                    sh "docker system prune -af"
                 }
             }
         }
@@ -80,7 +80,7 @@ pipeline {
         stage('Clean Common Image') {
             steps {
                 script {
-                    sh "docker rmi \${repository}:Common_\${BUILD_NUMBER}"
+                    sh "sudo docker rmi \${repository}:Common_\${BUILD_NUMBER}"
                 }
             }
         }
