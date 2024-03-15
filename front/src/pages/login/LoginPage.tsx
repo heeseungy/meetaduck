@@ -10,7 +10,7 @@ function LoginPage() {
 
   return (
     <>
-      <header className={`FontXXL`}>
+      <header className={`FontXXL ${styles.horizonCenter}`}>
         <div className={styles.paddingTop}>
           <span className={`FontBasic`}>믿어, </span>
           <span className={`FontWhite`}>덕.</span>
@@ -20,7 +20,7 @@ function LoginPage() {
           <span className={`FontWhite`}>Duck.</span>
         </div>
       </header>
-      <main className={`FontM ${styles.marginTop}`}>
+      <main className={`FontM ${styles.marginTop} ${styles.horizonCenter}`}>
         <p>나의 마니또는 누구일까요?</p>
         <p>채팅과 미션을 통해 알아보세요!</p>
         <img src={duckLogo} alt="Logo" className={styles.logoImg} />

@@ -1,9 +1,5 @@
-header, main {
+.horizonCenter {
   text-align: center;
-}
-
-main {
-  line-height: 1.5rem;
 }
 
 .paddingTop {
