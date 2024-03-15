@@ -14,3 +14,21 @@
 .marginLeft {
   margin-left: 4rem;
 }
+
+.endWrapper {
+  margin-top: 4rem;
+  margin-left: 3rem;
+}
+
+.inputWrapper {
+  margin-top: 1rem;
+}
+
+.buttonWrapper {
+  margin-top: 4rem;
+  margin-left: 1rem;
+}
+
+.oneButton {
+  margin-right: 1rem;
+}
