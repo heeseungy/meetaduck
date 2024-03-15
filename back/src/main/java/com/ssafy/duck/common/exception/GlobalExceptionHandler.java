@@ -14,26 +14,25 @@ import java.util.Arrays;
 @Slf4j
 public class GlobalExceptionHandler {
     @ExceptionHandler(HintException.class)
-    public ResponseEntity<Object> hintExceptionHandler(HintException e){
+    public ResponseEntity<Object> hintExceptionHandler(HintException e) {
         log.error(Arrays.toString(e.getStackTrace()));
         return ResponseEntity.status(e.getErrorCode().getHttpStatus())
                 .body(e.getMessage());
     }
 
     @ExceptionHandler(GuestException.class)
-    public ResponseEntity<Object> guestExceptionHandler(GuestException e){
+    public ResponseEntity<Object> guestExceptionHandler(GuestException e) {
         log.error(Arrays.toString(e.getStackTrace()));
         return ResponseEntity.status(e.getErrorCode().getHttpStatus())
                 .body(e.getMessage());
     }
 
     @ExceptionHandler(MissionException.class)
-    public ResponseEntity<Object> missionExceptionHandler(MissionException e){
+    public ResponseEntity<Object> missionExceptionHandler(MissionException e) {
         log.error(Arrays.toString(e.getStackTrace()));
         return ResponseEntity.status(e.getErrorCode().getHttpStatus())
                 .body(e.getMessage());
     }
-
 
 
 }

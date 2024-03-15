@@ -8,12 +8,15 @@ import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.exception.GuestErrorCode;
 import com.ssafy.duck.domain.guest.exception.GuestException;
 import com.ssafy.duck.domain.guest.repository.GuestRepository;
+import com.ssafy.duck.domain.party.exception.PartyErrorCode;
+import com.ssafy.duck.domain.party.exception.PartyException;
 import com.ssafy.duck.domain.party.repository.PartyRepository;
 import com.ssafy.duck.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -54,18 +57,19 @@ public class GuestService {
         guestRepository.deleteById(guestId);
     }
 
-    public void create(String accessCode, Long userId) {
+    public void createGuest(String accessCode, Long userId) {
         Guest guest = Guest.builder()
                 .manitiId(null)
                 .votedId(null)
-                .party(partyRepository.findByAccessCode(accessCode))
+                .party(partyRepository.findByAccessCode(accessCode)
+                        .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY)))
                 .chat(chatService.create(accessCode))
                 .user(userRepository.findByUserId(userId))
                 .build();
         guestRepository.save(guest);
     }
 
-    public List<Guest> updateManiti(Long partyId) {
+    public List<Guest> setManiti(Long partyId) {
         List<Guest> guests = guestRepository.findByParty_PartyId(partyId);
         Collections.shuffle(guests);
         for (int i = 0; i < guests.size(); i++) {
@@ -74,32 +78,34 @@ public class GuestService {
             guest.updateManiti(manitiId);
             guestRepository.save(guest);
         }
+
         return guests;
     }
 
-    public boolean find(Long userId) {
+    public boolean isGuest(Long userId) {
         Optional<Guest> guestOptional = guestRepository.findByUser_UserId(userId);
+
         return guestOptional.isPresent();
     }
 
     public GuestRes findByGuestId(Long guestId) {
-        Guest guest = guestRepository.findById(guestId).orElseThrow(()-> new GuestException(GuestErrorCode.GUEST_NOT_FOUND));
+        Guest guest = guestRepository.findById(guestId).orElseThrow(() -> new GuestException(GuestErrorCode.GUEST_NOT_FOUND));
         return toGuestRes(guest);
     }
 
-    public List<GuestRes> getAllGuest(Long partyId){
+    public List<GuestRes> getAllGuest(Long partyId) {
 
         List<Guest> guestList = guestRepository.findByParty_PartyId(partyId);
         List<GuestRes> guestResList = toGuestResList(guestList);
         return guestResList;
     }
 
-    public GuestRes findManito(Long guestId){
-        Guest manito = guestRepository.findByManitiId(guestId).orElseThrow(()-> new GuestException(GuestErrorCode.MANITO_NOT_FOUND));
+    public GuestRes findManito(Long guestId) {
+        Guest manito = guestRepository.findByManitiId(guestId).orElseThrow(() -> new GuestException(GuestErrorCode.MANITO_NOT_FOUND));
         return toGuestRes(manito);
     }
 
-    public GuestRes toGuestRes(Guest guest){
+    public GuestRes toGuestRes(Guest guest) {
         GuestRes res = GuestRes.builder()
                 .guestId(guest.getGuestId())
                 .manatiId(guest.getManitiId())
@@ -110,7 +116,6 @@ public class GuestService {
                 .build();
         return res;
     }
-
 
     public List<GuestRes> toGuestResList(List<Guest> guests) {
         List<GuestRes> guestResList = new ArrayList<>();

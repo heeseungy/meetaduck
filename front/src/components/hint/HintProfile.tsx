@@ -6,13 +6,9 @@ type Props = {
 };
 function HintProfile(props: Props) {
   return (
-    <>
-      <img
-        className={`${styles.HintAvatar} ${props.tag === 1 ? styles.MyAvatar : styles.YourAvatar}`}
-        src={pairChat}
-        alt="hintProfileImage"
-      />
-    </>
+    <div className={`${styles.HintAvatar} ${props.tag === 1 ? styles.MyAvatar : styles.YourAvatar}`}>
+      <img className={`${styles.HintImage}`} src={pairChat} alt="hintProfileImage" />
+    </div>
   );
 }
 

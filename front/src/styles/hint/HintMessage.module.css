@@ -1,27 +1,36 @@
 .TextContent {
+  display: flex;
+  align-items: center;
   word-break: break-all;
   white-space: normal;
   min-width: 1rem;
-  max-width: 15rem;
+  max-width: 10.5rem;
+  height: 1.5rem;
 }
-.TextBox {
+.MyText {
+  justify-content: end;
+}
+
+.YourText {
+  justify-content: start;
+}
+
+.Message {
   display: flex;
   justify-content: center;
-  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
-}
-.Message {
-  background-color: #f8f9fb;
+  background-color: white;
+  padding: 0.5rem 0.75rem 0.5rem 0.75rem;
 }
 .MyMessage {
-  border: 0.125rem solid #ffd656;
-  border-radius: 0.5rem 0.5rem 0rem 0.5rem;
+  border: 0.2rem solid #ffd656;
+  border-radius: 1.5rem 1.5rem 0rem 1.5rem;
   display: flex;
   justify-content: end;
 }
 
 .YourMessage {
-  border: 0.125rem solid #4fc775;
-  border-radius: 0.5rem 0.5rem 0.5rem 0rem;
+  border: 0.2rem solid #4fc775;
+  border-radius: 1.5rem 1.5rem 1.5rem 0rem;
   display: flex;
   justify-content: start;
 }

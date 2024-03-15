@@ -10,6 +10,8 @@ function HomePage() {
       <p><Link to="/hint">힌트 페이지</Link>로 이동</p>
       <p><Link to="/vote">투표 페이지</Link>로 이동</p>
       <p><Link to="/result">결과 페이지</Link>로 이동</p>
+      <p><Link to="/party">파티 페이지</Link>로 이동</p>
+      <p><Link to="/partycreate">파티 만들기 페이지</Link>로 이동</p>
     </> 
   )
 }

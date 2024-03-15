@@ -7,10 +7,8 @@ type Props = {
 
 function HintMessage(props: Props) {
   return (
-    <div>
-      <div
-        className={`FontBasic FontM ${styles.TextBox} ${styles.Message} ${styles.TextContent} ${props.tag === 1 ? styles.MyMessage : styles.YourMessage} `}
-      >
+    <div className={`${styles.Message} ${props.tag === 1 ? styles.MyMessage : styles.YourMessage}`}>
+      <div className={`FontBasic FontS ${styles.TextContent} ${props.tag === 1 ? styles.MyText : styles.YourText}`}>
         {props.text}
       </div>
     </div>

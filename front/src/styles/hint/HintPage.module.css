@@ -1,0 +1,20 @@
+.ScrollConatiner {
+  height: 33rem;
+  overflow-y: auto;
+  margin-top: 0.75rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.Title {
+  padding-left: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.HintImage {
+  position: absolute;
+  left: 4.19rem;
+  top: 17.7rem;
+}
