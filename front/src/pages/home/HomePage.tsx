@@ -12,6 +12,7 @@ function HomePage() {
       <p><Link to="/result">결과 페이지</Link>로 이동</p>
       <p><Link to="/party">파티 페이지</Link>로 이동</p>
       <p><Link to="/partycreate">파티 만들기 페이지</Link>로 이동</p>
+      <p><Link to="/testpage">희승's 테스트 페이지</Link>로 이동</p>
     </> 
   )
 }
