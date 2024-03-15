@@ -8,7 +8,6 @@ import MissionPage from '@/pages/mission/MissionPage';
 import PartyPage from '@/pages/party/PartyPage';
 import ResultPage from '@/pages/result/ResultPage';
 import RootPage from '@/pages/root/RootPage';
-import VotePage from '@/pages/vote/VotePage';
 import PartyCreatePage from './party/PartyCreatePage';
 
 const router = createBrowserRouter([
@@ -20,7 +19,6 @@ const router = createBrowserRouter([
       { path: '/mission', element: <MissionPage /> },
       { path: '/chatting', element: <ChattingPage /> },
       { path: '/hint', element: <HintPage /> },
-      { path: '/vote', element: <VotePage /> },
       { path: '/result', element: <ResultPage /> },
     ],
   },
