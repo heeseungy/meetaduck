@@ -20,9 +20,7 @@ pipeline {
             	withCredentials([file(credentialsId: 'application', variable: 'applicationFile')]) {
                 	script {
                 	    sh 'ls'
-                	    sh 'chmod +rwx $applicationFile'
-                	    sh 'chmod +rwx ./back/src/main/resources/'
-                    	sh 'cp $applicationFile ./back/src/main/resources/'
+                    	sh 'cp -f $applicationFile ./back/src/main/resources/'
                     	sh 'ls'
                     }
         		}
