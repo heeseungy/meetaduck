@@ -72,7 +72,7 @@ pipeline {
             steps {
                 script {
                     sh 'docker rm -f backend'
-                    sh "sudo docker run -d -p 8080:8080 --name backend backend"
+                    sh "docker run -d -p 8080:8080 --name backend backend"
                 }
             }
         }
