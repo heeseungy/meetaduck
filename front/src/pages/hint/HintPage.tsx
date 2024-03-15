@@ -39,6 +39,8 @@ function HintPage() {
   if (partyStatus.status === StatusType.Todo) {
     return <div>아직 파티가 시작하지 않았습니다.</div>;
   } else if (partyStatus.status === StatusType.Complete) {
+    ////////////////////////////////////////////////////////////////////
+    ////// axios 요청////////////////////////////////////////////////////
     const hintList: Answer[] = [
       {
         hintId: 3,
@@ -52,6 +54,9 @@ function HintPage() {
       { hintId: 25, hintContent: '강아지 vs 고양이?', hintStatusAnswer: '고양이' },
       { hintId: 25, hintContent: '강아지 vs 고양이?', hintStatusAnswer: '고양이' },
     ];
+    ////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////
+
     return <A2301 {...{ nickname: nickname, hintList: hintList }} />;
   } else {
     const hintList: Answer[] = [];
