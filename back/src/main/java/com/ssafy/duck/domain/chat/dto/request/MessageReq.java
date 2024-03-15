@@ -1,4 +1,4 @@
-package com.ssafy.duck.domain.chat.dto.response;
+package com.ssafy.duck.domain.chat.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Getter
-public class ChatRes {
+public class MessageReq {
 
-    private Long groupChatId;
-    private Long manitoChatId;
-    private Long manitiChatId;
+    private boolean messageType;
+    private String content;
+    private Long senderId;
 
 }
