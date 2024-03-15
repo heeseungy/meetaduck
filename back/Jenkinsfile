@@ -71,8 +71,8 @@ pipeline {
         stage("run container") {
             steps {
                 script {
-                    sh 'sudo docker rm -f backend'
-                    sh "sudo docker run -d -p 8080:8080 --name backend"
+                    sh 'docker rm -f backend'
+                    sh "docker run -d -p 8080:8080 --name backend"
                 }
             }
         }
@@ -80,7 +80,7 @@ pipeline {
         stage('Clean Common Image') {
             steps {
                 script {
-                    sh "sudo docker rmi \${repository}:Common_\${BUILD_NUMBER}"
+                    sh "docker rmi \${repository}:Common_\${BUILD_NUMBER}"
                 }
             }
         }
