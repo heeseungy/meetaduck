@@ -10,6 +10,7 @@ import com.ssafy.duck.domain.mission.exception.MissionException;
 import com.ssafy.duck.domain.mission.repository.MissionRepository;
 import com.ssafy.duck.domain.mission.repository.MissionStatusRepository;
 import com.ssafy.duck.domain.party.dto.request.StartReq;
+import com.ssafy.duck.domain.party.dto.response.PartyRes;
 import com.ssafy.duck.domain.party.entity.Party;
 import com.ssafy.duck.domain.party.exception.PartyErrorCode;
 import com.ssafy.duck.domain.party.exception.PartyException;
@@ -44,7 +45,7 @@ public class MissionService {
     }
 
     public void set(List<Mission> allMissions, StartReq startReq) {
-        int period = partyService.calcDate(Instant.now() + "", startReq.getEndTime());
+        int period = PartyRes.calcDate(Instant.now() + "", startReq.getEndTime());
         Collections.shuffle(allMissions);
         List<Mission> subMissions = allMissions.subList(0, period * 3);
         Party party = partyRepository.findByAccessCode(startReq.getAccessCode())
