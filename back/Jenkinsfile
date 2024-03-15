@@ -21,7 +21,8 @@ pipeline {
                 	script {
                 	    sh 'ls'
                 	    sh 'chmod 755 application.yml'
-                    	sh 'cp $applicationFile ./back/src/main/resources/application.yml'
+                	    sh 'chmod 755 ./back/src/main/resources'
+                    	sh 'cp $applicationFile ./back/src/main/resources'
                     	sh 'ls'
                     }
         		}
