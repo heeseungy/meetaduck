@@ -30,7 +30,7 @@ public class PartyController {
     @PostMapping("")
     @Operation(summary = "파티: 생성")
     public ResponseEntity<String> create(
-            @RequestBody CreateReq createReq) {
+        @RequestBody CreateReq createReq) {
         String accessCode = partyService.create(createReq.getPartyName(), createReq.getUserId());
         guestService.createGuest(accessCode, createReq.getUserId());
 
@@ -58,14 +58,18 @@ public class PartyController {
     public ResponseEntity<PartyRes> start(
             @RequestBody StartReq startReq) {
         PartyRes partyRes = partyService.find(startReq.getAccessCode());
-        partyService.start(partyRes, startReq);
-        guestService.setManiti(partyRes.getPartyId());
-        chatService.setManiti(partyRes.getPartyId());
-        chatService.createChat(partyRes.getAccessCode());
-        missionService.set(missionService.fetch(), startReq);
-        hintService.set(hintService.fetch(Instant.parse(startReq.getEndTime())), partyRes.getPartyId());
+        if(partyRes.isValid(startReq, partyRes)) {
+            partyService.start(partyRes, startReq);
+            guestService.setManiti(partyRes.getPartyId());
+            chatService.setManiti(partyRes.getPartyId());
+            chatService.createChat(partyRes.getAccessCode());
+            missionService.set(missionService.fetch(), startReq);
+            hintService.set(hintService.fetch(Instant.parse(startReq.getEndTime())), partyRes.getPartyId());
 
-        return ResponseEntity.ok().build();
+            return ResponseEntity.ok().build();
+        }
+
+        return ResponseEntity.badRequest().build();
     }
 
     @DeleteMapping("")
