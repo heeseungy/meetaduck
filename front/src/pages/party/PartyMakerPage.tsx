@@ -1,13 +1,19 @@
+import Button from '@/components/commons/Button';
 import Card from '@/components/commons/Card';
 import Input from '@/components/commons/Input';
 import ProfileName from '@/components/commons/ProfileName';
 import ShareButton from '@/components/party/ShareButton';
 import styles from '@/styles/party/PartyMaker.module.css';
-import Button from '@/components/commons/Button';
 
 function PartyMakerPage() {
+  const tempJoinNumber = 0;
+
   const children = (
-    <div>
+    <div className={styles.cardWrapper}>
+      <div className={`${styles.marginBottom}`}>
+        <span className={`FontM`}>참여 현황</span>
+        <span className={`${styles.marginLeft}`}>{tempJoinNumber}명 창여중</span>
+      </div>
       <ProfileName />
     </div>
   );
@@ -25,10 +31,10 @@ function PartyMakerPage() {
             </div>
             <div className={`${styles.buttonWrapper}`}>
               <span className={`${styles.oneButton}`}>
-                <Button bgc='filled'>시작하기</Button>
+                <Button bgc="filled">시작하기</Button>
               </span>
               <span>
-                <Button bgc='empty'>파티닫기</Button>
+                <Button bgc="empty">파티닫기</Button>
               </span>
             </div>
           </div>
