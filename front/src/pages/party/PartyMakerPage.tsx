@@ -1,5 +1,7 @@
 import styles from '@/styles/party/PartyMaker.module.css'
 import ShareButton from '@/components/party/ShareButton';
+import ProfileName from '@/components/commons/ProfileName';
+
 function PartyMakerPage() {
   return (
     <div className={styles.margin}>
@@ -7,6 +9,7 @@ function PartyMakerPage() {
         <span className={`FontL`}>블랙펄 마니또</span>
         <span className={styles.marginLeft}>
           <ShareButton>참여 코드 공유</ShareButton>
+          <ProfileName />
         </span>
       </header>
     </div>
