@@ -2,3 +2,15 @@
   margin-top: 4rem;
   margin-left: 1rem;
 }
+
+.share {
+  background-color: #4FC775;
+  border: 1px solid #4FC775;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+}
+
+.marginLeft {
+  margin-left: 4rem;
+}
