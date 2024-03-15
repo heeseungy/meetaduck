@@ -12,6 +12,8 @@ function HomePage() {
       <p><Link to="/result">결과 페이지</Link>로 이동</p>
       <p><Link to="/party">파티 페이지</Link>로 이동</p>
       <p><Link to="/partycreate">파티 만들기 페이지</Link>로 이동</p>
+      <p><Link to="/partymaker">파티 방장전용 페이지</Link>로 이동</p>
+      <p><Link to="/partyjoiner">파티 참여자전용 페이지</Link>로 이동</p>
     </> 
   )
 }
