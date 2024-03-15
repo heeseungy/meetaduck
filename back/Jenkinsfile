@@ -63,7 +63,7 @@ pipeline {
                     if (existingContainers) {
                         sh "docker rm -f ${existingContainers}"
                     }
-                    sh "docker system prune -af"
+//                     sh "docker system prune -af"
                 }
             }
         }
