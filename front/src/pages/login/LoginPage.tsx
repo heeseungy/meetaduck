@@ -1,7 +1,7 @@
 import duckLogo from '@/assets/images/RubberDuckBase.png';
 import kakaoLogo from '@/assets/images/kakao_login_large_wide.png';
 
-import styles from '../../styles/LoginPage.module.css';
+import styles from '../../styles/login/LoginPage.module.css';
 
 function LoginPage() {
   const loginHandler = () => {

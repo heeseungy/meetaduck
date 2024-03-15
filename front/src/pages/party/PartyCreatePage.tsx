@@ -1,7 +1,7 @@
 import duckLogo from '@/assets/images/RubberDuckWithLogo.png';
 import Button from '@/components/commons/Button';
 import Input from '@/components/commons/Input';
-import styles from '@/styles/Partyjoin.module.css';
+import styles from '@/styles/party/Partyjoin.module.css';
 
 function PartyCreatePage() {
   return (
@@ -20,7 +20,7 @@ function PartyCreatePage() {
         <div>남보다 먼저 공을 세우려고</div>
         <div>조급히 서둘것이 아니다</div>
         <div>– 채근담</div>
-        </div>
+      </div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import duckLogo from '@/assets/images/RubberDuckWithLogo.png';
 import Button from '@/components/commons/Button';
 import Input from '@/components/commons/Input';
-import styles from '@/styles/Partyjoin.module.css';
+import styles from '@/styles/party/Partyjoin.module.css';
 
 function PartyPage() {
   return (

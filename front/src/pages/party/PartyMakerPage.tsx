@@ -1,5 +1,12 @@
 function PartyMakerPage() {
-  return <h1>party maker</h1>;
+  return (
+    <>
+      <header>
+        <span>블랙펄 마니또</span>
+        <button>참여 코드 공유</button>
+      </header>
+    </>
+  );
 }
 
 export default PartyMakerPage;
