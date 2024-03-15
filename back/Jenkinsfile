@@ -79,11 +79,7 @@ pipeline {
 
         stage('Clean Common Image') {
             steps {
-                script {
-                    def repository = "my_repository"
-                    def imageName = "${repository}:Common_${BUILD_NUMBER}"
-                    sh "docker rmi ${imageName}"
-                }
+                sh "docker system prune -af"
             }
         }
     }
