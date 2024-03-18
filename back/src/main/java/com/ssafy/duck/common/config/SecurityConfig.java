@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -59,7 +60,15 @@ public class SecurityConfig {
     }
 
     @Bean
+    public RequestMatcher corsRequestMatchers() {
+        return request ->
+                request.getMethod().equals("OPTIONS") ||
+                        request.getMethod().equals("GET") ||
+                        request.getMethod().equals("POST");
+    }
+
+    @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers(HttpMethod.OPTIONS, "/**");
+        return (web) -> web.ignoring().requestMatchers(corsRequestMatchers());
     }
 }
