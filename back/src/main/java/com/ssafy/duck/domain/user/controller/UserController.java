@@ -42,9 +42,8 @@ public class UserController {
     @Value("${spring.security.oauth2.client.provider.kakao.user-info-uri}")
     private String userInfoURL;
 
-    @CrossOrigin
     @GetMapping("/login")
-    ResponseEntity<UserRes> login(@RequestParam("code") String code) {
+     ResponseEntity<UserRes> login(@RequestParam("code") String code) {
 
         // Setting For Request Header
         Charset utf8 = Charset.forName("UTF-8");
