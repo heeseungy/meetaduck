@@ -8,11 +8,11 @@ import MissionPage from '@/pages/mission/MissionPage';
 import PartyPage from '@/pages/party/PartyPage';
 import ResultPage from '@/pages/result/ResultPage';
 import RootPage from '@/pages/root/RootPage';
+
 import HintInputFormPage from './hint/HintInputFormPage';
 import PartyCreatePage from './party/PartyCreatePage';
 import PartyJoinerPage from './party/PartyJoinerPage';
 import PartyMakerPage from './party/PartyMakerPage';
-import PartyCreatePage from './party/PartyCreatePage';
 import TestPage from './webSocketTest/TestPage';
 
 const router = createBrowserRouter([
