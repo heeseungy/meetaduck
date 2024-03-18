@@ -129,10 +129,6 @@ public class UserController {
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Authorization", "Bearer " + jwtToken);
-        responseHeaders.setAccessControlAllowCredentials(true);
-        responseHeaders.setAccessControlAllowOrigin("*");
-        responseHeaders.setAccessControlAllowHeaders(Arrays.asList("*"));
-        responseHeaders.setAccessControlAllowMethods(Arrays.asList(HttpMethod.GET, HttpMethod.POST, HttpMethod.PUT, HttpMethod.PATCH, HttpMethod.DELETE));
 
         return ResponseEntity.ok()
                 .headers(responseHeaders)
