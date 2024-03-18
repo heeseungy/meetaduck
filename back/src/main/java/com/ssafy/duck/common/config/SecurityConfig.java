@@ -59,16 +59,8 @@ public class SecurityConfig {
 
     }
 
-    @Bean
-    public RequestMatcher corsRequestMatchers() {
-        return request ->
-                request.getMethod().equals("OPTIONS") ||
-                        request.getMethod().equals("GET") ||
-                        request.getMethod().equals("POST");
-    }
-
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers(corsRequestMatchers());
-    }
+//    @Bean
+//    public WebSecurityCustomizer webSecurityCustomizer() {
+//        return (web) -> web.ignoring().requestMatchers(corsRequestMatchers());
+//    }
 }
