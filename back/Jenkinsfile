@@ -79,7 +79,9 @@ pipeline {
 
         stage('Clean Common Image') {
             steps {
-                sh "docker system prune -af"
+                script {
+                    sh "docker system prune -af"
+                }
             }
         }
     }
