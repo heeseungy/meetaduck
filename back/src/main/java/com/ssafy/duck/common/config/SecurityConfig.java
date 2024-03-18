@@ -22,6 +22,7 @@ public class SecurityConfig {
 
     //    private final CustomJwtAuthenticationFilter jwtAuthenticationFilter;
 
+    @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowCredentials(true);
