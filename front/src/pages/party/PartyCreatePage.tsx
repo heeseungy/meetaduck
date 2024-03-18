@@ -4,6 +4,14 @@ import Input from '@/components/commons/Input';
 import styles from '@/styles/party/Partyjoin.module.css';
 
 function PartyCreatePage() {
+  // 파티 열기 클릭하면 수행
+  // const response = await Axios.post(`/api/parties`, {
+  //   params: {
+  //     userId: ,
+  //     partyName: ,
+  //   }
+  // })
+
   return (
     <div className={styles.container}>
       <img src={duckLogo} alt="duckLogo" className={styles.marginTop} />

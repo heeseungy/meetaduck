@@ -6,7 +6,7 @@ interface InputProps {
 }
 
 function Input({ usersInput, onChange }: InputProps) {
-  const saveUserInput = (e) => {
+  const saveUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
     console.log(e.target.value);
   };
