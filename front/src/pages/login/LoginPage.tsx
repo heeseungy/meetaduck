@@ -1,6 +1,6 @@
 import duckLogo from '@/assets/images/RubberDuckBase.png';
 import kakaoLogo from '@/assets/images/kakao_login_large_wide.png';
-import { Axios } from '@/services/axios';
+import { loginService } from '@/services/loginService';
 
 import styles from '../../styles/login/LoginPage.module.css';
 
@@ -10,31 +10,15 @@ function LoginPage() {
   const KAKAO_LOGIN_REDIRECT_URI = import.meta.env.VITE_KAKAO_LOGIN_REDIRECT_URI;
   const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_LOGIN_REDIRECT_URI}&response_type=code`;
 
-  const code = new URLSearchParams(window.location.search).get('code');
-  // const code = window.location.search;
   const loginHandler = async () => {
+    const code = new URLSearchParams(window.location.search).get('code');
+    // const code = window.location.search;
     window.location.href = kakaoURL;
-
-
-    const response = await Axios
-      .post('api/users/login', {
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json;charset=utf-8', //json형태로 데이터를 보내겠다는뜻
-          'Access-Control-Allow-Origin': '*', //이건 cors 에러때문에 넣어둔것. 당신의 프로젝트에 맞게 지워도됨
-        },
-        params: {
-          code: code,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        // navigate("/home");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    // console.log(response.data);
+    if (code) {
+      loginService(code);
+    } else {
+      console.log('code 없음');
+    }
   };
 
   return (
