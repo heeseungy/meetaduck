@@ -127,8 +127,6 @@ public class UserController {
                 .withSubject(userRes.getNickname())
                 .sign(Algorithm.HMAC512(jwtProperties.getSecretKey()));
 
-        System.out.println("*jwtToken : " + jwtToken);
-
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Authorization", "Bearer " + jwtToken);
         responseHeaders.setAccessControlAllowCredentials(true);
