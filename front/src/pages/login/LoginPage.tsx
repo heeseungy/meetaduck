@@ -1,10 +1,14 @@
 import duckLogo from '@/assets/images/RubberDuckBase.png';
 import kakaoLogo from '@/assets/images/kakao_login_large_wide.png';
+import { Axios } from '@/services/axios';
 
 import styles from '../../styles/login/LoginPage.module.css';
 
 function LoginPage() {
   const loginHandler = () => {
+    // const response = Axios.post('api/users/oauth/kakao')
+    const response = Axios.post('/posts');
+    console.log(response);
     console.log('카카오로 로그인하기');
   };
 
