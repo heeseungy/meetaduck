@@ -16,10 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
@@ -45,6 +42,7 @@ public class UserController {
     @Value("${spring.security.oauth2.client.provider.kakao.user-info-uri}")
     private String userInfoURL;
 
+    @CrossOrigin
     @GetMapping("/login")
     ResponseEntity<UserRes> login(@RequestParam("code") String code) {
 
