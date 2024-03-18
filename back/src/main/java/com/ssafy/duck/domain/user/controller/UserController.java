@@ -12,16 +12,14 @@ import com.ssafy.duck.domain.user.dto.response.UserRes;
 import com.ssafy.duck.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
+import java.util.Arrays;
 
 @RestController
 @RequestMapping("/api/users")
@@ -134,6 +132,10 @@ public class UserController {
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Authorization", "Bearer " + jwtToken);
+        responseHeaders.setAccessControlAllowCredentials(true);
+        responseHeaders.setAccessControlAllowOrigin("*");
+        responseHeaders.setAccessControlAllowHeaders(Arrays.asList("*"));
+        responseHeaders.setAccessControlAllowMethods(Arrays.asList(HttpMethod.GET, HttpMethod.POST, HttpMethod.PUT, HttpMethod.PATCH, HttpMethod.DELETE));
 
         return ResponseEntity.ok()
                 .headers(responseHeaders)
