@@ -21,6 +21,7 @@ import org.springframework.web.filter.CorsFilter;
 public class SecurityConfig {
 
     //    private final CustomJwtAuthenticationFilter jwtAuthenticationFilter;
+    //
 
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
