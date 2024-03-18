@@ -15,7 +15,7 @@ function HomePage() {
       <p><Link to="/partyjoiner">파티 참여자전용 페이지</Link>로 이동</p>
       <p><Link to="/hintinputform">힌트 정보 입력 페이지</Link>로 이동</p>
       <p><Link to="/testpage">희승's 테스트 페이지</Link>로 이동</p>
-      <p>testing</p>
+      <p>testing aa</p>
     </> 
   )
 }
