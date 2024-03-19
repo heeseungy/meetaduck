@@ -7,7 +7,6 @@ function HintInputFormPage() {
     <div className={styles.cardMargin}>
       <form action="#">
         <HintInputQuestion />
-
       </form>
     </div>
   );
