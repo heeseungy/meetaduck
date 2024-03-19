@@ -5,34 +5,30 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-@Entity
-@Table(name = "`messages`")
-@EntityListeners(AuditingEntityListener.class)
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
-@Builder
+import java.time.Instant;
+import java.time.LocalDateTime;
+
+@Document(collection = "messages")
 @Getter
-public class Message extends BaseTimeEntity {
+public class Message {
+    private String id;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long messageId;
+    @Field("chat_id")
+    private Integer chatId;
 
-    @NotNull
-    @Column(name = "`message_type`", nullable = false)
-    private boolean messageType;
-
-    @NotNull
-    @Column(name = "`content`", nullable = false)
+    @Field("content")
     private String content;
-
-    @NotNull
-    @Column(name = "`sender_id`", nullable = false)
-    private Long senderId;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "chat_id", nullable = false, updatable = false)
-    private Chat chat;
+    @Field("created_time")
+    private String createdTime;
+    @Id
+    @Field("message_id")
+    private Integer messageId;
+    @Field("message_type")
+    private Boolean messageType;
+    @Field("sender_id")
+    private Integer senderId;
 
 }

@@ -1,10 +1,13 @@
 package com.ssafy.duck.domain.chat.service;
 
 import com.ssafy.duck.domain.chat.dto.response.ChatRes;
+import com.ssafy.duck.domain.chat.dto.response.MessageRes;
 import com.ssafy.duck.domain.chat.entity.Chat;
+import com.ssafy.duck.domain.chat.entity.Message;
 import com.ssafy.duck.domain.chat.exception.ChatErrorCode;
 import com.ssafy.duck.domain.chat.exception.ChatException;
 import com.ssafy.duck.domain.chat.repository.ChatRepository;
+import com.ssafy.duck.domain.chat.repository.MessageRepository;
 import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.exception.GuestErrorCode;
 import com.ssafy.duck.domain.guest.exception.GuestException;
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,6 +32,7 @@ public class ChatService {
     private final PartyRepository partyRepository;
     private final GuestRepository guestRepository;
     private final ChatRepository chatRepository;
+    private final MessageRepository messageRepository;
 
     public Chat createChat(String accessCode) {
         Chat chat = Chat.builder()
@@ -71,6 +76,32 @@ public class ChatService {
             chat.setManiti(guest.getManitiId());
             chatRepository.save(chat);
         }
+    }
+
+    public List<MessageRes> getMessgess(Integer chatId) {
+        return toMessageResList(messageRepository.findByChatId(chatId));
+    }
+
+    private List<MessageRes> toMessageResList(List<Message> messages) {
+
+        // 결과를 담을 List 생성
+        List<MessageRes> messageResList = new ArrayList<>();
+
+        // 각 Message 객체를 MessageRes 객체로 변환하여 리스트에 추가
+        for (Message message : messages) {
+            MessageRes messageRes = MessageRes.builder()
+                    .messageId(message.getMessageId())
+                    .messageType(message.getMessageType())
+                    .chatId(message.getChatId())
+                    .content(message.getContent())
+                    .createdTime(message.getCreatedTime())
+                    .senderId(message.getSenderId())
+                    .build();
+
+            messageResList.add(messageRes);
+        }
+
+        return messageResList;
     }
 
 }
