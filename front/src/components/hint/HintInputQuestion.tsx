@@ -1,5 +1,6 @@
 import styles from '@/styles/hint/HintInputQuestion.module.css';
 
+import Button from '../commons/Button';
 import Input from '../commons/Input';
 
 function HintInputQuestion() {
@@ -17,6 +18,9 @@ function HintInputQuestion() {
           <Input />
         </div>
       ))}
+      <div className={`${styles.oneButton}`}>
+        <Button bgc="filled">입력 완료</Button>
+      </div>
     </>
   );
 }

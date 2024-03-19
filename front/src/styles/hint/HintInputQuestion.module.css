@@ -5,3 +5,8 @@
 .bottom2 {
   margin-bottom: 2rem;
 }
+
+.oneButton {
+  display: flex;
+  justify-content: center;
+}
