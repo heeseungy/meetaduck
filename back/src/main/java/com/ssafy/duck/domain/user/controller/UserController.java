@@ -21,7 +21,6 @@ import org.springframework.web.client.RestTemplate;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
@@ -45,6 +44,8 @@ public class UserController {
 
     @GetMapping("/login")
      ResponseEntity<UserRes> login(@RequestParam("code") String code) {
+
+        System.out.println("1111111111111");
 
         // Setting For Request Header
         Charset utf8 = Charset.forName("UTF-8");
@@ -130,6 +131,12 @@ public class UserController {
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Authorization", "Bearer " + jwtToken);
+
+        System.out.println("***********");
+
+        System.out.println(ResponseEntity.ok()
+                .headers(responseHeaders)
+                .body(userRes));
 
         return ResponseEntity.ok()
                 .headers(responseHeaders)
