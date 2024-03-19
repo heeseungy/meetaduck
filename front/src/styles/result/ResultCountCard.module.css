@@ -1,0 +1,9 @@
+.Card {
+  border: 2px solid #4d4637;
+  border-radius: 0.75rem;
+  width: 7.8rem;
+  height: 3.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

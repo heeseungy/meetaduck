@@ -1,0 +1,90 @@
+.ProfileUrl {
+  width: 6.25rem;
+  height: 6.25rem;
+  border-radius: 6rem;
+  position: absolute;
+  top: 2.75rem;
+  left: calc(50vw - 3.125rem);
+  /* left: 8.125rem; */
+
+  z-index: 1;
+}
+.ProfileResultUrl {
+  width: 4.7rem;
+  height: 4.7rem;
+  border-radius: 6rem;
+  z-index: 1;
+}
+
+.ScrollConatiner {
+  height: 26rem;
+  overflow-y: auto;
+  padding-top: 1.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.Title {
+  padding-top: 2rem;
+  /* padding-left: 0.75rem; */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.SubTitles {
+  padding-top: 0.75rem;
+  padding-right: 0.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.SubTitle {
+  display: flex;
+  justify-content: center;
+  gap: 7rem;
+  align-items: center;
+  /* margin-bottom: 1rem; */
+}
+
+.Conatiner {
+  display: flex;
+  flex-direction: column;
+}
+
+.ConatinerTitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 2rem;
+}
+
+.MarginBottom1_5 {
+  margin-bottom: 1.5rem;
+}
+
+.MarginBottom1 {
+  margin-bottom: 1rem;
+}
+
+.MarginBottom_5 {
+  margin-bottom: 0.5rem;
+}
+
+.Row {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 2rem;
+}
+
+.Column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

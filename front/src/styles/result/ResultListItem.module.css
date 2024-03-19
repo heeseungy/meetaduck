@@ -1,0 +1,30 @@
+.HeartFlex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.PairFlex {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.ManitiContainer {
+  position: relative;
+}
+.Hat {
+  position: absolute;
+  right: -0.25rem;
+  top: -1rem;
+}
+
+.HatActive {
+  visibility: visible;
+}
+.HatHidden {
+  visibility: hidden;
+}
