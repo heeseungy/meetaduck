@@ -18,9 +18,11 @@ import java.time.LocalDateTime;
 @Builder
 @Getter
 public class Message {
-    private String id;
 
     @Id
+    @Field("_id")
+    private String id;
+
     @Field("message_id")
     private Integer messageId;
     @Field("message_type")

@@ -29,7 +29,7 @@ public class ChatController {
     @Operation(summary = "채팅: 채팅: 메시지 조회")
     public ResponseEntity<List<MessageRes>> getMessages(
             @PathVariable Integer chatId) {
-        return ResponseEntity.ok().body(chatService.getMessgess(chatId));
+        return ResponseEntity.ok().body(chatService.getMessages(chatId));
     }
 
     @PostMapping("/{chatId}")

@@ -50,6 +50,16 @@ public class ChatService {
         return chat;
     }
 
+    public void setManiti(Long partyId) {
+        List<Guest> guests = guestRepository.findByParty_PartyId(partyId);
+        for (Guest guest : guests) {
+            Chat chat = chatRepository.findById(guest.getChat().getChatId())
+                    .orElseThrow(() -> new ChatException(ChatErrorCode.NOT_FOUND_CHAT));
+            chat.setManiti(guest.getManitiId());
+            chatRepository.save(chat);
+        }
+    }
+
     public ChatRes getMyChatList(Long guestId) {
         // 그룹채팅방ID = partyId=partyId고 manittiId == null인 방
         // (나의)마니또채팅방ID = partyId=partyId고 chats.getManitiId = guest.getGuestId();
@@ -67,6 +77,10 @@ public class ChatService {
                 .build();
     }
 
+    public List<MessageRes> getMessages(Integer chatId) {
+        return toMessageResList(messageRepository.findByChatId(chatId));
+    }
+
     public MessageRes createMessage(Integer chatId, MessageReq messageReq) {
         Message message = Message.builder()
                 .messageType(messageReq.isMessageType())
@@ -80,6 +94,10 @@ public class ChatService {
         return toMessageRes(message);
     }
 
+    public void notifyNewMessage(Integer chatId, MessageRes messageRes) {
+                simpMessagingTemplate.convertAndSend("/topic/chats/" + chatId, messageRes);
+    }
+
     private MessageRes toMessageRes(Message message) {
         return MessageRes.builder()
                 .messageId(message.getMessageId())
@@ -89,24 +107,6 @@ public class ChatService {
                 .senderId(message.getSenderId())
                 .chatId(message.getChatId())
                 .build();
-    }
-
-    public void notifyNewMessage(Integer chatId, MessageRes messageRes) {
-                simpMessagingTemplate.convertAndSend("/topic/chats/" + chatId, messageRes);
-    }
-
-    public void setManiti(Long partyId) {
-        List<Guest> guests = guestRepository.findByParty_PartyId(partyId);
-        for (Guest guest : guests) {
-            Chat chat = chatRepository.findById(guest.getChat().getChatId())
-                    .orElseThrow(() -> new ChatException(ChatErrorCode.NOT_FOUND_CHAT));
-            chat.setManiti(guest.getManitiId());
-            chatRepository.save(chat);
-        }
-    }
-
-    public List<MessageRes> getMessgess(Integer chatId) {
-        return toMessageResList(messageRepository.findByChatId(chatId));
     }
 
     private List<MessageRes> toMessageResList(List<Message> messages) {
