@@ -3,6 +3,8 @@ import Card from '@/components/commons/Card';
 import ProfileName from '@/components/commons/ProfileName';
 import DatePickerInput from '@/components/party/DatePickerInput';
 import ShareButton from '@/components/party/ShareButton';
+import { partyDeleteervice } from '@/services/partyDeleteService';
+import { partyStartService } from '@/services/partyStartService';
 import styles from '@/styles/party/PartyMaker.module.css';
 
 function PartyMakerPage() {
@@ -17,6 +19,16 @@ function PartyMakerPage() {
       <ProfileName />
     </div>
   );
+
+  const startHandler = () => {
+    console.log('시작하기');
+    partyStartService();
+  };
+
+  const deleteHandler = () => {
+    console.log('파티닫기');
+    partyDeleteervice();
+  };
   return (
     <div className={styles.margin}>
       <header className={styles.spaceB}>
@@ -35,10 +47,14 @@ function PartyMakerPage() {
         </div>
         <div className={`${styles.buttonWrapper}`}>
           <span className={`${styles.oneButton}`}>
-            <Button bgc="filled">시작하기</Button>
+            <Button onClickHandler={startHandler} bgc="filled">
+              시작하기
+            </Button>
           </span>
           <span>
-            <Button bgc="empty">파티닫기</Button>
+            <Button onClickHandler={deleteHandler} bgc="empty">
+              파티닫기
+            </Button>
           </span>
         </div>
       </div>

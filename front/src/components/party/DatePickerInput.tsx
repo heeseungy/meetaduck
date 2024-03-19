@@ -4,7 +4,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import dayjs, { Dayjs } from 'dayjs';
 
-function DatePickerInput({ children }) {
+function DatePickerInput() {
   // const [recommendForm, setRecommendForm] = useRecoilState(recommendFormState);
 
   const datePickerFormat = 'YYYY-MM-DD';

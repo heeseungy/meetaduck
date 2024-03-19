@@ -25,6 +25,7 @@ function PartyPage() {
   };
 
   const handleInputChange = (value: string) => {
+    
     setUsersInput(value);
   };
 
