@@ -1,4 +1,4 @@
-import { PairRank, Profile } from '@/types/user.interface';
+import { PairRank } from '@/types/user.interface';
 
 export type ResultListItemProfileProps = {
   nickname: string;
@@ -14,8 +14,17 @@ export type ResultListProps = {
   pairList: ResultListItemProps[];
 };
 
+export type ResultDoughnutChartProps = {
+  positive: number;
+  negative: number;
+  neutral: number;
+};
 export type ResultAnalysis = {
   favorability: number;
   wordcount: string;
-  ratio: number;
+  ratio: ResultDoughnutChartProps;
+};
+
+export type ResultCountCardProps = {
+  count: number;
 };

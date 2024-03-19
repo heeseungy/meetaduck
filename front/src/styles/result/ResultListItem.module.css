@@ -16,16 +16,15 @@
 .ManitiContainer {
   position: relative;
 }
-
-.HatActive {
-  display: block;
-}
-.HatHidden {
-  display: none;
-}
-
 .Hat {
   position: absolute;
   right: -0.25rem;
   top: -1rem;
+}
+
+.HatActive {
+  visibility: visible;
+}
+.HatHidden {
+  visibility: hidden;
 }

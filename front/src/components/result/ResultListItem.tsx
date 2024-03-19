@@ -12,7 +12,7 @@ function ResultListItem(resultListItemProps: ResultListItemProps) {
       />
       <div className={styles.HeartFlex}>
         <Heart size={32} color="#fb9d9d" weight="fill" />
-        <div className="FontXS">우호도 {resultListItemProps.manito.manitoFavorability}점</div>
+        <div className="FontXS">우호도 {resultListItemProps.maniti.manitoFavorability}점</div>
       </div>
       <div className={styles.ManitiContainer}>
         <img
