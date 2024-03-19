@@ -1,5 +1,6 @@
 package com.ssafy.duck.domain.chat.service;
 
+import com.ssafy.duck.domain.chat.dto.request.MessageReq;
 import com.ssafy.duck.domain.chat.dto.response.ChatRes;
 import com.ssafy.duck.domain.chat.dto.response.MessageRes;
 import com.ssafy.duck.domain.chat.entity.Chat;
@@ -17,6 +18,7 @@ import com.ssafy.duck.domain.party.exception.PartyErrorCode;
 import com.ssafy.duck.domain.party.exception.PartyException;
 import com.ssafy.duck.domain.party.repository.PartyRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +30,8 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class ChatService {
+
+    private final SimpMessagingTemplate simpMessagingTemplate;
 
     private final PartyRepository partyRepository;
     private final GuestRepository guestRepository;
@@ -42,6 +46,7 @@ public class ChatService {
                         .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY)))
                 .build();
         chatRepository.save(chat);
+
         return chat;
     }
 
@@ -62,8 +67,33 @@ public class ChatService {
                 .build();
     }
 
-//    public void createMessage(Long chatId, MessageReq messageReq) {
-//    }
+    public MessageRes createMessage(Integer chatId, MessageReq messageReq) {
+        Message message = Message.builder()
+                .messageType(messageReq.isMessageType())
+                .content(messageReq.getContent())
+                .createdTime(Instant.now() + "")
+                .senderId(messageReq.getSenderId())
+                .chatId(chatId)
+                .build();
+        messageRepository.save(message);
+
+        return toMessageRes(message);
+    }
+
+    private MessageRes toMessageRes(Message message) {
+        return MessageRes.builder()
+                .messageId(message.getMessageId())
+                .messageType(message.getMessageType())
+                .content(message.getContent())
+                .createdTime(message.getCreatedTime())
+                .senderId(message.getSenderId())
+                .chatId(message.getChatId())
+                .build();
+    }
+
+    public void notifyNewMessage(Integer chatId, MessageRes messageRes) {
+                simpMessagingTemplate.convertAndSend("/topic/chats/" + chatId, messageRes);
+    }
 
     public void setManiti(Long partyId) {
         List<Guest> guests = guestRepository.findByParty_PartyId(partyId);

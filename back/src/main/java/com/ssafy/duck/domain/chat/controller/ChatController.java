@@ -1,15 +1,13 @@
 package com.ssafy.duck.domain.chat.controller;
 
+import com.ssafy.duck.domain.chat.dto.request.MessageReq;
 import com.ssafy.duck.domain.chat.dto.response.ChatRes;
 import com.ssafy.duck.domain.chat.dto.response.MessageRes;
 import com.ssafy.duck.domain.chat.service.ChatService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,14 +31,15 @@ public class ChatController {
             @PathVariable Integer chatId) {
         return ResponseEntity.ok().body(chatService.getMessgess(chatId));
     }
-//
-//    @PostMapping("/{chatId}")
-//    @Operation(summary = "채팅: 메시지 생성(전송)")
-//    public ResponseEntity<Void> createMessage(
-//            @PathVariable Long chatId,
-//            @RequestBody MessageReq messageReq) {
-//        chatService.createMessage(chatId, messageReq);
-//        return ResponseEntity.noContent().build();
-//    }
+
+    @PostMapping("/{chatId}")
+    @Operation(summary = "채팅: 메시지 생성(전송)")
+    public ResponseEntity<Void> createMessage(
+            @PathVariable Integer chatId,
+            @RequestBody MessageReq messageReq) {
+        MessageRes messageRes = chatService.createMessage(chatId, messageReq);
+        chatService.notifyNewMessage(chatId, messageRes);
+        return ResponseEntity.noContent().build();
+    }
 
 }
