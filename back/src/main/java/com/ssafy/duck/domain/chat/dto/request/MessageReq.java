@@ -13,6 +13,7 @@ public class MessageReq {
 
     private boolean messageType;
     private String content;
-    private Long senderId;
+    private Integer senderId;
+    private Integer chatId;
 
 }
