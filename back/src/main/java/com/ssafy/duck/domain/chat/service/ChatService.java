@@ -62,9 +62,6 @@ public class ChatService {
                 .build();
     }
 
-//    public List<MessageRes> getMessgess(Long chatId) {
-//    }
-//
 //    public void createMessage(Long chatId, MessageReq messageReq) {
 //    }
 
@@ -83,11 +80,7 @@ public class ChatService {
     }
 
     private List<MessageRes> toMessageResList(List<Message> messages) {
-
-        // 결과를 담을 List 생성
         List<MessageRes> messageResList = new ArrayList<>();
-
-        // 각 Message 객체를 MessageRes 객체로 변환하여 리스트에 추가
         for (Message message : messages) {
             MessageRes messageRes = MessageRes.builder()
                     .messageId(message.getMessageId())
