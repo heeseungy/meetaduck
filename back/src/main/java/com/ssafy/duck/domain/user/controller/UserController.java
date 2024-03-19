@@ -45,8 +45,6 @@ public class UserController {
     @GetMapping("/login")
      ResponseEntity<UserRes> login(@RequestParam("code") String code) {
 
-        System.out.println("1111111111111");
-
         // Setting For Request Header
         Charset utf8 = Charset.forName("UTF-8");
         MediaType mediaType = new MediaType(MediaType.APPLICATION_FORM_URLENCODED, utf8);
