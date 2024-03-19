@@ -28,3 +28,7 @@ export type ResultAnalysis = {
 export type ResultCountCardProps = {
   count: number;
 };
+
+export interface ManitoResultAnalysis extends ResultAnalysis {
+  missionSuccess: number;
+}
