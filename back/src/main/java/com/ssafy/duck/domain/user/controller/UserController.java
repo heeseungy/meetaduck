@@ -12,19 +12,14 @@ import com.ssafy.duck.domain.user.dto.response.UserRes;
 import com.ssafy.duck.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
+import java.util.Arrays;
 
 @RestController
 @RequestMapping("/api/users")
@@ -48,7 +43,7 @@ public class UserController {
     private String userInfoURL;
 
     @GetMapping("/login")
-    ResponseEntity<UserRes> login(@RequestParam("code") String code) {
+     ResponseEntity<UserRes> login(@RequestParam("code") String code) {
 
         // Setting For Request Header
         Charset utf8 = Charset.forName("UTF-8");
@@ -132,10 +127,14 @@ public class UserController {
                 .withSubject(userRes.getNickname())
                 .sign(Algorithm.HMAC512(jwtProperties.getSecretKey()));
 
-        System.out.println("*jwtToken : " + jwtToken);
-
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Authorization", "Bearer " + jwtToken);
+
+        System.out.println("***********");
+
+        System.out.println(ResponseEntity.ok()
+                .headers(responseHeaders)
+                .body(userRes));
 
         return ResponseEntity.ok()
                 .headers(responseHeaders)

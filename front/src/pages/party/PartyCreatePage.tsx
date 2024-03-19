@@ -1,9 +1,17 @@
 import duckLogo from '@/assets/images/RubberDuckWithLogo.png';
 import Button from '@/components/commons/Button';
 import Input from '@/components/commons/Input';
-import styles from '@/styles/Partyjoin.module.css';
+import styles from '@/styles/party/Partyjoin.module.css';
 
 function PartyCreatePage() {
+  // 파티 열기 클릭하면 수행
+  // const response = await Axios.post(`/api/parties`, {
+  //   params: {
+  //     userId: ,
+  //     partyName: ,
+  //   }
+  // })
+
   return (
     <div className={styles.container}>
       <img src={duckLogo} alt="duckLogo" className={styles.marginTop} />
@@ -20,7 +28,7 @@ function PartyCreatePage() {
         <div>남보다 먼저 공을 세우려고</div>
         <div>조급히 서둘것이 아니다</div>
         <div>– 채근담</div>
-        </div>
+      </div>
     </div>
   );
 }

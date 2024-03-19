@@ -4,16 +4,18 @@ FROM node:lts-alpine
 WORKDIR /front
 
 # package.json과 package-lock.json을 먼저 복사
-COPY package*.json ./
+COPY package.json .
+COPY package-lock.json .
+
 
 # 프로젝트 의존성 설치
+RUN rm -rf node_modules
 RUN npm install
 
 # 프로젝트 소스 복사
 COPY . .
 
-# 환경변수 PATH 설정 (이미 설정되어 있음)
-ENV PATH /front/node_modules/.bin:$PATH
+EXPOSE 3000/tcp
 
 # 애플리케이션 실행
-CMD ["npm", "run", "dev", "--", "--host"]
+CMD ["npm", "run", "dev"]

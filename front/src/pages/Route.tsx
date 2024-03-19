@@ -9,7 +9,11 @@ import PartyPage from '@/pages/party/PartyPage';
 import ResultPage from '@/pages/result/ResultPage';
 import RootPage from '@/pages/root/RootPage';
 
+import HintInputFormPage from './hint/HintInputFormPage';
 import PartyCreatePage from './party/PartyCreatePage';
+import PartyJoinerPage from './party/PartyJoinerPage';
+import PartyMakerPage from './party/PartyMakerPage';
+import TestPage from './webSocketTest/TestPage';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +30,10 @@ const router = createBrowserRouter([
   { path: '/login', element: <LoginPage /> },
   { path: '/party', element: <PartyPage /> },
   { path: '/partycreate', element: <PartyCreatePage /> },
+  { path: '/partymaker', element: <PartyMakerPage /> },
+  { path: '/partyjoiner', element: <PartyJoinerPage /> },
+  { path: '/hintinputform', element: <HintInputFormPage /> },
+  { path: '/testpage', element: <TestPage /> },
 ]);
 
 function Route() {

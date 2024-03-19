@@ -33,7 +33,7 @@ public class Chat {
     @JoinColumn(name = "party_id", nullable = false, updatable = false)
     private Party party;
 
-    public void updateManiti(Long manitiId) {
+    public void setManiti(Long manitiId) {
         this.manitiId = manitiId;
     }
 }
