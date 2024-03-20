@@ -8,9 +8,11 @@ import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.exception.GuestErrorCode;
 import com.ssafy.duck.domain.guest.exception.GuestException;
 import com.ssafy.duck.domain.guest.repository.GuestRepository;
+import com.ssafy.duck.domain.party.entity.Party;
 import com.ssafy.duck.domain.party.exception.PartyErrorCode;
 import com.ssafy.duck.domain.party.exception.PartyException;
 import com.ssafy.duck.domain.party.repository.PartyRepository;
+import com.ssafy.duck.domain.user.entity.User;
 import com.ssafy.duck.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,6 +106,47 @@ public class GuestService {
         Guest manito = guestRepository.findByManitiId(guestId).orElseThrow(() -> new GuestException(GuestErrorCode.MANITO_NOT_FOUND));
         return toGuestRes(manito);
     }
+
+    //
+
+    public GuestRes toGuestResWithProfile(Guest guest) {
+
+        User user = guest.getUser();
+
+        GuestRes res = GuestRes.builder()
+                .guestId(guest.getGuestId())
+                .userId(user.getUserId())
+                .nickname(user.getNickname())
+                .thumbnailUrl(user.getThumbnailUrl())
+                .build();
+
+        return res;
+    }
+
+    public List<GuestRes> toGuestResWithProfileList(List<Guest> guests) {
+        List<GuestRes> guestResList = new ArrayList<>();
+        for (Guest guest : guests) {
+            GuestRes guestRes = toGuestResWithProfile(guest);
+            guestResList.add(guestRes);
+        }
+        return guestResList;
+    }
+
+    public GuestRes findGuestWithProfileByGuestId(Long guestId) {
+
+        Guest guest = guestRepository.findById(guestId)
+                .orElseThrow(() -> new GuestException(GuestErrorCode.GUEST_NOT_FOUND));
+        return toGuestResWithProfile(guest);
+    }
+
+    public List<GuestRes> findAllWithProfileByPartyId(Long partyId) {
+        Party party = partyRepository.findByPartyId(partyId)
+                .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
+        List<Guest> guestList = guestRepository.findAllByPartyId(partyId);
+        return toGuestResWithProfileList(guestList);
+    }
+
+    //
 
     public GuestRes toGuestRes(Guest guest) {
         GuestRes res = GuestRes.builder()
