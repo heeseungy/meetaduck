@@ -3,6 +3,7 @@ package com.ssafy.duck.common.exception;
 import com.ssafy.duck.domain.guest.exception.GuestException;
 import com.ssafy.duck.domain.hint.exception.HintException;
 import com.ssafy.duck.domain.mission.exception.MissionException;
+import com.ssafy.duck.domain.party.exception.PartyException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,6 +19,13 @@ public class GlobalExceptionHandler {
         log.error(Arrays.toString(e.getStackTrace()));
         return ResponseEntity.status(e.getErrorCode().getHttpStatus())
                 .body(e.getMessage());
+    }
+
+    @ExceptionHandler(PartyException.class)
+    public ResponseEntity<Object> partyExceptionHandler(PartyException e) {
+        log.error(Arrays.toString(e.getStackTrace()));
+        return ResponseEntity.status(e.getStatus().getStatusCode())
+                .body(e.getDetail());
     }
 
     @ExceptionHandler(GuestException.class)
