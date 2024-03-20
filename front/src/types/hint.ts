@@ -4,6 +4,6 @@ export interface Answer {
   hintStatusAnswer: string;
 }
 export type Hint = {
-  tag: number;
-  text: string;
+  hintId: number;
+  hintContent: string;
 };

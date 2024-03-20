@@ -1,8 +1,9 @@
 import Card from '@/components/commons/Card';
 import ResultCountCard from '@/components/result/ResultCountCard';
 import ResultDoughnutChart from '@/components/result/ResultDoughnutChart';
+import { MANITI_RESULT, MANITO_RESULT, MY_MANITI_RESULT, MY_MANITO_RESULT } from '@/recoil/dummy';
 import styles from '@/styles/result/ResultPage.module.css';
-import { ResultAnalysis, ResultListProps } from '@/types/result';
+import { ManitoResultAnalysis, ResultAnalysis, ResultListProps } from '@/types/result';
 // import ResultWord from '@/components/result/ResultWord';
 import { PairRank } from '@/types/user.interface';
 
@@ -14,53 +15,15 @@ type A2402Props = {
 };
 
 function A2402(a2402Props: A2402Props) {
-  ////////// 이걸 recoil에 저장해놔야할듯///////////////
-  // 내 마니또 = manito
   const manito = a2402Props.pairList.pairList.find((it) => it.manito.manitiId === a2402Props.me.guestId)?.manito;
-  // 내 마니띠 = maniti
   const maniti = a2402Props.pairList.pairList.find((it) => a2402Props.me.manitiId === it.maniti.guestId)?.maniti;
 
-  // 내 결과 = myManito myManiti
-  const me = a2402Props.me;
+  // axios
+  const manitoResult: ManitoResultAnalysis = MANITO_RESULT;
+  const myManitiResult: ResultAnalysis = MY_MANITI_RESULT;
+  const myManitoResult: ManitoResultAnalysis = MY_MANITO_RESULT;
+  const manitiResult: ResultAnalysis = MANITI_RESULT;
 
-  /////////////////////////////////////////////
-  ///// a2402props를 기반으로 axios요청///////////////
-  // 나: 가철수(1)
-  // 마니또: 바철수(5) - 60
-  // 마니띠: 나철수(2) = 100
-
-  interface ManitoResultAnalysis extends ResultAnalysis {
-    missionSuccess: number;
-  }
-  ////////////////////////////////////////////
-  const manitoResult: ManitoResultAnalysis = {
-    favorability: me!.manitoFavorability,
-    wordcount: 'wordCount',
-    ratio: { positive: 80, negative: 10, neutral: 10 },
-    missionSuccess: 2,
-  };
-  const myManitiResult: ResultAnalysis = {
-    favorability: me!.manitoFavorability,
-    wordcount: 'wordCount',
-    ratio: { positive: 80, negative: 10, neutral: 10 },
-  };
-  ////////////////////////////////////////////
-
-  ////////////////////////////////////////////
-  const myManitoResult: ManitoResultAnalysis = {
-    favorability: maniti!.manitoFavorability,
-    wordcount: 'wordCount',
-    ratio: { positive: 50, negative: 10, neutral: 40 },
-    missionSuccess: 3,
-  };
-  const manitiResult: ResultAnalysis = {
-    favorability: maniti!.manitoFavorability,
-    wordcount: 'wordCount',
-    ratio: { positive: 50, negative: 10, neutral: 40 },
-  };
-  ////////////////////////////////////////////
-
-  /////////////////////////////////////////////////////
   const children = (
     <div className={styles.Conatiner}>
       <div className={styles.ConatinerTitle}>

@@ -14,7 +14,7 @@ function A1403() {
           <p>마니또를 맞추면 모자로</p>
           <p>투표 결과를 확인할 수 있어요!</p>
         </div>
-        <ResultPair />
+        {/* <ResultPair /> */}
       </div>
       <div>
         <div>모든 참가자가 투표할 때까지 기다려주세요</div>

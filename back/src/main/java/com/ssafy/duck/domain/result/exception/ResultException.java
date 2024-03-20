@@ -1,4 +1,13 @@
 package com.ssafy.duck.domain.result.exception;
 
-public class ResultException {
+import lombok.Getter;
+
+@Getter
+public class ResultException extends RuntimeException{
+    private final ResultErrorCode errorCode;
+
+    public ResultException(ResultErrorCode errorCode) {
+        super(errorCode.getMessage());
+        this.errorCode = errorCode;
+    }
 }
