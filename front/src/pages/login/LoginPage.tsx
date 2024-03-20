@@ -1,24 +1,24 @@
 import duckLogo from '@/assets/images/RubberDuckBase.png';
 import kakaoLogo from '@/assets/images/kakao_login_large_wide.png';
-import { loginService } from '@/services/loginService';
 
 import styles from '../../styles/login/LoginPage.module.css';
 
+interface EnvType {
+  KAKAO_CLIENT_ID: string;
+  KAKAO_LOGIN_REDIRECT_URI: string;
+  kakaoURL: string;
+}
+
 function LoginPage() {
   const KAKAO_OAUTH_URL = import.meta.env.VITE_KAKAO_OAUTH_URL;
-  const KAKAO_CLIENT_ID = import.meta.env.VITE_KAKAO_CLIENT_ID;
-  const KAKAO_LOGIN_REDIRECT_URI = import.meta.env.VITE_KAKAO_LOGIN_REDIRECT_URI;
+  const KAKAO_CLIENT_ID: EnvType = import.meta.env.VITE_KAKAO_CLIENT_ID;
+  const KAKAO_LOGIN_REDIRECT_URI: EnvType = import.meta.env.VITE_KAKAO_LOGIN_REDIRECT_URI;
   const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_LOGIN_REDIRECT_URI}&response_type=code`;
 
   const loginHandler = async () => {
-    const code = new URLSearchParams(window.location.search).get('code');
     // const code = window.location.search;
+
     window.location.href = kakaoURL;
-    if (code) {
-      loginService(code);
-    } else {
-      console.log('code 없음');
-    }
   };
 
   return (
