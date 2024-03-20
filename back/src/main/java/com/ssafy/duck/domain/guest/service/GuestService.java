@@ -90,13 +90,6 @@ public class GuestService {
         return guestOptional.isPresent();
     }
 
-    public List<GuestRes> findAllByPartyId(Long partyId) {
-        Party party = partyRepository.findByPartyId(partyId)
-                .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
-        List<Guest> guestList = guestRepository.findAllByPartyId(partyId);
-        return toGuestResWithProfileList(guestList);
-    }
-
     public GuestRes findByGuestId(Long guestId) {
         Guest guest = guestRepository.findById(guestId).orElseThrow(() -> new GuestException(GuestErrorCode.GUEST_NOT_FOUND));
         return toGuestRes(guest);
@@ -113,6 +106,8 @@ public class GuestService {
         Guest manito = guestRepository.findByManitiId(guestId).orElseThrow(() -> new GuestException(GuestErrorCode.MANITO_NOT_FOUND));
         return toGuestRes(manito);
     }
+
+    //
 
     public GuestRes toGuestResWithProfile(Guest guest) {
 
@@ -136,6 +131,22 @@ public class GuestService {
         }
         return guestResList;
     }
+
+    public GuestRes findGuestWithProfileByGuestId(Long guestId) {
+
+        Guest guest = guestRepository.findById(guestId)
+                .orElseThrow(() -> new GuestException(GuestErrorCode.GUEST_NOT_FOUND));
+        return toGuestResWithProfile(guest);
+    }
+
+    public List<GuestRes> findAllWithProfileByPartyId(Long partyId) {
+        Party party = partyRepository.findByPartyId(partyId)
+                .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
+        List<Guest> guestList = guestRepository.findAllByPartyId(partyId);
+        return toGuestResWithProfileList(guestList);
+    }
+
+    //
 
     public GuestRes toGuestRes(Guest guest) {
         GuestRes res = GuestRes.builder()

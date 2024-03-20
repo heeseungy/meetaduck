@@ -17,9 +17,15 @@ public class GuestController {
 
     private final GuestService guestService;
 
+    @GetMapping("/{guestId}")
+    public ResponseEntity<GuestRes> getGuestWithProfileByGuestId(@PathVariable Long guestId) {
+        GuestRes guestRes = guestService.findGuestWithProfileByGuestId(guestId);
+        return ResponseEntity.ok(guestRes);
+    }
+
     @GetMapping("/all/{partyId}")
-    public ResponseEntity<List<GuestRes>> getAllByPartyId(@PathVariable Long partyId) {
-        List<GuestRes> guestList = guestService.findAllByPartyId(partyId);
+    public ResponseEntity<List<GuestRes>> getGuestListWithProfileByPartyId(@PathVariable Long partyId) {
+        List<GuestRes> guestList = guestService.findAllWithProfileByPartyId(partyId);
         return ResponseEntity.ok(guestList);
     }
 
