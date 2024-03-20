@@ -8,7 +8,9 @@ export interface Profile {
 
 // 마니또 페어
 export interface PairRank extends Profile {
-  manittiId: number;
+  manitiId: number;
   votedId: number;
   manitoFavorability: number;
+  
 }
+

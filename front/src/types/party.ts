@@ -12,7 +12,6 @@ export interface Party {
   deleted: boolean;
   userId: number;
 }
-
 export interface PartyStatus {
   status: number;
 }

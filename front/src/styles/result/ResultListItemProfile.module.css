@@ -1,0 +1,13 @@
+.Avatar {
+  width: 2.375rem;
+  height: 2.375rem;
+  border-radius: 5rem;
+}
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+}

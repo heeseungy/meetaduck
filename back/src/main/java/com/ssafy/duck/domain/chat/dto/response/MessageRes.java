@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,11 +14,11 @@ import java.time.Instant;
 @Getter
 public class MessageRes {
 
-    private Long messageId;
+    private Integer messageId;
     private boolean messageType;
     private String content;
-    private Instant createdTime;
-    private Long senderId;
-    private Long chatId;
+    private String createdTime;
+    private Integer senderId;
+    private Integer chatId;
 
 }
