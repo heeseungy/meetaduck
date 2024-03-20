@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
@@ -12,7 +11,7 @@ interface MessageRes {
   chatId: number;
 }
 
-const TestPage: React.FC = () => {
+const TestPage = () => {
   const [messages, setMessages] = useState<MessageRes[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const chatId = 1; // 예시로 사용되는 chatId
