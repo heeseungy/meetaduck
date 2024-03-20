@@ -8,15 +8,19 @@ import { ManitoResultAnalysis, ResultAnalysis, ResultListProps } from '@/types/r
 import { PairRank } from '@/types/user.interface';
 
 // tag: 1: 첫번째 2: 두번째
-type A2402Props = {
+type PairResultProps = {
   tag: number;
   me: PairRank;
   pairList: ResultListProps;
 };
 
-function A2402(a2402Props: A2402Props) {
-  const manito = a2402Props.pairList.pairList.find((it) => it.manito.manitiId === a2402Props.me.guestId)?.manito;
-  const maniti = a2402Props.pairList.pairList.find((it) => a2402Props.me.manitiId === it.maniti.guestId)?.maniti;
+function PairResultPage(pairResultProps: PairResultProps) {
+  const manito = pairResultProps.pairList.pairList.find(
+    (it) => it.manito.manitiId === pairResultProps.me.guestId,
+  )?.manito;
+  const maniti = pairResultProps.pairList.pairList.find(
+    (it) => pairResultProps.me.manitiId === it.maniti.guestId,
+  )?.maniti;
 
   // axios
   const manitoResult: ManitoResultAnalysis = MANITO_RESULT;
@@ -28,30 +32,35 @@ function A2402(a2402Props: A2402Props) {
     <div className={styles.Conatiner}>
       <div className={styles.ConatinerTitle}>
         <div className={`FontMBold ${styles.MarginBottom1_5}`}>
-          <span>{a2402Props.tag === 1 ? `마니또 ${manito!.nickname}` : `마니띠 ${maniti!.nickname}`}</span>님과 관계분석
+          <span>{pairResultProps.tag === 1 ? `마니또 ${manito!.nickname}` : `마니띠 ${maniti!.nickname}`}</span>님과
+          관계분석
         </div>
         <div>
           <img
             className={`${styles.ProfileResultUrl} ${styles.MarginBottom1}`}
-            src={a2402Props.tag === 1 ? manito!.profileUrl : maniti!.profileUrl}
+            src={pairResultProps.tag === 1 ? manito!.profileUrl : maniti!.profileUrl}
             alt=""
           />
           <div className="FontSBold">
-            우호도 {a2402Props.tag === 1 ? manito!.manitoFavorability : maniti!.manitoFavorability}점
+            우호도 {pairResultProps.tag === 1 ? myManitiResult!.favorability : myManitoResult!.favorability}점
           </div>
         </div>
       </div>
       <div>
         <div className={styles.Row}>
           <div className={styles.Column}>
-            <div className="FontMBold">{a2402Props.tag === 1 ? '마니또 단어' : '내 단어'}</div>
+            <div className="FontMBold">{pairResultProps.tag === 1 ? '마니또 단어' : '내 단어'}</div>
             {/* <ResultWord />  모르겠다 일단넘겨*/}
-            <div>{a2402Props.tag === 1 ? manitoResult!.wordcount : myManitoResult!.wordcount}</div>
+            <div>
+              {pairResultProps.tag === 1 ? manitoResult!.wordcount[0].value : myManitoResult!.wordcount[0].value}
+            </div>
           </div>
           <div className={styles.Column}>
-            <div className="FontMBold">{a2402Props.tag === 1 ? '내 단어' : '마니띠 단어'}</div>
+            <div className="FontMBold">{pairResultProps.tag === 1 ? '내 단어' : '마니띠 단어'}</div>
             {/* <ResultWord /> */}
-            <div>{a2402Props.tag === 1 ? myManitiResult!.wordcount : manitiResult!.wordcount}</div>
+            <div>
+              {pairResultProps.tag === 1 ? myManitiResult!.wordcount[0].value : manitiResult!.wordcount[0].value}
+            </div>
           </div>
         </div>
         <div className={styles.Row}>
@@ -63,7 +72,7 @@ function A2402(a2402Props: A2402Props) {
             </div>
             <div className={`${styles.MarginBottom1_5} ${styles.Column}`}>
               <div className={`FontSBold ${styles.MarginBottom1}`}>미션 수행 횟수</div>
-              {a2402Props.tag === 1 ? (
+              {pairResultProps.tag === 1 ? (
                 <ResultCountCard {...{ count: manitoResult.missionSuccess }} />
               ) : (
                 <ResultCountCard {...{ count: myManitoResult.missionSuccess }} />
@@ -79,7 +88,7 @@ function A2402(a2402Props: A2402Props) {
             </div>
 
             <div className={styles.DoughnutChartContainer}>
-              {a2402Props.tag === 1 ? (
+              {pairResultProps.tag === 1 ? (
                 <ResultDoughnutChart {...myManitiResult!.ratio} />
               ) : (
                 <ResultDoughnutChart {...manitiResult!.ratio} />
@@ -97,4 +106,4 @@ function A2402(a2402Props: A2402Props) {
   );
 }
 
-export default A2402;
+export default PairResultPage;

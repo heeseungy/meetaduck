@@ -2,7 +2,7 @@ import voteAfter from '@/assets/images/voteAfter.png';
 import Button from '@/components/commons/Button';
 import ResultPair from '@/components/result/ResultListItem';
 
-function A1403() {
+function VoteAfterPage() {
   return (
     <div>
       <div>
@@ -24,4 +24,4 @@ function A1403() {
   );
 }
 
-export default A1403;
+export default VoteAfterPage;

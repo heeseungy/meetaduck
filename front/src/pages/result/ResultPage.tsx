@@ -1,10 +1,10 @@
 import Slides from '@/components/commons/Slides';
-import A2401 from '@/pages/result/A2401';
-import A2402 from '@/pages/result/A2402';
-import A1401 from '@/pages/vote/A1401';
-import A1402 from '@/pages/vote/A1402';
-import A1403 from '@/pages/vote/A1403';
-import { MY_INFO, PAIR_LIST, PARTY_STATUS } from '@/recoil/dummy';
+import PairResultPage from '@/pages/result/PairResultPage';
+import ResultPairListPage from '@/pages/result/ResultPairListPage';
+import VoteAfterPage from '@/pages/vote/VoteAfterPage';
+import VoteBeforePage from '@/pages/vote/VoteBeforePage';
+import VoteInProgressPage from '@/pages/vote/VoteInProgressPage';
+import { MY_INFO, MY_PROFILE, PAIR_LIST, PARTY_STATUS } from '@/recoil/dummy';
 import { StatusType } from '@/types/party';
 import { ResultListItemProps, ResultListProps } from '@/types/result';
 import { PairRank } from '@/types/user.interface';
@@ -25,26 +25,33 @@ function ResultPage() {
         (a: ResultListItemProps, b: ResultListItemProps) => b.maniti.manitoFavorability - a.maniti.manitoFavorability,
       ),
     };
-    const me: PairRank = pairList.pairList.find((it) => it.maniti.guestId === MY_INFO.guestId)!.manito;
+    const me: PairRank = pairList.pairList.find((it) => it.manito.guestId === MY_INFO.guestId)!.manito;
 
-    const children1 = <A2401 {...{ me: me, pairList: pairList }} />;
-    const children2 = <A2402 {...{ tag: Role.Maniti, me: me, pairList: pairList }} />;
-    const children3 = <A2402 {...{ tag: Role.Manito, me: me, pairList: pairList }} />;
+    const children1 = <ResultPairListPage {...{ me: me, pairList: pairList }} />;
+    const children2 = <PairResultPage {...{ tag: Role.Maniti, me: me, pairList: pairList }} />;
+    const children3 = <PairResultPage {...{ tag: Role.Manito, me: me, pairList: pairList }} />;
 
     return <Slides {...{ children: [children1, children2, children3], className: 'Slides' }}></Slides>;
   } else if (PARTY_STATUS.status === StatusType.Before24) {
     // 24시간 전부터
-    return (
-      <>
-        <A1403 />
-        <A1402 />
-      </>
-    );
+    if (MY_PROFILE.votedId === 0) {
+      return (
+        <>
+          <VoteInProgressPage />;
+        </>
+      );
+    } else {
+      return (
+        <>
+          <VoteAfterPage />
+        </>
+      );
+    }
   } else {
     // 진행 중
     return (
       <>
-        <A1401 />
+        <VoteBeforePage />
       </>
     );
   }

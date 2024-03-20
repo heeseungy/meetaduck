@@ -4,11 +4,13 @@ import { MissionContent, MissionResultList } from '@/types/mission';
 import { Party, PartyStatus, StatusType } from '@/types/party';
 import { ResultListItemProps } from '@/types/result';
 import { ManitoResultAnalysis, ResultAnalysis } from '@/types/result';
-import { ListProifle, Profile, SimpleProfile } from '@/types/user.interface';
+import { ListProifle, LoginProfile } from '@/types/user.interface';
 
 // 로그인 시 필요한 데이터
-export const MY_INFO: Profile = {
+export const MY_INFO: LoginProfile = {
+  kakaoId: 123456,
   guestId: 1,
+  partyId: 3,
   nickname: '가철수',
   profileUrl: 'https://image.yes24.com/goods/104804448/XL',
   thumbnailUrl: 'https://image.yes24.com/goods/104804448/XL',
@@ -26,7 +28,10 @@ export const PARTY1: Party = {
 
 // 현재 파티 상태 확인
 export const PARTY_STATUS: PartyStatus = {
+  // status: StatusType['Todo'],
   status: StatusType['InProgress'],
+  // status: StatusType['Before24'],
+  // status: StatusType['Complete'],
 };
 
 // 참가자 1명 조회
@@ -35,75 +40,87 @@ export const MY_PROFILE: ListProifle = {
   guestId: 1,
   nickname: '가철수',
   thumbnailUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
+  votedId: 0,
 };
 
 // 참가자 목록 조회 (시작전)
-export const PARYTLIST: ListProifle[] = [
+export const PARTYLIST: ListProifle[] = [
   {
     userId: 152,
     guestId: 1,
     nickname: '가철수',
     thumbnailUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
+    votedId: 0,
   },
   {
     userId: 160,
     guestId: 2,
     nickname: '나철수',
     thumbnailUrl: 'https://ilyo.co.kr/contents/article/images/2017/1209/1512813041302755.jpg',
+    votedId: 0,
   },
   {
     userId: 98,
     guestId: 3,
     nickname: '다철수',
     thumbnailUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0_OYPzDohuNgpalEmE87NqxTsiTdVyV-1ZQ&usqp=CAU',
+    votedId: 0,
   },
   {
     userId: 111,
     guestId: 4,
     nickname: '라철수',
     thumbnailUrl: 'https://cdn.allets.com/500/2018/12/27/500_399045_1545871078.jpeg',
+    votedId: 0,
   },
   {
     userId: 202,
     guestId: 5,
     nickname: '바철수',
     thumbnailUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9ZRwNPdZBjdT128qQWJRi94ayDBYeGtcW2Q&usqp=CAU',
+    votedId: 0,
   },
   {
     userId: 10,
     guestId: 6,
     nickname: '가영희',
     thumbnailUrl: 'https://www.sportsq.co.kr/news/photo/201505/46687_83816_428.png',
+    votedId: 0,
   },
   {
     userId: 5,
     guestId: 7,
     nickname: '나영희',
     thumbnailUrl: 'https://cdn.imweb.me/thumbnail/20230824/20e7077f9429c.png',
+    votedId: 0,
   },
   {
     userId: 7,
     guestId: 8,
     nickname: '다영희',
     thumbnailUrl: 'https://dimg.donga.com/wps/NEWS/IMAGE/2021/11/12/110217903.2.jpg',
+    votedId: 0,
   },
   {
     userId: 12,
     guestId: 9,
     nickname: '라영희',
     thumbnailUrl: 'https://i.pinimg.com/236x/fe/40/e3/fe40e3ffbbcde74c5c77e188111ce2f7.jpg',
+    votedId: 0,
   },
   {
     userId: 59,
     guestId: 10,
     nickname: '마영희',
     thumbnailUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyIru6tQLhwY8EU6OV9IemXdE6EXSEZYrc0A&usqp=CAU',
+    votedId: 0,
   },
   {
     userId: 43,
     guestId: 11,
     nickname: '바영희',
     thumbnailUrl: 'https://i.ytimg.com/vi/tYM4oISacwY/maxresdefault.jpg',
+    votedId: 0,
   },
 ];
 
@@ -126,7 +143,7 @@ export const PAIR_LIST: ResultListItemProps[] = [
       profileUrl: 'https://ilyo.co.kr/contents/article/images/2017/1209/1512813041302755.jpg',
       thumbnailUrl: 'https://ilyo.co.kr/contents/article/images/2017/1209/1512813041302755.jpg',
       manitiId: 3,
-      votedId: 7,
+      votedId: 1,
       manitoFavorability: 60,
     },
   },
@@ -137,7 +154,7 @@ export const PAIR_LIST: ResultListItemProps[] = [
       profileUrl: 'https://ilyo.co.kr/contents/article/images/2017/1209/1512813041302755.jpg',
       thumbnailUrl: 'https://ilyo.co.kr/contents/article/images/2017/1209/1512813041302755.jpg',
       manitiId: 3,
-      votedId: 7,
+      votedId: 1,
       manitoFavorability: 60,
     },
     maniti: {
@@ -168,7 +185,7 @@ export const PAIR_LIST: ResultListItemProps[] = [
       profileUrl: 'https://cdn.allets.com/500/2018/12/27/500_399045_1545871078.jpeg',
       thumbnailUrl: 'https://cdn.allets.com/500/2018/12/27/500_399045_1545871078.jpeg',
       manitiId: 5,
-      votedId: 5,
+      votedId: 3,
       manitoFavorability: 89,
     },
   },
@@ -179,7 +196,7 @@ export const PAIR_LIST: ResultListItemProps[] = [
       profileUrl: 'https://cdn.allets.com/500/2018/12/27/500_399045_1545871078.jpeg',
       thumbnailUrl: 'https://cdn.allets.com/500/2018/12/27/500_399045_1545871078.jpeg',
       manitiId: 5,
-      votedId: 5,
+      votedId: 3,
       manitoFavorability: 89,
     },
     maniti: {
@@ -452,18 +469,18 @@ export const HINT_ALL: Answer[] = [
 
 // 대화분석 (마니또)
 export const MANITO_RESULT: ManitoResultAnalysis = {
-  favorability: 60,
+  favorability: 80,
   wordcount: [
-    { key: '아니', value: 10 },
-    { key: '진짜', value: 7 },
-    { key: '세상에', value: 1 },
+    { key: '내', value: 10 },
+    { key: '밥솥', value: 8 },
+    { key: '내놔', value: 7 },
   ],
   ratio: { positive: 80, negative: 10, neutral: 10 },
   missionSuccess: 2,
 };
 
 export const MY_MANITO_RESULT: ManitoResultAnalysis = {
-  favorability: 100,
+  favorability: 60,
   wordcount: [
     { key: '넌', value: 3 },
     { key: '안경', value: 2 },
@@ -475,17 +492,17 @@ export const MY_MANITO_RESULT: ManitoResultAnalysis = {
 
 // 대화분석 (마니띠)
 export const MANITI_RESULT: ResultAnalysis = {
-  favorability: 100,
+  favorability: 60,
   wordcount: [
-    { key: '내', value: 10 },
-    { key: '밥솥', value: 8 },
-    { key: '내놔', value: 7 },
+    { key: '아니', value: 10 },
+    { key: '진짜', value: 7 },
+    { key: '세상에', value: 1 },
   ],
   ratio: { positive: 50, negative: 10, neutral: 40 },
 };
 
 export const MY_MANITI_RESULT: ResultAnalysis = {
-  favorability: 60,
+  favorability: 80,
   wordcount: [
     { key: '아', value: 12 },
     { key: '재석이형', value: 6 },
