@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 
@@ -63,11 +64,7 @@ const TestPage: React.FC = () => {
         ))}
       </ul>
       <div>
-        <input
-          type="text"
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-        />
+        <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} />
         <button onClick={sendMessage}>Send!</button>
       </div>
     </div>
