@@ -1,8 +1,8 @@
-import { Axios } from "./axios";
+import { Axios } from './axios';
 
-export async function loginService(code: string) { //code: string
+export async function loginService(code: string): Promise<void> {
   try {
-    const response = await Axios.post('api/users/login', {
+    const response = await Axios.get('api/users/login', {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json;charset=utf-8', //json형태로 데이터를 보내겠다는뜻
@@ -11,9 +11,11 @@ export async function loginService(code: string) { //code: string
       params: {
         code: code,
       },
-    })
-    // console.log(response.data);
+    });
+    // const JWT_Token = response.headers.jwtToken;
+    // localStorage.setItem('token', JWT_Token);
+    console.log('responssssse', response);
   } catch (err) {
-    console.log(err);
+    console.log('errrrr', err);
   }
 }
