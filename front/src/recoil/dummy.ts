@@ -1,9 +1,10 @@
+import { ChatId } from '@/types/chat';
 import { Answer, Hint } from '@/types/hint.ts';
 import { MissionContent, MissionResultList } from '@/types/mission';
 import { Party, PartyStatus, StatusType } from '@/types/party';
 import { ResultListItemProps } from '@/types/result';
-import { ManitoResultAnalysis, ResultAnalysis, ResultListProps } from '@/types/result';
-import { ListProifle, PairRank, Profile, SimpleProfile } from '@/types/user.interface';
+import { ManitoResultAnalysis, ResultAnalysis } from '@/types/result';
+import { ListProifle, Profile, SimpleProfile } from '@/types/user.interface';
 
 // 로그인 시 필요한 데이터
 export const MY_INFO: Profile = {
@@ -29,7 +30,9 @@ export const PARTY_STATUS: PartyStatus = {
 };
 
 // 참가자 1명 조회
-export const MY_PROFILE: SimpleProfile = {
+export const MY_PROFILE: ListProifle = {
+  userId: 152,
+  guestId: 1,
   nickname: '가철수',
   thumbnailUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
 };
@@ -58,49 +61,49 @@ export const PARYTLIST: ListProifle[] = [
     userId: 111,
     guestId: 4,
     nickname: '라철수',
-    thumbnailUrl: 'https://cdn.allets.com/500/2018/12/27/500_399045_1545871078.jpeg'
+    thumbnailUrl: 'https://cdn.allets.com/500/2018/12/27/500_399045_1545871078.jpeg',
   },
   {
     userId: 202,
     guestId: 5,
     nickname: '바철수',
-    thumbnailUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9ZRwNPdZBjdT128qQWJRi94ayDBYeGtcW2Q&usqp=CAU'
+    thumbnailUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9ZRwNPdZBjdT128qQWJRi94ayDBYeGtcW2Q&usqp=CAU',
   },
   {
     userId: 10,
     guestId: 6,
     nickname: '가영희',
-    thumbnailUrl:'https://www.sportsq.co.kr/news/photo/201505/46687_83816_428.png'
+    thumbnailUrl: 'https://www.sportsq.co.kr/news/photo/201505/46687_83816_428.png',
   },
   {
     userId: 5,
     guestId: 7,
     nickname: '나영희',
-    thumbnailUrl:'https://cdn.imweb.me/thumbnail/20230824/20e7077f9429c.png'
+    thumbnailUrl: 'https://cdn.imweb.me/thumbnail/20230824/20e7077f9429c.png',
   },
   {
     userId: 7,
     guestId: 8,
     nickname: '다영희',
-    thumbnailUrl: 'https://dimg.donga.com/wps/NEWS/IMAGE/2021/11/12/110217903.2.jpg'
+    thumbnailUrl: 'https://dimg.donga.com/wps/NEWS/IMAGE/2021/11/12/110217903.2.jpg',
   },
   {
     userId: 12,
     guestId: 9,
     nickname: '라영희',
-    thumbnailUrl:'https://i.pinimg.com/236x/fe/40/e3/fe40e3ffbbcde74c5c77e188111ce2f7.jpg'
+    thumbnailUrl: 'https://i.pinimg.com/236x/fe/40/e3/fe40e3ffbbcde74c5c77e188111ce2f7.jpg',
   },
   {
     userId: 59,
     guestId: 10,
     nickname: '마영희',
-    thumbnailUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyIru6tQLhwY8EU6OV9IemXdE6EXSEZYrc0A&usqp=CAU'
+    thumbnailUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyIru6tQLhwY8EU6OV9IemXdE6EXSEZYrc0A&usqp=CAU',
   },
   {
     userId: 43,
     guestId: 11,
     nickname: '바영희',
-    thumbnailUrl: 'https://i.ytimg.com/vi/tYM4oISacwY/maxresdefault.jpg'
+    thumbnailUrl: 'https://i.ytimg.com/vi/tYM4oISacwY/maxresdefault.jpg',
   },
 ];
 
@@ -110,17 +113,18 @@ export const PAIR_LIST: ResultListItemProps[] = [
     manito: {
       guestId: 1,
       nickname: '가철수',
-      profileUrl: ,
-      thumbnailUrl:,
+      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
+      thumbnailUrl:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
       manitiId: 2,
       votedId: 10,
       manitoFavorability: 80,
     },
     maniti: {
       guestId: 2,
-      nickname: ,
-      profileUrl:,
-      thumbnailUrl:,
+      nickname: '나철수',
+      profileUrl: 'https://ilyo.co.kr/contents/article/images/2017/1209/1512813041302755.jpg',
+      thumbnailUrl: 'https://ilyo.co.kr/contents/article/images/2017/1209/1512813041302755.jpg',
       manitiId: 3,
       votedId: 7,
       manitoFavorability: 60,
@@ -129,18 +133,19 @@ export const PAIR_LIST: ResultListItemProps[] = [
   {
     manito: {
       guestId: 2,
-      nickname: ,
-      profileUrl: ,
-      thumbnailUrl:,
+      nickname: '나철수',
+      profileUrl: 'https://ilyo.co.kr/contents/article/images/2017/1209/1512813041302755.jpg',
+      thumbnailUrl: 'https://ilyo.co.kr/contents/article/images/2017/1209/1512813041302755.jpg',
       manitiId: 3,
       votedId: 7,
       manitoFavorability: 60,
     },
     maniti: {
       guestId: 3,
-      nickname: ,
-      profileUrl:,
-      thumbnailUrl:,
+      nickname: '다철수',
+      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0_OYPzDohuNgpalEmE87NqxTsiTdVyV-1ZQ&usqp=CAU',
+      thumbnailUrl:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0_OYPzDohuNgpalEmE87NqxTsiTdVyV-1ZQ&usqp=CAU',
       manitiId: 4,
       votedId: 4,
       manitoFavorability: 85,
@@ -149,18 +154,19 @@ export const PAIR_LIST: ResultListItemProps[] = [
   {
     manito: {
       guestId: 3,
-      nickname: ,
-      profileUrl: ,
-      thumbnailUrl:,
+      nickname: '다철수',
+      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0_OYPzDohuNgpalEmE87NqxTsiTdVyV-1ZQ&usqp=CAU',
+      thumbnailUrl:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0_OYPzDohuNgpalEmE87NqxTsiTdVyV-1ZQ&usqp=CAU',
       manitiId: 4,
       votedId: 4,
       manitoFavorability: 85,
     },
     maniti: {
       guestId: 4,
-      nickname: ,
-      profileUrl:,
-      thumbnailUrl:,
+      nickname: '라철수',
+      profileUrl: 'https://cdn.allets.com/500/2018/12/27/500_399045_1545871078.jpeg',
+      thumbnailUrl: 'https://cdn.allets.com/500/2018/12/27/500_399045_1545871078.jpeg',
       manitiId: 5,
       votedId: 5,
       manitoFavorability: 89,
@@ -169,18 +175,19 @@ export const PAIR_LIST: ResultListItemProps[] = [
   {
     manito: {
       guestId: 4,
-      nickname: ,
-      profileUrl: ,
-      thumbnailUrl:,
+      nickname: '라철수',
+      profileUrl: 'https://cdn.allets.com/500/2018/12/27/500_399045_1545871078.jpeg',
+      thumbnailUrl: 'https://cdn.allets.com/500/2018/12/27/500_399045_1545871078.jpeg',
       manitiId: 5,
       votedId: 5,
       manitoFavorability: 89,
     },
     maniti: {
       guestId: 5,
-      nickname: ,
-      profileUrl:,
-      thumbnailUrl:,
+      nickname: '바철수',
+      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9ZRwNPdZBjdT128qQWJRi94ayDBYeGtcW2Q&usqp=CAU',
+      thumbnailUrl:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9ZRwNPdZBjdT128qQWJRi94ayDBYeGtcW2Q&usqp=CAU',
       manitiId: 6,
       votedId: 4,
       manitoFavorability: 78,
@@ -189,18 +196,19 @@ export const PAIR_LIST: ResultListItemProps[] = [
   {
     manito: {
       guestId: 5,
-      nickname: ,
-      profileUrl: ,
-      thumbnailUrl:,
+      nickname: '바철수',
+      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9ZRwNPdZBjdT128qQWJRi94ayDBYeGtcW2Q&usqp=CAU',
+      thumbnailUrl:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9ZRwNPdZBjdT128qQWJRi94ayDBYeGtcW2Q&usqp=CAU',
       manitiId: 6,
       votedId: 4,
       manitoFavorability: 78,
     },
     maniti: {
       guestId: 6,
-      nickname: ,
-      profileUrl:,
-      thumbnailUrl:,
+      nickname: '가영희',
+      profileUrl: 'https://www.sportsq.co.kr/news/photo/201505/46687_83816_428.png',
+      thumbnailUrl: 'https://www.sportsq.co.kr/news/photo/201505/46687_83816_428.png',
       manitiId: 7,
       votedId: 1,
       manitoFavorability: 60,
@@ -209,18 +217,18 @@ export const PAIR_LIST: ResultListItemProps[] = [
   {
     manito: {
       guestId: 6,
-      nickname: ,
-      profileUrl: ,
-      thumbnailUrl:,
+      nickname: '가영희',
+      profileUrl: 'https://www.sportsq.co.kr/news/photo/201505/46687_83816_428.png',
+      thumbnailUrl: 'https://www.sportsq.co.kr/news/photo/201505/46687_83816_428.png',
       manitiId: 7,
       votedId: 1,
       manitoFavorability: 60,
     },
     maniti: {
       guestId: 7,
-      nickname: ,
-      profileUrl:,
-      thumbnailUrl:,
+      nickname: '나영희',
+      profileUrl: 'https://cdn.imweb.me/thumbnail/20230824/20e7077f9429c.png',
+      thumbnailUrl: 'https://cdn.imweb.me/thumbnail/20230824/20e7077f9429c.png',
       manitiId: 8,
       votedId: 5,
       manitoFavorability: 77,
@@ -229,18 +237,18 @@ export const PAIR_LIST: ResultListItemProps[] = [
   {
     manito: {
       guestId: 7,
-      nickname: ,
-      profileUrl: ,
-      thumbnailUrl:,
+      nickname: '나영희',
+      profileUrl: 'https://cdn.imweb.me/thumbnail/20230824/20e7077f9429c.png',
+      thumbnailUrl: 'https://cdn.imweb.me/thumbnail/20230824/20e7077f9429c.png',
       manitiId: 8,
       votedId: 5,
       manitoFavorability: 77,
     },
     maniti: {
       guestId: 8,
-      nickname: ,
-      profileUrl:,
-      thumbnailUrl:,
+      nickname: '다영희',
+      profileUrl: 'https://dimg.donga.com/wps/NEWS/IMAGE/2021/11/12/110217903.2.jpg',
+      thumbnailUrl: 'https://dimg.donga.com/wps/NEWS/IMAGE/2021/11/12/110217903.2.jpg',
       manitiId: 9,
       votedId: 9,
       manitoFavorability: 60,
@@ -249,18 +257,18 @@ export const PAIR_LIST: ResultListItemProps[] = [
   {
     manito: {
       guestId: 8,
-      nickname: ,
-      profileUrl: ,
-      thumbnailUrl:,
+      nickname: '다영희',
+      profileUrl: 'https://dimg.donga.com/wps/NEWS/IMAGE/2021/11/12/110217903.2.jpg',
+      thumbnailUrl: 'https://dimg.donga.com/wps/NEWS/IMAGE/2021/11/12/110217903.2.jpg',
       manitiId: 9,
       votedId: 9,
       manitoFavorability: 60,
     },
     maniti: {
       guestId: 9,
-      nickname: ,
-      profileUrl:,
-      thumbnailUrl:,
+      nickname: '라영희',
+      profileUrl: 'https://i.pinimg.com/236x/fe/40/e3/fe40e3ffbbcde74c5c77e188111ce2f7.jpg',
+      thumbnailUrl: 'https://i.pinimg.com/236x/fe/40/e3/fe40e3ffbbcde74c5c77e188111ce2f7.jpg',
       manitiId: 10,
       votedId: 10,
       manitoFavorability: 45,
@@ -269,58 +277,61 @@ export const PAIR_LIST: ResultListItemProps[] = [
   {
     manito: {
       guestId: 9,
-      nickname: ,
-      profileUrl: ,
-      thumbnailUrl:,
+      nickname: '라영희',
+      profileUrl: 'https://i.pinimg.com/236x/fe/40/e3/fe40e3ffbbcde74c5c77e188111ce2f7.jpg',
+      thumbnailUrl: 'https://i.pinimg.com/236x/fe/40/e3/fe40e3ffbbcde74c5c77e188111ce2f7.jpg',
       manitiId: 10,
       votedId: 10,
       manitoFavorability: 45,
     },
     maniti: {
       guestId: 10,
-      nickname: ,
-      profileUrl:,
-      thumbnailUrl:,
+      nickname: '마영희',
+      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyIru6tQLhwY8EU6OV9IemXdE6EXSEZYrc0A&usqp=CAU',
+      thumbnailUrl:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyIru6tQLhwY8EU6OV9IemXdE6EXSEZYrc0A&usqp=CAU',
       manitiId: 11,
-      votedId: ,
-      manitoFavorability: ,
+      votedId: 3,
+      manitoFavorability: 84,
     },
   },
   {
     manito: {
       guestId: 10,
-      nickname: ,
-      profileUrl: ,
-      thumbnailUrl:,
+      nickname: '마영희',
+      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyIru6tQLhwY8EU6OV9IemXdE6EXSEZYrc0A&usqp=CAU',
+      thumbnailUrl:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyIru6tQLhwY8EU6OV9IemXdE6EXSEZYrc0A&usqp=CAU',
       manitiId: 11,
-      votedId: ,
-      manitoFavorability: ,
+      votedId: 3,
+      manitoFavorability: 84,
     },
     maniti: {
       guestId: 11,
-      nickname: ,
-      profileUrl:,
-      thumbnailUrl:,
+      nickname: '바영희',
+      profileUrl: 'https://i.ytimg.com/vi/tYM4oISacwY/maxresdefault.jpg',
+      thumbnailUrl: 'https://i.ytimg.com/vi/tYM4oISacwY/maxresdefault.jpg',
       manitiId: 1,
-      votedId: ,
-      manitoFavorability: ,
+      votedId: 1,
+      manitoFavorability: 93,
     },
   },
   {
     manito: {
       guestId: 11,
-      nickname: ,
-      profileUrl: ,
-      thumbnailUrl:,
+      nickname: '바영희',
+      profileUrl: 'https://i.ytimg.com/vi/tYM4oISacwY/maxresdefault.jpg',
+      thumbnailUrl: 'https://i.ytimg.com/vi/tYM4oISacwY/maxresdefault.jpg',
       manitiId: 1,
-      votedId: ,
-      manitoFavorability: ,
+      votedId: 1,
+      manitoFavorability: 93,
     },
     maniti: {
       guestId: 1,
-      nickname: ,
-      profileUrl:,
-      thumbnailUrl:,
+      nickname: '가철수',
+      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
+      thumbnailUrl:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
       manitiId: 2,
       votedId: 10,
       manitoFavorability: 80,
@@ -395,6 +406,13 @@ export const MISSION_RESULT_LIST: MissionResultList = {
       missionImageUrl: null,
     },
   ],
+};
+
+// 채팅방 목록
+export const CHAT_ID_LIST: ChatId = {
+  groupChatId: 8,
+  manitoChatId: 1,
+  manitiChatId: 5,
 };
 
 // 힌트 질문 (입력페이지용)
