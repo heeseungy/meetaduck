@@ -116,6 +116,27 @@ public class GuestService {
 
     //
 
+    public GuestRes findByUserId(Long userId) {
+
+        boolean isPartyGuest = guestRepository.findByUserId(userId).isPresent();
+
+        if (isPartyGuest) {
+            Guest guest = guestRepository.findByUserId(userId).get();
+            return GuestRes.builder()
+                    .guestId(guest.getGuestId())
+                    .partyId(guest.getParty().getPartyId())
+                    .build();
+        } else {
+            final Long NON_EXIST_GUEST_ID = 0L;
+            final Long NON_EXIST_PARTY_ID = 0L;
+
+            return GuestRes.builder()
+                    .guestId(NON_EXIST_GUEST_ID)
+                    .partyId(NON_EXIST_PARTY_ID)
+                    .build();
+        }
+    }
+
     public GuestRes toGuestResWithProfile(Guest guest) {
 
         User user = guest.getUser();

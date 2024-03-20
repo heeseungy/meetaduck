@@ -32,16 +32,13 @@ public class CustomJwtAuthenticationFilter extends OncePerRequestFilter {
                 .build().verify(jwtToken)
                 .getSubject();
 
-        if (nickname != null) {
-            return true;
-        } else return false;
+        return nickname != null;
     }
 
     private boolean isFilterNotNeeded(HttpServletRequest request) {
         String requestUri = request.getRequestURI();
         System.out.println(requestUri);
         return requestUri.contains("/api/users/login");
-//        return requestUri.contains("/api/users/login") || requestUri.contains("/api/test/dummy");
     }
 
     @Override
