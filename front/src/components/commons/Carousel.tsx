@@ -13,12 +13,15 @@ interface SlidesProps {
 
 function Slides({ children, className }: SlidesProps) {
   const settings: Settings = {
-    dots: true,
+    dots: false,
     infinite: true,
-    autoplay: false,
+    autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 2000,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
+    cssEase: 'linear',
   };
   return (
     <div className={className}>

@@ -10,6 +10,12 @@ export interface Profile extends SimpleProfile {
   profileUrl: string;
 }
 
+//로그인 시 받아오는 프로필
+export interface LoginProfile extends Profile {
+  kakaoId: number;
+  partyId: number;
+}
+
 // 마니또 페어
 export interface PairRank extends Profile {
   manitiId: number;
@@ -23,4 +29,5 @@ export interface ListProifle {
   userId: number;
   nickname: string;
   thumbnailUrl: string;
+  votedId: number;
 }

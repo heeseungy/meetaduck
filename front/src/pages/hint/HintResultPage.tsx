@@ -3,11 +3,11 @@ import HintChats from '@/components/hint/HintChats';
 import styles from '@/styles/hint/HintPage.module.css';
 import { Answer } from '@/types/hint.ts';
 
-type A2301Props = {
+type HintResultProps = {
   nickname: string;
   hintList: Answer[];
 };
-function A2301(props: A2301Props) {
+function HintResultPage(props: HintResultProps) {
   const children = (
     <div>
       <div className={styles.Title}>
@@ -24,4 +24,4 @@ function A2301(props: A2301Props) {
   return <Card {...{ tag: 2, children: children }}></Card>;
 }
 
-export default A2301;
+export default HintResultPage;

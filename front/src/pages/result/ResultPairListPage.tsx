@@ -4,12 +4,14 @@ import styles from '@/styles/result/ResultPage.module.css';
 import { ResultListProps } from '@/types/result';
 import { PairRank } from '@/types/user.interface';
 
-type A2401Props = {
+type ResultPairListProps = {
   me: PairRank;
   pairList: ResultListProps;
 };
-function A2401(a2401Props: A2401Props) {
-  const myManito = a2401Props.pairList.pairList.find((it) => it.manito.manitiId === a2401Props.me.guestId)?.manito;
+function ResultPairListPage(resultPairListProps: ResultPairListProps) {
+  const myManito = resultPairListProps.pairList.pairList.find(
+    (it) => it.manito.manitiId === resultPairListProps.me.guestId,
+  )?.manito;
   // console.log(myManito!.nickname);
 
   const children = (
@@ -25,7 +27,7 @@ function A2401(a2401Props: A2401Props) {
         </div>
       </div>
       <div className={styles.ScrollConatiner}>
-        <ResultList {...a2401Props.pairList} />
+        <ResultList {...resultPairListProps.pairList} />
       </div>
     </div>
   );
@@ -37,4 +39,4 @@ function A2401(a2401Props: A2401Props) {
   );
 }
 
-export default A2401;
+export default ResultPairListPage;
