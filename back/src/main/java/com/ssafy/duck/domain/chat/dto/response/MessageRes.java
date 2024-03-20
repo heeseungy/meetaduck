@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Getter
 public class MessageRes {
 
-    private Integer messageId;
+    private String id;
     private boolean messageType;
     private String content;
     private String createdTime;
