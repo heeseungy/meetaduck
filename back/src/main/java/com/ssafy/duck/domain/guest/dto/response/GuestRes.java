@@ -1,7 +1,9 @@
 package com.ssafy.duck.domain.guest.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -16,4 +18,7 @@ public class GuestRes {
     private Long chatId;
     private Long userId;
 
+    // User
+    private String nickname;
+    private String thumbnailUrl;
 }
