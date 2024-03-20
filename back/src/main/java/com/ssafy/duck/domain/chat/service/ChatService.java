@@ -103,7 +103,7 @@ public class ChatService {
 
     private MessageRes toMessageRes(Message message) {
         return MessageRes.builder()
-                .messageId(message.getMessageId())
+                .id(message.getId())
                 .messageType(message.getMessageType())
                 .content(message.getContent())
                 .createdTime(message.getCreatedTime())
@@ -116,7 +116,7 @@ public class ChatService {
         List<MessageRes> messageResList = new ArrayList<>();
         for (Message message : messages) {
             MessageRes messageRes = MessageRes.builder()
-                    .messageId(message.getMessageId())
+                    .id(message.getId())
                     .messageType(message.getMessageType())
                     .chatId(message.getChatId())
                     .content(message.getContent())
