@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import duckLogo from '@/assets/images/RubberDuckWithLogo.png';
 import Button from '@/components/commons/Button';
@@ -8,6 +9,7 @@ import styles from '@/styles/party/Partyjoin.module.css';
 
 function PartyPage() {
   const [usersInput, setUsersInput] = useState('');
+  const navigate = useNavigate();
 
   const joinHandler = async () => {
     console.log('참여하기 클릭!');
@@ -19,9 +21,11 @@ function PartyPage() {
 
   const createHandler = async () => {
     console.log('이번엔 만들기 클릭!');
+    navigate('/partycreate');
   };
 
   const handleInputChange = (value: string) => {
+    
     setUsersInput(value);
   };
 
