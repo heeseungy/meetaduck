@@ -19,9 +19,15 @@ export type ResultDoughnutChartProps = {
   negative: number;
   neutral: number;
 };
+
+export type WordType = {
+  key: string;
+  value: number;
+};
+
 export type ResultAnalysis = {
   favorability: number;
-  wordcount: string;
+  wordcount: WordType[];
   ratio: ResultDoughnutChartProps;
 };
 
