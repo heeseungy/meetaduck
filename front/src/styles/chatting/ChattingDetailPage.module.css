@@ -1,0 +1,27 @@
+.bgc {
+  background-color: #FFF5C1;
+}
+
+.chatListArea {
+  height: 100dvh;
+  width: 100dvw;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.chatArea {
+  bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.plusBtn {
+  border-radius: 50%;
+}
+
+.inputArea {
+  width: 70%;
+}

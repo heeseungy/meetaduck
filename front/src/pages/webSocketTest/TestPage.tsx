@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState, useContext, createContext } from 'react';
 import { Client, IMessage } from "@stomp/stompjs"; // STOMP 프로토콜을 사용하기 위한 라이브러리를 가져옵니다.
-import axios from "axios"; // HTTP 클라이언트 라이브러리를 가져옵니다.
-import { Link, useParams } from "react-router-dom"; // 라우터 관련 기능을 사용하기 위한 라이브러리를 가져옵니다.
 import styles from '@/styles/webSocket/TestPage2.module.css';
+import axios from "axios"; // HTTP 클라이언트 라이브러리를 가져옵니다.
+import { useEffect, useState } from 'react';
 
 interface MessageReq {
   messageType: boolean;
