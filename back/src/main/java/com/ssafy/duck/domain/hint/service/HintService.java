@@ -58,8 +58,6 @@ public class HintService {
     //종료시간과 현재시간 비교해서 날짜개수만큼 랜덤으로 힌트 가져오기
     public List<Long> fetch(Instant endTime) {
         Instant current = Instant.now();
-//        System.out.println("current "+ LocalDateTime.ofInstant(current, ZoneId.systemDefault()));
-//        System.out.println("endTime " +LocalDateTime.ofInstant(endTime, ZoneId.systemDefault()));
 
         //day 수 구하기
         int curLocalTime = LocalDateTime.ofInstant(current, ZoneId.systemDefault()).getDayOfMonth();
@@ -69,7 +67,6 @@ public class HintService {
 
         //힌트 개수 가져오기
         long totalCount = hintRepository.count();
-//        System.out.println("total count " + totalCount);
 
         List<Long> totalIndex = new ArrayList<>();
         for (long i = 1; i <= totalCount; i++) {
@@ -98,7 +95,6 @@ public class HintService {
         // guest 마다 hint status에 데이터 추가하기
         for (GuestRes guestRes : guestList) {
             for (Long index : indexList) {
-//                System.out.println("index " + index);
                 HintStatus hintStatus = HintStatus.builder()
                         .guest(Guest.builder().guestId(guestRes.getGuestId()).build())
                         .hint(Hint.builder().hintId(index).build())
@@ -114,7 +110,6 @@ public class HintService {
         for (HintStatusReq req : hintStatusReq) {
             HintStatus hintStatus = hintStatusRepository.findByGuestGuestIdAndHintHintId(guestId, req.getHintId());
             hintStatus.updateAnswer(hintStatus.getHintStatusId(), req.getHintStatusAnswer(), hintStatus.getHint(), hintStatus.getGuest());
-//            System.out.println(req.getHintId() + " / " +hintStatus.getHintStatusId());
             hintStatusRepository.save(hintStatus);
         }
     }
@@ -154,10 +149,10 @@ public class HintService {
                 hintStatusResList.add(res);
             }
 
-            System.out.println("--- hint question + answer list");
-            for (HintStatusRes hsRes : hintStatusResList) {
-                System.out.println(hsRes.getHintContent() + "/" + hsRes.getHintStatusAnswer());
-            }
+//            System.out.println("--- hint question + answer list");
+//            for (HintStatusRes hsRes : hintStatusResList) {
+//                System.out.println(hsRes.getHintContent() + "/" + hsRes.getHintStatusAnswer());
+//            }
         }
 
 
