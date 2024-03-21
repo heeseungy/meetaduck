@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { chatListLoadService } from '@/services/chatListLoadService';
+import { chatSendMessageService } from '@/services/chatSendMessageService';
 import styles from '@/styles/webSocket/TestPage2.module.css';
 import { MessageRes, MessageReq } from '@/types/chatMessage';
 import { Client, IMessage } from '@stomp/stompjs';
@@ -56,6 +57,7 @@ function ChatTestPage() {
 
   const sendMessage = async () => {
     if (newMessage.trim() !== '') {
+      chatSendMessageService(chatId, setNewMessage)
       try {
         const messageReq = {
           messageType: false, // 메시지 타입 설정, 필요에 따라 조정 가능
