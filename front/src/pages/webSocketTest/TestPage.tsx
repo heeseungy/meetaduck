@@ -20,7 +20,7 @@ interface MessageRes {
   chatId: number;
 }
 
-function TestPage3() {
+function TestPage() {
   // const {chatId} = useParams();
   const chatId = 1;
   const [stompClient, setStompClient] = useState<Client | null>(null);  // STOMP 클라이언트 상태 관리
@@ -112,7 +112,8 @@ function TestPage3() {
         <input 
           type="text"
           value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
+          onChange={(e) => setNewMessage(e.target.value)
+          }
         />
         <button onClick={sendMessage}>
           {/* <PaperPlaneTilt size={32} /> Add icon import or component */}
@@ -123,4 +124,4 @@ function TestPage3() {
   );
 }
 
-export default TestPage3;
+export default TestPage;
