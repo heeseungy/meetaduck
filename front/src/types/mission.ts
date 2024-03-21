@@ -1,4 +1,3 @@
-
 export interface MissionContent {
   missionStatusId: number;
   confirmTime: string | null;
@@ -15,4 +14,9 @@ export interface MissionResult extends MissionContent {
 export interface MissionResultList {
   manitoMission: MissionResult[];
   myMission: MissionResult[];
+}
+
+export interface MissionCompletePageProps {
+  tag: number;
+  date: number;
 }

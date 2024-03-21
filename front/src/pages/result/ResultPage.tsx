@@ -6,13 +6,9 @@ import VoteBefore24Page from '@/pages/vote/VoteBefore24Page';
 import VoteBeforePage from '@/pages/vote/VoteInProgressPage';
 import { MY_INFO, MY_PROFILE, PAIR_LIST, PARTY_STATUS } from '@/recoil/dummy';
 import { StatusType } from '@/types/party';
+import { Role } from '@/types/party';
 import { ResultListItemProps, ResultListProps } from '@/types/result';
 import { PairRank } from '@/types/user.interface';
-
-enum Role {
-  Manito = 2, //내가 마니또일때
-  Maniti = 1, //내가 마니띠일때
-}
 
 function ResultPage() {
   if (PARTY_STATUS.status === StatusType.Todo) {

@@ -26,6 +26,11 @@ export const PARTY1: Party = {
   userId: 152,
 };
 
+const date1 = new Date(PARTY1.startTime);
+const date2 = new Date(PARTY1.endTime);
+const diffDate = date1.getTime() - date2.getTime();
+export const DATE_DIFF = Math.abs(diffDate / (1000 * 60 * 60 * 24));
+
 // 현재 파티 상태 확인
 export const PARTY_STATUS: PartyStatus = {
   // status: StatusType['Todo'],

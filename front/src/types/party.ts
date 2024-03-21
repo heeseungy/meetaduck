@@ -16,3 +16,8 @@ export interface Party {
 export interface PartyStatus {
   status: number;
 }
+
+export enum Role {
+  Manito = 2, //내가 마니또일때
+  Maniti = 1, //내가 마니띠일때
+}

@@ -1,7 +1,12 @@
+import MissionCompletePage from '@/pages/mission/MissionCompletePage';
+import { DATE_DIFF } from '@/recoil/dummy';
+import { Role } from '@/types/party';
+
 function MissionPage() {
   return (
     <>
-      <h1>Mission Page</h1>
+      <MissionCompletePage {...{ tag: Role.Manito, date: DATE_DIFF }} />
+      <MissionCompletePage {...{ tag: Role.Maniti, date: DATE_DIFF }} />
     </>
   );
 }
