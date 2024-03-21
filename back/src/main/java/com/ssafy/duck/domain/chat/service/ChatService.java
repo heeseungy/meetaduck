@@ -85,13 +85,13 @@ public class ChatService {
         Message message = Message.builder()
                 .messageType(messageReq.isMessageType())
                 .content(messageReq.getContent())
-                .createdTime(Instant.now() + "")
+                .createdTime(Instant.now().toString())
                 .senderId(messageReq.getSenderId())
                 .chatId(chatId)
                 .build();
-        messageRepository.save(message);
+        Message savedMessage = messageRepository.save(message);
 
-        return toMessageRes(message);
+        return toMessageRes(savedMessage);
     }
 
     public void notifyNewMessage(Integer chatId, MessageRes messageRes) {
@@ -123,7 +123,6 @@ public class ChatService {
                     .createdTime(message.getCreatedTime())
                     .senderId(message.getSenderId())
                     .build();
-
             messageResList.add(messageRes);
         }
 
