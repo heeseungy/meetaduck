@@ -91,3 +91,10 @@ http://scripts.sil.org/OFL
   font-size: 0.667rem;
   font-family: 'Pretendard', sans-serif;
 }
+.FontXSBold {
+  /* Comment */
+  /* 8pt */
+  font-weight: bold;
+  font-size: 0.667rem;
+  font-family: 'Pretendard', sans-serif;
+}

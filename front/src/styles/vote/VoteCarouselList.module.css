@@ -10,6 +10,7 @@
   justify-content: center;
   align-items: center;
   min-width: 9rem;
+  max-width: 10rem;
   height: 2.5rem;
   background-color: #f8f9fb;
   border: 2px solid #4d4637;
@@ -21,4 +22,21 @@
   gap: 0.5rem;
   justify-content: center;
   align-items: center;
+}
+
+.CarouselContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.Carouselsecond {
+  position: relative;
+  left: 3rem;
+}
+
+.Carouselthird {
+  position: relative;
+  left: -3rem;
 }

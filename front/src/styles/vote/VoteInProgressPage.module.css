@@ -1,20 +1,25 @@
 .Container {
   width: 100vw;
-  height: 20rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: auto;
-  margin-top: 9rem;
+  overflow: hidden;
+  margin-top: 12rem;
 }
 
 .Title {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 1rem;
+  margin: auto;
 }
 
 .TitleItem {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.Carousel {
+  margin-top: 2rem;
 }
