@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 
 import { chatListLoadService } from '@/services/chatListLoadService';
 import { chatSendMessageService } from '@/services/chatSendMessageService';
-import styles from '@/styles/chatting/ChattingDetailPage.module.css'
+import styles from '@/styles/chatting/ChattingDetailPage.module.css';
 import { MessageRes } from '@/types/chatMessage';
 import { Client, IMessage } from '@stomp/stompjs';
+import { PaperPlaneTilt } from '@phosphor-icons/react';
 
 function ChattingDetailPage() {
   // const {chatId} = useParams();
@@ -34,7 +35,6 @@ function ChattingDetailPage() {
     };
   }, [chatId]); // chatId가 변경될 때마다 useEffect 실행
 
-
   const sendMessage = async () => {
     if (newMessage.trim() !== '') {
       chatSendMessageService(chatId, newMessage, setNewMessage);
@@ -54,8 +54,7 @@ function ChattingDetailPage() {
         </ul>
         <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} />
         <button onClick={sendMessage}>
-          {/* <PaperPlaneTilt size={32} /> Add icon import or component */}
-          전송
+          <PaperPlaneTilt size={32} />
         </button>
       </div>
     </div>

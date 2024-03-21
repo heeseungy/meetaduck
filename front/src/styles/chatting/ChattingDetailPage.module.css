@@ -1,7 +1,7 @@
 .Box {
   height: 100vh;
   width: 100vw;
-  background-color: aqua;
+  background-color: #FFF5C1;
   overflow-y: auto;
 }
 
