@@ -2,16 +2,12 @@ import { useEffect, useState } from 'react';
 
 import { chatListLoadService } from '@/services/chatListLoadService';
 import styles from '@/styles/webSocket/TestPage2.module.css';
-import { MessageRes } from '@/types/chatMessage';
+import { MessageRes, MessageReq } from '@/types/chatMessage';
 import { Client, IMessage } from '@stomp/stompjs';
 import axios from 'axios';
 
-interface MessageReq {
-  messageType: boolean;
-  content: string;
-  senderId: number;
-  chatId: number;
-}
+
+
 
 function TestPage() {
   // const {chatId} = useParams();

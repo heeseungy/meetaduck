@@ -6,3 +6,10 @@ export interface MessageRes {
   senderId: number;
   chatId: number;
 }
+
+export interface MessageReq {
+  messageType: boolean;
+  content: string;
+  senderId: number;
+  chatId: number;
+}
