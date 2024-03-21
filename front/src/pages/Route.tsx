@@ -14,7 +14,7 @@ import PartyCreatePage from './party/PartyCreatePage';
 import PartyJoinerPage from './party/PartyJoinerPage';
 import PartyMakerPage from './party/PartyMakerPage';
 import TestPage from './webSocketTest/TestPage';
-import ChatTestPage from '@/pages/chatting/ChatTestPage';
+import ChatTestPage from '@/pages/chatting/ChattingDetailPage';
 import RedirectionPage from './login/RedirectionPage';
 
 
