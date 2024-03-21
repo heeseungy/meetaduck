@@ -1,12 +1,27 @@
-.Box {
-  height: 100vh;
-  width: 100vw;
+.bgc {
   background-color: #FFF5C1;
-  overflow-y: auto;
 }
 
-.Input {
-  position: absolute;
-  bottom: 5rem;
-  right: 5rem;
+.chatListArea {
+  height: 100dvh;
+  width: 100dvw;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.chatArea {
+  bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.plusBtn {
+  border-radius: 50%;
+}
+
+.inputArea {
+  width: 70%;
 }

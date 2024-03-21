@@ -4,8 +4,8 @@ import { chatListLoadService } from '@/services/chatListLoadService';
 import { chatSendMessageService } from '@/services/chatSendMessageService';
 import styles from '@/styles/chatting/ChattingDetailPage.module.css';
 import { MessageRes } from '@/types/chatMessage';
+import { PaperPlaneTilt, Plus } from '@phosphor-icons/react';
 import { Client, IMessage } from '@stomp/stompjs';
-import { PaperPlaneTilt } from '@phosphor-icons/react';
 
 function ChattingDetailPage() {
   // const {chatId} = useParams();
@@ -41,9 +41,13 @@ function ChattingDetailPage() {
     }
   };
 
+  const plusButtonHandler = () => {
+    console.log('plus button 클릭');
+  };
+
   return (
-    <div className={styles.Box}>
-      <div className={styles.Input}>
+    <div className={styles.bgc}>
+      <div className={styles.chatListArea}>
         <ul>
           {messages.map((msg) => (
             <li key={msg.id}>
@@ -52,7 +56,14 @@ function ChattingDetailPage() {
             </li>
           ))}
         </ul>
-        <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} />
+      </div>
+      <div className={styles.chatArea}>
+        <button className={styles.plusBtn} onClick={plusButtonHandler}>
+          <Plus size={32} />
+        </button>
+        <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)}
+          className={styles.inputArea}
+        />
         <button onClick={sendMessage}>
           <PaperPlaneTilt size={32} />
         </button>
