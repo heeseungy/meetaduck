@@ -1,0 +1,18 @@
+.Title {
+  display: flex;
+  justify-content: center;
+}
+
+.ScrollConatiner {
+  height: 30.5rem;
+  overflow-y: auto;
+  padding-left: 0.75rem;
+}
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.4rem;
+}

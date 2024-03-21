@@ -2,3 +2,26 @@
   position: absolute;
   bottom: 5rem;
 }
+
+.slider-container {
+  width: 28rem;
+}
+
+[type='radio'] {
+  -webkit-appearance: none;
+  appearance: none;
+  border: max(2px, 0.1em) solid #4fc775;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  transition: border 0.5s ease-in-out;
+}
+
+[type='radio']:checked {
+  border: 0.4em solid #4fc775;
+}
+
+[type='radio']:focus-visible {
+  outline-offset: max(2px, 0.1em);
+  outline: max(2px, 0.1em) dotted #4fc775;
+}

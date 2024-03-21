@@ -24,7 +24,7 @@ export interface PairRank extends Profile {
 }
 
 // 목록조회용 프로필
-export interface ListProifle {
+export interface ListProfile {
   guestId: number;
   userId: number;
   nickname: string;
