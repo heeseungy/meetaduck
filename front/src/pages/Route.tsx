@@ -14,6 +14,7 @@ import PartyCreatePage from './party/PartyCreatePage';
 import PartyJoinerPage from './party/PartyJoinerPage';
 import PartyMakerPage from './party/PartyMakerPage';
 import TestPage from './webSocketTest/TestPage';
+import ChatTestPage from '@/pages/chatting/ChatTestPage';
 import RedirectionPage from './login/RedirectionPage';
 
 
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
   { path: '/partyjoiner', element: <PartyJoinerPage /> },
   { path: '/hintinputform', element: <HintInputFormPage /> },
   { path: '/testpage', element: <TestPage /> },
+  { path: '/chattestpage', element: <ChatTestPage /> },
   { path: '/login/oauth2/code/kakao', element: <RedirectionPage /> },
 ]);
 

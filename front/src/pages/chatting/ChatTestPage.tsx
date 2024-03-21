@@ -9,7 +9,7 @@ import axios from 'axios';
 
 
 
-function TestPage() {
+function ChatTestPage() {
   // const {chatId} = useParams();
   const chatId = 1;
   const [stompClient, setStompClient] = useState<Client | null>(null); // STOMP 클라이언트 상태 관리
@@ -94,4 +94,4 @@ function TestPage() {
   );
 }
 
-export default TestPage;
+export default ChatTestPage;
