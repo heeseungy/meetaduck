@@ -16,8 +16,8 @@ import PartyMakerPage from './party/PartyMakerPage';
 import TestPage1 from './webSocketTest/TestPage1';
 import TestPage2 from './webSocketTest/TestPage2';
 import TestPage3 from './webSocketTest/TestPage3';
+import RedirectionPage from './login/RedirectionPage';
 
-// import TestPage from './webSocketTest/TestPage';
 
 const router = createBrowserRouter([
   {
@@ -40,6 +40,7 @@ const router = createBrowserRouter([
   { path: '/testpage1', element: <TestPage1 /> },
   { path: '/testpage2', element: <TestPage2 /> },
   { path: '/testpage3', element: <TestPage3 /> },
+  { path: '/login/oauth2/code/kakao', element: <RedirectionPage /> },
 ]);
 
 function Route() {

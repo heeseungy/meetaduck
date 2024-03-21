@@ -13,8 +13,24 @@
   gap: 0.5rem;
 }
 
+.Containter {
+  width: 18rem;
+  height: 35rem;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .HintImage {
-  position: absolute;
-  left: 4.19rem;
-  top: 17.7rem;
+  padding-right: 1rem;
+}
+
+.Text {
+  text-align: center;
+}
+
+.Text > p {
+  padding-bottom: 0.3rem;
 }

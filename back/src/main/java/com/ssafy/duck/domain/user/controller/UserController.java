@@ -5,6 +5,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.duck.common.jwt.JwtProperties;
+import com.ssafy.duck.domain.guest.dto.response.GuestRes;
+import com.ssafy.duck.domain.guest.service.GuestService;
 import com.ssafy.duck.domain.user.dto.model.KakaoUserInfo;
 import com.ssafy.duck.domain.user.dto.model.OAuthToken;
 import com.ssafy.duck.domain.user.dto.request.UserSignUpReq;
@@ -34,6 +36,7 @@ public class UserController {
     private final JwtProperties jwtProperties;
 
     private final UserService userService;
+    private final GuestService guestService;
 
     @Value("${spring.security.oauth2.client.registration.kakao.client-id}")
     private String clientId;
@@ -123,8 +126,16 @@ public class UserController {
         boolean isExist = userService.isUserExistByKakaoId(kakaoId);
         if (isExist) {
             userRes = userService.findByKakaoId(kakaoId);
+
+            GuestRes guestRes = guestService.findByUserId(userRes.getUserId());
+            userRes.setPartyId(guestRes.getPartyId());
+            userRes.setGuestId(guestRes.getGuestId());
         } else {
             userRes = userService.signUp(userSignUpReq);
+
+            GuestRes guestRes = guestService.findByUserId(userRes.getUserId());
+            userRes.setPartyId(guestRes.getPartyId());
+            userRes.setGuestId(guestRes.getGuestId());
         }
 
         String jwtToken
@@ -134,12 +145,6 @@ public class UserController {
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Authorization", "Bearer " + jwtToken);
-
-        System.out.println("***********");
-
-        System.out.println(ResponseEntity.ok()
-                .headers(responseHeaders)
-                .body(userRes));
 
         return ResponseEntity.ok()
                 .headers(responseHeaders)

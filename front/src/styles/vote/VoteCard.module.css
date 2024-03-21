@@ -1,0 +1,10 @@
+.VoteCard {
+  width: 21rem;
+  height: 8.625rem;
+  border-radius: 0.625rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fb;
+  margin: 0rem;
+}

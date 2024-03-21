@@ -2,6 +2,7 @@ package com.ssafy.duck.domain.guest.controller;
 
 import com.ssafy.duck.domain.guest.dto.request.VoteReq;
 import com.ssafy.duck.domain.guest.dto.response.GuestRes;
+import com.ssafy.duck.domain.guest.dto.response.PairRes;
 import com.ssafy.duck.domain.guest.dto.response.VoteRes;
 import com.ssafy.duck.domain.guest.service.GuestService;
 import lombok.RequiredArgsConstructor;
@@ -17,10 +18,22 @@ public class GuestController {
 
     private final GuestService guestService;
 
+    @GetMapping("/{guestId}")
+    public ResponseEntity<GuestRes> getGuestWithProfileByGuestId(@PathVariable Long guestId) {
+        GuestRes guestRes = guestService.findGuestWithProfileByGuestId(guestId);
+        return ResponseEntity.ok(guestRes);
+    }
+
     @GetMapping("/all/{partyId}")
-    public ResponseEntity<List<GuestRes>> getAllByPartyId(@PathVariable Long partyId) {
-        List<GuestRes> guestList = guestService.findAllByPartyId(partyId);
+    public ResponseEntity<List<GuestRes>> getGuestListWithProfileByPartyId(@PathVariable Long partyId) {
+        List<GuestRes> guestList = guestService.findAllWithProfileByPartyId(partyId);
         return ResponseEntity.ok(guestList);
+    }
+
+    @GetMapping("/pairs/{partyId}")
+    public ResponseEntity<List<PairRes>> getPairListWithProfileByPartyId(@PathVariable Long partyId) {
+        List<PairRes> pairList = guestService.findPairsWithProfileByPartyId(partyId);
+        return ResponseEntity.ok(pairList);
     }
 
     @PatchMapping

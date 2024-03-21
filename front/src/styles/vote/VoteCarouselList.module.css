@@ -1,0 +1,24 @@
+.ProfileImage {
+  width: 1.875rem;
+  height: 1.875rem;
+  border-radius: 5rem;
+}
+
+.CarouselItem {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  min-width: 9rem;
+  height: 2.5rem;
+  background-color: #f8f9fb;
+  border: 2px solid #4d4637;
+  border-radius: 5rem;
+}
+
+.CarouselListItem {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}

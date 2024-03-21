@@ -39,6 +39,7 @@ public class UserService {
 
     public UserRes toUserSignUpRes(User user) {
         return UserRes.builder()
+                .userId(user.getUserId())
                 .kakaoId(user.getKakaoId())
                 .nickname(user.getNickname())
                 .profileUrl(user.getProfileUrl())
