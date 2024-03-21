@@ -20,7 +20,6 @@ import java.time.LocalDateTime;
 public class Message {
 
     @Id
-    @Field("_id")
     private String id;
 
     @Field("message_id")
