@@ -211,8 +211,6 @@ public class GuestService {
         Party party = partyRepository.findByPartyId(partyId)
                 .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
 
-        System.out.println(party);
-
         List<Guest> guestList = guestRepository.findAllByPartyId(partyId);
 
         List<PairRes> pairResList = new ArrayList<>();

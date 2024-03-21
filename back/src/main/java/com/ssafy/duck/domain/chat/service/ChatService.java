@@ -85,17 +85,20 @@ public class ChatService {
         Message message = Message.builder()
                 .messageType(messageReq.isMessageType())
                 .content(messageReq.getContent())
-                .createdTime(Instant.now() + "")
+                .createdTime(Instant.now().toString())
                 .senderId(messageReq.getSenderId())
                 .chatId(chatId)
                 .build();
-        messageRepository.save(message);
+        Message savedMessage = messageRepository.save(message);
 
-        return toMessageRes(message);
+        return toMessageRes(savedMessage);
     }
 
     public void notifyNewMessage(Integer chatId, MessageRes messageRes) {
-                simpMessagingTemplate.convertAndSend("/topic/chats/" + chatId, messageRes);
+        // 아래 경로로 chatId를 구독하는 사용자들에게 messageRes를 응답
+        // -> 클라이언트 구독은 프론트에서 STOMP/SockJS 로 해야함.
+        // 백에선 여기가 프론트에 보내는 마지막 코드임
+        simpMessagingTemplate.convertAndSend("/sub/api/chats/" + chatId +"/messages", messageRes);
     }
 
     private MessageRes toMessageRes(Message message) {
@@ -120,7 +123,6 @@ public class ChatService {
                     .createdTime(message.getCreatedTime())
                     .senderId(message.getSenderId())
                     .build();
-
             messageResList.add(messageRes);
         }
 

@@ -80,8 +80,6 @@ public class UserController {
                 String.class
         );
 
-        System.out.println(tokenResponse);
-
         // Util
         ObjectMapper objectMapper = new ObjectMapper();
 

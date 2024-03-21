@@ -7,6 +7,7 @@ import com.ssafy.duck.domain.chat.service.ChatService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 public class ChatController {
 
     private final ChatService chatService;
+    private final SimpMessagingTemplate messagingTemplate;
 
     @GetMapping("/{guestId}")
     @Operation(summary = "채팅: 채팅방 목록조회")
@@ -32,7 +34,7 @@ public class ChatController {
         return ResponseEntity.ok().body(chatService.getMessages(chatId));
     }
 
-    @PostMapping("/{chatId}")
+    @PostMapping("/{chatId}/messages")
     @Operation(summary = "채팅: 메시지 생성(전송)")
     public ResponseEntity<Void> createMessage(
             @PathVariable Integer chatId,
