@@ -1,31 +1,4 @@
-import React, { useEffect, useRef, useState, useContext, createContext } from 'react';
-import { Axios } from '@/services/axios';
-
-// 메시지 객체에 대한 TypeScript 인터페이스 정의
-interface MessageRes {
-    id: string;
-    messageType: boolean;
-    content: string;
-    createdTime: string;
-    senderId: number;
-    chatId: number;
-  }
-
-// 서버에서 메시지를 가져오는 비동기 함수
-const getMessage = async () => {
-try {
-    const response = await Axios.get<MessageRes[]>('/api/chats/1/messages');
-    console.log('success : ', response.data);
-    setMessages(response.data); // 응답 데이터로 메시지 목록을 업데이트합니다.
-} catch (err) {
-    console.log('err : ', err); // 오류 발생 시 콘솔에 출력
-}
-};
-
-// 컴포넌트 마운트 시 getMessage 함수를 호출합니다.
-useEffect(() => {
-    getMessage();
-    }, []);
+import React, { useRef, useState, useContext, createContext } from 'react';
 
 // WebSocketContext 정의
 const WebSocketContext = createContext<any>(null);
@@ -110,10 +83,6 @@ function TextInputBox() {
 
 // TestPage 컴포넌트에 통합
 function TestPage() {
-     // 메시지 목록과 새 메시지 내용을 위한 상태를 선언합니다.
-    const [messages, setMessages] = useState<MessageRes[]>([]);
-    const [newMessage, setNewMessage] = useState('');
-    const chatId = 1; // 채팅 ID 예시 값
     return (
         <WebSocketProvider>
             <h1>Test Page</h1>
