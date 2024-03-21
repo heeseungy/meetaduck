@@ -1,0 +1,30 @@
+.paddingTop {
+  padding-top: 8rem;
+}
+
+.marginTop {
+  margin-top: 3rem;
+}
+
+.horizonCenter {
+  text-align: center;
+}
+
+.logoImg {
+  margin-top: 6rem;
+}
+
+.kakaoButtonWrapper {
+  text-align: center;
+}
+
+.kakaoButton {
+  background-color: #FEE500;
+  border: 1px solid #FEE500;
+  border-radius: 12px;
+  width: 280px;
+  /* height: auto; */
+  margin-top: 3rem;
+  
+}
+

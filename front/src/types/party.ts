@@ -1,7 +1,8 @@
 export enum StatusType {
   'Todo' = 0,
   'InProgress' = 1,
-  'Complete' = 2,
+  'Before24' = 2,
+  'Complete' = 3,
 }
 
 export interface Party {
@@ -12,7 +13,6 @@ export interface Party {
   deleted: boolean;
   userId: number;
 }
-
 export interface PartyStatus {
   status: number;
 }

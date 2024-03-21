@@ -5,6 +5,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.duck.common.jwt.JwtProperties;
+import com.ssafy.duck.domain.guest.dto.response.GuestRes;
+import com.ssafy.duck.domain.guest.service.GuestService;
 import com.ssafy.duck.domain.user.dto.model.KakaoUserInfo;
 import com.ssafy.duck.domain.user.dto.model.OAuthToken;
 import com.ssafy.duck.domain.user.dto.request.UserSignUpReq;
@@ -34,6 +36,7 @@ public class UserController {
     private final JwtProperties jwtProperties;
 
     private final UserService userService;
+    private final GuestService guestService;
 
     @Value("${spring.security.oauth2.client.registration.kakao.client-id}")
     private String clientId;
@@ -48,7 +51,7 @@ public class UserController {
     private String userInfoURL;
 
     @GetMapping("/login")
-    ResponseEntity<UserRes> login(@RequestParam("code") String code) {
+     ResponseEntity<UserRes> login(@RequestParam("code") String code) {
 
         // Setting For Request Header
         Charset utf8 = Charset.forName("UTF-8");
@@ -76,8 +79,6 @@ public class UserController {
                 tokenRequest,
                 String.class
         );
-
-        System.out.println(tokenResponse);
 
         // Util
         ObjectMapper objectMapper = new ObjectMapper();
@@ -123,16 +124,22 @@ public class UserController {
         boolean isExist = userService.isUserExistByKakaoId(kakaoId);
         if (isExist) {
             userRes = userService.findByKakaoId(kakaoId);
+
+            GuestRes guestRes = guestService.findByUserId(userRes.getUserId());
+            userRes.setPartyId(guestRes.getPartyId());
+            userRes.setGuestId(guestRes.getGuestId());
         } else {
             userRes = userService.signUp(userSignUpReq);
+
+            GuestRes guestRes = guestService.findByUserId(userRes.getUserId());
+            userRes.setPartyId(guestRes.getPartyId());
+            userRes.setGuestId(guestRes.getGuestId());
         }
 
         String jwtToken
                 = JWT.create()
                 .withSubject(userRes.getNickname())
                 .sign(Algorithm.HMAC512(jwtProperties.getSecretKey()));
-
-        System.out.println("*jwtToken : " + jwtToken);
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Authorization", "Bearer " + jwtToken);

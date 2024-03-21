@@ -1,0 +1,14 @@
+.border {
+  border: 1px solid #B3AA99;
+  border-radius: 50%;
+  width: 4rem;
+}
+
+.vertCenter {
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  margin-left: 1rem;
+}

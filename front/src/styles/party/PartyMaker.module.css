@@ -1,0 +1,60 @@
+.margin {
+  margin-top: 4rem;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.share {
+  background-color: #4FC775;
+  border: 1px solid #4FC775;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+}
+
+/* .marginLeft {
+  margin-left: 1rem;
+} */
+
+.endWrapper {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* margin-left: 2rem; */
+}
+
+.inputWrapper {
+  margin-top: 1rem;
+}
+
+.buttonWrapper {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.oneButton {
+  margin-right: 1rem;
+}
+
+.cardMargin {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.marginBottom {
+  margin-bottom: 2rem;
+}
+
+.spaceB {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
