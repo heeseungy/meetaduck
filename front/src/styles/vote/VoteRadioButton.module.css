@@ -1,0 +1,49 @@
+.Thumbnail {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 5rem;
+}
+
+.FlexHorizontal {
+  display: flex;
+  align-items: center;
+}
+
+.Gap07rem {
+  justify-content: center;
+  gap: 0.7rem;
+}
+
+.SpaceBetween {
+  justify-content: space-around;
+}
+
+.RadioButtonContainer {
+  width: 15rem;
+  height: 4.25rem;
+  border-radius: 1.375rem;
+  /* margin-bottom: 2rem; */
+  background-color: #f8f9fb;
+}
+
+.RadioButtonChecked {
+  border: 2px solid #4d4637;
+  /* background-color: #4fc775; */
+  color: #4d4637;
+}
+
+.RadioButtonUnchecked {
+  border: 1px solid #b3aa99;
+  color: #b3aa99;
+}
+
+.ScrollContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-right: 0.75rem;
+  gap: 2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}

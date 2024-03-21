@@ -2,8 +2,8 @@ import Slides from '@/components/commons/Slides';
 import PairResultPage from '@/pages/result/PairResultPage';
 import ResultPairListPage from '@/pages/result/ResultPairListPage';
 import VoteAfterPage from '@/pages/vote/VoteAfterPage';
-import VoteBeforePage from '@/pages/vote/VoteBeforePage';
-import VoteInProgressPage from '@/pages/vote/VoteInProgressPage';
+import VoteBefore24Page from '@/pages/vote/VoteBefore24Page';
+import VoteBeforePage from '@/pages/vote/VoteInProgressPage';
 import { MY_INFO, MY_PROFILE, PAIR_LIST, PARTY_STATUS } from '@/recoil/dummy';
 import { StatusType } from '@/types/party';
 import { ResultListItemProps, ResultListProps } from '@/types/result';
@@ -37,7 +37,7 @@ function ResultPage() {
     if (MY_PROFILE.votedId === 0) {
       return (
         <>
-          <VoteInProgressPage />;
+          <VoteBefore24Page />
         </>
       );
     } else {

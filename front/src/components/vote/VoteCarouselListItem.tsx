@@ -1,20 +1,21 @@
 import VoteCarouselItem from '@/components/vote/VoteCarouselItem';
-import styles from '@/styles/vote/VoteCarouselList.module.css';
-import { ListProifle } from '@/types/user.interface';
+import { ListProfile } from '@/types/user.interface';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 
+import Carousel from '../commons/Carousel';
+
 type VoteCarouselListItemProps = {
-  partyList: ListProifle[];
+  partyList: ListProfile[];
 };
 
 function VoteCarouselListItem(voteCarouselListProps: VoteCarouselListItemProps) {
   return (
-    <div className={styles.CarouselListItem}>
-      {voteCarouselListProps.partyList.map((it) => (
-        <VoteCarouselItem {...it} />
+    <Carousel>
+      {voteCarouselListProps.partyList.map((it, i) => (
+        <VoteCarouselItem key={i} {...it} />
       ))}
-    </div>
+    </Carousel>
   );
 }
 

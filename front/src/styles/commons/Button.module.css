@@ -1,17 +1,38 @@
 .box {
   width: 7rem;
   height: 2rem;
-  border: 1px solid #EEA23E;
+  border: 1px solid #eea23e;
   border-radius: 8px;
   font-weight: bold;
 }
 
 .filled {
-  background-color: #EEA23E;
+  background-color: #eea23e;
   color: white;
 }
 
 .empty {
   background-color: white;
-  color: #EEA23E;
+  color: #eea23e;
+}
+.voteEmptyGray {
+  background-color: white;
+  border: 1px solid #b3aa99;
+  color: #b3aa99;
+  width: 15.5rem;
+  height: 3rem;
+}
+
+.voteFilled {
+  background-color: #eea23e;
+  color: white;
+  width: 15.5rem;
+  height: 3rem;
+}
+
+.voteFinish {
+  background-color: #eea23e;
+  color: white;
+  width: 18rem;
+  height: 4rem;
 }

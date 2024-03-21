@@ -1,12 +1,14 @@
 import styles from '@/styles/vote/VoteCarouselList.module.css';
-import { ListProifle } from '@/types/user.interface';
+import { ListProfile } from '@/types/user.interface';
 
-function VoteCarouselItem(voteCarouselItemProps: ListProifle) {
+function VoteCarouselItem(voteCarouselItemProps: ListProfile) {
   return (
-    <div className={`FontBasic ${styles.CarouselItem}`}>
-      <img className={styles.ProfileImage} src={voteCarouselItemProps.thumbnailUrl} alt="" />
-      <div className="FontSBold">{voteCarouselItemProps.nickname}</div>
-    </div>
+    <>
+      <div className={`FontBasic ${styles.CarouselItem}`}>
+        <img className={styles.ProfileImage} src={voteCarouselItemProps.thumbnailUrl} alt="" />
+        <div className="FontSBold">{voteCarouselItemProps.nickname}</div>
+      </div>
+    </>
   );
 }
 

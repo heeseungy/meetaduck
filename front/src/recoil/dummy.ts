@@ -4,7 +4,7 @@ import { MissionContent, MissionResultList } from '@/types/mission';
 import { Party, PartyStatus, StatusType } from '@/types/party';
 import { ResultListItemProps } from '@/types/result';
 import { ManitoResultAnalysis, ResultAnalysis } from '@/types/result';
-import { ListProifle, LoginProfile } from '@/types/user.interface';
+import { ListProfile, LoginProfile } from '@/types/user.interface';
 
 // 로그인 시 필요한 데이터
 export const MY_INFO: LoginProfile = {
@@ -29,13 +29,13 @@ export const PARTY1: Party = {
 // 현재 파티 상태 확인
 export const PARTY_STATUS: PartyStatus = {
   // status: StatusType['Todo'],
-  status: StatusType['InProgress'],
-  // status: StatusType['Before24'],
+  // status: StatusType['InProgress'],
+  status: StatusType['Before24'],
   // status: StatusType['Complete'],
 };
 
 // 참가자 1명 조회
-export const MY_PROFILE: ListProifle = {
+export const MY_PROFILE: ListProfile = {
   userId: 152,
   guestId: 1,
   nickname: '가철수',
@@ -44,7 +44,7 @@ export const MY_PROFILE: ListProifle = {
 };
 
 // 참가자 목록 조회 (시작전)
-export const PARTYLIST: ListProifle[] = [
+export const PARTYLIST: ListProfile[] = [
   {
     userId: 152,
     guestId: 1,
