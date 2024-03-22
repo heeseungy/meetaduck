@@ -85,7 +85,7 @@ function PartyMakerPage() {
   return (
     <div className={styles.margin}>
       <header className={styles.spaceB}>
-        <span className={`FontL FontBasic`}>블랙펄 마니또</span>
+        <span className={`FontL FontBasic`}>{partyName} 마니또</span>
         <span>
           <ShareButton>참여 코드 공유</ShareButton>
         </span>
