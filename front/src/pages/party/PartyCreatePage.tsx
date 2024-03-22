@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import duckLogo from '@/assets/images/RubberDuckWithLogo.png';
 import Button from '@/components/commons/Button';
 import Input from '@/components/commons/Input';
+import { loginState } from '@/recoil/atom';
 import { Axios } from '@/services/axios';
 import styles from '@/styles/party/Partyjoin.module.css';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { loginState } from '@/recoil/atom';
+import { useRecoilValue } from 'recoil';
 
 function PartyCreatePage() {
   const [partyName, setPartyName] = useState('');
@@ -16,10 +16,8 @@ function PartyCreatePage() {
 
   const createHandler = () => {
     Axios.post('/api/parties', {
-      params: {
-        partyName: partyName,
-        userId: login.userId,
-      },
+      partyName: partyName,
+      userId: login.userId,
     })
       .then((response) => {
         console.log('responsssssse:', response);
@@ -28,7 +26,6 @@ function PartyCreatePage() {
       .catch((err) => {
         console.log('err :', err);
       });
-    // partyCreateService();
   };
 
   const handleInputChange = (value: string) => {
