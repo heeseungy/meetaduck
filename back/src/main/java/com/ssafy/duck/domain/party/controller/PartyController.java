@@ -32,9 +32,6 @@ public class PartyController {
     public ResponseEntity<String> create(
         @RequestBody CreateReq createReq) {
 
-        System.out.println("userId : " + createReq.getUserId());
-        System.out.println("partName : " + createReq.getPartyName());
-
         String accessCode = partyService.create(createReq.getPartyName(), createReq.getUserId());
         guestService.createGuest(accessCode, createReq.getUserId());
 
