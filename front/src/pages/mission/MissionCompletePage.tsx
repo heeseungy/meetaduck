@@ -1,18 +1,15 @@
 import Card from '@/components/commons/Card';
-import Slides from '@/components/commons/Slides';
+import { MissionResultList } from '@/types/mission';
 
+interface MissionCompletePageProps {
+  tag: number;
+  date: number;
+  missionResultList: MissionResultList;
+}
 
-function MissionCompletePage(MissionCompletePageProps) {
+function MissionCompletePage({ tag, date, missionResultList }: MissionCompletePageProps) {
   const children = (
     <div>
-      <div>
-        <p>
-          진행기간 <span>7</span>일 중
-        </p>
-        <p>
-          총 <span>3</span>개의 미션을 수행했어요!
-        </p>
-      </div>
       <div>
         <div>내가 수행한 미션</div>
         <div></div>
@@ -29,10 +26,17 @@ function MissionCompletePage(MissionCompletePageProps) {
     </div>
   );
   return (
-    <Slides className={'Slides'}>
+    <div>
+      <div>
+        <p>
+          진행기간 <span>7</span>일 중
+        </p>
+        <p>
+          총 <span>3</span>개의 미션을 수행했어요!
+        </p>
+      </div>
       <Card {...{ tag: 1, children: children }} />
-      <Card {...{ tag: 1, children: children }} />
-    </Slides>
+    </div>
   );
 }
 
