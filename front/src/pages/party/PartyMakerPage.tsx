@@ -6,8 +6,54 @@ import ShareButton from '@/components/party/ShareButton';
 import { partyDeleteervice } from '@/services/partyDeleteService';
 import { partyStartService } from '@/services/partyStartService';
 import styles from '@/styles/party/PartyMaker.module.css';
+import { useEffect } from 'react';
+import { Axios } from '@/services/axios';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { partyState, loginState } from '@/recoil/atom';
+
+// export const PARTY1: Party = {
+//   partyId: -1,
+//   accessCode: '',
+//   startTime: '',
+//   endTime: '',
+//   deleted: false,
+//   userId: -1,
+// };
 
 function PartyMakerPage() {
+  const setParty = useSetRecoilState(partyState);
+  const party = useRecoilValue(partyState);
+  const login = useRecoilValue(loginState);
+
+  useEffect(() => {
+    console.log(party)
+    // Axios로 파티를 조회한다.
+    // recoil에 axios response로 온 파티 정보를 저장함.
+    // setParty({
+    //   partyId: response.data.partyId,
+    //   accessCode: response.data.accessCode,
+    //   startTime: response.data.startTime,
+    //   endTime: response.data.endTime,
+    //   deleted: response.data.deleted,
+    //   userId: response.data.userId,
+    // });
+    setParty({
+      partyId: 3,
+      accessCode: 'tlz5vy',
+      startTime: '2024-03-11T21:00:00.000Z',
+      endTime: '2024-03-20T21:00:00.000Z',
+      deleted: false,
+      userId: 152,
+    });
+  }, [])
+
+  useEffect(() => {
+    // login State 가져와서 같은지 확인
+    console.log('login.userId: ',login.userId)
+    console.log(party.userId)
+
+  }, [party])
+
   const tempJoinNumber = 0;
 
   const children = (

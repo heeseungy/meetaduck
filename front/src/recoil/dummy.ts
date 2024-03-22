@@ -14,6 +14,7 @@ export const MY_INFO: LoginProfile = {
   nickname: '가철수',
   profileUrl: 'https://image.yes24.com/goods/104804448/XL',
   thumbnailUrl: 'https://image.yes24.com/goods/104804448/XL',
+  userId: 123
 };
 
 // 파티 조회

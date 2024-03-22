@@ -14,6 +14,7 @@ export interface Profile extends SimpleProfile {
 export interface LoginProfile extends Profile {
   kakaoId: number;
   partyId: number;
+  userId: number;
 }
 
 // 마니또 페어

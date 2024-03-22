@@ -14,7 +14,6 @@ import VoteAfterPage from '@/pages/vote/VoteAfterPage';
 import HintInputFormPage from './hint/HintInputFormPage';
 import RedirectionPage from './login/RedirectionPage';
 import PartyCreatePage from './party/PartyCreatePage';
-import PartyJoinerPage from './party/PartyJoinerPage';
 import PartyMakerPage from './party/PartyMakerPage';
 import TestPage from './webSocketTest/TestPage';
 
@@ -34,7 +33,6 @@ const router = createBrowserRouter([
   { path: '/party', element: <PartyPage /> },
   { path: '/partycreate', element: <PartyCreatePage /> },
   { path: '/partymaker', element: <PartyMakerPage /> },
-  { path: '/partyjoiner', element: <PartyJoinerPage /> },
   { path: '/hintinputform', element: <HintInputFormPage /> },
   { path: '/voteFinish', element: <VoteAfterPage /> },
   { path: '/testpage', element: <TestPage /> },
