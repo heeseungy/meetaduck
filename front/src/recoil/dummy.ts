@@ -34,6 +34,8 @@ export const DATE_DIFF = Math.abs(diffDate / (1000 * 60 * 60 * 24));
 // 현재 파티 상태 확인
 export const PARTY_STATUS: PartyStatus = {
   // status: StatusType['Todo'],
+  status: StatusType['InProgress'],
+  // status: StatusType['Before24']
   // status: StatusType['Complete'],
 };
 
