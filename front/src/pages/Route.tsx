@@ -16,6 +16,9 @@ import RedirectionPage from './login/RedirectionPage';
 import PartyCreatePage from './party/PartyCreatePage';
 import PartyMakerPage from './party/PartyMakerPage';
 import TestPage from './webSocketTest/TestPage';
+// import S3Page from './s3/s3Page';
+// import { S3Page } from './s3/s3Page';
+import SamplePage from './sample/SamplePage';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +41,7 @@ const router = createBrowserRouter([
   { path: '/testpage', element: <TestPage /> },
   { path: '/chattestpage', element: <ChatTestPage /> },
   { path: '/login/oauth2/code/kakao', element: <RedirectionPage /> },
+  { path: '/sample', element: <SamplePage/> },
 ]);
 
 function Route() {
