@@ -141,8 +141,6 @@ public class MissionService {
     public int calcMissionFailCount(Long manitoId) {
         // 한국 시간으로 현재 날짜 00시
         Instant today = Instant.now().atZone(ZoneId.of("+9")).toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC);
-//        today = today.plus(Duration.ofDays(3)); // 테스트를 위해 오늘 날짜 변경
-        System.out.println("calcMissionFailCount " + today);
 
         List<MissionStatus> missionStatusList = missionStatusRepository.findAllByGuestGuestIdAndGetTimeBefore(manitoId, today);
         int failCount = missionStatusList.size() / 4; // 어제까지의 미션 개수
@@ -203,9 +201,6 @@ public class MissionService {
             }
             missionResultResList.add(mrRes.build());
         }
-//        for (MissionResultRes mrRes : missionResultResList) {
-//            System.out.println(mrRes.toString());
-//        }
         return missionResultResList;
     }
 
@@ -257,9 +252,6 @@ public class MissionService {
             }
             missionResultResList.add(mrRes.build());
         }
-//        for (MissionResultRes mrRes : missionResultResList) {
-//            System.out.println(mrRes.toString());
-//        }
         return missionResultResList;
     }
 }

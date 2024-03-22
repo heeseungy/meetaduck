@@ -46,7 +46,6 @@ public class HintService {
             Hint hint = hintRepository.findById(hs.getHint().getHintId())
                     .orElseThrow(() -> new HintException(HintErrorCode.QUESTION_NOT_FOUND));
             hintList.add(hint);
-
         }
 
         List<HintRes> hintResList = hintList.stream().map(HintRes::toDto)
@@ -109,6 +108,8 @@ public class HintService {
     public void setStatus(Long guestId, List<HintStatusReq> hintStatusReq) {
         for (HintStatusReq req : hintStatusReq) {
             HintStatus hintStatus = hintStatusRepository.findByGuestGuestIdAndHintHintId(guestId, req.getHintId());
+            if(hintStatus == null)
+                throw new HintException(HintErrorCode.STATUS_NOT_FOUND);
             hintStatus.updateAnswer(hintStatus.getHintStatusId(), req.getHintStatusAnswer(), hintStatus.getHint(), hintStatus.getGuest());
             hintStatusRepository.save(hintStatus);
         }
@@ -118,7 +119,6 @@ public class HintService {
     public List<HintStatusRes> getHintQnA(Long guestId) {
         GuestRes guestRes = guestService.findByGuestId(guestId);    // 내 정보
         GuestRes manito = guestService.findManito(guestId);         // 마니또 정보
-        System.out.println("my " + guestRes.toString() + " / manito " + manito.toString());
 
         List<HintStatusRes> hintStatusResList = new ArrayList<>();
         List<HintStatus> hintStatusList = hintStatusRepository.findAllByGuestGuestId(manito.getGuestId());
@@ -149,10 +149,6 @@ public class HintService {
                 hintStatusResList.add(res);
             }
 
-//            System.out.println("--- hint question + answer list");
-//            for (HintStatusRes hsRes : hintStatusResList) {
-//                System.out.println(hsRes.getHintContent() + "/" + hsRes.getHintStatusAnswer());
-//            }
         }
 
 
