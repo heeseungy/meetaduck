@@ -74,9 +74,9 @@ public class MissionService {
     }
 
 
-//    public List<MissionRes> findTodayMissionsByGuestId(Long guestId){
-//
-//    }
+    public List<MissionRes> findTodayMissionsByGuestId(Long guestId){
+
+    }
 //
 //    public void updateConfirmTimeByMissionStatusId(MissionPassReq missionPassReq){
 //

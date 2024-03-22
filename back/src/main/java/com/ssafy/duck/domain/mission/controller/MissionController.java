@@ -19,11 +19,11 @@ public class MissionController {
 
     private final MissionService missionService;
 
-//    @GetMapping("/{guestId}")
-//    public ResponseEntity<List<MissionRes>> getTodayMissions(@PathVariable Long guestId){
-//        List<MissionRes> todayMissionList = missionService.findTodayMissionsByGuestId(guestId);
-//        return ResponseEntity.ok(todayMissionList);
-//    }
+    @GetMapping("/{guestId}")
+    public ResponseEntity<List<MissionRes>> getTodayMissions(@PathVariable Long guestId){
+        List<MissionRes> todayMissionList = missionService.findTodayMissionsByGuestId(guestId);
+        return ResponseEntity.ok(todayMissionList);
+    }
 
 //    @PatchMapping("/pass")
 //    public ResponseEntity<Void> updateConfirmTime(@RequestBody MissionPassReq missionPassReq){
