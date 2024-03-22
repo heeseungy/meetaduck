@@ -1,6 +1,7 @@
 nav {
   overflow: hidden;
-  border-top: 2px solid grey;
+  /* border-top: 2px solid grey; */
+  box-shadow: -10px 0 10px rgba(0, 0, 0, 0.3);
 }
 
 nav > div {
@@ -12,7 +13,6 @@ nav > div {
   /* 세로길이 설정 */
   height: 70px;
   line-height: 85px;
-  
 }
 
 .wrapper {
@@ -21,4 +21,9 @@ nav > div {
   left: 0;
   right: 0;
   height: 70px;
+  background-color: white;
+}
+
+nav > a {
+  color: #4d4637;
 }
