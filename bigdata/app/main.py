@@ -73,10 +73,13 @@ def update_result_wordcount(json_data, favorability, guest_id : int, isManito:bo
     try: 
         with connection.cursor() as cursor:
             if isManito: # 내가 마니또일 때
-                sql = "UPDATE results SET maniti_wordcount = %s, maniti_favorability = %s WHERE guest_id = %s"
+                sql = "INSERT INTO results (guest_id, maniti_wordcount, maniti_favorability) VALUES (%s, %s, %s)"
+                # sql = "UPDATE results SET maniti_wordcount = %s, maniti_favorability = %s WHERE guest_id = %s"
+                cursor.execute(sql, (int(guest_id), json_data, favorability) )
             else : # 내가 마니띠일 때
+                # sql = "INSERT INTO results (guest_id, manito_wordcount, manito_favorability) VALUES (%s, %s, %s)"
                 sql = "UPDATE results SET manito_wordcount = %s, manito_favorability = %s WHERE guest_id = %s"
-            cursor.execute(sql, (json_data, favorability, int(guest_id)))
+                cursor.execute(sql, (json_data, favorability, int(guest_id)) )
             connection.commit()
     finally:
         if connection:
@@ -143,7 +146,7 @@ def get_favorability(guest_id, chat_id):
   
     return test.calc_favorability(message_list)
 
-@app.patch("/spark/{guest_id}")
+@app.post("/spark/{guest_id}")
 async def word_count_spark(guest_id: int):   
     df = spark.read.format("mongo").load()
 
