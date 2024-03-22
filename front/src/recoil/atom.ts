@@ -1,6 +1,6 @@
-import { atom } from "recoil";
+import { Party, PartyStatus, StatusType } from '@/types/party';
 import { LoginProfile } from '@/types/user.interface';
-import { Party } from "@/types/party";
+import { atom, selector } from 'recoil';
 
 export const loginState = atom<LoginProfile>({
   key: 'loginState',
@@ -12,8 +12,8 @@ export const loginState = atom<LoginProfile>({
     profileUrl: '',
     thumbnailUrl: '',
     userId: 0,
-  }
-})
+  },
+});
 
 export const partyState = atom<Party>({
   key: 'partyState',
@@ -24,15 +24,35 @@ export const partyState = atom<Party>({
     endTime: '',
     deleted: false,
     userId: -1,
-  }
+  },
 });
 
+export const currentTimeState = atom<string>({
+  key: 'currentTimeState',
+  default: '',
+}); // new Date()
 
-// export const MY_INFO: LoginProfile = {
-//   kakaoId: 123456,
-//   guestId: 1,
-//   partyId: 3,
-//   nickname: '가철수',
-//   profileUrl: 'https://image.yes24.com/goods/104804448/XL',
-//   thumbnailUrl: 'https://image.yes24.com/goods/104804448/XL',
-// };
+export const partyStatusState = selector({
+  key: 'partyStatusState',
+  get: ({ get }) => {
+    const party = get(partyState);
+    const date2 = party.endTime;
+    const now = get(currentTimeState);
+
+    if (date2 === '') {
+      return 'Todo';
+    } else {
+      const endTime = new Date(date2);
+      const currentTime = new Date(now);
+      const before24Time = new Date(endTime.getTime() - 24 * 60 * 60 * 1000);
+
+      if (currentTime < before24Time) {
+        return 'InProgress';
+      } else if (currentTime < endTime) {
+        return 'Before24';
+      } else {
+        return 'Complete';
+      }
+    }
+  },
+});

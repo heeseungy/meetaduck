@@ -1,15 +1,16 @@
+import { useEffect } from 'react';
+
 import Button from '@/components/commons/Button';
 import Card from '@/components/commons/Card';
 import ProfileName from '@/components/commons/ProfileName';
 import DatePickerInput from '@/components/party/DatePickerInput';
 import ShareButton from '@/components/party/ShareButton';
+import { currentTimeState, loginState, partyState, partyStatusState } from '@/recoil/atom';
+import { Axios } from '@/services/axios';
 import { partyDeleteervice } from '@/services/partyDeleteService';
 import { partyStartService } from '@/services/partyStartService';
 import styles from '@/styles/party/PartyMaker.module.css';
-import { useEffect } from 'react';
-import { Axios } from '@/services/axios';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { partyState, loginState } from '@/recoil/atom';
 
 // export const PARTY1: Party = {
 //   partyId: -1,
@@ -24,9 +25,11 @@ function PartyMakerPage() {
   const setParty = useSetRecoilState(partyState);
   const party = useRecoilValue(partyState);
   const login = useRecoilValue(loginState);
-
+  const currentTime = useRecoilValue(currentTimeState);
+  const setcurrentTime = useSetRecoilState(currentTimeState);
+  const partyStatus = useRecoilValue(partyStatusState);
   useEffect(() => {
-    console.log(party)
+    console.log(party);
     // Axios로 파티를 조회한다.
     // recoil에 axios response로 온 파티 정보를 저장함.
     // setParty({
@@ -37,22 +40,24 @@ function PartyMakerPage() {
     //   deleted: response.data.deleted,
     //   userId: response.data.userId,
     // });
+    setcurrentTime(new Date().toISOString());
     setParty({
       partyId: 3,
       accessCode: 'tlz5vy',
-      startTime: '2024-03-11T21:00:00.000Z',
-      endTime: '2024-03-20T21:00:00.000Z',
+      startTime: '2024-03-21T21:00:00.000Z',
+      endTime: '2024-03-23T06:00:00.000Z',
       deleted: false,
       userId: 152,
     });
-  }, [])
+  }, []);
 
   useEffect(() => {
     // login State 가져와서 같은지 확인
-    console.log('login.userId: ',login.userId)
-    console.log(party.userId)
-
-  }, [party])
+    console.log('login.userId: ', login.userId);
+    console.log(party.userId);
+    console.log(currentTime);
+    console.log(partyStatus);
+  }, [party]);
 
   const tempJoinNumber = 0;
 
