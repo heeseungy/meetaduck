@@ -19,9 +19,13 @@ function PartyPage() {
     console.log('참여하기 클릭!');
     const accessCode = usersInput;
     const userId = content.userId;
-    // const response = await Axios.get(`/api/parties/${accessCode}/users/${userId}`);
-    // console.log(response);
-    navigate('/partymaker')
+    try {
+      const response = await Axios.get(`/api/parties/${accessCode}/users/${userId}`);
+      console.log(response);
+      // navigate('/partymaker')
+    } catch (err) {
+      console.log('err :', err);
+    }
   };
 
   const createHandler = async () => {
