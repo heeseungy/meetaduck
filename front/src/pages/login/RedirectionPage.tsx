@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router-dom';
 
 import { loginState } from '@/recoil/atom';
 import { Axios } from '@/services/axios';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 function RedirectionPage() {
   const setContent = useSetRecoilState(loginState);
+  const login = useRecoilValue(loginState);
 
   const code: string = new URLSearchParams(window.location.search).get('code')!;
   const navigate = useNavigate();
@@ -33,20 +34,10 @@ function RedirectionPage() {
           thumbnailUrl: response.data.thumbnailUrl,
           userId: response.data.userId,
         });
-        // 방법 1 localStroage에 넣고
-        // const JWT_Token = response.headers.jwtToken;
-        // localStorage.setItem('token', JWT_Token);
-
-        // 그 토큰을 받아서 로그인 유지 : 저장한 토큰을 필요할때마다 request에 담아서 보냄.
-        // Axios.get('주소'. {
-        //   headers: {
-        //     Authorization: `Bearer ${localStorage.getItem('token')}`
-        //   },
-        // })
 
         // 방법2 recoil에 token을 저장해서 필요할때마다
         // token이 있는지 없는지 확인 후 로그인 상태를 검사함.
-
+        alert('로그인 되었습니다');
         navigate('/party');
       })
       .catch((err) => {
@@ -54,7 +45,11 @@ function RedirectionPage() {
       });
   }, []);
 
-  return <div>로그인 중입니다.</div>;
+  // useEffect(() => {
+  //   console.log('login.kakaoId', login.kakaoId);
+  // }, [login.kakaoId]);
+
+  return <div className="FontM">로그인 중입니다.</div>;
 }
 
 export default RedirectionPage;

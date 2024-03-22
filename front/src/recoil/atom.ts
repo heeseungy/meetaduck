@@ -1,6 +1,12 @@
-import { atom } from "recoil";
+import { Party } from '@/types/party';
 import { LoginProfile } from '@/types/user.interface';
-import { Party } from "@/types/party";
+import { atom } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
+
+const { persistAtom } = recoilPersist({
+  key: 'sessionStorage',
+  storage: sessionStorage,
+});
 
 export const loginState = atom<LoginProfile>({
   key: 'loginState',
@@ -12,8 +18,9 @@ export const loginState = atom<LoginProfile>({
     profileUrl: '',
     thumbnailUrl: '',
     userId: 0,
-  }
-})
+  },
+  effects_UNSTABLE: [persistAtom],
+});
 
 export const partyState = atom<Party>({
   key: 'partyState',
@@ -24,9 +31,8 @@ export const partyState = atom<Party>({
     endTime: '',
     deleted: false,
     userId: -1,
-  }
+  },
 });
-
 
 // export const MY_INFO: LoginProfile = {
 //   kakaoId: 123456,
