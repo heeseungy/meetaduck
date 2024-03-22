@@ -51,6 +51,7 @@ CREATE TABLE `mission_status`
     `get_time`          TIMESTAMP    NOT NULL,
     `confirm_time`      TIMESTAMP,
     `success_time`      TIMESTAMP,
+    `failed_time`       TIMESTAMP,
     `mission_image_url` VARCHAR(255),
     `mission_id`        INT UNSIGNED NOT NULL,
     `guest_id`          INT UNSIGNED NOT NULL,

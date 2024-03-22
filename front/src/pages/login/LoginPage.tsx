@@ -17,7 +17,6 @@ function LoginPage() {
 
   const loginHandler = async () => {
     // const code = window.location.search;
-
     window.location.href = kakaoURL;
   };
 

@@ -1,5 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
+import ChatTestPage from '@/pages/chatting/ChattingDetailPage';
 import ChattingPage from '@/pages/chatting/ChattingPage';
 import HintPage from '@/pages/hint/HintPage';
 import HomePage from '@/pages/home/HomePage';
@@ -13,12 +14,8 @@ import VoteAfterPage from '@/pages/vote/VoteAfterPage';
 import HintInputFormPage from './hint/HintInputFormPage';
 import RedirectionPage from './login/RedirectionPage';
 import PartyCreatePage from './party/PartyCreatePage';
-import PartyJoinerPage from './party/PartyJoinerPage';
 import PartyMakerPage from './party/PartyMakerPage';
 import TestPage from './webSocketTest/TestPage';
-import ChatTestPage from '@/pages/chatting/ChattingDetailPage';
-import RedirectionPage from './login/RedirectionPage';
-
 
 const router = createBrowserRouter([
   {
@@ -36,7 +33,6 @@ const router = createBrowserRouter([
   { path: '/party', element: <PartyPage /> },
   { path: '/partycreate', element: <PartyCreatePage /> },
   { path: '/partymaker', element: <PartyMakerPage /> },
-  { path: '/partyjoiner', element: <PartyJoinerPage /> },
   { path: '/hintinputform', element: <HintInputFormPage /> },
   { path: '/voteFinish', element: <VoteAfterPage /> },
   { path: '/testpage', element: <TestPage /> },

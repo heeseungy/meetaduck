@@ -1,15 +1,38 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import duckLogo from '@/assets/images/RubberDuckWithLogo.png';
 import Button from '@/components/commons/Button';
 import Input from '@/components/commons/Input';
-import { partyCreateService } from '@/services/partCreateService';
+import { loginState, partyState } from '@/recoil/atom';
+import { Axios } from '@/services/axios';
 import styles from '@/styles/party/Partyjoin.module.css';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 function PartyCreatePage() {
   const [partyName, setPartyName] = useState('');
+  const navigate = useNavigate();
+
+  const login = useRecoilValue(loginState);
+  const setParty = useSetRecoilState(partyState);
+
   const createHandler = () => {
-    partyCreateService();
+    Axios.post('/api/parties', {
+      partyName: partyName,
+      userId: login.userId,
+    })
+      .then((response) => {
+        const accessCode = response.data;
+        setParty((prevPartyState) => ({
+          ...prevPartyState,
+          accessCode: accessCode,
+          partyName: partyName,
+        }));
+        navigate('/partymaker');
+      })
+      .catch((err) => {
+        console.log('err :', err);
+      });
   };
 
   const handleInputChange = (value: string) => {
