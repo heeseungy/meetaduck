@@ -8,7 +8,6 @@ interface InputProps {
 function Input({ usersInput, onChange }: InputProps) {
   const saveUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
-    console.log(e.target.value);
   };
   return <input type="text" className={`${styles.box}`} value={usersInput} onChange={saveUserInput} />;
 }
