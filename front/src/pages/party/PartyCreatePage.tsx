@@ -1,18 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import duckLogo from '@/assets/images/RubberDuckWithLogo.png';
 import Button from '@/components/commons/Button';
 import Input from '@/components/commons/Input';
-import { loginState } from '@/recoil/atom';
+import { loginState, partyState } from '@/recoil/atom';
 import { Axios } from '@/services/axios';
 import styles from '@/styles/party/Partyjoin.module.css';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 function PartyCreatePage() {
   const [partyName, setPartyName] = useState('');
   const navigate = useNavigate();
   const login = useRecoilValue(loginState);
+  const setParty = useSetRecoilState(partyState);
+  // recoil에서 파티 꺼냄
+  const party = useRecoilValue(partyState);
 
   const createHandler = () => {
     Axios.post('/api/parties', {
@@ -20,13 +23,19 @@ function PartyCreatePage() {
       userId: login.userId,
     })
       .then((response) => {
-        console.log('responsssssse:', response);
-        navigate('/partymaker');
+        // accessCode를 recoil에 저장
+        const accessCode = response.data;
+        setParty((prevPartyState) => ({
+          ...prevPartyState,
+          accessCode: accessCode,
+        }));
+        // navigate('/partymaker');
       })
       .catch((err) => {
         console.log('err :', err);
       });
   };
+
 
   const handleInputChange = (value: string) => {
     setPartyName(value);
