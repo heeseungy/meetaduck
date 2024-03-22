@@ -24,6 +24,11 @@ export interface PairRank extends Profile {
   manitoFavorability: number;
 }
 
+// 마니띠 조회용 프로필
+export interface ManitiProfile {
+  nickname: string;
+}
+
 // 목록조회용 프로필
 export interface ListProfile {
   guestId: number;

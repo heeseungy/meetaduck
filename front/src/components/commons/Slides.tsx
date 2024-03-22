@@ -14,7 +14,7 @@ interface SlidesProps {
 function Slides({ children, className }: SlidesProps) {
   const settings: Settings = {
     dots: true,
-    infinite: true,
+    infinite: false,
     autoplay: false,
     slidesToShow: 1,
     slidesToScroll: 1,

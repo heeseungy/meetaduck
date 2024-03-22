@@ -12,15 +12,6 @@ import { partyStartService } from '@/services/partyStartService';
 import styles from '@/styles/party/PartyMaker.module.css';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-// export const PARTY1: Party = {
-//   partyId: -1,
-//   accessCode: '',
-//   startTime: '',
-//   endTime: '',
-//   deleted: false,
-//   userId: -1,
-// };
-
 function PartyMakerPage() {
   const setParty = useSetRecoilState(partyState);
   const party = useRecoilValue(partyState);
@@ -45,7 +36,7 @@ function PartyMakerPage() {
       partyId: 3,
       accessCode: 'tlz5vy',
       startTime: '2024-03-21T21:00:00.000Z',
-      endTime: '2024-03-23T06:00:00.000Z',
+      endTime: '2024-03-25T06:00:00.000Z',
       deleted: false,
       userId: 152,
     });

@@ -4,19 +4,56 @@
   margin-top: 3rem;
   text-align: center;
 }
+.FlexVertical {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
+.AlignCenter {
+  align-items: center;
+}
+
+.AlignBaseLine {
+  align-items: baseline;
+}
+.FlexHorizontal {
+  display: flex;
+  justify-content: start;
+  align-items: end;
+}
+
+.Gap45Rem {
+  gap: 4.5rem;
+}
+.Gap1Rem {
+  gap: 1rem;
+}
+.Gap05Rem {
+  gap: 0.5rem;
+}
 .Title {
   padding-left: 0.75rem;
-  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.IconSpin {
+  animation: spin-animation 0.5s;
+  display: inline-block;
+}
+
+@keyframes spin-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
 }
 
 .MissionStatus {
   padding-left: 0.75rem;
   gap: 0.5rem;
-}
-
-.marginTop {
-  margin-top: 1rem;
 }
 
 .marginBottom {
@@ -45,17 +82,6 @@
   align-items: center;
 }
 
-.uploadContainer {
-  width: 18rem;
-  height: 25rem;
-  margin: auto;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .buttonMargin {
   margin-right: 1rem;
 }
@@ -65,7 +91,7 @@
   height: 250px;
   margin: 10px;
   padding: 10px;
-  border: 2px solid #ECECEC; /* 테두리 */
+  border: 2px solid #ececec; /* 테두리 */
   border-radius: 30px; /* 모든 모서리의 곡률 */
 
   text-align: center;

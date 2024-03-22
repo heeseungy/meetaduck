@@ -4,18 +4,18 @@ import { MissionContent, MissionResultList } from '@/types/mission';
 import { Party, PartyStatus, StatusType } from '@/types/party';
 import { ResultListItemProps } from '@/types/result';
 import { ManitoResultAnalysis, ResultAnalysis } from '@/types/result';
-import { ListProfile, LoginProfile } from '@/types/user.interface';
+import { ListProfile, LoginProfile, ManitiProfile } from '@/types/user.interface';
 
-// 로그인 시 필요한 데이터
-export const MY_INFO: LoginProfile = {
-  kakaoId: 123456,
-  guestId: 1,
-  partyId: 3,
-  nickname: '가철수',
-  profileUrl: 'https://image.yes24.com/goods/104804448/XL',
-  thumbnailUrl: 'https://image.yes24.com/goods/104804448/XL',
-  userId: 123
-};
+// // 로그인 시 필요한 데이터
+// export const MY_INFO: LoginProfile = {
+//   kakaoId: 123456,
+//   guestId: 1,
+//   partyId: 3,
+//   nickname: '가철수',
+//   profileUrl: 'https://image.yes24.com/goods/104804448/XL',
+//   thumbnailUrl: 'https://image.yes24.com/goods/104804448/XL',
+//   userId: 123455,
+// };
 
 // 파티 조회
 export const PARTY1: Party = {
@@ -47,6 +47,11 @@ export const MY_PROFILE: ListProfile = {
   nickname: '가철수',
   thumbnailUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
   votedId: 0,
+};
+
+// 마니띠 조회
+export const MANITI_PROFILE: ManitiProfile = {
+  nickname: '나철수',
 };
 
 // 참가자 목록 조회 (시작전)

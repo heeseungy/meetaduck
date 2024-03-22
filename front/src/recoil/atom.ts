@@ -1,18 +1,32 @@
 import { Party, PartyStatus, StatusType } from '@/types/party';
 import { LoginProfile } from '@/types/user.interface';
 import { atom, selector } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
+
+const { persistAtom } = recoilPersist({
+  key: 'sessionStorage',
+  storage: sessionStorage,
+});
 
 export const loginState = atom<LoginProfile>({
   key: 'loginState',
   default: {
-    kakaoId: 0,
-    guestId: 0,
-    partyId: 0,
-    nickname: '',
-    profileUrl: '',
-    thumbnailUrl: '',
-    userId: 0,
+    kakaoId: 123456,
+    guestId: 1,
+    partyId: 3,
+    nickname: '가철수',
+    profileUrl: 'https://image.yes24.com/goods/104804448/XL',
+    thumbnailUrl: 'https://image.yes24.com/goods/104804448/XL',
+    userId: 123455,
+    // kakaoId: 0,
+    // guestId: 0,
+    // partyId: 0,
+    // nickname: '',
+    // profileUrl: '',
+    // thumbnailUrl: '',
+    // userId: 0,
   },
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const partyState = atom<Party>({
@@ -25,6 +39,7 @@ export const partyState = atom<Party>({
     deleted: false,
     userId: -1,
   },
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const currentTimeState = atom<string>({
