@@ -1,15 +1,18 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import duckLogo from '@/assets/images/RubberDuckWithLogo.png';
 import Button from '@/components/commons/Button';
 import Input from '@/components/commons/Input';
-import { partyCreateService } from '@/services/partCreateService';
 import styles from '@/styles/party/Partyjoin.module.css';
 
 function PartyCreatePage() {
   const [partyName, setPartyName] = useState('');
+  const navigate = useNavigate();
+
   const createHandler = () => {
-    partyCreateService();
+    // partyCreateService();
+    navigate('/partymaker');
   };
 
   const handleInputChange = (value: string) => {

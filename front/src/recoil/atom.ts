@@ -1,6 +1,6 @@
 import { atom } from "recoil";
-import { ListProfile, LoginProfile } from '@/types/user.interface';
-
+import { LoginProfile } from '@/types/user.interface';
+import { Party } from "@/types/party";
 
 export const loginState = atom<LoginProfile>({
   key: 'loginState',
@@ -11,10 +11,21 @@ export const loginState = atom<LoginProfile>({
     nickname: '',
     profileUrl: '',
     thumbnailUrl: '',
+    userId: 0,
   }
 })
 
-
+export const partyState = atom<Party>({
+  key: 'partyState',
+  default: {
+    partyId: -1,
+    accessCode: '',
+    startTime: '',
+    endTime: '',
+    deleted: false,
+    userId: -1,
+  }
+});
 
 
 // export const MY_INFO: LoginProfile = {

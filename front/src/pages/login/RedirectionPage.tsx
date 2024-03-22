@@ -3,11 +3,10 @@ import { useNavigate } from 'react-router-dom';
 
 import { loginState } from '@/recoil/atom';
 import { Axios } from '@/services/axios';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 
 function RedirectionPage() {
   const setContent = useSetRecoilState(loginState);
-  const content = useRecoilValue(loginState);
 
   const code: string = new URLSearchParams(window.location.search).get('code')!;
   const navigate = useNavigate();
@@ -32,6 +31,7 @@ function RedirectionPage() {
           nickname: response.data.nickname,
           profileUrl: response.data.profileUrl,
           thumbnailUrl: response.data.thumbnailUrl,
+          userId: response.data.userId,
         });
         // 방법 1 localStroage에 넣고
         // const JWT_Token = response.headers.jwtToken;
@@ -53,10 +53,6 @@ function RedirectionPage() {
         console.log(err);
       });
   }, []);
-
-  useEffect(() => {
-    console.log(content);
-  }, [content])
 
   return <div>로그인 중입니다.</div>;
 }

@@ -4,19 +4,24 @@ import { useNavigate } from 'react-router-dom';
 import duckLogo from '@/assets/images/RubberDuckWithLogo.png';
 import Button from '@/components/commons/Button';
 import Input from '@/components/commons/Input';
+import { loginState } from '@/recoil/atom';
 import { Axios } from '@/services/axios';
 import styles from '@/styles/party/Partyjoin.module.css';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 function PartyPage() {
   const [usersInput, setUsersInput] = useState('');
   const navigate = useNavigate();
+  const setContent = useSetRecoilState(loginState);
+  const content = useRecoilValue(loginState);
 
   const joinHandler = async () => {
     console.log('참여하기 클릭!');
     const accessCode = usersInput;
-    const userId = 'dummy';
-    const response = await Axios.get(`/api/parties/${accessCode}/users/${userId}`);
-    console.log(response);
+    const userId = content.userId;
+    // const response = await Axios.get(`/api/parties/${accessCode}/users/${userId}`);
+    // console.log(response);
+    navigate('/partymaker')
   };
 
   const createHandler = async () => {
@@ -25,7 +30,6 @@ function PartyPage() {
   };
 
   const handleInputChange = (value: string) => {
-    
     setUsersInput(value);
   };
 
