@@ -29,7 +29,6 @@ function PartyPage() {
   };
 
   const createHandler = async () => {
-    console.log('이번엔 만들기 클릭!');
     navigate('/partycreate');
   };
 
