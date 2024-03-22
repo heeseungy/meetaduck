@@ -33,6 +33,10 @@ public class MissionStatus {
     private Instant successTime;
 
     @Nullable
+    @Column(name = "`failed_time`")
+    private Instant failedTime;
+
+    @Nullable
     @Column(name = "`mission_image_url`")
     private String missionImageUrl;
 
