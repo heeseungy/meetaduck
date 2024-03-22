@@ -9,14 +9,9 @@ import java.time.Instant;
 @AllArgsConstructor
 @Builder
 @ToString
-public class MissionResultRes {
-
-    private Long guestId;
+public class MyManitoMissionRes {
     private Long missionStatusId;
-    private Instant getTime;
     private Instant confirmTime;
-    private Instant successTime;
+    private Instant MissionImageUrl;
     private String missionContent;
-    private String missionImageUrl;
-
 }

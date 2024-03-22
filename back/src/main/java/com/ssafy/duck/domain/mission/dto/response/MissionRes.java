@@ -5,13 +5,15 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
 public class MissionRes {
-
-    private Long missionId;
-    private String content;
-
+    private Long missionStatusId;
+    private Instant confirmTime;
+    private Instant missionImageUrl;
+    private String missionContent;
 }
