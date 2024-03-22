@@ -12,10 +12,9 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 function PartyCreatePage() {
   const [partyName, setPartyName] = useState('');
   const navigate = useNavigate();
+
   const login = useRecoilValue(loginState);
   const setParty = useSetRecoilState(partyState);
-  // recoil에서 파티 꺼냄
-  const party = useRecoilValue(partyState);
 
   const createHandler = () => {
     Axios.post('/api/parties', {
@@ -23,19 +22,18 @@ function PartyCreatePage() {
       userId: login.userId,
     })
       .then((response) => {
-        // accessCode를 recoil에 저장
         const accessCode = response.data;
         setParty((prevPartyState) => ({
           ...prevPartyState,
           accessCode: accessCode,
+          partyName: partyName,
         }));
-        // navigate('/partymaker');
+        navigate('/partymaker');
       })
       .catch((err) => {
         console.log('err :', err);
       });
   };
-
 
   const handleInputChange = (value: string) => {
     setPartyName(value);

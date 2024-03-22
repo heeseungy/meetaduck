@@ -1,15 +1,16 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import Button from '@/components/commons/Button';
 import Card from '@/components/commons/Card';
 import ProfileName from '@/components/commons/ProfileName';
 import DatePickerInput from '@/components/party/DatePickerInput';
 import ShareButton from '@/components/party/ShareButton';
+import { loginState, partyState } from '@/recoil/atom';
 import { partyDeleteervice } from '@/services/partyDeleteService';
 import { partyStartService } from '@/services/partyStartService';
 import styles from '@/styles/party/PartyMaker.module.css';
-import { useEffect } from 'react';
-import { Axios } from '@/services/axios';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { partyState, loginState } from '@/recoil/atom';
 
 // export const PARTY1: Party = {
 //   partyId: -1,
@@ -25,8 +26,15 @@ function PartyMakerPage() {
   const party = useRecoilValue(partyState);
   const login = useRecoilValue(loginState);
 
+  const location = useLocation();
+  const { accessCode, partyName } = location.state;
+
+  // 가져온 accessCode와 partyName
+  console.log('accessCode:', accessCode);
+  console.log('partyName:', partyName);
+
   useEffect(() => {
-    console.log(party)
+    console.log(party);
     // Axios로 파티를 조회한다.
     // recoil에 axios response로 온 파티 정보를 저장함.
     // setParty({
@@ -45,14 +53,13 @@ function PartyMakerPage() {
       deleted: false,
       userId: 152,
     });
-  }, [])
+  }, []);
 
   useEffect(() => {
     // login State 가져와서 같은지 확인
-    console.log('login.userId: ',login.userId)
-    console.log(party.userId)
-
-  }, [party])
+    console.log('login.userId: ', login.userId);
+    console.log(party.userId);
+  }, [party]);
 
   const tempJoinNumber = 0;
 
