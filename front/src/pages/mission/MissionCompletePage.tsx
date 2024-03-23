@@ -1,40 +1,97 @@
+import { useState } from 'react';
+
 import Card from '@/components/commons/Card';
+import MissionImage from '@/components/mission/MissionImage';
+import MissionSlider from '@/components/mission/MissionSlider';
+import styles from '@/styles/mission/MissionCompletePage.module.css';
 import { MissionResultList } from '@/types/mission';
+import { Role } from '@/types/party';
+import { Party } from '@/types/party';
 
 interface MissionCompletePageProps {
-  tag: number;
-  date: number;
+  role: number;
+  party: Party;
+  nickname: string;
   missionResultList: MissionResultList;
 }
 
-function MissionCompletePage({ tag, date, missionResultList }: MissionCompletePageProps) {
+function MissionCompletePage({ role, party, nickname, missionResultList }: MissionCompletePageProps) {
+  const mission = Role.Manito === role ? missionResultList.myMission : missionResultList.manitoMission;
+  const count = mission.filter((it) => it.successTime != null).length;
+  const [checkedDay, setcheckedDay] = useState(0);
+  // 날짜계산
+  const startTime = new Date(party.startTime);
+  const endTime = new Date(party.endTime);
+  const date = mission.length;
+  // const date = Math.abs((endTime.getTime() - startTime.getTime()) / (24 * 60 * 60 * 1000));
+  let days: string[] = [];
+  for (let i = 0; i < date; i++) {
+    const d = new Date();
+    const month = new Date(d.setDate(startTime.getMonth() + i)).getMonth();
+    const day = new Date(d.setDate(startTime.getDate() + i)).getDate();
+    days.push(`${month}/${day}`);
+  }
+
+  const ChangeDate = (idx: number) => {
+    setcheckedDay(idx);
+  };
   const children = (
     <div>
-      <div>
-        <div>내가 수행한 미션</div>
-        <div></div>
+      <div className={`FontMTitle ${styles.CardTitle}`}>
+        {Role.Manito === role ? '내가 수행한 미션' : '마니또가 수행한 미션'}
       </div>
-      <div>
-        <div>
-          <div>2/26</div>
-          <div>00님에게 손으로 그린 그림을 선물하세요</div>
-        </div>
-        <div>
-          <img src="" alt="" />
-        </div>
+      <div className={`FontSBold ${styles.MissionHorizonScrollContainer}`}>
+        <MissionSlider className="mission-slider">
+          {days.map((it, idx) => (
+            <div className={styles.Height8rem} key={idx} onClick={() => ChangeDate(idx)}>
+              <div
+                className={`${styles.HorizonScrollItem} 
+                ${
+                  mission[idx].successTime != null
+                    ? Role.Manito === role
+                      ? 'BackgroundOrange'
+                      : styles.ManitoButton
+                    : 'BackgroundGray'
+                }
+                ${idx === checkedDay ? styles.ClickedItem : styles.UnclickedItem}
+                `}
+              >
+                <div
+                  className={`${styles.ItemText} ${role != Role.Manito && mission[idx].successTime != null ? 'FontOrange' : 'FontWhite'}`}
+                >
+                  <div>{it}</div>
+                  <div>{idx + 1}일</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </MissionSlider>
       </div>
+      <MissionImage {...{ day: checkedDay, mission: mission, nickname: nickname }} />
     </div>
   );
+
   return (
-    <div>
-      <div>
-        <p>
-          진행기간 <span>7</span>일 중
-        </p>
-        <p>
-          총 <span>3</span>개의 미션을 수행했어요!
-        </p>
-      </div>
+    <div className={`${styles.MissionCompleteContainer}`}>
+      {role === Role.Manito ? (
+        <div className={`FontMTitle FontBasic ${styles.TitleContainer}`}>
+          <p>
+            진행기간 <span className={`FontRed`}>{date} </span>일 중
+          </p>
+          <p>
+            총 <span className={`FontRed`}>{count} </span>개의 미션을 수행했어요!
+          </p>
+        </div>
+      ) : (
+        <div className={`FontMTitle FontBasic ${styles.TitleContainer}`}>
+          <p>
+            진행기간 <span className={`FontRed`}>{date} </span>일 중
+          </p>
+          <p>
+            총 <span className={`FontRed`}>{count} </span>개의 선물을 받았어요!
+          </p>
+        </div>
+      )}
       <Card {...{ tag: 1, children: children }} />
     </div>
   );

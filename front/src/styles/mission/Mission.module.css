@@ -29,9 +29,15 @@
 .Gap1Rem {
   gap: 1rem;
 }
+
 .Gap05Rem {
   gap: 0.5rem;
 }
+
+.ImageBoxContainer {
+  width: 18.9rem
+}
+
 .Title {
   padding-left: 0.75rem;
   margin-bottom: 1rem;

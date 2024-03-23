@@ -25,7 +25,7 @@ function MissionManitoPage(props: MissionManitoProps) {
     <div className={`${styles.FlexVertical} ${styles.AlignBaseLine} ${styles.Gap45Rem}`}>
       <div className={`${styles.FlexVertical}`}>
         <div className={`${styles.Title} ${styles.FlexHorizontal} ${styles.Gap1Rem}`}>
-          <div className={`FontL FontBasic `}>오늘의 미션</div>
+          <div className={`FontL`}>오늘의 미션</div>
           <div className={`${styles.FlexHorizontal} ${styles.Gap05Rem}`}>
             <div className={`FontXS FontBasic`}>{}/3</div>
             <div className={`${styles.IconSpin}`} onClick={newMission}>
@@ -40,10 +40,10 @@ function MissionManitoPage(props: MissionManitoProps) {
       </div>
       <div className={`${styles.FlexVertical} ${styles.AlignBaseLine} ${styles.Gap1Rem}`}>
         <div>
-          <div className={`FontL FontBasic ${styles.Title}`}>미션 업로드</div>
+          <div className={`FontL ${styles.Title}`}>미션 업로드</div>
           <div className={`FontS FontComment ${styles.MissionStatus}`}>미션을 수행한 사진을 업로드해주세요.</div>
         </div>
-        <div className={`${styles.FlexVertical} ${styles.AlignCenter} ${styles.Gap1Rem}`}>
+        <div className={`${styles.FlexVertical} ${styles.AlignCenter} ${styles.Gap1Rem} ${styles.ImageBoxContainer}`}>
           <div onClick={uploadHandler}>
             <div className={`${styles.imageBox}`}>
               <img src={plusCircle} alt="plusCircle" />

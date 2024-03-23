@@ -3,7 +3,6 @@ import { ResultListProps } from '@/types/result';
 import ResultListItem from './ResultListItem';
 
 function ResultList(resultListProps: ResultListProps) {
-  console.log(resultListProps);
   return (
     <div>
       {resultListProps.pairList.map((it) => (

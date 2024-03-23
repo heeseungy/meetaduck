@@ -32,12 +32,18 @@ export const loginState = atom<LoginProfile>({
 export const partyState = atom<Party>({
   key: 'partyState',
   default: {
-    partyId: -1,
-    accessCode: '',
-    startTime: '',
-    endTime: '',
+    partyId: 3,
+    accessCode: 'tlz5vy',
+    startTime: '2024-03-11T21:00:00.000Z',
+    endTime: '2024-03-21T21:00:00.000Z',
     deleted: false,
-    userId: -1,
+    userId: 152,
+    // partyId: -1,
+    // accessCode: '',
+    // startTime: '',
+    // endTime: '',
+    // deleted: false,
+    // userId: -1,
   },
   effects_UNSTABLE: [persistAtom],
 });

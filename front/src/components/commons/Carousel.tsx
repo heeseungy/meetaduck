@@ -26,7 +26,7 @@ function Carousel({ children, className }: CarouselProps) {
     cssEase: 'linear',
   };
   return (
-    <div className="slider-container">
+    <div className="carousel-container">
       <Slider {...settings}>{children}</Slider>
     </div>
   );

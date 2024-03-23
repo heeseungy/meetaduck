@@ -35,12 +35,13 @@ function ResultPage() {
       ),
     };
     const me: PairRank = pairList.pairList.find((it) => it.manito.guestId === login.guestId)!.manito;
-
-    const children1 = <ResultPairListPage {...{ me: me, pairList: pairList }} />;
-    const children2 = <PairResultPage {...{ tag: Role.Maniti, me: me, pairList: pairList }} />;
-    const children3 = <PairResultPage {...{ tag: Role.Manito, me: me, pairList: pairList }} />;
-
-    return <Slides {...{ children: [children1, children2, children3], className: 'Slides' }}></Slides>;
+    return (
+      <Slides {...{ className: 'Slides' }}>
+        <ResultPairListPage {...{ me: me, pairList: pairList }} />
+        <PairResultPage {...{ tag: Role.Maniti, me: me, pairList: pairList }} />
+        <PairResultPage {...{ tag: Role.Manito, me: me, pairList: pairList }} />
+      </Slides>
+    );
   } else if (StatusType[partyStatus] === StatusType.Before24) {
     // 24시간 전부터
     if (MY_PROFILE.votedId === 0) {
