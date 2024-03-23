@@ -1,6 +1,5 @@
 nav {
   overflow: hidden;
-  /* border-top: 2px solid grey; */
   box-shadow: -10px 0 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -13,6 +12,7 @@ nav > div {
   /* 세로길이 설정 */
   height: 70px;
   line-height: 85px;
+  -webkit-tap-highlight-color: transparent !important;
 }
 
 .wrapper {
@@ -20,10 +20,32 @@ nav > div {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 70px;
+  height: 4.125rem;
   background-color: white;
 }
 
-nav > a {
-  color: #4d4637;
+.UnderBar {
+  position: absolute;
+  bottom: 0rem;
+  z-index: 100;
+  height: 0.2rem;
+  background-color: #ffd656;
+  min-width: 32px;
+  width: 12.5%;
+}
+
+.BarMission {
+  left: 6.25%;
+}
+
+.BarChatting {
+  left: 31.25%;
+}
+
+.BarHint {
+  left: 56.25%;
+}
+
+.BarResult {
+  left: 81.25%;
 }
