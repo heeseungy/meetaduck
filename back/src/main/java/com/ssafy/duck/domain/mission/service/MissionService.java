@@ -3,6 +3,9 @@ package com.ssafy.duck.domain.mission.service;
 import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.repository.GuestRepository;
 import com.ssafy.duck.domain.guest.service.GuestService;
+import com.ssafy.duck.domain.mission.dto.request.MissionImageUpdateReq;
+import com.ssafy.duck.domain.mission.dto.request.MissionPassReq;
+import com.ssafy.duck.domain.mission.dto.response.MissionRes;
 import com.ssafy.duck.domain.mission.entity.Mission;
 import com.ssafy.duck.domain.mission.entity.MissionStatus;
 import com.ssafy.duck.domain.mission.exception.MissionErrorCode;
@@ -60,6 +63,7 @@ public class MissionService {
                         .getTime(now.plus(Duration.ofDays(day)))
                         .confirmTime(null)
                         .successTime(null)
+                        .failedTime(null)
                         .missionImageUrl(null)
                         .mission(mission)
                         .guest(guest)
@@ -68,6 +72,19 @@ public class MissionService {
             }
         }
     }
+
+
+//    public List<MissionRes> findTodayMissionsByGuestId(Long guestId){
+//
+//    }
+//
+//    public void updateConfirmTimeByMissionStatusId(MissionPassReq missionPassReq){
+//
+//    }
+//
+//    public void updateMissionImageUrlByMissionStatusId(MissionImageUpdateReq missionImageUpdateReq){
+//
+//    }
 
 
     //    //종료시간과 현재시간 비교해서 날짜개수만큼 랜덤으로 미션 가져오기

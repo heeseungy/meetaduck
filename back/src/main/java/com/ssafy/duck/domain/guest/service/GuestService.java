@@ -175,6 +175,19 @@ public class GuestService {
 
     //
 
+    public String findManitiNicknameByGuestId(Long guestId) {
+        Guest manito = guestRepository.findById(guestId)
+                .orElseThrow(() -> new GuestException(GuestErrorCode.GUEST_NOT_FOUND));
+        Long manitiGuestId = manito.getManitiId();
+        Guest maniti = guestRepository.findById(manitiGuestId)
+                .orElseThrow(() -> new GuestException(GuestErrorCode.MANITI_NOT_FOUND));
+        Long manitiUserId = maniti.getUser().getUserId();
+        String manitiNickname = userRepository.findByUserId(manitiUserId).getNickname();
+        return manitiNickname;
+    }
+
+    //
+
     public GuestRes toGuestResWithProfileAndResult(Guest guest) {
 
         User user = guest.getUser();

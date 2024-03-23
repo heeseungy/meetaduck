@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import Button from '@/components/commons/Button';
 import Card from '@/components/commons/Card';
@@ -12,10 +13,26 @@ import { partyStartService } from '@/services/partyStartService';
 import styles from '@/styles/party/PartyMaker.module.css';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
+// export const PARTY1: Party = {
+//   partyId: -1,
+//   accessCode: '',
+//   startTime: '',
+//   endTime: '',
+//   deleted: false,
+//   userId: -1,
+// };
+
 function PartyMakerPage() {
   const setParty = useSetRecoilState(partyState);
   const party = useRecoilValue(partyState);
   const login = useRecoilValue(loginState);
+
+  const location = useLocation();
+  const { accessCode, partyName } = location.state;
+
+  // 가져온 accessCode와 partyName
+  console.log('accessCode:', accessCode);
+  console.log('partyName:', partyName);
   const currentTime = useRecoilValue(currentTimeState);
   const setcurrentTime = useSetRecoilState(currentTimeState);
   const partyStatus = useRecoilValue(partyStatusState);
@@ -74,7 +91,7 @@ function PartyMakerPage() {
   return (
     <div className={styles.margin}>
       <header className={styles.spaceB}>
-        <span className={`FontL FontBasic`}>블랙펄 마니또</span>
+        <span className={`FontL FontBasic`}>{partyName} 마니또</span>
         <span>
           <ShareButton>참여 코드 공유</ShareButton>
         </span>
