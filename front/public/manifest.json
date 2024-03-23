@@ -65,7 +65,7 @@
     },
     {
       "src": "icons/RubberDuckBase.png",
-      "sizes": "600x512",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]
