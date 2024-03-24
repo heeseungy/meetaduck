@@ -10,6 +10,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ResultRes {
-    private Long resultId;
+public class ResultWithManitoRes {
+    private Integer manitoFavorability;
+    private String myWordcount;
+    private String mantoWordcount;
+    private Integer manitoRatio;
+    private int chatCount;
+
 }

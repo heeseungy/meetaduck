@@ -16,6 +16,7 @@ public class Result {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "`result_id`", insertable = false, nullable = false, updatable = false)
     private Long resultId;
 
     @Nullable
