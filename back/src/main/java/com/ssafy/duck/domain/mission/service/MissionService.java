@@ -19,20 +19,21 @@ import com.ssafy.duck.domain.party.exception.PartyErrorCode;
 import com.ssafy.duck.domain.party.exception.PartyException;
 import com.ssafy.duck.domain.party.repository.PartyRepository;
 import com.ssafy.duck.domain.party.service.PartyService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
+import java.time.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
+@Slf4j
 public class MissionService {
 
     private final PartyService partyService;
@@ -56,7 +57,7 @@ public class MissionService {
         List<Guest> guests = guestRepository.findByParty_PartyId(party.getPartyId());
         for (Guest guest : guests) {
             Instant now = Instant.now();
-            int day = 0, count = 0;
+            int day = -1, count = 0;
             for (Mission mission : subMissions) {
                 if (count++ % 3 == 0) day++;
                 MissionStatus missionStatus = MissionStatus.builder()
@@ -75,7 +76,33 @@ public class MissionService {
 
 
     public List<MissionRes> findTodayMissionsByGuestId(Long guestId){
+        List<MissionRes> missionResList = new ArrayList<>();
 
+        Instant today = Instant.now();
+        List<MissionStatus> missionStatusList = missionStatusRepository.findAllByGuestGuestIdAndGetTimeBefore(guestId, today);
+
+        int firstMission = missionStatusList.size()-3;
+        Instant checkConfirmTime = Instant.now();
+        if(missionStatusList.get(firstMission).getConfirmTime() != null){
+            checkConfirmTime = missionResList.get(firstMission).getConfirmTime();
+        }
+        missionResList.add(MissionRes.builder().
+                missionStatusId(missionStatusList.get(firstMission).getMissionStatusId()).
+                confirmTime(checkConfirmTime).
+                missionContent(missionRepository.findById(missionStatusList.get(firstMission).getMission().getMissionId()).get().getMissionContent()).
+                missionImageUrl(missionStatusList.get(firstMission).getMissionImageUrl()).
+                build());
+
+        for(int i = missionStatusList.size()-2; i < missionStatusList.size(); i++){
+            missionResList.add(MissionRes.builder().
+                    missionStatusId(missionStatusList.get(i).getMissionStatusId()).
+                    confirmTime(missionStatusList.get(i).getConfirmTime()).
+                    missionContent(missionRepository.findById(missionStatusList.get(i).getMission().getMissionId()).get().getMissionContent()).
+                    missionImageUrl(missionStatusList.get(i).getMissionImageUrl()).
+                    build());
+        }
+
+        return missionResList;
     }
 //
 //    public void updateConfirmTimeByMissionStatusId(MissionPassReq missionPassReq){
@@ -159,7 +186,7 @@ public class MissionService {
         System.out.println("calcMissionFailCount " + today);
 
         List<MissionStatus> missionStatusList = missionStatusRepository.findAllByGuestGuestIdAndGetTimeBefore(manitoId, today);
-        int failCount = missionStatusList.size() / 4; // 어제까지의 미션 개수
+        int failCount = missionStatusList.size() / 3; // 어제까지의 미션 개수
         for (MissionStatus ms : missionStatusList) {
             System.out.println(ms.getMissionStatusId() + " / " + ms.getGetTime() + " / " + ms.getSuccessTime());
             if (ms.getSuccessTime() != null)

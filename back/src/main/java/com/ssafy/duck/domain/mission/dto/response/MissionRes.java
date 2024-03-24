@@ -14,6 +14,6 @@ import java.time.Instant;
 public class MissionRes {
     private Long missionStatusId;
     private Instant confirmTime;
-    private Instant missionImageUrl;
+    private String missionImageUrl;
     private String missionContent;
 }
