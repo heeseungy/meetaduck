@@ -1,0 +1,13 @@
+db // 사용 중인 DB 조회 s10p22c108
+
+show dbs // DB 리스트 확인
+
+db.stats() // DB 상태 확인
+
+show collections // collection list 확인 (messages, test)
+
+db.messages.find()  // db.collection명.find(query, projection)
+
+db.messages.find({"chat_id": 1})
+
+db.messages.updateMany({}, { $unset: { "message_id": "" } })
