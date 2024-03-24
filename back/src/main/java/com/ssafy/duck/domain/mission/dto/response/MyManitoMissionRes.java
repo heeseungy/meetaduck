@@ -12,6 +12,8 @@ import java.time.Instant;
 public class MyManitoMissionRes {
     private Long missionStatusId;
     private Instant confirmTime;
+    private Instant successTime;
+    private Instant failedTime;
     private Instant MissionImageUrl;
     private String missionContent;
 }

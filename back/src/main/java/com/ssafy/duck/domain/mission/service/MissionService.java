@@ -5,7 +5,9 @@ import com.ssafy.duck.domain.guest.repository.GuestRepository;
 import com.ssafy.duck.domain.guest.service.GuestService;
 import com.ssafy.duck.domain.mission.dto.request.MissionImageUpdateReq;
 import com.ssafy.duck.domain.mission.dto.request.MissionPassReq;
+import com.ssafy.duck.domain.mission.dto.request.MissionSuccessReq;
 import com.ssafy.duck.domain.mission.dto.response.MissionRes;
+import com.ssafy.duck.domain.mission.dto.response.MyManitoMissionRes;
 import com.ssafy.duck.domain.mission.entity.Mission;
 import com.ssafy.duck.domain.mission.entity.MissionStatus;
 import com.ssafy.duck.domain.mission.exception.MissionErrorCode;
@@ -85,6 +87,11 @@ public class MissionService {
         Instant checkConfirmTime = Instant.now();
         if(missionStatusList.get(firstMission).getConfirmTime() != null){
             checkConfirmTime = missionResList.get(firstMission).getConfirmTime();
+        }else {
+            MissionPassReq missionPassReq = MissionPassReq.builder().
+                    missionStatusId(missionStatusList.get(firstMission).getMissionStatusId()).
+                    build();
+            updateConfirmTimeByMissionStatusId(missionPassReq);
         }
         missionResList.add(MissionRes.builder().
                 missionStatusId(missionStatusList.get(firstMission).getMissionStatusId()).
@@ -104,14 +111,79 @@ public class MissionService {
 
         return missionResList;
     }
-//
-//    public void updateConfirmTimeByMissionStatusId(MissionPassReq missionPassReq){
-//
-//    }
-//
-//    public void updateMissionImageUrlByMissionStatusId(MissionImageUpdateReq missionImageUpdateReq){
-//
-//    }
+
+    public void updateConfirmTimeByMissionStatusId(MissionPassReq missionPassReq){
+        Long missionStatusId = missionPassReq.getMissionStatusId();
+        MissionStatus beforemissionStatus = missionStatusRepository.findById(missionStatusId).orElse(null);
+        MissionStatus aftermissionStatus = MissionStatus.builder().
+                missionStatusId(beforemissionStatus.getMissionStatusId()).
+                getTime(beforemissionStatus.getGetTime()).
+                confirmTime(Instant.now()).
+                successTime(beforemissionStatus.getSuccessTime()).
+                failedTime(beforemissionStatus.getFailedTime()).
+                missionImageUrl(beforemissionStatus.getMissionImageUrl()).
+                mission(beforemissionStatus.getMission()).
+                guest(beforemissionStatus.getGuest()).
+                build();
+
+        missionStatusRepository.save(aftermissionStatus);
+
+    }
+
+    public void updateMissionImageUrlByMissionStatusId(MissionImageUpdateReq missionImageUpdateReq){
+        Long missionStatusId = missionImageUpdateReq.getMissionStatusId();
+        String missionImageUrl = missionImageUpdateReq.getMissionImageUrl();
+        MissionStatus beforemissionStatus = missionStatusRepository.findById(missionStatusId).orElse(null);
+        MissionStatus aftermissionStatus = MissionStatus.builder().
+                missionStatusId(beforemissionStatus.getMissionStatusId()).
+                getTime(beforemissionStatus.getGetTime()).
+                confirmTime(beforemissionStatus.getConfirmTime()).
+                successTime(beforemissionStatus.getSuccessTime()).
+                failedTime(beforemissionStatus.getFailedTime()).
+                missionImageUrl(missionImageUrl).
+                mission(beforemissionStatus.getMission()).
+                guest(beforemissionStatus.getGuest()).
+                build();
+
+        missionStatusRepository.save(aftermissionStatus);
+    }
+
+    public MyManitoMissionRes findMissionResultsByGuestId(Long guestId){
+        return MyManitoMissionRes.builder().build();
+    }
+
+    public void updateSuccessTime(MissionSuccessReq missionSuccessReq){
+        Long missionStatusId = missionSuccessReq.getMissionStatusId();
+        boolean missionSuccessResult = missionSuccessReq.getMissionSuccessResult();
+        MissionStatus beforemissionStatus = missionStatusRepository.findById(missionStatusId).orElse(null);
+        if(missionSuccessResult){
+            MissionStatus aftermissionStatus = MissionStatus.builder().
+                    missionStatusId(beforemissionStatus.getMissionStatusId()).
+                    getTime(beforemissionStatus.getGetTime()).
+                    confirmTime(beforemissionStatus.getConfirmTime()).
+                    successTime(Instant.now()).
+                    failedTime(null).
+                    missionImageUrl(beforemissionStatus.getMissionImageUrl()).
+                    mission(beforemissionStatus.getMission()).
+                    guest(beforemissionStatus.getGuest()).
+                    build();
+            missionStatusRepository.save(aftermissionStatus);
+        }else {
+            MissionStatus aftermissionStatus = MissionStatus.builder().
+                    missionStatusId(beforemissionStatus.getMissionStatusId()).
+                    getTime(beforemissionStatus.getGetTime()).
+                    confirmTime(beforemissionStatus.getConfirmTime()).
+                    successTime(null).
+                    failedTime(Instant.now()).
+                    missionImageUrl(beforemissionStatus.getMissionImageUrl()).
+                    mission(beforemissionStatus.getMission()).
+                    guest(beforemissionStatus.getGuest()).
+                    build();
+            missionStatusRepository.save(aftermissionStatus);
+        }
+
+    }
+
 
 
     //    //종료시간과 현재시간 비교해서 날짜개수만큼 랜덤으로 미션 가져오기
