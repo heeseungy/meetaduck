@@ -10,3 +10,10 @@
   display: flex;
   justify-content: center;
 }
+
+.errorMessage {
+  text-align: center;
+  color: red;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
