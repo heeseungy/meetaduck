@@ -35,7 +35,7 @@
 }
 
 .ImageBoxContainer {
-  width: 18.9rem
+  width: 18.9rem;
 }
 
 .Title {
@@ -43,9 +43,10 @@
   margin-bottom: 1rem;
 }
 
-.IconSpin {
-  animation: spin-animation 0.5s;
+.IconSpin1 {
+  animation: spin-animation 1s;
   display: inline-block;
+  animation-delay: 1ms;
 }
 
 @keyframes spin-animation {
@@ -105,4 +106,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.marginTop {
+  margin-top: 1rem;
 }

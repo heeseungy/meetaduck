@@ -1,3 +1,4 @@
+import { ChatId } from '@/types/chat';
 import { Party, PartyStatus, StatusType } from '@/types/party';
 import { LoginProfile } from '@/types/user.interface';
 import { atom, selector } from 'recoil';
@@ -35,7 +36,7 @@ export const partyState = atom<Party>({
     partyId: 3,
     accessCode: 'tlz5vy',
     startTime: '2024-03-11T21:00:00.000Z',
-    endTime: '2024-03-21T21:00:00.000Z',
+    endTime: '2024-03-25T21:00:00.000Z',
     deleted: false,
     userId: 152,
     // partyId: -1,
@@ -75,5 +76,17 @@ export const partyStatusState = selector({
         return 'Complete';
       }
     }
+  },
+});
+
+export const chatIdListState = atom<ChatId>({
+  key: 'chatIdListState',
+  default: {
+    groupChatId: 8,
+    manitoChatId: 1,
+    manitiChatId: 5,
+    // groupChatId: ,
+    // manitoChatId: ,
+    // manitiChatId: ,
   },
 });

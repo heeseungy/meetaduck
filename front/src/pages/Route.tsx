@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import ChatTestPage from '@/pages/chatting/ChattingDetailPage';
+import ChatDetailPage from '@/pages/chatting/ChattingDetailPage';
 import ChattingPage from '@/pages/chatting/ChattingPage';
 import HintPage from '@/pages/hint/HintPage';
 import HomePage from '@/pages/home/HomePage';
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
   { path: '/partymaker', element: <PartyMakerPage /> },
   { path: '/hintinputform', element: <HintInputFormPage /> },
   { path: '/testpage', element: <TestPage /> },
-  { path: '/chattestpage', element: <ChatTestPage /> },
+  { path: '/chatdetail/:chatId', element: <ChatDetailPage /> },
   { path: '/login/oauth2/code/kakao', element: <RedirectionPage /> },
 ]);
 

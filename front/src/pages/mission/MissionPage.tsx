@@ -25,8 +25,6 @@ function MissionPage() {
   }, []);
 
   const nickname: string = login.nickname;
-  const successTime: string | null = '2024-03-13T00:00:00Z';
-  // const successTime: string | null = null;
 
   if (StatusType[partyStatus] == StatusType.Complete) {
     const missionResultList: MissionResultList = MISSION_RESULT_LIST;
@@ -57,7 +55,7 @@ function MissionPage() {
     return (
       <Slides {...{ className: 'Slides' }}>
         <MissionManitoPage {...{ nickname: MANITI_PROFILE.nickname }} />
-        <MissionManitiPage {...{ nickname: nickname, successTime: successTime }} />
+        <MissionManitiPage {...{ nickname: nickname }} />
       </Slides>
     );
   }

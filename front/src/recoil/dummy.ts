@@ -1,6 +1,6 @@
 import { ChatId } from '@/types/chat';
 import { Answer, Hint } from '@/types/hint.ts';
-import { MissionContent, MissionResultList } from '@/types/mission';
+import { MissionContent, MissionResult, MissionResultList } from '@/types/mission';
 import { Party, PartyStatus, StatusType } from '@/types/party';
 import { ResultListItemProps } from '@/types/result';
 import { ManitoResultAnalysis, ResultAnalysis } from '@/types/result';
@@ -368,10 +368,37 @@ export const PAIR_LIST: ResultListItemProps[] = [
 ];
 
 // 미션 조회
-export const MISSION_STATUS_LIST: MissionContent = {
+export const MISSION_STATUS_LIST: MissionContent[] = [
+  {
+    missionStatusId: 578,
+    confirmTime: '2024-03-13T00:00:00Z',
+    missionImageUrl: '',
+    missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
+  },
+  {
+    missionStatusId: 578,
+    confirmTime: '2024-03-13T05:00:00Z',
+    missionImageUrl: null,
+    missionContent: '노래를 선물하세요',
+  },
+  {
+    missionStatusId: 578,
+    confirmTime: null,
+    missionImageUrl: '',
+    missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
+  },
+];
+
+//미션: 마니또가 수행한 미션조회
+export const MY_MANITO_MISSION: MissionResult = {
+  guestId: 5,
   missionStatusId: 578,
+  getTime: '2024-03-13T00:00:00Z',
   confirmTime: null,
+  successTime: null,
+  // successTime: '2024-03-14T12:50:20Z',
   missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
+  missionImageUrl: '',
 };
 
 // 미션 조회 (결과)
