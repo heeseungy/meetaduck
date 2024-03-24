@@ -5,10 +5,12 @@ import com.ssafy.duck.domain.chat.dto.response.ChatRes;
 import com.ssafy.duck.domain.chat.dto.response.MessageRes;
 import com.ssafy.duck.domain.chat.entity.Chat;
 import com.ssafy.duck.domain.chat.entity.Message;
+import com.ssafy.duck.domain.chat.entity.Topic;
 import com.ssafy.duck.domain.chat.exception.ChatErrorCode;
 import com.ssafy.duck.domain.chat.exception.ChatException;
 import com.ssafy.duck.domain.chat.repository.ChatRepository;
 import com.ssafy.duck.domain.chat.repository.MessageRepository;
+import com.ssafy.duck.domain.chat.repository.TopicRepository;
 import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.exception.GuestErrorCode;
 import com.ssafy.duck.domain.guest.exception.GuestException;
@@ -19,10 +21,12 @@ import com.ssafy.duck.domain.party.exception.PartyException;
 import com.ssafy.duck.domain.party.repository.PartyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +41,26 @@ public class ChatService {
     private final GuestRepository guestRepository;
     private final ChatRepository chatRepository;
     private final MessageRepository messageRepository;
+    private final TopicRepository topicRepository;
+
+    @Scheduled(cron = "0 0 9 * * *", zone = "Asia/Seoul")
+    public void sendTopic() {
+        int dayOfMonth = LocalDate.now().getDayOfMonth();
+        Topic topic = topicRepository.findByTopicId(Long.valueOf(dayOfMonth))
+                .orElseThrow(() -> new ChatException(ChatErrorCode.NOT_FOUND_TOPIC));
+
+        List<Chat> chats = chatRepository.findAll();
+        for (Chat chat : chats) {
+            MessageReq messageReq = MessageReq.builder()
+                    .messageType(false)
+                    .content(topic.getTopicConent())
+                    .senderId(1)
+                    .chatId(chat.getChatId().intValue())
+                    .build();
+            MessageRes messageRes = createMessage(chat.getChatId().intValue(), messageReq);
+            notifyNewMessage(chat.getChatId().intValue(), messageRes);
+        }
+    }
 
     public Chat createChat(String accessCode) {
         Chat chat = Chat.builder()

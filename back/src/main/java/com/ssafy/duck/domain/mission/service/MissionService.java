@@ -153,19 +153,16 @@ public class MissionService {
     // hint에서 사용 : 마니또의 미션 수행 실패 개수 반환
     // 실패 개수 = 어제까지 미션 status 조회 후 전체 개수/3 - 성공 개수
     public int calcMissionFailCount(Long manitoId) {
-        // 한국 시간으로 현재 날짜 00시
-        Instant today = Instant.now().atZone(ZoneId.of("+9")).toLocalDate().atStartOfDay().toInstant(ZoneOffset.UTC);
-//        today = today.plus(Duration.ofDays(3)); // 테스트를 위해 오늘 날짜 변경
-        System.out.println("calcMissionFailCount " + today);
+        Instant today = Instant.now();
+//        today = today.plus(Duration.ofDays(1)); // 테스트를 위해 오늘 날짜 변경
+//        System.out.println("calcMissionFailCount " + today);
 
         List<MissionStatus> missionStatusList = missionStatusRepository.findAllByGuestGuestIdAndGetTimeBefore(manitoId, today);
-        int failCount = missionStatusList.size() / 4; // 어제까지의 미션 개수
+        int failCount = missionStatusList.size() / 3; // 어제까지의 미션 개수
         for (MissionStatus ms : missionStatusList) {
-            System.out.println(ms.getMissionStatusId() + " / " + ms.getGetTime() + " / " + ms.getSuccessTime());
             if (ms.getSuccessTime() != null)
                 failCount--;
         }
-        System.out.println("failCount " + failCount);
         return failCount;
     }
 //

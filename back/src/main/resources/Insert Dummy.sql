@@ -3,16 +3,13 @@ SET foreign_key_checks = 0;
 
 -- users
 INSERT INTO users (kakao_id, nickname, profile_url, thumbnail_url, birthday, phonenumber)
-VALUES (10001, '강지수', 'http://example.com/profiles/kang', 'http://example.com/thumbnails/kang', '0101',
-        '010-1234-5678'),
-       (10002, '김현영', 'http://example.com/profiles/kim', 'http://example.com/thumbnails/kim', '0202', '010-2345-6789'),
-       (10003, '안준선', 'http://example.com/profiles/ahn', 'http://example.com/thumbnails/ahn', '0303', '010-3456-7890'),
-       (10004, '양희승', 'http://example.com/profiles/yang', 'http://example.com/thumbnails/yang', '0404',
-        '010-4567-8901'),
-       (10005, '전원빈', 'http://example.com/profiles/jeon', 'http://example.com/thumbnails/jeon', '0505',
-        '010-5678-9012'),
-       (10006, '최지웅', 'http://example.com/profiles/choi', 'http://example.com/thumbnails/choi', '0606',
-        '010-6789-0123');
+VALUES  (00000, '관리자', 'http://example.com/prifiles/admin', 'http://example.com/thumbnails/admin', '0000', '000-0000-0000'),
+        (10001, '강지수', 'http://example.com/profiles/kang', 'http://example.com/thumbnails/kang', '0101', '010-1234-5678'),
+        (10002, '김현영', 'http://example.com/profiles/kim', 'http://example.com/thumbnails/kim', '0202', '010-2345-6789'),
+        (10003, '안준선', 'http://example.com/profiles/ahn', 'http://example.com/thumbnails/ahn', '0303', '010-3456-7890'),
+        (10004, '양희승', 'http://example.com/profiles/yang', 'http://example.com/thumbnails/yang', '0404', '010-4567-8901'),
+        (10005, '전원빈', 'http://example.com/profiles/jeon', 'http://example.com/thumbnails/jeon', '0505', '010-5678-9012'),
+        (10006, '최지웅', 'http://example.com/profiles/choi', 'http://example.com/thumbnails/choi', '0606', '010-6789-0123');
 
 
 -- parties
@@ -80,22 +77,34 @@ VALUES ("한 달 동안 인터넷 없이 생활하기 VS 한 달 동안 친구�
        ("영원히 여름 날씨 VS 영원히 겨울 날씨"),
        ("매일 같은 옷만 입기 VS 매일 같은 음식만 먹기"),
        ("우주 여행 한 번 가기 VS 지구상에서 원하는 곳 어디든 평생 무료로 여행하기"),
-       ("모든 언어를 유창하게 할 수 있게 되기 VS 모든 악기를 마스터할 수 있게 되기"),
        ("미래를 볼 수 있는 능력 VS 과거로 돌아갈 수 있는 능력"),
-       ("하루에 24시간을 모두 깨어있기 VS 하루에 2시간만 자고 항상 상쾌하게 일어나기"),
-       ("모든 책을 읽을 수 있는 능력 VS 모든 음악을 들을 수 있는 능력"),
        ("평생 동안 슈퍼히어로 영화만 보기 VS 평생 동안 로맨틱 코미디 영화만 보기"),
        ("시간을 멈출 수 있는 능력 VS 마음을 읽을 수 있는 능력"),
        ("평생 동안 취미를 즐기며 살기 VS 꿈의 직업을 가지고 일하며 살기"),
-       ("고립된 섬에서 혼자 살기 VS 붐비는 도시에서 항상 사람들과 함께 살기"),
        ("모든 게임에서 이기는 능력 VS 모든 시험에서 만점 받는 능력"),
        ("매일 웃긴 일만 일어나는 삶 VS 매일 신나는 모험이 있는 삶"),
        ("소설 속 세계로 들어갈 수 있는 능력 VS 영화 속 세계로 들어갈 수 있는 능력"),
-       ("모든 음식이 맛있게 느껴지는 능력 VS 필요할 때마다 음식을 마법처럼 만들어내는 능력"),
        ("영원히 젊게 살기 VS 원하는 것을 얻을 수 있는 무한한 지혜 가지기"),
        ("과거의 중대한 실수 하나를 바로잡을 수 있는 기회 VS 미래의 중대한 성공을 보장받는 기회"),
-       ("세상의 모든 지식을 알기 VS 세상의 모든 재능을 가지기"),
-       ("평생 동안 원하는 책을 무제한으로 얻을 수 있기 VS 평생 동안 원하는 음악을 무제한으로 들을 수 있기");
+       ("바다 속을 마음대로 탐험할 수 있는 능력 VS 하늘을 자유롭게 날 수 있는 능력"),
+       ("책 속에 등장하는 모든 지혜를 내 것으로 만들기 VS 영화 속에 등장하는 모든 기술을 내 것으로 만들기"),
+       ("항상 사람들을 웃게 만드는 유머 감각 가지기 VS 언제나 새로운 아이디어로 감탄을 자아내는 창의력 가지기"),
+       ("한 달 동안 맨발로 다니기 VS 한 달 동안 장갑을 끼고 생활하기"),
+       ("한식만 평생 먹기 VS 양식만 평생 먹기"),
+       ("유명한 가수로 데뷔하기 VS 유명한 배우로 데뷔하기"),
+       ("역사적 사건의 진실을 알 수 있는 능력 VS 미래의 사건을 미리 알 수 있는 능력"),
+       ("어릴 적 기억만 생생하게 기억나기 VS 최근 일 년의 기억만 생생하게 기억나기"),
+       ("세상에서 가장 빠르게 달릴 수 있는 능력 VS 세상에서 가장 높이 뛸 수 있는 능력"),
+       ("모든 사람을 친구로 만들 수 있는 카리스마 VS 어떤 문제도 해결할 수 있는 지혜"),
+       ("한 번의 손뼉으로 청소가 끝나는 능력 VS 한 번의 손짓으로 요리가 완성되는 능력"),
+       ("어떤 악기든 마스터할 수 있는 능력 VS 어떤 게임이든 고수가 될 수 있는 능력"),
+       ("매일 다른 시간대에서 깨어나기 VS 매일 다른 연대에서 깨어나기"),
+       ("매일 새로운 헤어스타일로 깨어나기 VS 매일 새로운 옷차림으로 깨어나기"),
+       ("마음대로 색상을 바꿀 수 있는 능력 VS 마음대로 물체의 모양을 바꿀 수 있는 능력"),
+       ("초능력을 얻는 대신 매일 랜덤한 부작용을 겪기 VS 평범한 삶을 사는 대신 매일 행운을 얻기"),
+       ("매일 새로운 악기 연주법을 배우기 VS 매일 새로운 언어를 배우기"),
+       ("헤어질 수 없는 진정한 사랑을 찾기 VS 세계에서 가장 영향력 있는 인물이 되기");
+
 
 
 -- missions
