@@ -61,7 +61,7 @@ public class HintService {
 
         return hintResList;
     }
-    
+
     public List<Hint> fetch() {
         return hintRepository.findAll();
     }
