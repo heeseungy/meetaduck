@@ -65,7 +65,7 @@ public class PartyController {
             chatService.setManiti(partyRes.getPartyId());
             chatService.createChat(partyRes.getAccessCode());
             missionService.set(missionService.fetch(), startReq);
-            hintService.set(hintService.fetch(Instant.parse(startReq.getEndTime())), partyRes.getPartyId());
+            hintService.set(hintService.fetch(), partyRes.getPartyId());
 
             return ResponseEntity.ok().build();
         }
