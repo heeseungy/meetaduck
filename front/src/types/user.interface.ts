@@ -14,6 +14,7 @@ export interface Profile extends SimpleProfile {
 export interface LoginProfile extends Profile {
   kakaoId: number;
   partyId: number;
+  userId: number;
 }
 
 // 마니또 페어
@@ -21,6 +22,11 @@ export interface PairRank extends Profile {
   manitiId: number;
   votedId: number;
   manitoFavorability: number;
+}
+
+// 마니띠 조회용 프로필
+export interface ManitiProfile {
+  nickname: string;
 }
 
 // 목록조회용 프로필

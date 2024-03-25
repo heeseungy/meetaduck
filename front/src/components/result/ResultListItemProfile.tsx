@@ -7,7 +7,7 @@ function ResultListItemProfile(resultListItemProfileProps: ResultListItemProfile
   return (
     <div className={styles.Container}>
       <img className={styles.Avatar} src={resultListItemProfileProps.thumbnailUrl} alt="pthumbnail" />
-      <div className="FontXSBold">{resultListItemProfileProps.nickname}</div>
+      <div className="FontXSBold FontBasic">{resultListItemProfileProps.nickname}</div>
     </div>
   );
 }

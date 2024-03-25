@@ -21,7 +21,8 @@ function VoteBefore24Page() {
     if (selectedValue === 0) {
       window.alert('투표를 해주세요');
     } else {
-      navigate('/voteFinish');
+      // navigate('/voteFinish');
+      // 조회 한번 하고 다시 렌더링 or 한번은 그냥 voteFinish로 가기
     }
   };
 
