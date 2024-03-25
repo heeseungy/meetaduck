@@ -34,22 +34,22 @@ spark = SparkSession.builder \
 
 # 데이터베이스 연결 설정
 def get_db_connection():
-    return pymysql.connect(
-        host="stg-yswa-kr-practice-db-master.mariadb.database.azure.com",
-        port=3306,
-        user="S10P21C108@stg-yswa-kr-practice-db-master.mariadb.database.azure.com",
-        password="XGzFAZq8e7",
-        db="s10p21c108",
-        cursorclass=pymysql.cursors.DictCursor
-    ) 
     # return pymysql.connect(
     #     host="stg-yswa-kr-practice-db-master.mariadb.database.azure.com",
     #     port=3306,
-    #     user="S10P22C108@stg-yswa-kr-practice-db-master.mariadb.database.azure.com",
-    #     password="iF6wrgXGd6",
-    #     db="s10p22c108",
+    #     user="S10P21C108@stg-yswa-kr-practice-db-master.mariadb.database.azure.com",
+    #     password="XGzFAZq8e7",
+    #     db="s10p21c108",
     #     cursorclass=pymysql.cursors.DictCursor
     # ) 
+    return pymysql.connect(
+        host="stg-yswa-kr-practice-db-master.mariadb.database.azure.com",
+        port=3306,
+        user="S10P22C108@stg-yswa-kr-practice-db-master.mariadb.database.azure.com",
+        password="iF6wrgXGd6",
+        db="s10p22c108",
+        cursorclass=pymysql.cursors.DictCursor
+    ) 
 
 def get_guest_info(guest_id : int, isMe : bool) :
     connection = get_db_connection()
@@ -61,7 +61,6 @@ def get_guest_info(guest_id : int, isMe : bool) :
                 sql = "select * from guests where maniti_id = %s "
             cursor.execute(sql, (int(guest_id)))
             info = cursor.fetchall() # 조회 결과 가져오기 
-            # print("guest info : ", info)
     finally:
         if connection:
             connection.close()
@@ -179,19 +178,18 @@ async def word_count_spark(guest_id: int):
     # 내가 마니또일 때 저장 
     try:
         my_info = get_guest_info(guest_id, True)    # 내 정보 가져오기
-        print("my info ", my_info)
     except Exception as e:
         print("Error occurred while getting guest info:", e)
         raise HTTPException(status_code=404, detail="참가자의 정보가 없습니다.")
   
-    # me_manito_favorability = get_favorability(guest_id, my_info["chat_id"])
-    me_manito_favorability = test.calc_favorability(get_message(guest_id, my_info["chat_id"]))
-    print("me_ manito_favorability", me_manito_favorability)
+    model_result = test.calc_favorability(get_message(guest_id, my_info["chat_id"]))
+
+    me_manito_favorability = model_result[0]
     if pd.isna(me_manito_favorability):
         me_manito_favorability = 0
     
     # 긍정어 사용비율
-    me_manito_ratio = test.calc_ratio(get_message(guest_id, my_info["chat_id"]))
+    me_manito_ratio = model_result[1]
 
     me_manito_wordcount = word_count(guest_id,my_info["chat_id"] )
     update_result_wordcount(me_manito_wordcount, me_manito_favorability, me_manito_ratio, guest_id, True)
@@ -200,19 +198,19 @@ async def word_count_spark(guest_id: int):
     # 내가 마니띠일 때 저장 
     try:
         manito_info = get_guest_info(guest_id, False)    # 마니또 정보 가져오기
-        print("\n manito_info ", manito_info)
     except Exception as e:
         print("Error occurred while getting manito info:", e)
         raise HTTPException(status_code=404, detail="참가자의 마니또 정보가 없습니다.")
    
-    # me_maniti_favorability = get_favorability(guest_id, manito_info["chat_id"])
-    me_maniti_favorability = test.calc_favorability(get_message(guest_id, manito_info["chat_id"]))
-    print("me_maniti_favorability ", me_maniti_favorability)
+    model_result = test.calc_favorability(get_message(guest_id, manito_info["chat_id"]))
+
+
+    me_maniti_favorability = model_result[0]
     if pd.isna(me_maniti_favorability):
         me_maniti_favorability = 0
 
     # 긍정어 사용비율
-    me_maniti_ratio = test.calc_ratio(get_message(guest_id, manito_info["chat_id"]))
+    me_maniti_ratio = model_result[1]
 
     me_maniti_wordcount = word_count(guest_id,manito_info["chat_id"] )
     update_result_wordcount(me_maniti_wordcount, me_maniti_favorability, me_maniti_ratio, guest_id, False)

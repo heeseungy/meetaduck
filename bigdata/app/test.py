@@ -17,15 +17,23 @@ sentiment_classifier = pipeline('sentiment-analysis', tokenizer=tokenizer, model
 STANDARD_POINT = 50
 STANDARD_PERIOD =120
 
+# 긍정어 비율 계산
+positive = 0 
+neutral = 0
+
 #점수 계산 함수
 def predict_sentiment(content, point):
+    global positive, neutral
     pred = sentiment_classifier(content)
     label = pred[0]["label"]
     # 긍정이면 +1, 부정이면 -1
     if label == 'LABEL_1':
-        point -= 1
+        point -= 1 
     elif label == 'LABEL_2':
         point += 1
+        positive +=1
+    else :
+        neutral += 1
 
     return point
 
@@ -63,23 +71,10 @@ class TimeAndPoint:
 ####나중에 index 2차원배열 만들어서 관리####
 
 
-# 긍정어 사용 비율 계산
-def calc_ratio(chat_list):
-    if chat_list == 0 :
-        return -1
-    
-    total_count = len(chat_list)
-    labels = np.array([sentiment_classifier(chat_message['content'])[0]['label'] for chat_message in chat_list])
-    positive = np.sum(labels == 'LABEL_2')
-    ratio = positive /total_count  *100 
-    print("total_count ", total_count, " positive ", positive , " ratio ", ratio)
-    return ratio
-           
-
 def calc_favorability(chat_list): 
-    print("\n Chat list ", chat_list)
     if chat_list == 0 :
-        return 0
+        return [0, -1]
+    
   
     #시작포인트, 시간 초기화
     point = STANDARD_POINT
@@ -89,6 +84,11 @@ def calc_favorability(chat_list):
     #객체를 삽입할 배열
     time_block=[[TimeAndPoint(time, point)]]
 
+    # 긍정어, 중립 개수 초기화
+    global positive, neutral
+    positive = 0
+    neutral = 0
+ 
     for chat_message in chat_list: 
         # 시간 범위
         compare_time = make_dt(chat_message['created_time'])
@@ -107,6 +107,9 @@ def calc_favorability(chat_list):
         else:
             point = predict_sentiment(chat_message['content'], point)
             time_block[len(time_block)-1].append(TimeAndPoint(compare_time, point))
+
+    total_count = len(chat_list) - neutral
+    ratio = positive/total_count *100 
 
     if len(time_block[len(time_block)-1]) == 1:
         time_block.pop()
@@ -176,4 +179,4 @@ def calc_favorability(chat_list):
 
     score = scoreStock(p,h,l,v)
     score_fng = FearGreed(score).compute_stock(duration=(dur-2)) 
-    return score_fng[0][0]
+    return [score_fng[0][0], ratio]
