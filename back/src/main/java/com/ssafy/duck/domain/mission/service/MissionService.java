@@ -89,7 +89,7 @@ public class MissionService {
         int firstMission = missionStatusList.size()-3;
         Instant checkConfirmTime = Instant.now();
         if(missionStatusList.get(firstMission).getConfirmTime() != null){
-            checkConfirmTime = missionResList.get(firstMission).getConfirmTime();
+            checkConfirmTime = missionStatusList.get(firstMission).getConfirmTime();
         }else {
             MissionPassReq missionPassReq = MissionPassReq.builder().
                     missionStatusId(missionStatusList.get(firstMission).getMissionStatusId())
