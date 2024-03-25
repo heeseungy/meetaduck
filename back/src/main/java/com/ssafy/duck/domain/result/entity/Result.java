@@ -12,6 +12,7 @@ import javax.annotation.Nullable;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @Getter
+@ToString
 public class Result {
 
     @Id
@@ -34,6 +35,7 @@ public class Result {
     @Nullable
     @Column(name = "`maniti_wordcount`")
     private String mantiWordcount;
+
 
     @Nullable
     @Column(name = "`manito_ratio`")

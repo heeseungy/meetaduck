@@ -1,6 +1,7 @@
 package com.ssafy.duck.domain.result.service;
 
 import com.ssafy.duck.domain.chat.repository.ChatRepository;
+import com.ssafy.duck.domain.chat.repository.MessageRepository;
 import com.ssafy.duck.domain.guest.dto.response.GuestRes;
 import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.repository.GuestRepository;
@@ -27,6 +28,7 @@ public class ResultService {
 
     private final ResultRepository resultRepository;
     private final ChatRepository chatRepository;
+    private final MessageRepository messageRepository;
     private final GuestService guestService;
     private final GuestRepository guestRepository;
 
@@ -37,14 +39,16 @@ public class ResultService {
         Result myResult = resultRepository.findByGuestGuestId(guestId);
         if (myResult == null)
             throw new ResultException(ResultErrorCode.MY_RESULT_NOT_FOUND);
+        System.out.println("my result : " + myResult.toString());
 
         // 마니띠의 결과 조회
         Result manitiResult = resultRepository.findByGuestGuestId(myInfo.getManatiId());
         if (manitiResult == null)
             throw new ResultException(ResultErrorCode.MANITI_RESULT_NOT_FOUND);
+        System.out.println("maniti result : " + manitiResult.toString());
 
         // 대화 빈도 계산
-        Long chatCount = chatRepository.countByChatId(myInfo.getChatId());
+        Long chatCount = messageRepository.countByChatId(myInfo.getChatId().intValue());
 
         //response 넣기
         ResultWithManitiRes resultRes = ResultWithManitiRes.builder()
@@ -58,6 +62,7 @@ public class ResultService {
 
         return resultRes;
     }
+
 
     public ResultWithManitoRes findMeManitoResult(Long guestId) {
         GuestRes myInfo = guestService.findByGuestId(guestId);    // 내 정보
