@@ -1,4 +1,4 @@
-package com.ssafy.duck.common.jwt;
+package com.ssafy.duck.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
