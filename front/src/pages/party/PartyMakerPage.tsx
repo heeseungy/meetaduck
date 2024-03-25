@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 
 import Button from '@/components/commons/Button';
 import Card from '@/components/commons/Card';
-import ProfileName from '@/components/commons/ProfileName';
 import DatePickerInput from '@/components/party/DatePickerInput';
 import ShareButton from '@/components/party/ShareButton';
 import { loginState, partyState } from '@/recoil/atom';
@@ -94,8 +93,8 @@ function PartyMakerPage() {
       </div>
       {participants.map((participant, index) => (
         <div key={index} className={styles.participant}>
-          <img src={participant.thumbnailUrl} alt="Profile" className={styles.profileImage} />
-          <ProfileName name={participant.nickname} />
+          <img src={participant.thumbnailUrl} alt="ProfileImg" className={styles.profileImage} />
+          <span className={styles.nickname}>{participant.nickname}</span>
         </div>
       ))}
     </div>
