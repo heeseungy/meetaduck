@@ -1,5 +1,6 @@
 package com.ssafy.duck.domain.mission.service;
 
+import com.ssafy.duck.common.TimeUtil;
 import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.exception.GuestErrorCode;
 import com.ssafy.duck.domain.guest.exception.GuestException;
@@ -83,11 +84,11 @@ public class MissionService {
     public List<MissionRes> findTodayMissionsByGuestId(Long guestId){
         List<MissionRes> missionResList = new ArrayList<>();
 
-        Instant today = Instant.now();
+        Instant today = TimeUtil.convertToKST(Instant.now());
         List<MissionStatus> missionStatusList = missionStatusRepository.findAllByGuestGuestIdAndGetTimeBefore(guestId, today);
 
         int firstMission = missionStatusList.size()-3;
-        Instant checkConfirmTime = Instant.now();
+        Instant checkConfirmTime = TimeUtil.convertToKST(Instant.now());
         if(missionStatusList.get(firstMission).getConfirmTime() != null){
             checkConfirmTime = missionStatusList.get(firstMission).getConfirmTime();
         }else {
@@ -122,7 +123,7 @@ public class MissionService {
         MissionStatus aftermissionStatus = MissionStatus.builder()
                 .missionStatusId(beforemissionStatus.getMissionStatusId())
                 .getTime(beforemissionStatus.getGetTime())
-                .confirmTime(Instant.now())
+                .confirmTime(TimeUtil.convertToKST(Instant.now()))
                 .successTime(beforemissionStatus.getSuccessTime())
                 .failedTime(beforemissionStatus.getFailedTime())
                 .missionImageUrl(beforemissionStatus.getMissionImageUrl())
@@ -156,7 +157,7 @@ public class MissionService {
     public MyManitoMissionRes findMissionResultsByGuestId(Long guestId){
         Guest guest = guestRepository.findByManitiId(guestId)
                 .orElseThrow(() -> new GuestException(GuestErrorCode.MANITO_NOT_FOUND));
-        Instant today = Instant.now();
+        Instant today = TimeUtil.convertToKST(Instant.now());
         List<MissionStatus> missionStatusList = missionStatusRepository.findAllByGuestGuestIdAndGetTimeBefore(guest.getGuestId(), today);
         MyManitoMissionRes myManitoMissionRes = null;
         for(int i = missionStatusList.size()-3; i < missionStatusList.size(); i++){
@@ -186,7 +187,7 @@ public class MissionService {
                     .missionStatusId(beforemissionStatus.getMissionStatusId())
                     .getTime(beforemissionStatus.getGetTime())
                     .confirmTime(beforemissionStatus.getConfirmTime())
-                    .successTime(Instant.now())
+                    .successTime(TimeUtil.convertToKST(Instant.now()))
                     .failedTime(null)
                     .missionImageUrl(beforemissionStatus.getMissionImageUrl())
                     .mission(beforemissionStatus.getMission())
@@ -199,7 +200,7 @@ public class MissionService {
                     .getTime(beforemissionStatus.getGetTime())
                     .confirmTime(beforemissionStatus.getConfirmTime())
                     .successTime(null)
-                    .failedTime(Instant.now())
+                    .failedTime(TimeUtil.convertToKST(Instant.now()))
                     .missionImageUrl(beforemissionStatus.getMissionImageUrl())
                     .mission(beforemissionStatus.getMission())
                     .guest(beforemissionStatus.getGuest())
