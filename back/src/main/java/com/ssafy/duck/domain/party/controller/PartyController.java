@@ -1,6 +1,7 @@
 package com.ssafy.duck.domain.party.controller;
 
 import com.ssafy.duck.domain.chat.service.ChatService;
+import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.service.GuestService;
 import com.ssafy.duck.domain.hint.service.HintService;
 import com.ssafy.duck.domain.mission.service.MissionService;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/parties")
@@ -32,6 +34,8 @@ public class PartyController {
     public ResponseEntity<PartyRes> create(
         @RequestBody CreateReq createReq) {
 
+        guestService.isValidCreateReq(createReq.getUserId());
+
         String accessCode = partyService.create(createReq.getPartyName(), createReq.getUserId());
         guestService.createGuest(accessCode, createReq.getUserId());
         PartyRes partyRes = partyService.find(accessCode);
@@ -45,12 +49,8 @@ public class PartyController {
             @PathVariable String accessCode,
             @PathVariable Long userId) {
         PartyRes partyRes = partyService.find(accessCode);
-        // TODO: 파티가 있는데 isDeleted=true인 경우에는 if문 진입하도록 하는 엣지케이스 추가
-        // TODO: 시작한 파티를 조회(가입)하려고 하는 경우
-        // TODO: 없는 UserId인 경우
-        if (!guestService.isGuest(userId)) {
-            guestService.createGuest(accessCode, userId);   // 아직 파티가 없는 경우
-        }
+        guestService.isValidJoinReq(partyRes, userId);
+        guestService.createGuest(accessCode, userId);
 
         return ResponseEntity.ok().body(partyRes);
     }
@@ -79,9 +79,7 @@ public class PartyController {
     public ResponseEntity<Void> delete(
             @RequestBody DeleteReq deleteReq) {
         PartyRes partyRes = partyService.find(deleteReq.getAccessCode());
-        if (!deleteReq.getUserId().equals(partyRes.getUserId())) {
-            return ResponseEntity.badRequest().build();
-        }
+        guestService.isValidDeleteReq(partyRes, deleteReq);
         partyService.delete(deleteReq.getAccessCode());
 
         return ResponseEntity.noContent().build();

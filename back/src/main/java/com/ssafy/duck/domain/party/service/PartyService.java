@@ -29,13 +29,6 @@ public class PartyService {
     private final UserRepository userRepository;
 
     public String create(String partyName, Long userId) {
-        if (guestService.isGuest(userId)) {
-            // TODO: userId로 List<Guest> 가져옴
-            //      partyId로 party를 조회
-            //      deleted=true면 continue / false면 예외처리 추가
-            throw new PartyException(PartyErrorCode.MAXIMUM_OF_1_PARTY_ALLOWED);
-        }
-
         String chracters = "abcdefghijklmnopqrstuvwxyz0123456789";
         String accessCode = ThreadLocalRandom.current()
                 .ints(6, 0, chracters.length())

@@ -1,5 +1,6 @@
 package com.ssafy.duck.domain.party.dto.response;
 
+import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.party.dto.request.StartReq;
 import com.ssafy.duck.domain.party.exception.PartyErrorCode;
 import com.ssafy.duck.domain.party.exception.PartyException;
@@ -12,6 +13,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor

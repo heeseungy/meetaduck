@@ -25,4 +25,8 @@ public interface GuestRepository extends JpaRepository<Guest, Long> {
     Optional<Guest> findByUser_UserId(Long userId);
 
     Optional<Guest> findByManitiId(Long manitiId);
+
+    @Query("SELECT guest FROM Guest guest " +
+            "WHERE guest.user.userId = :userId")
+    List<Guest> findAllByUserId(Long userId);
 }
