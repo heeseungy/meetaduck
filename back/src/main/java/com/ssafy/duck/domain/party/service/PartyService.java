@@ -107,6 +107,7 @@ public class PartyService {
         if (partyRes.getDeleted()) {
             throw new PartyException(PartyErrorCode.NOT_FOUND_PARTY);
         }
+        // TODO: 파티가 진행 중인 경우
     }
 
     public PartyRes toPartyRes(Party party) {
