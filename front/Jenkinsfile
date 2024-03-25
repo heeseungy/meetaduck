@@ -14,6 +14,16 @@ pipeline {
             }
         }
 
+        stage('.env download') {
+        	steps {
+            	withCredentials([file(credentialsId: 'env', variable: 'env')]) {
+                	script {
+                    	sh 'cp -f ${env} ./front/.env'
+                    }
+        		}
+        	}
+        }
+
         stage('Build Image') {
             steps {
                 script {
@@ -37,7 +47,7 @@ pipeline {
             steps {
                 script {
                     sh 'docker rm -f frontend' // Remove container if exists
-                    sh "docker run -d -p 3000:3000 --name frontend frontend"
+                    sh "docker run -d --restart=always -p 3000:3000 --name frontend frontend"
                 }
             }
         }

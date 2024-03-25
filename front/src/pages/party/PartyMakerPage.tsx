@@ -26,6 +26,7 @@ function PartyMakerPage() {
   const [participants, setParticipants] = useState([]);
 
   const partyId = party.partyId;
+  console.log('party:', party)
   // if (partyId === -1 || partyId === undefined) {
   //   partyId = login.userId;
   // }

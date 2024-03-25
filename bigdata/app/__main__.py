@@ -1,7 +1,3 @@
-from .score import scoreIndex, scoreStock
-
-if __name__ == '__main__':
-    import uvicorn
-
-    uvicorn.run("app.main:app", host="0.0.0.0", port=8080, reload=True)
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:da421995b521a7af0f85b64a36b7ed7131e2eba3bc814b35c80c72ce847a6bac
+size 163

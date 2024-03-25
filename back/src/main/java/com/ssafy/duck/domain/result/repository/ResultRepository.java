@@ -15,4 +15,6 @@ public interface ResultRepository extends JpaRepository<Result, Long> {
             "FROM Result result "+
             "WHERE result.guest.guestId = :guestId")
     Optional<FavorabilityProjection> findFavorabilityByGuestId(Long guestId);
+
+    Result findByGuestGuestId(Long guestId);
 }

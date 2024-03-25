@@ -29,13 +29,14 @@ public class PartyController {
 
     @PostMapping("")
     @Operation(summary = "파티: 생성")
-    public ResponseEntity<String> create(
+    public ResponseEntity<PartyRes> create(
         @RequestBody CreateReq createReq) {
 
         String accessCode = partyService.create(createReq.getPartyName(), createReq.getUserId());
         guestService.createGuest(accessCode, createReq.getUserId());
+        PartyRes partyRes = partyService.find(accessCode);
 
-        return ResponseEntity.ok().body(accessCode);
+        return ResponseEntity.ok().body(partyRes);
     }
 
     @GetMapping("/{accessCode}/users/{userId}")
@@ -65,7 +66,7 @@ public class PartyController {
             chatService.setManiti(partyRes.getPartyId());
             chatService.createChat(partyRes.getAccessCode());
             missionService.set(missionService.fetch(), startReq);
-            hintService.set(hintService.fetch(Instant.parse(startReq.getEndTime())), partyRes.getPartyId());
+            hintService.set(hintService.fetch(), partyRes.getPartyId());
 
             return ResponseEntity.ok().build();
         }
