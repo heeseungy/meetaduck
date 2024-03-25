@@ -1,4 +1,4 @@
-package com.ssafy.duck.common.exception;
+package com.ssafy.duck.exception;
 
 import com.ssafy.duck.domain.guest.exception.GuestException;
 import com.ssafy.duck.domain.hint.exception.HintException;
