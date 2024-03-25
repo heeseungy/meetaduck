@@ -9,8 +9,6 @@ import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.exception.GuestErrorCode;
 import com.ssafy.duck.domain.guest.exception.GuestException;
 import com.ssafy.duck.domain.guest.repository.GuestRepository;
-import com.ssafy.duck.domain.party.dto.request.DeleteReq;
-import com.ssafy.duck.domain.party.dto.response.PartyRes;
 import com.ssafy.duck.domain.party.entity.Party;
 import com.ssafy.duck.domain.party.exception.PartyErrorCode;
 import com.ssafy.duck.domain.party.exception.PartyException;

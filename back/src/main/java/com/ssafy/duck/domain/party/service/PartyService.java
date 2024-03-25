@@ -2,7 +2,6 @@ package com.ssafy.duck.domain.party.service;
 
 import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.repository.GuestRepository;
-import com.ssafy.duck.domain.guest.service.GuestService;
 import com.ssafy.duck.domain.party.dto.request.DeleteReq;
 import com.ssafy.duck.domain.party.dto.request.StartReq;
 import com.ssafy.duck.domain.party.dto.response.PartyRes;
@@ -109,7 +108,6 @@ public class PartyService {
             throw new PartyException(PartyErrorCode.NOT_FOUND_PARTY);
         }
     }
-
 
     public PartyRes toPartyRes(Party party) {
         if (party.getPartyId() == null) {
