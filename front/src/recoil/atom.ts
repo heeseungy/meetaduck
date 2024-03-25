@@ -4,6 +4,8 @@ import { LoginProfile } from '@/types/user.interface';
 import { atom, selector } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
 
+import { CHAT_ID_LIST, PARTY1 } from './dummy';
+
 const { persistAtom } = recoilPersist({
   key: 'sessionStorage',
   storage: sessionStorage,
@@ -32,20 +34,7 @@ export const loginState = atom<LoginProfile>({
 
 export const partyState = atom<Party>({
   key: 'partyState',
-  default: {
-    partyId: 3,
-    accessCode: 'tlz5vy',
-    startTime: '2024-03-11T21:00:00.000Z',
-    endTime: '2024-03-25T21:00:00.000Z',
-    deleted: false,
-    userId: 152,
-    // partyId: -1,
-    // accessCode: '',
-    // startTime: '',
-    // endTime: '',
-    // deleted: false,
-    // userId: -1,
-  },
+  default: PARTY1,
   effects_UNSTABLE: [persistAtom],
 });
 
@@ -81,12 +70,5 @@ export const partyStatusState = selector({
 
 export const chatIdListState = atom<ChatId>({
   key: 'chatIdListState',
-  default: {
-    groupChatId: 8,
-    manitoChatId: 1,
-    manitiChatId: 5,
-    // groupChatId: ,
-    // manitoChatId: ,
-    // manitiChatId: ,
-  },
+  default: CHAT_ID_LIST,
 });

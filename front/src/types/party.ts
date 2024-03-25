@@ -8,6 +8,7 @@ export enum StatusType {
 export interface Party {
   partyId: number;
   accessCode: string;
+  partyName: string;
   startTime: string;
   endTime: string;
   deleted: boolean;
