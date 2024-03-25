@@ -1,0 +1,15 @@
+pip install numpy
+pip install pandas
+pip install matplotlib
+pip install scipy
+pip install torch
+pip install transformers
+pip install fastapi
+pip install uvicorn
+pip install findspark
+pip install pyspark
+pip install keras
+pip install kiwipiepy
+pip install konlpy
+pip install pymongo
+pip install pyMySQL
