@@ -10,6 +10,7 @@ import { Axios } from '@/services/axios';
 import { partyDeleteervice } from '@/services/partyDeleteService';
 import { partyStartService } from '@/services/partyStartService';
 import styles from '@/styles/party/PartyMaker.module.css';
+import { ArrowsCounterClockwise } from '@phosphor-icons/react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 // export const PARTY1: Party = {
@@ -45,8 +46,13 @@ function PartyMakerPage() {
     fetchPartyInfo();
   }, []);
 
-  const refreshClickHandler = () => {
-    Axios.get(`/api/guests/all/${partyId}`);
+  const refreshClickHandler = async () => {
+    try {
+      const partyInfoRes = await Axios.get(`/api/guests/all/${partyId}`);
+      setParticipants(partyInfoRes.data);
+    } catch (err) {
+      console.log('Error refreshing party info: ', err);
+    }
   };
 
   useEffect(() => {
@@ -88,7 +94,12 @@ function PartyMakerPage() {
   const children = (
     <div className={styles.cardMargin}>
       <div className={`${styles.marginBottom} ${styles.spaceB}`}>
-        <span className={`FontM`}>참여 현황</span>
+        <span className={`FontM`}>
+          참여 현황
+          <span onClick={refreshClickHandler} className={styles.marginL}>
+            <ArrowsCounterClockwise size={18} />
+          </span>
+        </span>
         <span>{joinNumber}명 창여중</span>
       </div>
       {participants.map((participant, index) => (
