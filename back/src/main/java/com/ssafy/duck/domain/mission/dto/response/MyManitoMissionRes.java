@@ -11,7 +11,10 @@ import java.time.Instant;
 @ToString
 public class MyManitoMissionRes {
     private Long missionStatusId;
+    private Instant getTime;
     private Instant confirmTime;
-    private Instant MissionImageUrl;
+    private Instant successTime;
+    private Instant failedTime;
+    private String missionImageUrl;
     private String missionContent;
 }

@@ -21,35 +21,35 @@ public class MissionController {
 
     private final MissionService missionService;
 
+    @GetMapping("/{guestId}")
+    public ResponseEntity<List<MissionRes>> getTodayMissions(@PathVariable Long guestId){
+        List<MissionRes> todayMissionList = missionService.findTodayMissionsByGuestId(guestId);
+        return ResponseEntity.ok(todayMissionList);
+    }
 
-//    @GetMapping("/{guestId}")
-//    public ResponseEntity<List<MissionRes>> getTodayMissions(@PathVariable Long guestId){
-//        List<MissionRes> todayMissionList = missionService.findTodayMissionsByGuestId(guestId);
-//        return ResponseEntity.ok(todayMissionList);
-//    }
+    @PatchMapping("/pass")
+    public ResponseEntity<Void> updateConfirmTime(@RequestBody MissionPassReq missionPassReq){
+        missionService.updateConfirmTimeByMissionStatusId(missionPassReq);
+        return ResponseEntity.ok().build();
+    }
 
-//    @PatchMapping("/pass")
-//    public ResponseEntity<Void> updateConfirmTime(@RequestBody MissionPassReq missionPassReq){
-//        missionService.updateConfirmTimeByMissionStatusId(missionPassReq);
-//        return ResponseEntity.ok().build();
-//    }
-//
-//    @PatchMapping("/update")
-//    public ResponseEntity<Void> updateMissionImageUrl(@RequestBody MissionImageUpdateReq missionImageUpdateReq){
-//        missionService.updateMissionImageUrlByMissionStatusId(missionImageUpdateReq);
-//        return ResponseEntity.ok().build();
-//    }
-//
-//    @GetMapping("/mymanito/{guestId}")
-//    public ResponseEntity<List<MyManitoMissionRes>> getMissionResults(@PathVariable Long guestId){
-//        List<MyManitoMissionRes>  myManitoMission = missionService.findMissionResultsByGuestId(guestId);
-//        return ResponseEntity.ok(myManitoMission);
-//    }
-//
-//    @PatchMapping("/success")
-//    public ResponseEntity<Void> updateSuccessTime(@RequestBody MissionSuccessReq missionSuccessReq){
-//        missionService.updateSuccessTime(missionSuccessReq);
-//        return ResponseEntity.ok().build();
-//    }
+    @PatchMapping("/update")
+    public ResponseEntity<Void> updateMissionImageUrl(@RequestBody MissionImageUpdateReq missionImageUpdateReq){
+        missionService.updateMissionImageUrlByMissionStatusId(missionImageUpdateReq);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/mymanito/{guestId}")
+    public ResponseEntity<MyManitoMissionRes> getMissionResults(@PathVariable Long guestId){
+        MyManitoMissionRes  myManitoMission = missionService.findMissionResultsByGuestId(guestId);
+        return ResponseEntity.ok(myManitoMission);
+    }
+
+
+    @PatchMapping("/success")
+    public ResponseEntity<Void> updateSuccessTime(@RequestBody MissionSuccessReq missionSuccessReq){
+        missionService.updateSuccessTime(missionSuccessReq);
+        return ResponseEntity.ok().build();
+    }
 
 }
