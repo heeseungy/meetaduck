@@ -32,9 +32,7 @@ public class TimeUtil {
 
     // 4-1. 현재시간(KST) 리턴 (Instant Type)
     public static Instant convertToKST(Instant inputTime) {
-        return inputTime.atZone(ZoneId.of("UTC"))
-                .withZoneSameInstant(ZoneId.of("Asia/Seoul"))
-                .toInstant();
+        return inputTime.plus(Duration.ofHours(9));
     }
 
     // 4-2. 무조건 해당 날짜 00시 리턴 (Instant Type)
