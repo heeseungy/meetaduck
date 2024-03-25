@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import pairChat from '@/assets/images/pairChat.png';
 import { loginState } from '@/recoil/atom';
@@ -15,7 +15,11 @@ function ChatListArea({ tag, messages }: { tag: string; messages: MessageRes[] }
   // 일자 추가하려면 sort 후 각 message.map((msg)=>(msg.map))
   // let sortedMessages = [[]];
   // const dates = messages.map((it) => it.createdTime);
-  useEffect(() => {}, []);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    scrollRef.current!.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
   return (
     <>
       <div className={styles.chatListArea}>
@@ -80,6 +84,7 @@ function ChatListArea({ tag, messages }: { tag: string; messages: MessageRes[] }
               </li>
             );
           })}
+          <div ref={scrollRef}></div>
         </ul>
       </div>
     </>
