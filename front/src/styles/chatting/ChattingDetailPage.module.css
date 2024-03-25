@@ -2,27 +2,9 @@
   background-color: #fff5c1;
   width: 100dvw;
   height: 100dvh;
-}
-
-.chatListArea {
-  height: calc(100dvh - 8.75rem);
-  width: 100dvw;
-  overflow-y: auto;
   display: flex;
-  flex-direction: column-reverse;
-}
-
-
-
-.chatArea {
-  display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
-.plusBtn {
-  border-radius: 50%;
-}
-
-.inputArea {
-  height: 4.375rem;
-}
