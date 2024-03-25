@@ -18,7 +18,7 @@ pipeline {
         	steps {
             	withCredentials([file(credentialsId: 'env', variable: 'envFile')]) {
                 	script {
-                    	sh 'cp -f $envFile ./front/.env'
+                    	sh 'cp -f ${envFile} ./front/.env'
                     }
         		}
         	}
