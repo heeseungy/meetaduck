@@ -14,26 +14,63 @@ function PartyCreatePage() {
   const navigate = useNavigate();
 
   const login = useRecoilValue(loginState);
-  const setParty = useSetRecoilState(partyState);
+  const party = useRecoilValue(partyState);
 
-  const createHandler = () => {
-    Axios.post('/api/parties', {
-      partyName: partyName,
-      userId: login.userId,
-    })
-      .then((response) => {
-        const accessCode = response.data;
-        setParty((prevPartyState) => ({
-          ...prevPartyState,
-          accessCode: accessCode,
-          partyName: partyName,
-        }));
-        navigate('/partymaker');
-      })
-      .catch((err) => {
-        console.log('err :', err);
+  const setParty = useSetRecoilState(partyState);
+  const createHandler = async () => {
+    try {
+      const response = await Axios.post('/api/parties', {
+        partyName: partyName,
+        userId: login.userId,
       });
+
+      // console.log("accessCode :",accessCode)
+      // console.log("partyId :",partyId)
+
+      setParty((prevPartyState) => ({
+        ...prevPartyState,
+        accessCode: response.data.accessCode,
+        partyName: partyName,
+        userId: login.userId,
+        partyId: response.data.partyId,
+      }));
+      navigate('/partymaker');
+      // navigate('/partymaker', {
+      //   state: {
+      //     accessCode: accessCode,
+      //     partyName: partyName,
+      //   },
+      // });
+    } catch (err) {
+      console.log('Error:', err);
+    }
+    // Axios.post('/api/parties', {
+    //   partyName: partyName,
+    //   userId: login.userId,
+    // })
+    //   .then((response) => {
+    //     const accessCode = response.data.accessCode;
+    //     console.log("accessCode: ",accessCode);
+    //     setParty((prevPartyState) => ({
+    //       ...prevPartyState,
+    //       accessCode: accessCode,
+    //       partyName: partyName,
+    //     }));
+    //     navigate('/partymaker', {
+    //       state: {
+    //         accessCode: response.data.accessCode,
+    //         partyName: response.data.partyName,
+    //       },
+    //     });
+    // }
+    // .catch((err) => {
+    //   console.log('err :', err);
+    // });
   };
+
+  useEffect(() => {
+    console.log('party.partyId :', party.partyId);
+  }, [party]);
 
   const handleInputChange = (value: string) => {
     setPartyName(value);
