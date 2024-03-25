@@ -29,13 +29,14 @@ public class PartyController {
 
     @PostMapping("")
     @Operation(summary = "파티: 생성")
-    public ResponseEntity<String> create(
+    public ResponseEntity<PartyRes> create(
         @RequestBody CreateReq createReq) {
 
         String accessCode = partyService.create(createReq.getPartyName(), createReq.getUserId());
         guestService.createGuest(accessCode, createReq.getUserId());
+        PartyRes partyRes = partyService.find(accessCode);
 
-        return ResponseEntity.ok().body(accessCode);
+        return ResponseEntity.ok().body(partyRes);
     }
 
     @GetMapping("/{accessCode}/users/{userId}")
