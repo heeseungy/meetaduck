@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import Slider, { Settings } from 'react-slick';
 
+import styles from '@/styles/mission/MissionSlider.module.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 
@@ -11,20 +12,26 @@ interface SlidesProps {
   /** 자동재생 (속도 설정시 number 타입으로) */
 }
 
-function Slides({ children, className }: SlidesProps) {
+function MissionSlider({ children, className }: SlidesProps) {
   const settings: Settings = {
-    dots: true,
+    dots: false,
     infinite: false,
     autoplay: false,
-    slidesToShow: 1,
+    slidesToShow: 4,
     slidesToScroll: 1,
-    arrows: false,
+    arrows: true,
+    swipe: false,
+    swipeToSlide: false,
+    draggable: false,
+    touchMove: false,
   };
   return (
-    <div className={className}>
-      <Slider {...settings}>{children}</Slider>
-    </div>
+    <>
+      <div className={`${styles[className]}`}>
+        <Slider {...settings}>{children}</Slider>
+      </div>
+    </>
   );
 }
 
-export default Slides;
+export default MissionSlider;

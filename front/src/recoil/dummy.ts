@@ -1,21 +1,21 @@
 import { ChatId } from '@/types/chat';
 import { Answer, Hint } from '@/types/hint.ts';
-import { MissionContent, MissionResultList } from '@/types/mission';
+import { MissionContent, MissionResult, MissionResultList } from '@/types/mission';
 import { Party, PartyStatus, StatusType } from '@/types/party';
 import { ResultListItemProps } from '@/types/result';
 import { ManitoResultAnalysis, ResultAnalysis } from '@/types/result';
-import { ListProfile, LoginProfile } from '@/types/user.interface';
+import { ListProfile, LoginProfile, ManitiProfile } from '@/types/user.interface';
 
-// 로그인 시 필요한 데이터
-export const MY_INFO: LoginProfile = {
-  kakaoId: 123456,
-  guestId: 1,
-  partyId: 3,
-  nickname: '가철수',
-  profileUrl: 'https://image.yes24.com/goods/104804448/XL',
-  thumbnailUrl: 'https://image.yes24.com/goods/104804448/XL',
-  userId: 123
-};
+// // 로그인 시 필요한 데이터
+// export const MY_INFO: LoginProfile = {
+//   kakaoId: 123456,
+//   guestId: 1,
+//   partyId: 3,
+//   nickname: '가철수',
+//   profileUrl: 'https://image.yes24.com/goods/104804448/XL',
+//   thumbnailUrl: 'https://image.yes24.com/goods/104804448/XL',
+//   userId: 123455,
+// };
 
 // 파티 조회
 export const PARTY1: Party = {
@@ -27,11 +27,16 @@ export const PARTY1: Party = {
   userId: 152,
 };
 
+const date1 = new Date(PARTY1.startTime);
+const date2 = new Date(PARTY1.endTime);
+const diffDate = date1.getTime() - date2.getTime();
+export const DATE_DIFF = Math.abs(diffDate / (1000 * 60 * 60 * 24));
+
 // 현재 파티 상태 확인
 export const PARTY_STATUS: PartyStatus = {
   // status: StatusType['Todo'],
-  // status: StatusType['InProgress'],
-  status: StatusType['Before24'],
+  status: StatusType['InProgress'],
+  // status: StatusType['Before24']
   // status: StatusType['Complete'],
 };
 
@@ -42,6 +47,11 @@ export const MY_PROFILE: ListProfile = {
   nickname: '가철수',
   thumbnailUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
   votedId: 0,
+};
+
+// 마니띠 조회
+export const MANITI_PROFILE: ManitiProfile = {
+  nickname: '나철수',
 };
 
 // 참가자 목록 조회 (시작전)
@@ -358,15 +368,69 @@ export const PAIR_LIST: ResultListItemProps[] = [
 ];
 
 // 미션 조회
-export const MISSION_STATUS_LIST: MissionContent = {
+export const MISSION_STATUS_LIST: MissionContent[] = [
+  {
+    missionStatusId: 578,
+    confirmTime: '2024-03-13T00:00:00Z',
+    missionImageUrl: '',
+    missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
+  },
+  {
+    missionStatusId: 578,
+    confirmTime: '2024-03-13T05:00:00Z',
+    missionImageUrl: null,
+    missionContent: '노래를 선물하세요',
+  },
+  {
+    missionStatusId: 578,
+    confirmTime: null,
+    missionImageUrl: '',
+    missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
+  },
+];
+
+//미션: 마니또가 수행한 미션조회
+export const MY_MANITO_MISSION: MissionResult = {
+  guestId: 5,
   missionStatusId: 578,
+  getTime: '2024-03-13T00:00:00Z',
   confirmTime: null,
+  successTime: null,
+  // successTime: '2024-03-14T12:50:20Z',
   missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
+  missionImageUrl: '',
 };
 
 // 미션 조회 (결과)
 export const MISSION_RESULT_LIST: MissionResultList = {
   manitoMission: [
+    {
+      guestId: 5,
+      missionStatusId: 578,
+      getTime: '2024-03-13T00:00:00Z',
+      confirmTime: null,
+      successTime: null,
+      missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
+      missionImageUrl: null,
+    },
+    {
+      guestId: 5,
+      missionStatusId: 621,
+      getTime: '2024-03-14T00:00:00Z',
+      confirmTime: '2024-03-14T12:33:20Z',
+      successTime: '2024-03-14T12:50:20Z',
+      missionContent: '마니띠에게 본인을 잘 설명하는 키워드 1개를 알려주세요',
+      missionImageUrl: 'http://example.com/mission/success/1',
+    },
+    {
+      guestId: 5,
+      missionStatusId: 616,
+      getTime: '2024-03-15T00:00:00Z',
+      confirmTime: '2024-03-15T16:33:20Z',
+      successTime: null,
+      missionContent: '마니띠에게 좋은 아침이나 좋은 밤 메시지를 보내주세요',
+      missionImageUrl: null,
+    },
     {
       guestId: 5,
       missionStatusId: 578,
@@ -419,6 +483,33 @@ export const MISSION_RESULT_LIST: MissionResultList = {
       missionStatusId: 580,
       getTime: '2024-03-15T00:00:00Z',
       confirmTime: null,
+      successTime: null,
+      missionContent: '마니띠에게 좋은 아침이나 좋은 밤 메시지를 보내주세요',
+      missionImageUrl: null,
+    },
+    {
+      guestId: 5,
+      missionStatusId: 578,
+      getTime: '2024-03-13T00:00:00Z',
+      confirmTime: null,
+      successTime: null,
+      missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
+      missionImageUrl: null,
+    },
+    {
+      guestId: 5,
+      missionStatusId: 621,
+      getTime: '2024-03-14T00:00:00Z',
+      confirmTime: '2024-03-14T12:33:20Z',
+      successTime: '2024-03-14T12:50:20Z',
+      missionContent: '마니띠에게 본인을 잘 설명하는 키워드 1개를 알려주세요',
+      missionImageUrl: 'http://example.com/mission/success/1',
+    },
+    {
+      guestId: 5,
+      missionStatusId: 616,
+      getTime: '2024-03-15T00:00:00Z',
+      confirmTime: '2024-03-15T16:33:20Z',
       successTime: null,
       missionContent: '마니띠에게 좋은 아침이나 좋은 밤 메시지를 보내주세요',
       missionImageUrl: null,

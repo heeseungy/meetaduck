@@ -1,18 +1,30 @@
+import { useEffect } from 'react';
+
 import HintInProgressPage from '@/pages/hint/HintInProgressPage';
 import HintNonePage from '@/pages/hint/HintNonePage';
 import HintResultPage from '@/pages/hint/HintResultPage';
-import { HINT_ALL, HINT_NONE, HINT_PART, MY_PROFILE, PARTY_STATUS } from '@/recoil/dummy';
+import { currentTimeState, loginState, partyStatusState } from '@/recoil/atom';
+import { HINT_ALL, HINT_NONE, HINT_PART } from '@/recoil/dummy';
 import { Answer } from '@/types/hint.ts';
 import { StatusType } from '@/types/party';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 function HintPage() {
-  const nickname: string = MY_PROFILE.nickname;
+  const login = useRecoilValue(loginState);
+  const setcurrentTime = useSetRecoilState(currentTimeState);
+  // const currentTime = useRecoilValue(currentTimeState);
+  const partyStatus = useRecoilValue(partyStatusState);
+  useEffect(() => {
+    setcurrentTime(new Date().toISOString());
+    console.log(partyStatus);
+  }, []);
+  const nickname: string = login.nickname;
 
   const hintList: Answer[] = HINT_ALL;
-  if (PARTY_STATUS.status === StatusType.Todo) {
+  if (StatusType[partyStatus] === StatusType.Todo) {
     // 시작전
     return <div>아직 파티가 시작하지 않았습니다.</div>;
-  } else if (PARTY_STATUS.status === StatusType.Complete) {
+  } else if (StatusType[partyStatus] === StatusType.Complete) {
     // 결과
     return <HintResultPage {...{ nickname: nickname, hintList: hintList }} />;
   } else {

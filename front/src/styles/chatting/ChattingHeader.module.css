@@ -1,0 +1,15 @@
+.HeaderArea {
+  position: relative;
+  height: 4.375rem;
+  background-color: white;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.BackBtn {
+  position: absolute;
+  top: 1.6rem;
+  left: 0.875rem;
+}

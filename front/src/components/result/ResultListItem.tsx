@@ -11,8 +11,8 @@ function ResultListItem(resultListItemProps: ResultListItemProps) {
         {...{ nickname: resultListItemProps.manito.nickname, thumbnailUrl: resultListItemProps.manito.thumbnailUrl }}
       />
       <div className={styles.HeartFlex}>
-        <Heart size={32} color="#fb9d9d" weight="fill" />
-        <div className="FontXSBold">우호도 {resultListItemProps.maniti.manitoFavorability}점</div>
+        <Heart size={32} color="#f26969" weight="fill" />
+        <div className="FontXSBold FontBasic">우호도 {resultListItemProps.maniti.manitoFavorability}점</div>
       </div>
       <div className={styles.ManitiContainer}>
         <img

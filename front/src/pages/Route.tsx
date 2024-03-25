@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import ChatTestPage from '@/pages/chatting/ChattingDetailPage';
+import ChatDetailPage from '@/pages/chatting/ChattingDetailPage';
 import ChattingPage from '@/pages/chatting/ChattingPage';
 import HintPage from '@/pages/hint/HintPage';
 import HomePage from '@/pages/home/HomePage';
@@ -9,7 +9,6 @@ import MissionPage from '@/pages/mission/MissionPage';
 import PartyPage from '@/pages/party/PartyPage';
 import ResultPage from '@/pages/result/ResultPage';
 import RootPage from '@/pages/root/RootPage';
-import VoteAfterPage from '@/pages/vote/VoteAfterPage';
 
 import HintInputFormPage from './hint/HintInputFormPage';
 import RedirectionPage from './login/RedirectionPage';
@@ -37,9 +36,8 @@ const router = createBrowserRouter([
   { path: '/partycreate', element: <PartyCreatePage /> },
   { path: '/partymaker', element: <PartyMakerPage /> },
   { path: '/hintinputform', element: <HintInputFormPage /> },
-  { path: '/voteFinish', element: <VoteAfterPage /> },
   { path: '/testpage', element: <TestPage /> },
-  { path: '/chattestpage', element: <ChatTestPage /> },
+  { path: '/chatdetail/:chatId', element: <ChatDetailPage /> },
   { path: '/login/oauth2/code/kakao', element: <RedirectionPage /> },
   { path: '/sample', element: <SamplePage/> },
 ]);

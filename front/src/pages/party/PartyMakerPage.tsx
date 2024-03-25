@@ -6,7 +6,8 @@ import Card from '@/components/commons/Card';
 import ProfileName from '@/components/commons/ProfileName';
 import DatePickerInput from '@/components/party/DatePickerInput';
 import ShareButton from '@/components/party/ShareButton';
-import { loginState, partyState } from '@/recoil/atom';
+import { currentTimeState, loginState, partyState, partyStatusState } from '@/recoil/atom';
+import { Axios } from '@/services/axios';
 import { partyDeleteervice } from '@/services/partyDeleteService';
 import { partyStartService } from '@/services/partyStartService';
 import styles from '@/styles/party/PartyMaker.module.css';
@@ -32,7 +33,9 @@ function PartyMakerPage() {
   // 가져온 accessCode와 partyName
   console.log('accessCode:', accessCode);
   console.log('partyName:', partyName);
-
+  const currentTime = useRecoilValue(currentTimeState);
+  const setcurrentTime = useSetRecoilState(currentTimeState);
+  const partyStatus = useRecoilValue(partyStatusState);
   useEffect(() => {
     console.log(party);
     // Axios로 파티를 조회한다.
@@ -45,11 +48,12 @@ function PartyMakerPage() {
     //   deleted: response.data.deleted,
     //   userId: response.data.userId,
     // });
+    setcurrentTime(new Date().toISOString());
     setParty({
       partyId: 3,
       accessCode: 'tlz5vy',
-      startTime: '2024-03-11T21:00:00.000Z',
-      endTime: '2024-03-20T21:00:00.000Z',
+      startTime: '2024-03-21T21:00:00.000Z',
+      endTime: '2024-03-25T06:00:00.000Z',
       deleted: false,
       userId: 152,
     });
@@ -59,6 +63,8 @@ function PartyMakerPage() {
     // login State 가져와서 같은지 확인
     console.log('login.userId: ', login.userId);
     console.log(party.userId);
+    console.log(currentTime);
+    console.log(partyStatus);
   }, [party]);
 
   const tempJoinNumber = 0;

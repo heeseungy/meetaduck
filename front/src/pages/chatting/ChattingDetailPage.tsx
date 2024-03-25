@@ -1,20 +1,26 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
+import ChattingHeader from '@/components/chatting/ChattingHeader';
+import { chatIdListState } from '@/recoil/atom';
 import { chatListLoadService } from '@/services/chatListLoadService';
 import { chatSendMessageService } from '@/services/chatSendMessageService';
 import styles from '@/styles/chatting/ChattingDetailPage.module.css';
 import { MessageRes } from '@/types/chatMessage';
 import { PaperPlaneTilt, Plus } from '@phosphor-icons/react';
 import { Client, IMessage } from '@stomp/stompjs';
+import { useRecoilValue } from 'recoil';
 
 function ChattingDetailPage() {
+  const chatIdList = useRecoilValue(chatIdListState);
   // const {chatId} = useParams();
   const chatId = 1;
   const [stompClient, setStompClient] = useState<Client | null>(null); // STOMP 클라이언트 상태 관리
   const [messages, setMessages] = useState<MessageRes[]>([]); // 채팅 메시지 목록 상태 관리
   const [writer, setWriter] = useState<string>(''); // 메시지 작성자 이름 상태 관리
   const [newMessage, setNewMessage] = useState<string>(''); // 새 메시지 입력 상태 관리
-
+  const tag: string =
+    chatId === chatIdList.groupChatId ? 'groupChat' : chatId === chatIdList.manitiChatId ? 'manitiChat' : 'manitoChat';
   useEffect(() => {
     chatListLoadService(chatId, setMessages);
     const client = new Client({
@@ -47,6 +53,7 @@ function ChattingDetailPage() {
 
   return (
     <div className={styles.bgc}>
+      <ChattingHeader {...{ tag: tag }} />
       <div className={styles.chatListArea}>
         <ul>
           {messages.map((msg) => (
@@ -61,7 +68,10 @@ function ChattingDetailPage() {
         <button className={styles.plusBtn} onClick={plusButtonHandler}>
           <Plus size={32} />
         </button>
-        <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)}
+        <input
+          type="text"
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
           className={styles.inputArea}
         />
         <button onClick={sendMessage}>

@@ -19,8 +19,8 @@ function ResultPairListPage(resultPairListProps: ResultPairListProps) {
       <div className={`${styles.Title}`}>
         <div className={`FontMTitle`}>나의 마니또는 {myManito!.nickname}입니다</div>
         <div className={`${styles.SubTitles}`}>
-          <div className="FontS">마니또 발표</div>
-          <div className={`FontS ${styles.SubTitle}`}>
+          <div className="FontSBold">마니또 발표</div>
+          <div className={`FontSBold  ${styles.SubTitle}`}>
             <div>마니또</div>
             <div>마니띠</div>
           </div>

@@ -6,7 +6,7 @@ import { Axios } from '@/services/axios';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 function RedirectionPage() {
-  const setContent = useSetRecoilState(loginState);
+  const setLogin = useSetRecoilState(loginState);
   const login = useRecoilValue(loginState);
 
   const code: string = new URLSearchParams(window.location.search).get('code')!;
@@ -25,7 +25,7 @@ function RedirectionPage() {
     })
       .then((response) => {
         console.log('responsessss : ', response);
-        setContent({
+        setLogin({
           kakaoId: response.data.kakaoId,
           guestId: response.data.guestId,
           partyId: response.data.partyId,
