@@ -14,6 +14,8 @@ function PartyCreatePage() {
   const navigate = useNavigate();
 
   const login = useRecoilValue(loginState);
+  const party = useRecoilValue(partyState);
+
   const setParty = useSetRecoilState(partyState);
   const createHandler = async () => {
     try {
@@ -22,11 +24,14 @@ function PartyCreatePage() {
         userId: login.userId,
       });
 
-      const accessCode = response.data;
+      const accessCode = response.data.accessCode;
+      const partyId = response.data.partyId;
       setParty((prevPartyState) => ({
         ...prevPartyState,
         accessCode: accessCode,
         partyName: partyName,
+        userId: login.userId,
+        partyId: partyId,
       }));
 
       navigate('/partymaker', {

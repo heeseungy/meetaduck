@@ -13,26 +13,22 @@ import styles from '@/styles/party/PartyMaker.module.css';
 import { ArrowsCounterClockwise } from '@phosphor-icons/react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-// export const PARTY1: Party = {
-//   partyId: -1,
-//   accessCode: '',
-//   startTime: '',
-//   endTime: '',
-//   deleted: false,
-//   userId: -1,
-// };
-
 function PartyMakerPage() {
   const setParty = useSetRecoilState(partyState);
   const party = useRecoilValue(partyState);
   const login = useRecoilValue(loginState);
 
   const location = useLocation();
-  const { accessCode, partyName, partyId } = location.state;
+  const { accessCode, partyName } = location.state;
   console.log('location.state: ', location.state);
 
+  console.log('login.userId:', login.userId);
   const [participants, setParticipants] = useState([]);
 
+  const partyId = party.partyId;
+  // if (partyId === -1 || partyId === undefined) {
+  //   partyId = login.userId;
+  // }
   useEffect(() => {
     const fetchPartyInfo = async () => {
       try {
@@ -56,17 +52,9 @@ function PartyMakerPage() {
   };
 
   useEffect(() => {
-    console.log(party);
+    console.log('party:', party);
     // Axios로 파티를 조회한다.
     // recoil에 axios response로 온 파티 정보를 저장함.
-    // setParty({
-    //   partyId: response.data.partyId,
-    //   accessCode: response.data.accessCode,
-    //   startTime: response.data.startTime,
-    //   endTime: response.data.endTime,
-    //   deleted: response.data.deleted,
-    //   userId: response.data.userId,
-    // });
 
     setParty((prevPartyState) => ({
       ...prevPartyState,
@@ -83,8 +71,8 @@ function PartyMakerPage() {
     // });
   }, []);
 
-// login.userId === response.userId
-  
+  // login.userId === response.userId
+
   useEffect(() => {
     // login State 가져와서 같은지 확인
     console.log('login.userId: ', login.userId);
@@ -122,6 +110,11 @@ function PartyMakerPage() {
     console.log('파티닫기');
     partyDeleteervice();
   };
+
+  const leaveHandler = () => {
+    console.log('나가기');
+  };
+
   return (
     <div className={styles.margin}>
       <header className={styles.spaceB}>
@@ -134,22 +127,34 @@ function PartyMakerPage() {
         <Card {...{ tag: 4, children: children }} />
       </div>
       <div className={styles.endWrapper}>
-        <div className={`FontM`}>종료 시간</div>
-        <div className={`${styles.inputWrapper}`}>
-          <DatePickerInput />
-        </div>
-        <div className={`${styles.buttonWrapper}`}>
-          <span className={`${styles.oneButton}`}>
-            <Button onClickHandler={startHandler} bgc="filled">
-              시작하기
-            </Button>
-          </span>
+        {/* recoil에 있는 party의 userId와 login의 userId가 같으면 */}
+        {login.userId === party.userId ? (
+          <>
+            <div className={`FontM`}>종료 시간</div>
+            <div className={`${styles.inputWrapper}`}>
+              <DatePickerInput />
+            </div>
+            <div className={`${styles.buttonWrapper}`}>
+              <span className={`${styles.oneButton}`}>
+                <Button onClickHandler={startHandler} bgc="filled">
+                  시작하기
+                </Button>
+              </span>
+              <span>
+                <Button onClickHandler={deleteHandler} bgc="empty">
+                  파티닫기
+                </Button>
+              </span>
+            </div>
+          </>
+        ) : (
+          // recoil에 있는 party의 userId와 login의 userId가 다르면
           <span>
-            <Button onClickHandler={deleteHandler} bgc="empty">
-              파티닫기
+            <Button onClickHandler={leaveHandler} bgc="empty">
+              나가기
             </Button>
           </span>
-        </div>
+        )}
       </div>
     </div>
   );
