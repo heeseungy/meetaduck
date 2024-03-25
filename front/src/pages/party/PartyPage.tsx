@@ -12,7 +12,6 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 function PartyPage() {
   const [usersInput, setUsersInput] = useState('');
   const navigate = useNavigate();
-  const setLogin = useSetRecoilState(loginState);
   const login = useRecoilValue(loginState);
   const setParty = useSetRecoilState(partyState);
   const party = useRecoilValue(partyState);
@@ -28,15 +27,16 @@ function PartyPage() {
       setParty((prevPartyState) => ({
         ...prevPartyState,
         accessCode: accessCode,
+        partyId: response.data.partyId,
       }));
-
-      navigate('/partymaker', {
-        state: {
-          accessCode: response.data.accessCode,
-          partyName: response.data.partyName,
-          partyId:  response.data.partyId,
-        },
-      });
+      navigate('/partymaker');
+      // navigate('/partymaker', {
+      //   state: {
+      //     accessCode: response.data.accessCode,
+      //     partyName: response.data.partyName,
+      //     partyId:  response.data.partyId,
+      //   },
+      // });
     } catch (err) {
       alert('입력 코드가 올바르지 않습니다');
       console.log('err :', err);

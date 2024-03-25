@@ -24,24 +24,25 @@ function PartyCreatePage() {
         userId: login.userId,
       });
 
-      const accessCode = response.data.accessCode;
-      const partyId = response.data.partyId;
+      // console.log("accessCode :",accessCode)
+      // console.log("partyId :",partyId)
+
       setParty((prevPartyState) => ({
         ...prevPartyState,
-        accessCode: accessCode,
+        accessCode: response.data.accessCode,
         partyName: partyName,
         userId: login.userId,
-        partyId: partyId,
+        partyId: response.data.partyId,
       }));
-
-      navigate('/partymaker', {
-        state: {
-          accessCode: accessCode,
-          partyName: partyName,
-        },
-      });
-    } catch(err) {
-      console.log('Error:', err)
+      navigate('/partymaker');
+      // navigate('/partymaker', {
+      //   state: {
+      //     accessCode: accessCode,
+      //     partyName: partyName,
+      //   },
+      // });
+    } catch (err) {
+      console.log('Error:', err);
     }
     // Axios.post('/api/parties', {
     //   partyName: partyName,
@@ -61,11 +62,15 @@ function PartyCreatePage() {
     //         partyName: response.data.partyName,
     //       },
     //     });
-      // }
-      // .catch((err) => {
-      //   console.log('err :', err);
-      // });
+    // }
+    // .catch((err) => {
+    //   console.log('err :', err);
+    // });
   };
+
+  useEffect(() => {
+    console.log('party.partyId :', party.partyId);
+  }, [party]);
 
   const handleInputChange = (value: string) => {
     setPartyName(value);

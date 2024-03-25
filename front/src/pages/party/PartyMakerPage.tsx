@@ -18,24 +18,22 @@ function PartyMakerPage() {
   const party = useRecoilValue(partyState);
   const login = useRecoilValue(loginState);
 
-  const location = useLocation();
-  const { accessCode, partyName } = location.state;
-  console.log('location.state: ', location.state);
+  // const location = useLocation();
+  // const { accessCode, partyName } = location.state;
+  // console.log('location.state: ', location.state);
 
   console.log('login.userId:', login.userId);
   const [participants, setParticipants] = useState([]);
 
-  const partyId = party.partyId;
-  console.log('party:', party)
   // if (partyId === -1 || partyId === undefined) {
   //   partyId = login.userId;
   // }
   useEffect(() => {
     const fetchPartyInfo = async () => {
       try {
-        const partyInfoRes = await Axios.get(`/api/guests/all/${partyId}`);
-        console.log('partyInfoRes.data :', partyInfoRes.data);
-        setParticipants(partyInfoRes.data);
+        const usersInfo = await Axios.get(`/api/guests/all/${party.partyId}`);
+        console.log('usersInfo.data :', usersInfo.data);
+        setParticipants(usersInfo.data);
       } catch (err) {
         console.log('Err :', err);
       }
@@ -45,8 +43,8 @@ function PartyMakerPage() {
 
   const refreshClickHandler = async () => {
     try {
-      const partyInfoRes = await Axios.get(`/api/guests/all/${partyId}`);
-      setParticipants(partyInfoRes.data);
+      const usersInfo = await Axios.get(`/api/guests/all/${party.partyId}`);
+      setParticipants(usersInfo.data);
     } catch (err) {
       console.log('Error refreshing party info: ', err);
     }
@@ -59,8 +57,8 @@ function PartyMakerPage() {
 
     setParty((prevPartyState) => ({
       ...prevPartyState,
-      accessCode: accessCode,
-      partyName: partyName,
+      accessCode: party.accessCode,
+      partyName: party.partyName,
     }));
     // setParty({
     //   partyId: 3,
@@ -119,7 +117,7 @@ function PartyMakerPage() {
   return (
     <div className={styles.margin}>
       <header className={styles.spaceB}>
-        <span className={`FontL FontBasic`}>{partyName} 마니또</span>
+        <span className={`FontL FontBasic`}>{party.partyName} 마니또</span>
         <span>
           <ShareButton>참여 코드 공유</ShareButton>
         </span>
