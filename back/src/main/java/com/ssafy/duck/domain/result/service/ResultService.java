@@ -1,5 +1,6 @@
 package com.ssafy.duck.domain.result.service;
 
+import com.ssafy.duck.domain.chat.repository.ChatRepository;
 import com.ssafy.duck.domain.guest.dto.response.GuestRes;
 import com.ssafy.duck.domain.guest.service.GuestService;
 import com.ssafy.duck.domain.result.dto.response.ResultRes;
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ResultService {
 
     private final ResultRepository resultRepository;
+    private final ChatRepository chatRepository;
     private final GuestService guestService;
 
     public ResultWithManitiRes findMeManitiResult(Long guestId) {
@@ -35,14 +37,17 @@ public class ResultService {
             throw new ResultException(ResultErrorCode.MANITI_RESULT_NOT_FOUND);
 
         // 대화 빈도 계산
+        Long chatCount = chatRepository.countByChatId(myInfo.getChatId());
 
-
+        //response 넣기
         ResultWithManitiRes resultRes = ResultWithManitiRes.builder()
                 .manitiFavorability(myResult.getManitiFavorability())
                 .manitiRatio(myResult.getManitiRatio())
                 .myWordcount(myResult.getMantiWordcount())
                 .mantiWordcount(manitiResult.getManitoWordcount())
+                .chatCount(chatCount)
                 .build();
+        System.out.println(resultRes);
 
         return resultRes;
     }

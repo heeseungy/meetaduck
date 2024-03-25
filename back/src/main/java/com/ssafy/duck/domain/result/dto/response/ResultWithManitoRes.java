@@ -15,6 +15,6 @@ public class ResultWithManitoRes {
     private String myWordcount;
     private String mantoWordcount;
     private Integer manitoRatio;
-    private int chatCount;
+    private Long chatCount;
 
 }
