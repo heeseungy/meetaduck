@@ -11,5 +11,6 @@ public interface ChatRepository extends JpaRepository<Chat, Long> {
 
     @Query("SELECT c.chatId as chatId FROM Chat c WHERE c.party.partyId = :partyId AND (c.manitiId = :manitiId OR (:manitiId IS NULL AND c.manitiId IS NULL))")
     Long findChatIdByPartyIdAndManitiIdCustom(@Param("partyId") Long partyId, @Param("manitiId") Long manitiId);
+
     Long countByChatId(Long chatId);
 }

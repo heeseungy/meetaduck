@@ -12,7 +12,6 @@ import com.ssafy.duck.domain.hint.exception.HintErrorCode;
 import com.ssafy.duck.domain.hint.exception.HintException;
 import com.ssafy.duck.domain.hint.repository.HintRepository;
 import com.ssafy.duck.domain.hint.repository.HintStatusRepository;
-import com.ssafy.duck.domain.mission.entity.Mission;
 import com.ssafy.duck.domain.mission.service.MissionService;
 import com.ssafy.duck.domain.party.dto.response.PartyRes;
 import com.ssafy.duck.domain.party.entity.Party;
@@ -23,13 +22,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 @Service
@@ -73,8 +68,8 @@ public class HintService {
 
         //마니또 기간 계산
         Party party = partyRepository.findByPartyId(partyId)
-                .orElseThrow(()-> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
-        int period = PartyRes.calcDate(party.getStartTime().toString(), party.getEndTime().toString())-1;
+                .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
+        int period = PartyRes.calcDate(party.getStartTime().toString(), party.getEndTime().toString()) - 1;
 
         Collections.shuffle(hintList);
         // guest 마다 hint status에 데이터 추가하기
@@ -91,7 +86,7 @@ public class HintService {
     public void setStatus(Long guestId, List<HintStatusReq> hintStatusReq) {
         for (HintStatusReq req : hintStatusReq) {
             HintStatus hintStatus = hintStatusRepository.findByGuestGuestIdAndHintHintId(guestId, req.getHintId());
-            if(hintStatus == null)
+            if (hintStatus == null)
                 throw new HintException(HintErrorCode.STATUS_NOT_FOUND);
             hintStatus.updateAnswer(hintStatus.getHintStatusId(), req.getHintStatusAnswer(), hintStatus.getHint(), hintStatus.getGuest());
             hintStatusRepository.save(hintStatus);

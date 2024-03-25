@@ -1,7 +1,6 @@
 package com.ssafy.duck.domain.party.controller;
 
 import com.ssafy.duck.domain.chat.service.ChatService;
-import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.service.GuestService;
 import com.ssafy.duck.domain.hint.service.HintService;
 import com.ssafy.duck.domain.mission.service.MissionService;
@@ -14,9 +13,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.Instant;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/parties")
@@ -32,7 +28,7 @@ public class PartyController {
     @PostMapping("")
     @Operation(summary = "파티: 생성")
     public ResponseEntity<PartyRes> create(
-        @RequestBody CreateReq createReq) {
+            @RequestBody CreateReq createReq) {
 
         guestService.isValidCreateReq(createReq.getUserId());
 
@@ -60,7 +56,7 @@ public class PartyController {
     public ResponseEntity<PartyRes> start(
             @RequestBody StartReq startReq) {
         PartyRes partyRes = partyService.find(startReq.getAccessCode());
-        if(partyRes.isValid(startReq, partyRes)) {
+        if (partyRes.isValid(startReq, partyRes)) {
             partyService.start(partyRes, startReq);
             guestService.setManiti(partyRes.getPartyId());
             chatService.setManiti(partyRes.getPartyId());

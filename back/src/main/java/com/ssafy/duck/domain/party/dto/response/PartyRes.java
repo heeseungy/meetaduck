@@ -1,6 +1,5 @@
 package com.ssafy.duck.domain.party.dto.response;
 
-import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.party.dto.request.StartReq;
 import com.ssafy.duck.domain.party.exception.PartyErrorCode;
 import com.ssafy.duck.domain.party.exception.PartyException;
@@ -13,7 +12,6 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,6 +26,20 @@ public class PartyRes {
     private Instant endTime;
     private boolean deleted;
     private Long userId;
+
+    // String 예제형식 "2024-03-14T12:00:00Z"
+    public static int calcDate(String start, String end) {
+
+        // String -> Instant
+        Instant startTime = Instant.parse(start);
+        Instant endTime = Instant.parse(end);
+
+        // 시스템 기본 시간대(ZoneId)를 사용하여 LocalDate로 변환
+        LocalDate startDate = startTime.atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate endDate = endTime.atZone(ZoneId.systemDefault()).toLocalDate();
+
+        return (int) ChronoUnit.DAYS.between(startDate, endDate);
+    }
 
     public boolean getDeleted() {
         return this.deleted;
@@ -55,20 +67,6 @@ public class PartyRes {
         // TODO: 인원 수가 적을 10명보다 적을 때
 
         return true;
-    }
-
-    // String 예제형식 "2024-03-14T12:00:00Z"
-    public static int calcDate(String start, String end) {
-
-        // String -> Instant
-        Instant startTime = Instant.parse(start);
-        Instant endTime = Instant.parse(end);
-
-        // 시스템 기본 시간대(ZoneId)를 사용하여 LocalDate로 변환
-        LocalDate startDate = startTime.atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate endDate = endTime.atZone(ZoneId.systemDefault()).toLocalDate();
-
-        return (int) ChronoUnit.DAYS.between(startDate, endDate);
     }
 
 }

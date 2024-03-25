@@ -23,14 +23,12 @@ import com.ssafy.duck.domain.user.entity.User;
 import com.ssafy.duck.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -185,7 +183,7 @@ public class GuestService {
         User user = guest.getUser();
         Favorability favorability = resultRepository.findFavorabilityByGuestId(guest.getGuestId())
                 .map(projection ->
-                    new Favorability(projection.getManitoFavorability(), projection.getManitiFavorability()))
+                        new Favorability(projection.getManitoFavorability(), projection.getManitiFavorability()))
                 .orElseThrow(() -> new ResultException(ResultErrorCode.FAVORABILITY_RESULT_NOT_FOUND));
 
         return GuestRes.builder()
@@ -282,5 +280,5 @@ public class GuestService {
             throw new PartyException(PartyErrorCode.NOT_FOUND_PARTY);
         }
     }
-    
+
 }
