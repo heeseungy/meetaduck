@@ -90,14 +90,14 @@ public class GuestService {
         return guests;
     }
 
-    public GuestRes findByGuestId(Long guestId) {
+    public GuestRes getGuestByUserId(Long guestId) {
         Guest guest = guestRepository.findById(guestId)
                 .orElseThrow(() -> new GuestException(GuestErrorCode.GUEST_NOT_FOUND));
 
         return toGuestRes(guest);
     }
 
-    public List<GuestRes> getAllGuest(Long partyId) {
+    public List<GuestRes> getAllGuestByPartyId(Long partyId) {
         List<Guest> guestList = guestRepository.findByParty_PartyId(partyId);
         List<GuestRes> guestResList = toGuestResList(guestList);
 

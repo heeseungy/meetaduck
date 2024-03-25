@@ -32,7 +32,7 @@ public class ResultService {
     private String fastAPIUrl;
 
     public ResultWithManitiRes findMeManitiResult(Long guestId) {
-        GuestRes myInfo = guestService.findByGuestId(guestId);    // 내 정보
+        GuestRes myInfo = guestService.getGuestByUserId(guestId);    // 내 정보
 
         // 내 결과 조회
         Result myResult = resultRepository.findByGuestGuestId(guestId);
@@ -63,7 +63,7 @@ public class ResultService {
     //
 
     public ResultWithManitoRes findMeManitoResult(Long guestId) {
-        GuestRes myInfo = guestService.findByGuestId(guestId);    // 내 정보
+        GuestRes myInfo = guestService.getGuestByUserId(guestId);    // 내 정보
         GuestRes manitoInfo = guestService.findManito(guestId);         // 마니또 정보
 
         // 마니또방 우호도

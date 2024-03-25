@@ -64,7 +64,7 @@ public class HintService {
     // 힌트status에 질문 저장
     public void set(List<Hint> hintList, Long partyId) {
         // 파티아이디로 전체 guest id 가져오기
-        List<GuestRes> guestList = guestService.getAllGuest(partyId);
+        List<GuestRes> guestList = guestService.getAllGuestByPartyId(partyId);
 
         //마니또 기간 계산
         Party party = partyRepository.findByPartyId(partyId)
@@ -95,7 +95,7 @@ public class HintService {
 
     //힌트 질문+답변 조회
     public List<HintStatusRes> getHintQnA(Long guestId) {
-        GuestRes myInfo = guestService.findByGuestId(guestId);    // 내 정보
+        GuestRes myInfo = guestService.getGuestByUserId(guestId);    // 내 정보
         GuestRes manitoInfo = guestService.findManito(guestId);         // 마니또 정보
 
         List<HintStatusRes> hintStatusResList = new ArrayList<>();
