@@ -5,7 +5,6 @@ import com.ssafy.duck.domain.guest.dto.response.GuestRes;
 import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.repository.GuestRepository;
 import com.ssafy.duck.domain.guest.service.GuestService;
-import com.ssafy.duck.domain.result.dto.response.ResultRes;
 import com.ssafy.duck.domain.result.dto.response.ResultWithManitiRes;
 import com.ssafy.duck.domain.result.dto.response.ResultWithManitoRes;
 import com.ssafy.duck.domain.result.entity.Result;
@@ -29,9 +28,11 @@ public class ResultService {
     private final ChatRepository chatRepository;
     private final GuestService guestService;
     private final GuestRepository guestRepository;
+    @Value("${fast-api.url}")
+    private String fastAPIUrl;
 
     public ResultWithManitiRes findMeManitiResult(Long guestId) {
-        GuestRes myInfo = guestService.findByGuestId(guestId);    // 내 정보
+        GuestRes myInfo = guestService.getGuestByUserId(guestId);    // 내 정보
 
         // 내 결과 조회
         Result myResult = resultRepository.findByGuestGuestId(guestId);
@@ -59,8 +60,10 @@ public class ResultService {
         return resultRes;
     }
 
+    //
+
     public ResultWithManitoRes findMeManitoResult(Long guestId) {
-        GuestRes myInfo = guestService.findByGuestId(guestId);    // 내 정보
+        GuestRes myInfo = guestService.getGuestByUserId(guestId);    // 내 정보
         GuestRes manitoInfo = guestService.findManito(guestId);         // 마니또 정보
 
         // 마니또방 우호도
@@ -71,11 +74,6 @@ public class ResultService {
         //긍정어, 부정어 사용 비율
         return null;
     }
-
-    //
-
-    @Value("${fast-api.url}")
-    private String fastAPIUrl;
 
     public void reserveAnalysis(Long partyId) {
         RestTemplate resultRestTemplate = new RestTemplate();

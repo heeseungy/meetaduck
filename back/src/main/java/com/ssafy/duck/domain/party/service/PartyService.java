@@ -1,6 +1,8 @@
 package com.ssafy.duck.domain.party.service;
 
-import com.ssafy.duck.domain.guest.service.GuestService;
+import com.ssafy.duck.domain.guest.entity.Guest;
+import com.ssafy.duck.domain.guest.repository.GuestRepository;
+import com.ssafy.duck.domain.party.dto.request.DeleteReq;
 import com.ssafy.duck.domain.party.dto.request.StartReq;
 import com.ssafy.duck.domain.party.dto.response.PartyRes;
 import com.ssafy.duck.domain.party.entity.Party;
@@ -13,9 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Service
@@ -23,19 +23,11 @@ import java.util.concurrent.ThreadLocalRandom;
 @RequiredArgsConstructor
 public class PartyService {
 
-    private final GuestService guestService;
-
     private final PartyRepository partyRepository;
     private final UserRepository userRepository;
+    private final GuestRepository guestRepository;
 
     public String create(String partyName, Long userId) {
-        if (guestService.isGuest(userId)) {
-            // TODO: userId로 List<Guest> 가져옴
-            //      partyId로 party를 조회
-            //      deleted=true면 continue / false면 예외처리 추가
-            throw new PartyException(PartyErrorCode.MAXIMUM_OF_1_PARTY_ALLOWED);
-        }
-
         String chracters = "abcdefghijklmnopqrstuvwxyz0123456789";
         String accessCode = ThreadLocalRandom.current()
                 .ints(6, 0, chracters.length())
@@ -75,6 +67,46 @@ public class PartyService {
                 .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
         party.delete();
         partyRepository.save(party);
+    }
+
+    public void isValidCreateReq(Long userId) {
+        List<Guest> guests = guestRepository.findAllByUserId(userId);
+        for (Guest guest : guests) {
+            Party party = partyRepository.findByPartyId(guest.getParty().getPartyId())
+                    .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
+            if (!party.isDeleted()) {
+                throw new PartyException(PartyErrorCode.MAXIMUM_OF_1_PARTY_ALLOWED);
+            }
+        }
+    }
+
+    public void isValidJoinReq(PartyRes partyRes, Long userId) {
+        List<Guest> guests = guestRepository.findAllByUserId(userId);
+        for (Guest guest : guests) {
+            Party party = partyRepository.findByPartyId(guest.getParty().getPartyId())
+                    .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
+            if (!party.isDeleted()) {
+                throw new PartyException(PartyErrorCode.NOT_FOUND_PARTY);
+            }
+        }
+        if (partyRes.getStartTime() != null) {
+            throw new PartyException(PartyErrorCode.ALREADY_STARTED_PARTY);
+        }
+        List<Guest> joinedGuests = guestRepository.findAllByPartyId(partyRes.getPartyId());
+        for (Guest guest : joinedGuests) {
+            if (guest.getUser().getUserId().equals(userId)) {
+                throw new PartyException(PartyErrorCode.MAXIMUM_OF_1_PARTY_JOINED);
+            }
+        }
+    }
+
+    public void isValidDeleteReq(PartyRes partyRes, DeleteReq deleteReq) {
+        if (!deleteReq.getUserId().equals(partyRes.getUserId())) {
+            throw new PartyException(PartyErrorCode.ACCESS_DENIED);
+        }
+        if (partyRes.getDeleted()) {
+            throw new PartyException(PartyErrorCode.NOT_FOUND_PARTY);
+        }
     }
 
     public PartyRes toPartyRes(Party party) {

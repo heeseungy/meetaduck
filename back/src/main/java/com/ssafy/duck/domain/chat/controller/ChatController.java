@@ -18,7 +18,6 @@ import java.util.List;
 public class ChatController {
 
     private final ChatService chatService;
-    private final SimpMessagingTemplate messagingTemplate;
 
     @GetMapping("/{guestId}")
     @Operation(summary = "채팅: 채팅방 목록조회")
