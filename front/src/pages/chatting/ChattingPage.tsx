@@ -5,7 +5,6 @@ import groupChat from '@/assets/images/groupChat.png';
 import pairChat from '@/assets/images/pairChat.png';
 import Card from '@/components/commons/Card';
 import { chatIdListState } from '@/recoil/atom';
-import { CHAT_ID_LIST } from '@/recoil/dummy';
 import styles from '@/styles/chatting/ChattingPage.module.css';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 

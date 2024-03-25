@@ -21,6 +21,7 @@ import { ListProfile, LoginProfile, ManitiProfile } from '@/types/user.interface
 export const PARTY1: Party = {
   partyId: 3,
   accessCode: 'tlz5vy',
+  partyName: '마니또도도독 너 내 동료가 되라',
   startTime: '2024-03-11T21:00:00.000Z',
   endTime: '2024-03-20T21:00:00.000Z',
   deleted: false,
@@ -519,9 +520,9 @@ export const MISSION_RESULT_LIST: MissionResultList = {
 
 // 채팅방 목록
 export const CHAT_ID_LIST: ChatId = {
-  groupChatId: 8,
+  groupChatId: 5,
   manitoChatId: 1,
-  manitiChatId: 5,
+  manitiChatId: 8,
 };
 
 // 힌트 질문 (입력페이지용)
