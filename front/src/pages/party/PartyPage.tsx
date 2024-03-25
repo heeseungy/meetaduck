@@ -24,14 +24,19 @@ function PartyPage() {
     try {
       const response = await Axios.get(`/api/parties/${accessCode}/users/${userId}`);
       console.log(response);
+      // Axios.get(`/api/guests/all/${partyId}`)
       setParty((prevPartyState) => ({
         ...prevPartyState,
         accessCode: accessCode,
       }));
-      navigate('/partymaker', {state: {
-        accessCode: response.data.accessCode,
-        partyName: response.data.partyName,
-      }})
+
+      navigate('/partymaker', {
+        state: {
+          accessCode: response.data.accessCode,
+          partyName: response.data.partyName,
+          partyId:  response.data.partyId,
+        },
+      });
     } catch (err) {
       alert('입력 코드가 올바르지 않습니다');
       console.log('err :', err);

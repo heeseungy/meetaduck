@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import Button from '@/components/commons/Button';
@@ -7,6 +7,7 @@ import ProfileName from '@/components/commons/ProfileName';
 import DatePickerInput from '@/components/party/DatePickerInput';
 import ShareButton from '@/components/party/ShareButton';
 import { loginState, partyState } from '@/recoil/atom';
+import { Axios } from '@/services/axios';
 import { partyDeleteervice } from '@/services/partyDeleteService';
 import { partyStartService } from '@/services/partyStartService';
 import styles from '@/styles/party/PartyMaker.module.css';
@@ -27,11 +28,27 @@ function PartyMakerPage() {
   const login = useRecoilValue(loginState);
 
   const location = useLocation();
-  const { accessCode, partyName } = location.state;
+  const { accessCode, partyName, partyId } = location.state;
+  console.log('location.state: ', location.state);
 
-  // 가져온 accessCode와 partyName
-  console.log('accessCode:', accessCode);
-  console.log('partyName:', partyName);
+  const [participants, setParticipants] = useState([]);
+
+  useEffect(() => {
+    const fetchPartyInfo = async () => {
+      try {
+        const partyInfoRes = await Axios.get(`/api/guests/all/${partyId}`);
+        console.log('partyInfoRes.data :', partyInfoRes.data);
+        setParticipants(partyInfoRes.data);
+      } catch (err) {
+        console.log('Err :', err);
+      }
+    };
+    fetchPartyInfo();
+  }, []);
+
+  const refreshClickHandler = () => {
+    Axios.get(`/api/guests/all/${partyId}`);
+  };
 
   useEffect(() => {
     console.log(party);
@@ -45,14 +62,20 @@ function PartyMakerPage() {
     //   deleted: response.data.deleted,
     //   userId: response.data.userId,
     // });
-    setParty({
-      partyId: 3,
-      accessCode: 'tlz5vy',
-      startTime: '2024-03-11T21:00:00.000Z',
-      endTime: '2024-03-20T21:00:00.000Z',
-      deleted: false,
-      userId: 152,
-    });
+
+    setParty((prevPartyState) => ({
+      ...prevPartyState,
+      accessCode: accessCode,
+      partyName: partyName,
+    }));
+    // setParty({
+    //   partyId: 3,
+    //   accessCode: 'tlz5vy',
+    //   startTime: '2024-03-11T21:00:00.000Z',
+    //   endTime: '2024-03-20T21:00:00.000Z',
+    //   deleted: false,
+    //   userId: 152,
+    // });
   }, []);
 
   useEffect(() => {
@@ -61,15 +84,20 @@ function PartyMakerPage() {
     console.log(party.userId);
   }, [party]);
 
-  const tempJoinNumber = 0;
+  const joinNumber = participants.length;
 
   const children = (
     <div className={styles.cardMargin}>
       <div className={`${styles.marginBottom} ${styles.spaceB}`}>
         <span className={`FontM`}>참여 현황</span>
-        <span>{tempJoinNumber}명 창여중</span>
+        <span>{joinNumber}명 창여중</span>
       </div>
-      <ProfileName />
+      {participants.map((participant, index) => (
+        <div key={index} className={styles.participant}>
+          <img src={participant.thumbnailUrl} alt="Profile" className={styles.profileImage} />
+          <ProfileName name={participant.nickname} />
+        </div>
+      ))}
     </div>
   );
 

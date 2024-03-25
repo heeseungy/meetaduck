@@ -15,24 +15,51 @@ function PartyCreatePage() {
 
   const login = useRecoilValue(loginState);
   const setParty = useSetRecoilState(partyState);
+  const createHandler = async () => {
+    try {
+      const response = await Axios.post('/api/parties', {
+        partyName: partyName,
+        userId: login.userId,
+      });
 
-  const createHandler = () => {
-    Axios.post('/api/parties', {
-      partyName: partyName,
-      userId: login.userId,
-    })
-      .then((response) => {
-        const accessCode = response.data;
-        setParty((prevPartyState) => ({
-          ...prevPartyState,
+      const accessCode = response.data;
+      setParty((prevPartyState) => ({
+        ...prevPartyState,
+        accessCode: accessCode,
+        partyName: partyName,
+      }));
+
+      navigate('/partymaker', {
+        state: {
           accessCode: accessCode,
           partyName: partyName,
-        }));
-        navigate('/partymaker');
-      })
-      .catch((err) => {
-        console.log('err :', err);
+        },
       });
+    } catch(err) {
+      console.log('Error:', err)
+    }
+    // Axios.post('/api/parties', {
+    //   partyName: partyName,
+    //   userId: login.userId,
+    // })
+    //   .then((response) => {
+    //     const accessCode = response.data.accessCode;
+    //     console.log("accessCode: ",accessCode);
+    //     setParty((prevPartyState) => ({
+    //       ...prevPartyState,
+    //       accessCode: accessCode,
+    //       partyName: partyName,
+    //     }));
+    //     navigate('/partymaker', {
+    //       state: {
+    //         accessCode: response.data.accessCode,
+    //         partyName: response.data.partyName,
+    //       },
+    //     });
+      // }
+      // .catch((err) => {
+      //   console.log('err :', err);
+      // });
   };
 
   const handleInputChange = (value: string) => {
