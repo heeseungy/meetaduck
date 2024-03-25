@@ -83,6 +83,8 @@ function PartyMakerPage() {
     // });
   }, []);
 
+// login.userId === response.userId
+  
   useEffect(() => {
     // login State 가져와서 같은지 확인
     console.log('login.userId: ', login.userId);
