@@ -14,6 +14,16 @@ pipeline {
             }
         }
 
+        stage('.env download') {
+        	steps {
+            	withCredentials([file(credentialsId: 'env', variable: 'envFile')]) {
+                	script {
+                    	sh 'cp -f $envFile ./front'
+                    }
+        		}
+        	}
+        }
+
         stage('Build Image') {
             steps {
                 script {
