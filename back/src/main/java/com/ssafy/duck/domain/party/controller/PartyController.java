@@ -30,7 +30,7 @@ public class PartyController {
     public ResponseEntity<PartyRes> create(
             @RequestBody CreateReq createReq) {
 
-        guestService.isValidCreateReq(createReq.getUserId());
+        partyService.isValidCreateReq(createReq.getUserId());
 
         String accessCode = partyService.create(createReq.getPartyName(), createReq.getUserId());
         guestService.createGuest(accessCode, createReq.getUserId());
@@ -45,7 +45,7 @@ public class PartyController {
             @PathVariable String accessCode,
             @PathVariable Long userId) {
         PartyRes partyRes = partyService.find(accessCode);
-        guestService.isValidJoinReq(partyRes, userId);
+        partyService.isValidJoinReq(partyRes, userId);
         guestService.createGuest(accessCode, userId);
 
         return ResponseEntity.ok().body(partyRes);
@@ -75,7 +75,7 @@ public class PartyController {
     public ResponseEntity<Void> delete(
             @RequestBody DeleteReq deleteReq) {
         PartyRes partyRes = partyService.find(deleteReq.getAccessCode());
-        guestService.isValidDeleteReq(partyRes, deleteReq);
+        partyService.isValidDeleteReq(partyRes, deleteReq);
         partyService.delete(deleteReq.getAccessCode());
 
         return ResponseEntity.noContent().build();
