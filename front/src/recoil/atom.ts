@@ -14,9 +14,12 @@ const { persistAtom } = recoilPersist({
 export const loginState = atom<LoginProfile>({
   key: 'loginState',
   default: {
-    kakaoId: 0,
-    guestId: 0,
-    partyId: 0,
+    // kakaoId: 0,
+    // guestId: 0,
+    // partyId: 0,
+    kakaoId: 123456,
+    guestId: 15,
+    partyId: 3,
     nickname: '가철수',
     profileUrl: '',
     thumbnailUrl: '',

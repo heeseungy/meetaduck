@@ -23,7 +23,7 @@ export const PARTY1: Party = {
   accessCode: 'tlz5vy',
   partyName: '마니또도도독 너 내 동료가 되라',
   startTime: '2024-03-11T21:00:00.000Z',
-  endTime: '2024-03-20T21:00:00.000Z',
+  endTime: '2024-03-30T21:00:00.000Z',
   deleted: false,
   userId: 152,
 };
@@ -44,7 +44,7 @@ export const PARTY_STATUS: PartyStatus = {
 // 참가자 1명 조회
 export const MY_PROFILE: ListProfile = {
   userId: 152,
-  guestId: 1,
+  guestId: 15,
   nickname: '가철수',
   thumbnailUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
   votedId: 0,
@@ -59,7 +59,7 @@ export const MANITI_PROFILE: ManitiProfile = {
 export const PARTYLIST: ListProfile[] = [
   {
     userId: 152,
-    guestId: 1,
+    guestId: 15,
     nickname: '가철수',
     thumbnailUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
     votedId: 0,
@@ -140,7 +140,7 @@ export const PARTYLIST: ListProfile[] = [
 export const PAIR_LIST: ResultListItemProps[] = [
   {
     manito: {
-      guestId: 1,
+      guestId: 15,
       nickname: '가철수',
       profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
       thumbnailUrl:
@@ -356,7 +356,7 @@ export const PAIR_LIST: ResultListItemProps[] = [
       manitoFavorability: 93,
     },
     maniti: {
-      guestId: 1,
+      guestId: 15,
       nickname: '가철수',
       profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
       thumbnailUrl:
