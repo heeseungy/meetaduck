@@ -54,7 +54,7 @@ public class MissionService {
     }
 
     public void set(List<Mission> allMissions, StartReq startReq) {
-        int period = PartyRes.calcDate(Instant.now() + "", startReq.getEndTime());
+        int period = TimeUtil.calcDate(Instant.now() + "", startReq.getEndTime());
         Collections.shuffle(allMissions);
         List<Mission> subMissions = allMissions.subList(0, period * 3);
         Party party = partyRepository.findByAccessCode(startReq.getAccessCode())
