@@ -73,6 +73,7 @@ public class PartyService {
     public boolean isValidCreateReq(Long userId) {
         List<Guest> guests = guestRepository.findAllByUserId(userId);
         for (Guest guest : guests) {
+            System.out.println(guest.getParty().getAccessCode());
             Party party = partyRepository.findByPartyId(guest.getParty().getPartyId())
                     .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
             if (!party.isDeleted()) {
@@ -84,22 +85,35 @@ public class PartyService {
     }
 
     public boolean isValidJoinReq(PartyRes partyRes, Long userId) {
-        List<Guest> guests = guestRepository.findAllByUserId(userId);
-        for (Guest guest : guests) {
-            Party party = partyRepository.findByPartyId(guest.getParty().getPartyId())
-                    .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
-            if (!party.isDeleted()) {
-                throw new PartyException(PartyErrorCode.NOT_FOUND_PARTY);
-            }
-        }
-        if (partyRes.getStartTime() != null) {
-            throw new PartyException(PartyErrorCode.ALREADY_STARTED_PARTY);
+        if (partyRes.isDeleted()) {
+            // 삭제된 파티 일 경우
+            throw new PartyException(PartyErrorCode.DELETED_PARTY);
         }
         List<Guest> joinedGuests = guestRepository.findAllByPartyId(partyRes.getPartyId());
         for (Guest guest : joinedGuests) {
             if (guest.getUser().getUserId().equals(userId)) {
-                throw new PartyException(PartyErrorCode.MAXIMUM_OF_1_PARTY_JOINED);
+                throw new PartyException(PartyErrorCode.ALREADY_JOINED_PARTY);
             }
+        }
+        List<Guest> guests = guestRepository.findAllByUserId(userId);
+        for (Guest guest : guests) {
+            Party party = partyRepository.findByPartyId(guest.getParty().getPartyId())
+                    .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
+            if (party.getStartTime() == null) {
+                if (party.isDeleted()) {
+                    throw new PartyException(PartyErrorCode.DELETED_PARTY);
+                } else {
+                    throw new PartyException(PartyErrorCode.MAXIMUM_OF_1_PARTY_ALLOWED);
+                }
+            } else {
+                if (!party.isDeleted() && TimeUtil.convertToKST(Instant.now()).isBefore(party.getEndTime())) {
+                    throw new PartyException(PartyErrorCode.MAXIMUM_OF_1_PARTY_ALLOWED);
+                }
+            }
+        }
+        if (partyRes.getStartTime() != null) {
+            // 시작한 파티일 경우
+            throw new PartyException(PartyErrorCode.ALREADY_STARTED_PARTY);
         }
 
         return true;
@@ -108,7 +122,7 @@ public class PartyService {
     public boolean isValidStartReq(StartReq startReq, PartyRes partyRes) {
         if (partyRes.isDeleted()) {
             // 삭제된 파티 일 경우
-            throw new PartyException(PartyErrorCode.NOT_FOUND_PARTY);
+            throw new PartyException(PartyErrorCode.DELETED_PARTY);
         }
         if (!partyRes.getUserId().equals(startReq.getUserId())) {
             // 파티 생성자가 아닌 사용자가 시작하려고 한 경우
@@ -124,13 +138,13 @@ public class PartyService {
         }
         if (TimeUtil.calcDate(Instant.now() + "", startReq.getEndTime()) < 3 || TimeUtil.calcDate(Instant.now() + "", startReq.getEndTime()) > 7) {
             // 설정한 날짜가 3일보다 작거나, 7일보다 클 경우
-            throw new PartyException(PartyErrorCode.MAXIMUM_OF_7_DAYS_ALLOWED);
+            throw new PartyException(PartyErrorCode.MAXIMUM_OF_3_TO_7_DAYS_ALLOWED);
         }
         // 인원 수가 3명보다 적을 때
         Party party = partyRepository.findByAccessCode(startReq.getAccessCode())
                 .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
         List<Guest> guests = guestRepository.findByParty_PartyId(party.getPartyId());
-        if (guests.size() < 2) {
+        if (guests.size() <= 2) {
             throw new PartyException(PartyErrorCode.NOT_ENOUGH_PEOPLE);
         }
 
@@ -139,12 +153,16 @@ public class PartyService {
 
     public boolean isValidDeleteReq(PartyRes partyRes, DeleteReq deleteReq) {
         if (!deleteReq.getUserId().equals(partyRes.getUserId())) {
+            // 파티 생성자가 아닌 경우
             throw new PartyException(PartyErrorCode.ACCESS_DENIED);
         }
+        // 파티가 시작하기 전에 삭제되는 경우
         if (partyRes.isDeleted()) {
-            throw new PartyException(PartyErrorCode.NOT_FOUND_PARTY);
+            // 파티가 삭제된 경우
+            throw new PartyException(PartyErrorCode.DELETED_PARTY);
         }
-        if (partyRes.getEndTime().isBefore(TimeUtil.convertToKST(Instant.now()))) {
+        if (partyRes.getStartTime() != null && TimeUtil.convertToKST(Instant.now()).isBefore(partyRes.getEndTime())) {
+            // 파티가 진행 중인 경우
             throw new PartyException(PartyErrorCode.PARTY_IS_IN_PROGRESS);
         }
 
