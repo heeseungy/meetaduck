@@ -12,7 +12,7 @@ public interface ResultRepository extends JpaRepository<Result, Long> {
     @Query("SELECT " +
             "result.manitoFavorability AS manitoFavorability, " +
             "result.manitiFavorability AS manitiFavorability " +
-            "FROM Result result "+
+            "FROM Result result " +
             "WHERE result.guest.guestId = :guestId")
     Optional<FavorabilityProjection> findFavorabilityByGuestId(Long guestId);
 

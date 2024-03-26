@@ -4,7 +4,6 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ssafy.duck.common.jwt.JwtProperties;
 import com.ssafy.duck.domain.guest.dto.response.GuestRes;
 import com.ssafy.duck.domain.guest.service.GuestService;
 import com.ssafy.duck.domain.user.dto.model.KakaoUserInfo;
@@ -12,6 +11,7 @@ import com.ssafy.duck.domain.user.dto.model.OAuthToken;
 import com.ssafy.duck.domain.user.dto.request.UserSignUpReq;
 import com.ssafy.duck.domain.user.dto.response.UserRes;
 import com.ssafy.duck.domain.user.service.UserService;
+import com.ssafy.duck.jwt.JwtProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -51,7 +51,7 @@ public class UserController {
     private String userInfoURL;
 
     @GetMapping("/login")
-     ResponseEntity<UserRes> login(@RequestParam("code") String code) {
+    ResponseEntity<UserRes> login(@RequestParam("code") String code) {
 
         // Setting For Request Header
         Charset utf8 = Charset.forName("UTF-8");

@@ -2,8 +2,9 @@ package com.ssafy.duck.domain.result.service;
 
 import com.ssafy.duck.domain.chat.repository.ChatRepository;
 import com.ssafy.duck.domain.guest.dto.response.GuestRes;
+import com.ssafy.duck.domain.guest.entity.Guest;
+import com.ssafy.duck.domain.guest.repository.GuestRepository;
 import com.ssafy.duck.domain.guest.service.GuestService;
-import com.ssafy.duck.domain.result.dto.response.ResultRes;
 import com.ssafy.duck.domain.result.dto.response.ResultWithManitiRes;
 import com.ssafy.duck.domain.result.dto.response.ResultWithManitoRes;
 import com.ssafy.duck.domain.result.entity.Result;
@@ -11,8 +12,12 @@ import com.ssafy.duck.domain.result.exception.ResultErrorCode;
 import com.ssafy.duck.domain.result.exception.ResultException;
 import com.ssafy.duck.domain.result.repository.ResultRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -22,18 +27,21 @@ public class ResultService {
     private final ResultRepository resultRepository;
     private final ChatRepository chatRepository;
     private final GuestService guestService;
+    private final GuestRepository guestRepository;
+    @Value("${fast-api.url}")
+    private String fastAPIUrl;
 
     public ResultWithManitiRes findMeManitiResult(Long guestId) {
-        GuestRes myInfo = guestService.findByGuestId(guestId);    // 내 정보
+        GuestRes myInfo = guestService.getGuestByUserId(guestId);    // 내 정보
 
         // 내 결과 조회
         Result myResult = resultRepository.findByGuestGuestId(guestId);
-        if(myResult == null)
+        if (myResult == null)
             throw new ResultException(ResultErrorCode.MY_RESULT_NOT_FOUND);
 
         // 마니띠의 결과 조회
         Result manitiResult = resultRepository.findByGuestGuestId(myInfo.getManatiId());
-        if(manitiResult == null)
+        if (manitiResult == null)
             throw new ResultException(ResultErrorCode.MANITI_RESULT_NOT_FOUND);
 
         // 대화 빈도 계산
@@ -52,8 +60,10 @@ public class ResultService {
         return resultRes;
     }
 
+    //
+
     public ResultWithManitoRes findMeManitoResult(Long guestId) {
-        GuestRes myInfo = guestService.findByGuestId(guestId);    // 내 정보
+        GuestRes myInfo = guestService.getGuestByUserId(guestId);    // 내 정보
         GuestRes manitoInfo = guestService.findManito(guestId);         // 마니또 정보
 
         // 마니또방 우호도
@@ -63,5 +73,18 @@ public class ResultService {
 
         //긍정어, 부정어 사용 비율
         return null;
+    }
+
+    public void reserveAnalysis(Long partyId) {
+        RestTemplate resultRestTemplate = new RestTemplate();
+        List<Guest> guestList = guestRepository.findAllByPartyId(partyId);
+        for (Guest guest : guestList) {
+            resultRestTemplate.postForEntity(
+                    fastAPIUrl + "/{guestId}",
+                    String.class,
+                    String.class,
+                    guest.getGuestId()
+            );
+        }
     }
 }

@@ -1,81 +1,102 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import Button from '@/components/commons/Button';
 import Card from '@/components/commons/Card';
-import ProfileName from '@/components/commons/ProfileName';
 import DatePickerInput from '@/components/party/DatePickerInput';
 import ShareButton from '@/components/party/ShareButton';
-import { currentTimeState, loginState, partyState, partyStatusState } from '@/recoil/atom';
+import { loginState, partyState } from '@/recoil/atom';
 import { Axios } from '@/services/axios';
 import { partyDeleteervice } from '@/services/partyDeleteService';
 import { partyStartService } from '@/services/partyStartService';
 import styles from '@/styles/party/PartyMaker.module.css';
+import { ArrowsCounterClockwise } from '@phosphor-icons/react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-
-// export const PARTY1: Party = {
-//   partyId: -1,
-//   accessCode: '',
-//   startTime: '',
-//   endTime: '',
-//   deleted: false,
-//   userId: -1,
-// };
 
 function PartyMakerPage() {
   const setParty = useSetRecoilState(partyState);
   const party = useRecoilValue(partyState);
   const login = useRecoilValue(loginState);
 
-  const location = useLocation();
-  const { accessCode, partyName } = location.state;
+  // const location = useLocation();
+  // const { accessCode, partyName } = location.state;
+  // console.log('location.state: ', location.state);
 
-  // 가져온 accessCode와 partyName
-  console.log('accessCode:', accessCode);
-  console.log('partyName:', partyName);
-  const currentTime = useRecoilValue(currentTimeState);
-  const setcurrentTime = useSetRecoilState(currentTimeState);
-  const partyStatus = useRecoilValue(partyStatusState);
+  console.log('login.userId:', login.userId);
+  const [participants, setParticipants] = useState([]);
+
+  // if (partyId === -1 || partyId === undefined) {
+  //   partyId = login.userId;
+  // }
   useEffect(() => {
-    console.log(party);
+    const fetchPartyInfo = async () => {
+      try {
+        const usersInfo = await Axios.get(`/api/guests/all/${party.partyId}`);
+        console.log('usersInfo.data :', usersInfo.data);
+        setParticipants(usersInfo.data);
+      } catch (err) {
+        console.log('Err :', err);
+      }
+    };
+    fetchPartyInfo();
+  }, []);
+
+  const refreshClickHandler = async () => {
+    try {
+      const usersInfo = await Axios.get(`/api/guests/all/${party.partyId}`);
+      setParticipants(usersInfo.data);
+    } catch (err) {
+      console.log('Error refreshing party info: ', err);
+    }
+  };
+
+  useEffect(() => {
+    console.log('party:', party);
     // Axios로 파티를 조회한다.
     // recoil에 axios response로 온 파티 정보를 저장함.
+
+    setParty((prevPartyState) => ({
+      ...prevPartyState,
+      accessCode: party.accessCode,
+      partyName: party.partyName,
+    }));
     // setParty({
-    //   partyId: response.data.partyId,
-    //   accessCode: response.data.accessCode,
-    //   startTime: response.data.startTime,
-    //   endTime: response.data.endTime,
-    //   deleted: response.data.deleted,
-    //   userId: response.data.userId,
+    //   partyId: 3,
+    //   accessCode: 'tlz5vy',
+    //   startTime: '2024-03-11T21:00:00.000Z',
+    //   endTime: '2024-03-20T21:00:00.000Z',
+    //   deleted: false,
+    //   userId: 152,
     // });
-    setcurrentTime(new Date().toISOString());
-    setParty({
-      partyId: 3,
-      accessCode: 'tlz5vy',
-      startTime: '2024-03-21T21:00:00.000Z',
-      endTime: '2024-03-25T06:00:00.000Z',
-      deleted: false,
-      userId: 152,
-    });
   }, []);
+
+  // login.userId === response.userId
 
   useEffect(() => {
     // login State 가져와서 같은지 확인
     console.log('login.userId: ', login.userId);
     console.log(party.userId);
-    console.log(currentTime);
-    console.log(partyStatus);
   }, [party]);
 
-  const tempJoinNumber = 0;
+  const joinNumber = participants.length;
 
   const children = (
     <div className={styles.cardMargin}>
       <div className={`${styles.marginBottom} ${styles.spaceB}`}>
-        <span className={`FontM`}>참여 현황</span>
-        <span>{tempJoinNumber}명 창여중</span>
+        <span className={`FontM`}>
+          참여 현황
+          <span onClick={refreshClickHandler} className={styles.marginL}>
+            <ArrowsCounterClockwise size={18} />
+          </span>
+        </span>
+        <span>{joinNumber}명 창여중</span>
       </div>
-      <ProfileName />
+      {participants.map((participant, index) => (
+        <div key={index} className={styles.participant}>
+          <img src={participant.thumbnailUrl} alt="ProfileImg" className={styles.profileImage} />
+          <span className={styles.nickname}>{participant.nickname}</span>
+        </div>
+      ))}
     </div>
   );
 
@@ -88,10 +109,15 @@ function PartyMakerPage() {
     console.log('파티닫기');
     partyDeleteervice();
   };
+
+  const leaveHandler = () => {
+    console.log('나가기');
+  };
+
   return (
     <div className={styles.margin}>
       <header className={styles.spaceB}>
-        <span className={`FontL FontBasic`}>{partyName} 마니또</span>
+        <span className={`FontL FontBasic`}>{party.partyName} 마니또</span>
         <span>
           <ShareButton>참여 코드 공유</ShareButton>
         </span>
@@ -100,22 +126,34 @@ function PartyMakerPage() {
         <Card {...{ tag: 4, children: children }} />
       </div>
       <div className={styles.endWrapper}>
-        <div className={`FontM`}>종료 시간</div>
-        <div className={`${styles.inputWrapper}`}>
-          <DatePickerInput />
-        </div>
-        <div className={`${styles.buttonWrapper}`}>
-          <span className={`${styles.oneButton}`}>
-            <Button onClickHandler={startHandler} bgc="filled">
-              시작하기
-            </Button>
-          </span>
+        {/* recoil에 있는 party의 userId와 login의 userId가 같으면 */}
+        {login.userId === party.userId ? (
+          <>
+            <div className={`FontM`}>종료 시간</div>
+            <div className={`${styles.inputWrapper}`}>
+              <DatePickerInput />
+            </div>
+            <div className={`${styles.buttonWrapper}`}>
+              <span className={`${styles.oneButton}`}>
+                <Button onClickHandler={startHandler} bgc="filled">
+                  시작하기
+                </Button>
+              </span>
+              <span>
+                <Button onClickHandler={deleteHandler} bgc="empty">
+                  파티닫기
+                </Button>
+              </span>
+            </div>
+          </>
+        ) : (
+          // recoil에 있는 party의 userId와 login의 userId가 다르면
           <span>
-            <Button onClickHandler={deleteHandler} bgc="empty">
-              파티닫기
+            <Button onClickHandler={leaveHandler} bgc="empty">
+              나가기
             </Button>
           </span>
-        </div>
+        )}
       </div>
     </div>
   );

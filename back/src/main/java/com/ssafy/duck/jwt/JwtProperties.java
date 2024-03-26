@@ -1,4 +1,4 @@
-package com.ssafy.duck.common.jwt;
+package com.ssafy.duck.jwt;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
