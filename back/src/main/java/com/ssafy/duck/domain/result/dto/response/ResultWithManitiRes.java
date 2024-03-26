@@ -11,9 +11,10 @@ import org.json.simple.JSONArray;
 @AllArgsConstructor
 @Builder
 public class ResultWithManitiRes {
-    private Integer manitiFavorability;
-    private Integer manitiRatio;
+    private Integer favorability;
+    private Integer ratio;
     private JSONArray myWordcount;
-    private JSONArray mantiWordcount;
+    private JSONArray wordcount;
     private Long chatCount;
+    private int missionCount;
 }

@@ -9,5 +9,7 @@ import java.util.List;
 public interface MissionStatusRepository extends JpaRepository<MissionStatus, Long> {
     List<MissionStatus> findAllByGuestGuestIdAndGetTimeBefore(Long guestId, Instant today);
 
+    int countByGuestGuestIdAndSuccessTimeIsNotNull(Long guestId);
+
     List<MissionStatus> findByGuestGuestIdOrderByGetTime(Long guestId);
 }

@@ -18,7 +18,6 @@ import com.ssafy.duck.domain.mission.exception.MissionException;
 import com.ssafy.duck.domain.mission.repository.MissionRepository;
 import com.ssafy.duck.domain.mission.repository.MissionStatusRepository;
 import com.ssafy.duck.domain.party.dto.request.StartReq;
-import com.ssafy.duck.domain.party.dto.response.PartyRes;
 import com.ssafy.duck.domain.party.entity.Party;
 import com.ssafy.duck.domain.party.exception.PartyErrorCode;
 import com.ssafy.duck.domain.party.exception.PartyException;

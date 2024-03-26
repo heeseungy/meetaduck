@@ -34,7 +34,7 @@ public class Result {
 
     @Nullable
     @Column(name = "`maniti_wordcount`")
-    private String mantiWordcount;
+    private String manitiWordcount;
 
 
     @Nullable
