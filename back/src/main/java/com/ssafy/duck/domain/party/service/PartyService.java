@@ -1,5 +1,6 @@
 package com.ssafy.duck.domain.party.service;
 
+import com.ssafy.duck.common.TimeUtil;
 import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.repository.GuestRepository;
 import com.ssafy.duck.domain.party.dto.request.DeleteReq;
@@ -107,7 +108,9 @@ public class PartyService {
         if (partyRes.getDeleted()) {
             throw new PartyException(PartyErrorCode.NOT_FOUND_PARTY);
         }
-        // TODO: 파티가 진행 중인 경우
+        if (partyRes.getEndTime().isBefore(TimeUtil.convertToKST(Instant.now()))) {
+            throw new PartyException(PartyErrorCode.PARTY_IS_IN_PROGRESS);
+        }
     }
 
     public PartyRes toPartyRes(Party party) {
