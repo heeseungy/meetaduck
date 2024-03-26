@@ -111,3 +111,12 @@
 .marginTop {
   margin-top: 1rem;
 }
+
+.ImageInput {
+  visibility: hidden;
+}
+.PreviewImage {
+  min-width: 250px;
+  min-height: 250px;
+  object-fit: cover;
+}

@@ -15,7 +15,7 @@ export const loginState = atom<LoginProfile>({
   key: 'loginState',
   default: {
     kakaoId: 123456,
-    guestId: 1,
+    guestId: 15,
     partyId: 3,
     nickname: '가철수',
     profileUrl: 'https://image.yes24.com/goods/104804448/XL',

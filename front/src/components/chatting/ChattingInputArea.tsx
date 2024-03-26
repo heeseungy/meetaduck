@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import pairChat from '@/assets/images/pairChat.png';
+import { chatSendImageService } from '@/services/chatSendImageService';
 import { chatSendMessageService } from '@/services/chatSendMessageService';
-import { handleImageUpload } from '@/services/imageCompression';
 import styles from '@/styles/chatting/ChattingInputArea.module.css';
-import { PaperPlaneTilt, Plus } from '@phosphor-icons/react';
+import { PaperPlaneTilt, Plus, XCircle } from '@phosphor-icons/react';
 import AWS from 'aws-sdk';
 import imageCompression from 'browser-image-compression';
 
@@ -16,6 +16,11 @@ function ChattingInputArea({ senderId }: { senderId: number }) {
   const sendMessage = async () => {
     if (newMessage.trim() !== '') {
       chatSendMessageService(senderId, +chatId, newMessage, setNewMessage);
+      if (imgUrl !== '') {
+        chatSendImageService(senderId, +chatId, imgUrl, setImgUrl);
+      }
+    } else if (imgUrl !== '') {
+      chatSendImageService(senderId, +chatId, imgUrl, setImgUrl);
     }
   };
 
@@ -32,6 +37,7 @@ function ChattingInputArea({ senderId }: { senderId: number }) {
   // 파일 상태를 관리하기 위한 State
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [imgUrl, setImgUrl] = useState<string>('');
+
   // 파일 업로드 핸들러
   const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -49,12 +55,13 @@ function ChattingInputArea({ senderId }: { senderId: number }) {
           // return uploadToServer(compressedFile); // write your own logic
         })
         .catch(function (error) {
+          window.alert('이미지 파일을 업로드해주세요.');
           console.log(error.message);
         });
     }
   };
 
-  // 파일 업로드 함수
+  // s3파일 업로드 함수
   const uploadFile = (file: File) => {
     const uploadParams = {
       Bucket: 's10p22c108', // 버킷 이름
@@ -78,38 +85,49 @@ function ChattingInputArea({ senderId }: { senderId: number }) {
   useEffect(() => {
     selectedFile && uploadFile(selectedFile);
   }, [selectedFile]);
-  const plusButtonHandler = () => {
-    console.log('plus button 클릭');
+
+  const handlerDelete = () => {
+    setImgUrl('');
+  };
+
+  const pressEnter = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      sendMessage;
+    }
   };
 
   return (
     <>
-      <div>
-        <input type="file" onChange={handleFileInput} />
-        <button onClick={() => selectedFile && uploadFile(selectedFile)}> Upload to S3</button>
-        <div>
-          {/* <img src={imgUrl} alt="" /> */}
-          <img src={imgUrl ? pairChat : ''} alt="" />
+      <div className={`${styles.inputArea}`}>
+        <div className={`${imgUrl != '' ? styles.PreviewBackground : styles.PreviewHidden}`}>
+          <input className={styles.ImageInput} type="file" id="file" onChange={handleFileInput} />
+          <div className={styles.ImageBox}>
+            <div className={styles.DeleteButton} onClick={handlerDelete}>
+              <XCircle size={20} color="#4d4637" weight="fill" />
+            </div>
+            <img className={`${imgUrl != '' ? styles.PreviewImage : ''}`} src={imgUrl ? pairChat : ''} alt="" />
+          </div>
+          {/* <img className={`${imgUrl != '' ? styles.PreviewImage : ''}`} src={imgUrl ? imgUrl : ''} alt="" /> */}
         </div>
-      </div>
-      <div className={`${styles.FlexHorizontal} ${styles.inputArea}`}>
-        <div className={`${styles.FlexHorizontal} ${styles.InputBox}`}>
-          <button className={styles.plusBtn} onClick={plusButtonHandler}>
-            <Plus color="#4d4637" size={25} />
-          </button>
-          <div className={styles.MessageContainer}>
-            <button
-              className={` ${styles.SendButton}`}
-              onClick={sendMessage || (selectedFile && uploadFile(selectedFile))}
-            >
-              <PaperPlaneTilt color="#ffd656" size={25} />
-            </button>
-            <textarea
-              placeholder="메시지를 입력하세요"
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-              className={`FontS ${styles.TextBox}`}
-            />
+        <div className={`${styles.FlexHorizontal} `}>
+          <div className={`${styles.FlexHorizontal} ${styles.InputBox}`}>
+            <label htmlFor="file">
+              <div className={styles.plusBtn}>
+                <Plus color="#4d4637" size={25} />
+              </div>
+            </label>
+            <div className={styles.MessageContainer}>
+              <button className={` ${styles.SendButton}`} onClick={sendMessage}>
+                <PaperPlaneTilt color="#ffd656" size={25} />
+              </button>
+              <textarea
+                placeholder="메시지를 입력하세요"
+                value={newMessage}
+                onKeyDown={(e) => pressEnter(e)}
+                onChange={(e) => setNewMessage(e.target.value)}
+                className={`FontS ${styles.TextBox}`}
+              />
+            </div>
           </div>
         </div>
       </div>

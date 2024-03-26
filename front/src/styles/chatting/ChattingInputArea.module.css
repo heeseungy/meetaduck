@@ -1,7 +1,11 @@
 .inputArea {
-  height: 4.375rem;
+  position: absolute;
+  bottom: 1rem;
+  min-height: 4rem;
+  /* height: 4.375rem; */
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -10,9 +14,43 @@
   justify-content: center;
   align-items: center;
 }
+
 .InputBox {
   gap: 1rem;
   width: 20.5rem;
+}
+
+.PreviewBackground {
+  position: absolute;
+  top: -3rem;
+  height: 3rem;
+  width: 100dvw;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.PreviewHidden {
+  display: none;
+}
+
+.ImageInput {
+  visibility: hidden;
+}
+
+.ImageBox {
+  position: relative;
+}
+.DeleteButton {
+  position: absolute;
+  right: 0rem;
+  top: 0rem;
+}
+.PreviewImage {
+  width: auto;
+  max-width: 5rem;
 }
 .plusBtn {
   width: 2.125rem;
@@ -40,6 +78,7 @@
   border: #4d4637 2px solid;
   -ms-overflow-style: none; /* 인터넷 익스플로러 */
   scrollbar-width: none; /* 파이어폭스 */
+  resize: none;
 }
 
 .TextBox::-webkit-scrollbar {

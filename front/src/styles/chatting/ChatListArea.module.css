@@ -12,6 +12,7 @@
   width: 100%;
   height: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
   margin-top: 2rem;
   margin-bottom: 2rem;
   display: flex;
@@ -60,29 +61,48 @@
 }
 
 .Admin {
-  width: 100%;
-  height: 2rem;
+  width: calc(100dvw - 1rem);
+  min-height: 2rem;
   text-align: center;
   border-radius: 0.3125rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 0.3rem;
-  padding-bottom: 0.3rem;
-  gap: 0.2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  gap: 0.5rem;
+}
+
+.Admin1 {
+  width: 9.5rem;
+  word-break: keep-all;
+  white-space: normal;
 }
 
 .Message {
   border-radius: 0.3125rem;
   padding: 0.5rem;
   max-width: 17rem;
+  word-break: break-all;
+  white-space: normal;
 }
-
+.Message img {
+  max-width: 16.5rem;
+  height: auto;
+  background-color: white;
+  border-radius: 0.3125rem;
+}
 .MyMessage {
   background-color: #ffd656;
 }
 
 .TheirMessage {
   background-color: white;
+}
+
+.Gap {
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
 }
