@@ -34,22 +34,22 @@ spark = SparkSession.builder \
 
 # 데이터베이스 연결 설정
 def get_db_connection():
-    # return pymysql.connect(
-    #     host="stg-yswa-kr-practice-db-master.mariadb.database.azure.com",
-    #     port=3306,
-    #     user="S10P21C108@stg-yswa-kr-practice-db-master.mariadb.database.azure.com",
-    #     password="XGzFAZq8e7",
-    #     db="s10p21c108",
-    #     cursorclass=pymysql.cursors.DictCursor
-    # ) 
     return pymysql.connect(
         host="stg-yswa-kr-practice-db-master.mariadb.database.azure.com",
         port=3306,
-        user="S10P22C108@stg-yswa-kr-practice-db-master.mariadb.database.azure.com",
-        password="iF6wrgXGd6",
-        db="s10p22c108",
+        user="S10P21C108@stg-yswa-kr-practice-db-master.mariadb.database.azure.com",
+        password="XGzFAZq8e7",
+        db="s10p21c108",
         cursorclass=pymysql.cursors.DictCursor
     ) 
+    # return pymysql.connect(
+    #     host="stg-yswa-kr-practice-db-master.mariadb.database.azure.com",
+    #     port=3306,
+    #     user="S10P22C108@stg-yswa-kr-practice-db-master.mariadb.database.azure.com",
+    #     password="iF6wrgXGd6",
+    #     db="s10p22c108",
+    #     cursorclass=pymysql.cursors.DictCursor
+    # ) 
 
 def get_guest_info(guest_id : int, isMe : bool) :
     connection = get_db_connection()
@@ -122,7 +122,7 @@ def get_favorability(guest_id, chat_id):
 
     # 채팅 메세지 가져오기
     origincontent = (df.filter((col("sender_id") == guest_id) & (col("chat_id") == chat_id) & (col("message_type") == False))
-                    .select("_id", "message_type", "content", "created_time", "sender_id", "chat_id", "_class")
+                    .select("content", "created_time", "sender_id", "chat_id", "_class")
                     .collect() )
     if not origincontent:
         return 0
@@ -130,9 +130,7 @@ def get_favorability(guest_id, chat_id):
     # JSON 리스트로 변환
     message_list = []
     for message in origincontent:
-        message_dict = {
-            "_id": {"$oid": message["_id"]["oid"]},
-            "message_type": message["message_type"],
+        message_dict = { 
             "content": message["content"],
             "created_time": message["created_time"],
             "sender_id": message["sender_id"],
@@ -144,12 +142,13 @@ def get_favorability(guest_id, chat_id):
     return test.calc_favorability(message_list)
 
 
-def get_message(guest_id, chat_id):    
+def get_message( chat_id):    
     df = spark.read.format("mongo").load()
+    print("get message ",  chat_id)
 
     # 채팅 메세지 가져오기
-    origincontent = (df.filter((col("sender_id") == guest_id) & (col("chat_id") == chat_id) & (col("message_type") == False))
-                    .select("_id", "message_type", "content", "created_time", "sender_id", "chat_id", "_class")
+    origincontent = (df.filter((col("chat_id") == chat_id) & (col("message_type") == False))
+                    .select("message_type", "content", "created_time", "sender_id", "chat_id")
                     .collect() )
     if not origincontent:
         return 0
@@ -158,15 +157,14 @@ def get_message(guest_id, chat_id):
     message_list = []
     for message in origincontent:
         message_dict = {
-            "_id": {"$oid": message["_id"]["oid"]},
             "message_type": message["message_type"],
             "content": message["content"],
             "created_time": message["created_time"],
             "sender_id": message["sender_id"],
-            "chat_id": message["chat_id"],
-            "_class": message["_class"]
+            "chat_id": message["chat_id"]
         }
         message_list.append(message_dict)  
+    print("message list ", message_list)
   
     return message_list
 
@@ -174,15 +172,15 @@ def get_message(guest_id, chat_id):
 @app.post("/spark/{guest_id}")
 async def word_count_spark(guest_id: int):   
     df = spark.read.format("mongo").load()
-
+    print("guest id " , guest_id)
     # 내가 마니또일 때 저장 
     try:
         my_info = get_guest_info(guest_id, True)    # 내 정보 가져오기
     except Exception as e:
         print("Error occurred while getting guest info:", e)
         raise HTTPException(status_code=404, detail="참가자의 정보가 없습니다.")
-  
-    model_result = test.calc_favorability(get_message(guest_id, my_info["chat_id"]))
+    print("1차 정보가져오기")
+    model_result = test.calc_favorability(guest_id, get_message(my_info["chat_id"]))
 
     me_manito_favorability = model_result[0]
     if pd.isna(me_manito_favorability):
@@ -190,10 +188,11 @@ async def word_count_spark(guest_id: int):
     
     # 긍정어 사용비율
     me_manito_ratio = model_result[1]
-
+    print("1차 모델")
     me_manito_wordcount = word_count(guest_id,my_info["chat_id"] )
+    print("1차 word count")
     update_result_wordcount(me_manito_wordcount, me_manito_favorability, me_manito_ratio, guest_id, True)
-   
+    print("1차 마니또 끝")
 
     # 내가 마니띠일 때 저장 
     try:
@@ -201,18 +200,19 @@ async def word_count_spark(guest_id: int):
     except Exception as e:
         print("Error occurred while getting manito info:", e)
         raise HTTPException(status_code=404, detail="참가자의 마니또 정보가 없습니다.")
-   
-    model_result = test.calc_favorability(get_message(guest_id, manito_info["chat_id"]))
-
+    print("2차 정보가져오기")
+    model_result = test.calc_favorability(guest_id, get_message(manito_info["chat_id"]))
 
     me_maniti_favorability = model_result[0]
     if pd.isna(me_maniti_favorability):
         me_maniti_favorability = 0
+    print("2차 모델")
 
     # 긍정어 사용비율
     me_maniti_ratio = model_result[1]
 
     me_maniti_wordcount = word_count(guest_id,manito_info["chat_id"] )
+    print("2차 word count")
     update_result_wordcount(me_maniti_wordcount, me_maniti_favorability, me_maniti_ratio, guest_id, False)
 
     return {"success wordcount"}
