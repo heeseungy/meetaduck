@@ -33,7 +33,7 @@ public class Guest {
     @JoinColumn(name = "chat_id", nullable = false, updatable = false)
     private Chat chat;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false, updatable = false)
     private User user;
 
