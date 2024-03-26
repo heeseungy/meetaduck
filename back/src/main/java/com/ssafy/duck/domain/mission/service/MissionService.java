@@ -24,17 +24,16 @@ import com.ssafy.duck.domain.party.exception.PartyErrorCode;
 import com.ssafy.duck.domain.party.exception.PartyException;
 import com.ssafy.duck.domain.party.repository.PartyRepository;
 import com.ssafy.duck.domain.party.service.PartyService;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.*;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -55,7 +54,7 @@ public class MissionService {
     }
 
     public void set(List<Mission> allMissions, StartReq startReq) {
-        int period = PartyRes.calcDate(Instant.now() + "", startReq.getEndTime());
+        int period = TimeUtil.calcDate(Instant.now() + "", startReq.getEndTime());
         Collections.shuffle(allMissions);
         List<Mission> subMissions = allMissions.subList(0, period * 3);
         Party party = partyRepository.findByAccessCode(startReq.getAccessCode())
@@ -81,17 +80,17 @@ public class MissionService {
     }
 
 
-    public List<MissionRes> findTodayMissionsByGuestId(Long guestId){
+    public List<MissionRes> findTodayMissionsByGuestId(Long guestId) {
         List<MissionRes> missionResList = new ArrayList<>();
 
         Instant today = TimeUtil.convertToKST(Instant.now());
         List<MissionStatus> missionStatusList = missionStatusRepository.findAllByGuestGuestIdAndGetTimeBefore(guestId, today);
 
-        int firstMission = missionStatusList.size()-3;
+        int firstMission = missionStatusList.size() - 3;
         Instant checkConfirmTime = TimeUtil.convertToKST(Instant.now());
-        if(missionStatusList.get(firstMission).getConfirmTime() != null){
+        if (missionStatusList.get(firstMission).getConfirmTime() != null) {
             checkConfirmTime = missionStatusList.get(firstMission).getConfirmTime();
-        }else {
+        } else {
             MissionPassReq missionPassReq = MissionPassReq.builder().
                     missionStatusId(missionStatusList.get(firstMission).getMissionStatusId())
                     .build();
@@ -104,7 +103,7 @@ public class MissionService {
                 .missionImageUrl(missionStatusList.get(firstMission).getMissionImageUrl())
                 .build());
 
-        for(int i = missionStatusList.size()-2; i < missionStatusList.size(); i++){
+        for (int i = missionStatusList.size() - 2; i < missionStatusList.size(); i++) {
             missionResList.add(MissionRes.builder()
                     .missionStatusId(missionStatusList.get(i).getMissionStatusId())
                     .confirmTime(missionStatusList.get(i).getConfirmTime())
@@ -116,7 +115,7 @@ public class MissionService {
         return missionResList;
     }
 
-    public void updateConfirmTimeByMissionStatusId(MissionPassReq missionPassReq){
+    public void updateConfirmTimeByMissionStatusId(MissionPassReq missionPassReq) {
         Long missionStatusId = missionPassReq.getMissionStatusId();
         MissionStatus beforemissionStatus = missionStatusRepository.findById(missionStatusId)
                 .orElseThrow(() -> new MissionException(MissionErrorCode.MISSION_NOT_FOUND));
@@ -135,7 +134,7 @@ public class MissionService {
 
     }
 
-    public void updateMissionImageUrlByMissionStatusId(MissionImageUpdateReq missionImageUpdateReq){
+    public void updateMissionImageUrlByMissionStatusId(MissionImageUpdateReq missionImageUpdateReq) {
         Long missionStatusId = missionImageUpdateReq.getMissionStatusId();
         String missionImageUrl = missionImageUpdateReq.getMissionImageUrl();
         MissionStatus beforemissionStatus = missionStatusRepository.findById(missionStatusId)
@@ -154,14 +153,14 @@ public class MissionService {
         missionStatusRepository.save(aftermissionStatus);
     }
 
-    public MyManitoMissionRes findMissionResultsByGuestId(Long guestId){
+    public MyManitoMissionRes findMissionResultsByGuestId(Long guestId) {
         Guest guest = guestRepository.findByManitiId(guestId)
                 .orElseThrow(() -> new GuestException(GuestErrorCode.MANITO_NOT_FOUND));
         Instant today = TimeUtil.convertToKST(Instant.now());
         List<MissionStatus> missionStatusList = missionStatusRepository.findAllByGuestGuestIdAndGetTimeBefore(guest.getGuestId(), today);
         MyManitoMissionRes myManitoMissionRes = null;
-        for(int i = missionStatusList.size()-3; i < missionStatusList.size(); i++){
-            if(missionStatusList.get(i).getMissionImageUrl() != null){
+        for (int i = missionStatusList.size() - 3; i < missionStatusList.size(); i++) {
+            if (missionStatusList.get(i).getMissionImageUrl() != null) {
                 myManitoMissionRes = MyManitoMissionRes.builder()
                         .missionStatusId(missionStatusList.get(i).getMissionStatusId())
                         .getTime(missionStatusList.get(i).getGetTime())
@@ -177,12 +176,12 @@ public class MissionService {
         return myManitoMissionRes;
     }
 
-    public void updateSuccessTime(MissionSuccessReq missionSuccessReq){
+    public void updateSuccessTime(MissionSuccessReq missionSuccessReq) {
         Long missionStatusId = missionSuccessReq.getMissionStatusId();
         boolean missionSuccessResult = missionSuccessReq.getMissionSuccessResult();
         MissionStatus beforemissionStatus = missionStatusRepository.findById(missionStatusId)
                 .orElseThrow(() -> new MissionException(MissionErrorCode.MISSION_NOT_FOUND));
-        if(missionSuccessResult){
+        if (missionSuccessResult) {
             MissionStatus aftermissionStatus = MissionStatus.builder()
                     .missionStatusId(beforemissionStatus.getMissionStatusId())
                     .getTime(beforemissionStatus.getGetTime())
@@ -194,7 +193,7 @@ public class MissionService {
                     .guest(beforemissionStatus.getGuest())
                     .build();
             missionStatusRepository.save(aftermissionStatus);
-        }else {
+        } else {
             MissionStatus aftermissionStatus = MissionStatus.builder()
                     .missionStatusId(beforemissionStatus.getMissionStatusId())
                     .getTime(beforemissionStatus.getGetTime())

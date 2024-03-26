@@ -1,5 +1,6 @@
 package com.ssafy.duck.domain.party.entity;
 
+import com.ssafy.duck.common.TimeUtil;
 import com.ssafy.duck.domain.user.entity.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -47,7 +48,7 @@ public class Party {
     }
 
     public void start(Instant endTime) {
-        this.startTime = Instant.now();
+        this.startTime = TimeUtil.convertToKST(Instant.now());
         this.endTime = endTime;
     }
 

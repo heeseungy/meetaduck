@@ -3,11 +3,10 @@ import { useNavigate } from 'react-router-dom';
 
 import { loginState } from '@/recoil/atom';
 import { Axios } from '@/services/axios';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 
 function RedirectionPage() {
   const setLogin = useSetRecoilState(loginState);
-  const login = useRecoilValue(loginState);
 
   const code: string = new URLSearchParams(window.location.search).get('code')!;
   const navigate = useNavigate();
@@ -24,7 +23,6 @@ function RedirectionPage() {
       },
     })
       .then((response) => {
-        console.log('responsessss : ', response);
         setLogin({
           kakaoId: response.data.kakaoId,
           guestId: response.data.guestId,
@@ -45,9 +43,6 @@ function RedirectionPage() {
       });
   }, []);
 
-  // useEffect(() => {
-  //   console.log('login.kakaoId', login.kakaoId);
-  // }, [login.kakaoId]);
 
   return <div className="FontM">로그인 중입니다.</div>;
 }

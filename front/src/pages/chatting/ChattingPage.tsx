@@ -13,7 +13,7 @@ function ChattingPage() {
   const setChatIdList = useSetRecoilState(chatIdListState);
 
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     // api 채팅방 목록 조회
     // setChatIdList(response.data)

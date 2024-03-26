@@ -1,16 +1,12 @@
 package com.ssafy.duck.domain.chat.entity;
 
-import com.ssafy.duck.common.BaseTimeEntity;
-import com.ssafy.duck.domain.chat.dto.request.MessageReq;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import lombok.*;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-
-import java.time.Instant;
-import java.time.LocalDateTime;
 
 @Document(collection = "messages")
 @AllArgsConstructor

@@ -37,9 +37,11 @@ public class ResultService {
     private final MessageRepository messageRepository;
     private final GuestService guestService;
     private final GuestRepository guestRepository;
+    @Value("${fast-api.url}")
+    private String fastAPIUrl;
 
     public ResultWithManitiRes findMeManitiResult(Long guestId) {
-        GuestRes myInfo = guestService.findByGuestId(guestId);    // 내 정보
+        GuestRes myInfo = guestService.getGuestByUserId(guestId);    // 내 정보
 
         // 내 결과 조회
         Result myResult = resultRepository.findByGuestGuestId(guestId);
@@ -72,8 +74,9 @@ public class ResultService {
     }
 
 
+
     public ResultWithManitoRes findMeManitoResult(Long guestId) {
-        GuestRes myInfo = guestService.findByGuestId(guestId);    // 내 정보
+        GuestRes myInfo = guestService.getGuestByUserId(guestId);    // 내 정보
         GuestRes manitoInfo = guestService.findManito(guestId);         // 마니또 정보
 
         // 마니또방 우호도
@@ -84,6 +87,7 @@ public class ResultService {
         //긍정어, 부정어 사용 비율
         return null;
     }
+
 
     // str은 항상 json 배열 형태로 들어옴
     public JSONArray stringToJson(String str){

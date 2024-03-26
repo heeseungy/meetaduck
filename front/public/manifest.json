@@ -1,6 +1,6 @@
 {
-  "name": "vite-pwa",
-  "short_name": "vite-pwa",
+  "name": "Meet A Duck",
+  "short_name": "Meet A Duck",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

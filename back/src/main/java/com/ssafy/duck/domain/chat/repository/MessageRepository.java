@@ -1,6 +1,5 @@
 package com.ssafy.duck.domain.chat.repository;
 
-import com.ssafy.duck.domain.chat.dto.response.MessageRes;
 import com.ssafy.duck.domain.chat.entity.Message;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

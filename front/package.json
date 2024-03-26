@@ -23,6 +23,7 @@
     "@types/socket.io-client": "^3.0.0",
     "aws-sdk": "^2.1583.0",
     "axios": "^1.6.8",
+    "browser-image-compression": "^2.0.2",
     "chart.js": "^4.4.2",
     "chartjs-chart-wordcloud": "^4.4.0",
     "dayjs": "^1.11.10",

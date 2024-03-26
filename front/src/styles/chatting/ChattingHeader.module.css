@@ -1,5 +1,6 @@
 .HeaderArea {
-  position: relative;
+  position: absolute;
+  top: 0;
   width: 100dvw;
   height: 4.375rem;
   background-color: white;

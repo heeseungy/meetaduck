@@ -19,20 +19,20 @@ public class HintController {
 
     @GetMapping("/{guestId}")
     public ResponseEntity<List<HintRes>> getHintQuestion(@PathVariable("guestId") Long guestId) {
-            List<HintRes> hintResList = hintService.getHintQuestion(guestId);
-            return ResponseEntity.ok(hintResList);
+        List<HintRes> hintResList = hintService.getHintQuestion(guestId);
+        return ResponseEntity.ok(hintResList);
     }
 
     @PatchMapping("/{guestId}")
     public ResponseEntity<Void> setHintStatus(@PathVariable("guestId") Long guestId,
-                                              @RequestBody List<HintStatusReq> hintStatusReq){
+                                              @RequestBody List<HintStatusReq> hintStatusReq) {
         hintService.setStatus(guestId, hintStatusReq);
         return ResponseEntity.ok().body(null);
     }
 
 
     @GetMapping("/answers/{guestId}")
-    public ResponseEntity<List<HintStatusRes>> getHintQnA(@PathVariable("guestId") Long guestId){
+    public ResponseEntity<List<HintStatusRes>> getHintQnA(@PathVariable("guestId") Long guestId) {
         List<HintStatusRes> hintStatusResList = hintService.getHintQnA(guestId);
         return ResponseEntity.ok(hintStatusResList);
     }
