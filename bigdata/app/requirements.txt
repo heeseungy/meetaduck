@@ -8,7 +8,6 @@ fastapi
 uvicorn
 findspark
 pyspark
-keras
 kiwipiepy
 konlpy
 pymongo
