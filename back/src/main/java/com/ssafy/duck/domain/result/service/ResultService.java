@@ -6,7 +6,6 @@ import com.ssafy.duck.domain.guest.dto.response.GuestRes;
 import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.repository.GuestRepository;
 import com.ssafy.duck.domain.guest.service.GuestService;
-import com.ssafy.duck.domain.result.dto.response.ResultRes;
 import com.ssafy.duck.domain.result.dto.response.ResultWithManitiRes;
 import com.ssafy.duck.domain.result.dto.response.ResultWithManitoRes;
 import com.ssafy.duck.domain.result.entity.Result;
@@ -14,7 +13,14 @@ import com.ssafy.duck.domain.result.exception.ResultErrorCode;
 import com.ssafy.duck.domain.result.exception.ResultException;
 import com.ssafy.duck.domain.result.repository.ResultRepository;
 import lombok.RequiredArgsConstructor;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
+//import org.springframework.boot.configurationprocessor.json.JSONArray;
+//import org.springframework.boot.configurationprocessor.json.JSONException;
+//import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -43,9 +49,10 @@ public class ResultService {
 
         // 마니띠의 결과 조회
         Result manitiResult = resultRepository.findByGuestGuestId(myInfo.getManatiId());
-        if (manitiResult == null)
+        if (manitiResult == null || manitiResult.getManitoWordcount() == null)
             throw new ResultException(ResultErrorCode.MANITI_RESULT_NOT_FOUND);
         System.out.println("maniti result : " + manitiResult.toString());
+
 
         // 대화 빈도 계산
         Long chatCount = messageRepository.countByChatId(myInfo.getChatId().intValue());
@@ -54,8 +61,9 @@ public class ResultService {
         ResultWithManitiRes resultRes = ResultWithManitiRes.builder()
                 .manitiFavorability(myResult.getManitiFavorability())
                 .manitiRatio(myResult.getManitiRatio())
-                .myWordcount(myResult.getMantiWordcount())
-                .mantiWordcount(manitiResult.getManitoWordcount())
+                .myWordcount(stringToJson(myResult.getMantiWordcount()))
+                .mantiWordcount(stringToJson(manitiResult.getManitoWordcount()))
+//                .mantiWordcount(null)
                 .chatCount(chatCount)
                 .build();
         System.out.println(resultRes);
@@ -77,7 +85,29 @@ public class ResultService {
         return null;
     }
 
-    //
+    // str은 항상 json 배열 형태로 들어옴
+    public JSONArray stringToJson(String str){
+        JSONArray jsonArray = new JSONArray();
+        try {
+            JSONParser parser = new JSONParser();
+            jsonArray = (JSONArray) parser.parse(str);
+            System.out.println("json array:" + jsonArray);
+//            // JSONObject에 담아줄 JSONArray 생성
+//            // 각각의 원소를 JSONObject로 변환하여 새로운 JSONArray에 추가
+//            for (Object obj : jsonArray) {
+//                JSONObject wordCountObj = new JSONObject();
+//                JSONObject jsonObj = (JSONObject) obj;
+//                wordCountObj.put("word", jsonObj.get("word"));
+//                wordCountObj.put("count", jsonObj.get("count"));
+//                wordCountArray.add(wordCountObj);
+//            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return jsonArray;
+//        return wordCountArray;
+    }
+
 
     @Value("${fast-api.url}")
     private String fastAPIUrl;

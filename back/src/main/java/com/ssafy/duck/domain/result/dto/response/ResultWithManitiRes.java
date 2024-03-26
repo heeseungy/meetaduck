@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
+import org.json.simple.JSONArray;
 
 @Getter
 @NoArgsConstructor
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class ResultWithManitiRes {
     private Integer manitiFavorability;
     private Integer manitiRatio;
-    private String myWordcount;
-    private String mantiWordcount;
+    private JSONArray myWordcount;
+    private JSONArray mantiWordcount;
     private Long chatCount;
 }
