@@ -29,14 +29,15 @@ public class PartyController {
     @Operation(summary = "파티: 생성")
     public ResponseEntity<PartyRes> create(
             @RequestBody CreateReq createReq) {
+        if (partyService.isValidCreateReq(createReq.getUserId())) {
+            String accessCode = partyService.create(createReq.getPartyName(), createReq.getUserId());
+            guestService.createGuest(accessCode, createReq.getUserId());
+            PartyRes partyRes = partyService.find(accessCode);
 
-        partyService.isValidCreateReq(createReq.getUserId());
+            return ResponseEntity.ok().body(partyRes);
+        }
 
-        String accessCode = partyService.create(createReq.getPartyName(), createReq.getUserId());
-        guestService.createGuest(accessCode, createReq.getUserId());
-        PartyRes partyRes = partyService.find(accessCode);
-
-        return ResponseEntity.ok().body(partyRes);
+        return ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/{accessCode}/users/{userId}")
@@ -45,10 +46,13 @@ public class PartyController {
             @PathVariable String accessCode,
             @PathVariable Long userId) {
         PartyRes partyRes = partyService.find(accessCode);
-        partyService.isValidJoinReq(partyRes, userId);
-        guestService.createGuest(accessCode, userId);
+        if (partyService.isValidJoinReq(partyRes, userId)) {
+            guestService.createGuest(accessCode, userId);
 
-        return ResponseEntity.ok().body(partyRes);
+            return ResponseEntity.ok().body(partyRes);
+        }
+
+        return ResponseEntity.badRequest().build();
     }
 
     @PatchMapping("")
@@ -56,7 +60,7 @@ public class PartyController {
     public ResponseEntity<PartyRes> start(
             @RequestBody StartReq startReq) {
         PartyRes partyRes = partyService.find(startReq.getAccessCode());
-        if (partyRes.isValid(startReq, partyRes)) {
+        if (partyService.isValidStartReq(startReq, partyRes)) {
             partyService.start(partyRes, startReq);
             guestService.setManiti(partyRes.getPartyId());
             chatService.setManiti(partyRes.getPartyId());
@@ -75,10 +79,13 @@ public class PartyController {
     public ResponseEntity<Void> delete(
             @RequestBody DeleteReq deleteReq) {
         PartyRes partyRes = partyService.find(deleteReq.getAccessCode());
-        partyService.isValidDeleteReq(partyRes, deleteReq);
-        partyService.delete(deleteReq.getAccessCode());
+        if (partyService.isValidDeleteReq(partyRes, deleteReq)) {
+            partyService.delete(deleteReq.getAccessCode());
 
-        return ResponseEntity.noContent().build();
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.badRequest().build();
     }
 
 }

@@ -1,5 +1,6 @@
 package com.ssafy.duck.domain.party.service;
 
+import com.ssafy.duck.common.TimeUtil;
 import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.repository.GuestRepository;
 import com.ssafy.duck.domain.party.dto.request.DeleteReq;
@@ -69,7 +70,7 @@ public class PartyService {
         partyRepository.save(party);
     }
 
-    public void isValidCreateReq(Long userId) {
+    public boolean isValidCreateReq(Long userId) {
         List<Guest> guests = guestRepository.findAllByUserId(userId);
         for (Guest guest : guests) {
             Party party = partyRepository.findByPartyId(guest.getParty().getPartyId())
@@ -78,9 +79,11 @@ public class PartyService {
                 throw new PartyException(PartyErrorCode.MAXIMUM_OF_1_PARTY_ALLOWED);
             }
         }
+
+        return true;
     }
 
-    public void isValidJoinReq(PartyRes partyRes, Long userId) {
+    public boolean isValidJoinReq(PartyRes partyRes, Long userId) {
         List<Guest> guests = guestRepository.findAllByUserId(userId);
         for (Guest guest : guests) {
             Party party = partyRepository.findByPartyId(guest.getParty().getPartyId())
@@ -98,16 +101,54 @@ public class PartyService {
                 throw new PartyException(PartyErrorCode.MAXIMUM_OF_1_PARTY_JOINED);
             }
         }
+
+        return true;
     }
 
-    public void isValidDeleteReq(PartyRes partyRes, DeleteReq deleteReq) {
+    public boolean isValidStartReq(StartReq startReq, PartyRes partyRes) {
+        if (partyRes.isDeleted()) {
+            // 삭제된 파티 일 경우
+            throw new PartyException(PartyErrorCode.NOT_FOUND_PARTY);
+        }
+        if (!partyRes.getUserId().equals(startReq.getUserId())) {
+            // 파티 생성자가 아닌 사용자가 시작하려고 한 경우
+            throw new PartyException(PartyErrorCode.ACCESS_DENIED);
+        }
+        if (partyRes.getStartTime() != null) {
+            // 이미 시작한 파티인 경우
+            throw new PartyException(PartyErrorCode.ALREADY_STARTED_PARTY);
+        }
+        if (TimeUtil.stringToInstant(startReq.getEndTime()).isBefore(TimeUtil.convertToKST(Instant.now()))) {
+            // 현재 일보다 이전 날짜를 입력 했을 때
+            throw new PartyException(PartyErrorCode.THE_TIME_IS_SET_INCORRECTLY);
+        }
+        if (TimeUtil.calcDate(Instant.now() + "", startReq.getEndTime()) < 3 || TimeUtil.calcDate(Instant.now() + "", startReq.getEndTime()) > 7) {
+            // 설정한 날짜가 3일보다 작거나, 7일보다 클 경우
+            throw new PartyException(PartyErrorCode.MAXIMUM_OF_7_DAYS_ALLOWED);
+        }
+        // 인원 수가 3명보다 적을 때
+        Party party = partyRepository.findByAccessCode(startReq.getAccessCode())
+                .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
+        List<Guest> guests = guestRepository.findByParty_PartyId(party.getPartyId());
+        if (guests.size() < 2) {
+            throw new PartyException(PartyErrorCode.NOT_ENOUGH_PEOPLE);
+        }
+
+        return true;
+    }
+
+    public boolean isValidDeleteReq(PartyRes partyRes, DeleteReq deleteReq) {
         if (!deleteReq.getUserId().equals(partyRes.getUserId())) {
             throw new PartyException(PartyErrorCode.ACCESS_DENIED);
         }
-        if (partyRes.getDeleted()) {
+        if (partyRes.isDeleted()) {
             throw new PartyException(PartyErrorCode.NOT_FOUND_PARTY);
         }
-        // TODO: 파티가 진행 중인 경우
+        if (partyRes.getEndTime().isBefore(TimeUtil.convertToKST(Instant.now()))) {
+            throw new PartyException(PartyErrorCode.PARTY_IS_IN_PROGRESS);
+        }
+
+        return true;
     }
 
     public PartyRes toPartyRes(Party party) {
