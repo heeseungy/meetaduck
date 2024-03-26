@@ -20,14 +20,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
@@ -138,7 +136,7 @@ public class UserController {
 
         String jwtToken
                 = JWT.create()
-                .withSubject(userRes.getNickname())
+                .withSubject(userRes.getKakaoId().toString())
                 .sign(Algorithm.HMAC512(jwtProperties.getSecretKey()));
 
         HttpHeaders responseHeaders = new HttpHeaders();
