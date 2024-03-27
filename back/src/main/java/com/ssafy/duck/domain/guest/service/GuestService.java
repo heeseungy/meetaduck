@@ -133,6 +133,7 @@ public class GuestService {
 
         return GuestRes.builder()
                 .guestId(guest.getGuestId())
+                .votedId(guest.getVotedId())
                 .userId(user.getUserId())
                 .nickname(user.getNickname())
                 .thumbnailUrl(user.getThumbnailUrl())
