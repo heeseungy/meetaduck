@@ -24,9 +24,6 @@ function PartyCreatePage() {
         userId: login.userId,
       });
 
-      // console.log("accessCode :",accessCode)
-      // console.log("partyId :",partyId)
-
       setParty((prevPartyState) => ({
         ...prevPartyState,
         accessCode: response.data.accessCode,
@@ -35,37 +32,11 @@ function PartyCreatePage() {
         partyId: response.data.partyId,
       }));
       navigate('/partymaker');
-      // navigate('/partymaker', {
-      //   state: {
-      //     accessCode: accessCode,
-      //     partyName: partyName,
-      //   },
-      // });
     } catch (err) {
-      console.log('Error:', err);
+      console.log(err);
+      alert(err.response.data)
     }
-    // Axios.post('/api/parties', {
-    //   partyName: partyName,
-    //   userId: login.userId,
-    // })
-    //   .then((response) => {
-    //     const accessCode = response.data.accessCode;
-    //     console.log("accessCode: ",accessCode);
-    //     setParty((prevPartyState) => ({
-    //       ...prevPartyState,
-    //       accessCode: accessCode,
-    //       partyName: partyName,
-    //     }));
-    //     navigate('/partymaker', {
-    //       state: {
-    //         accessCode: response.data.accessCode,
-    //         partyName: response.data.partyName,
-    //       },
-    //     });
-    // }
-    // .catch((err) => {
-    //   console.log('err :', err);
-    // });
+
   };
 
   useEffect(() => {

@@ -10,23 +10,7 @@ import { useEffect } from 'react';
 
 
 function DatePickerInput({ setEndDate }) {
-  // const [recommendForm, setRecommendForm] = useRecoilState(recommendFormState);
-
-
   const datePickerFormat = 'YYYY-MM-DD';
-
-  // const datePickerUtils = {
-  //   format: datePickerFormat,
-  //   parse: (value) => dayjs(value, datePickerFormat, true).toDate(),
-  // };
-
-  // const endDateChange = (date) => {
-  //   const formattedDate = dayjs(date).format(datePickerFormat);
-  //   setRecommendForm((prev) => ({
-  //     ...prev,
-  //     endDate: formattedDate,
-  //   }));
-  // };
 
   return (
     <>

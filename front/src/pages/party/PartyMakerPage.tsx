@@ -11,6 +11,7 @@ import { partyStartService } from '@/services/partyStartService';
 import styles from '@/styles/party/PartyMaker.module.css';
 import { ArrowsCounterClockwise } from '@phosphor-icons/react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
 
 function PartyMakerPage() {
   const setParty = useSetRecoilState(partyState);
@@ -18,6 +19,7 @@ function PartyMakerPage() {
   const login = useRecoilValue(loginState);
   const [participants, setParticipants] = useState([]);
   const [endDate, setEndDate] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPartyInfo = async () => {
@@ -36,12 +38,12 @@ function PartyMakerPage() {
       const usersInfo = await Axios.get(`/api/guests/all/${party.partyId}`);
       setParticipants(usersInfo.data);
     } catch (err) {
+      alert(err.response.data)
       console.log('Error refreshing party info: ', err);
     }
   };
 
   useEffect(() => {
-    console.log('party:', party);
     // Axios로 파티를 조회한다.
     // recoil에 axios response로 온 파티 정보를 저장함.
 
@@ -51,12 +53,6 @@ function PartyMakerPage() {
       partyName: party.partyName,
     }));
   }, []);
-
-  useEffect(() => {
-    // login State 가져와서 같은지 확인
-    console.log('login.userId: ', login.userId);
-    console.log(party.userId);
-  }, [party]);
 
   const joinNumber = participants.length;
 
@@ -81,30 +77,65 @@ function PartyMakerPage() {
   );
   
   const startHandler = async () => {
-    console.log('시작하기');
-  
     try {
+      const isoEndDate = endDate.toISOString();
       await Axios.patch(`/api/parties`, {
         accessCode: party.accessCode,
-        endTime: endDate,
+        endTime: isoEndDate,
         userId: party.userId,
       })
-      // setParty((prevPartyState) => ({
-      //   ...prevPartyState,
-      //   endTime: endDate,
-      // }))
+      setParty((prevPartyState) => ({
+        ...prevPartyState,
+        endTime: endDate !== null ? endDate : prevPartyState.endTime,
+      }))
+      navigate('/hintinputform')
     } catch(err) {
-      console.log('Error! : ', err)
+      console.log("err:", err);
+      alert(err.response.data);
     }
   };
 
-  const deleteHandler = () => {
+  const deleteHandler = async () => {
     console.log('파티닫기');
-    partyDeleteervice();
+    try {
+      await Axios.delete(`/api/parties`, {
+        data: {
+          accessCode: party.accessCode,
+          userId: party.userId,
+        }
+      })
+      alert('파티가 삭제되었습니다')
+      navigate('/party');
+    } catch(err) {
+      alert(err.response.data);
+      navigate('/party');
+    }
   };
 
-  const leaveHandler = () => {
+  const leaveHandler = async () => {
     console.log('나가기');
+    try {
+      // 로그인 상태에서 JWT 토큰을 가져옵니다.
+      // const jwtToken = login.jwtToken;
+      const jwtToken = 123;
+  
+      // JWT 토큰이 존재하는 경우에만 요청을 보냅니다.
+      if (jwtToken) {
+        await Axios.delete(`/api/guests/${login.guestId}`, {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`, // JWT 토큰을 헤더에 추가합니다.
+          },
+        });
+        alert('파티를 나갔습니다.');
+        navigate('/party');
+      } else {
+        // JWT 토큰이 없는 경우에는 어떻게 처리할지 결정합니다.
+        console.log('JWT 토큰이 없습니다.');
+      }
+    } catch (err) {
+      alert(err.response.data);
+      navigate('/party');
+    }
   };
 
   return (
