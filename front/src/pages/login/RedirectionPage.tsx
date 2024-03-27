@@ -1,13 +1,17 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { loginState } from '@/recoil/atom';
+import { loginState, partyState } from '@/recoil/atom';
 import { Axios } from '@/services/axios';
-import { useSetRecoilState } from 'recoil';
+import { partyInfoService } from '@/services/partyStartService';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 function RedirectionPage() {
+  const login = useRecoilValue(loginState);
   const setLogin = useSetRecoilState(loginState);
 
+  const party = useRecoilValue(partyState);
+  const setParty = useSetRecoilState(partyState);
   const code: string = new URLSearchParams(window.location.search).get('code')!;
   const navigate = useNavigate();
 
@@ -35,8 +39,28 @@ function RedirectionPage() {
 
         // 방법2 recoil에 token을 저장해서 필요할때마다
         // token이 있는지 없는지 확인 후 로그인 상태를 검사함.
-        sessionStorage.setItem('isAuthenticated', 'true');
-        alert('로그인 되었습니다');
+        // alert('로그인 되었습니다');
+      })
+      .then(() => {
+        console.log(login.partyId);
+        if (login.partyId !== null) {
+          partyInfoService(login.partyId).then((data) => {
+            if (data.deleted !== true) {
+              setParty({
+                partyId: data.partyId,
+                accessCode: data.accessCode,
+                partyName: data.partyName,
+                startTime: data.startTime,
+                endTime: data.endTime,
+                deleted: data.deleted,
+                userId: data.userId,
+              });
+            }
+            navigate('/partymaker');
+          });
+        }
+      })
+      .then(() => {
         navigate('/party');
       })
       .catch((err) => {
