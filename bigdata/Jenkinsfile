@@ -17,7 +17,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                    dockerImage = docker.build("bigdata", "-f /Dockerfile ./bigdata") // Dockerfile 경로 수정
+                    dockerImage = docker.build("bigdata", "-f bigdata/Dockerfile ./bigdata") // Dockerfile 경로 수정
                 }
             }
         }
