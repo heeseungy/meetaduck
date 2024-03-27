@@ -1,5 +1,5 @@
 import { WordType } from '@/types/result';
-import { scaleLog } from '@visx/scale';
+import { scaleSqrt } from '@visx/scale';
 import { Text } from '@visx/text';
 import Wordcloud from '@visx/wordcloud/lib/Wordcloud';
 
@@ -15,17 +15,18 @@ interface ExampleProps {
 }
 export default function Example({ width = 100, height = 100, data }: ExampleProps) {
   const words = data.map((it) => ({ text: it.word, value: it.count }));
+  console.log(words);
   const colors = ['#4d4637', '#a2a2a2'];
 
   function getRotationDegree() {
     const rand = Math.random();
-    const degree = rand > 0.2 ? 0 : 90;
+    const degree = rand > 0.2 ? 0 : 0;
     return degree;
   }
 
-  const fontScale = scaleLog({
+  const fontScale = scaleSqrt({
     domain: [Math.min(...words.map((w) => w.value)), Math.max(...words.map((w) => w.value))],
-    range: [7, 20],
+    range: [11, 25],
   });
   const fontSizeSetter = (datum: WordData) => fontScale(datum.value);
 
@@ -39,7 +40,7 @@ export default function Example({ width = 100, height = 100, data }: ExampleProp
         height={height}
         fontSize={fontSizeSetter}
         font={'Pretendard'}
-        padding={0}
+        padding={1}
         spiral={'rectangular'}
         rotate={getRotationDegree}
         random={fixedValueGenerator}

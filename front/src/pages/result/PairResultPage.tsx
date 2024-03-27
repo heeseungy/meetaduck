@@ -4,11 +4,8 @@ import Card from '@/components/commons/Card';
 import ResultCountCard from '@/components/result/ResultCountCard';
 import ResultDoughnutChart from '@/components/result/ResultDoughnutChart';
 import WordCloud from '@/components/result/WordCloud';
-// import ResultWordCloudChart from '@/components/result/resultWordCloud';
-import { MANITI_RESULT, MANITO_RESULT } from '@/recoil/dummy';
 import styles from '@/styles/result/ResultPage.module.css';
 import { ManitoResultAnalysis, ResultListProps } from '@/types/result';
-// import ResultWord from '@/components/result/ResultWord';
 import { PairRank } from '@/types/user.interface';
 
 // tag: 1: 첫번째 2: 두번째
@@ -39,7 +36,7 @@ function PairResultPage(pairResultProps: PairResultProps) {
         <div>
           <img
             className={`${styles.ProfileResultUrl} ${styles.MarginBottom1}`}
-            src={pairResultProps.tag === 1 ? manito!.profileUrl : maniti!.profileUrl}
+            src={pairResultProps.tag === 1 ? manito!.thumbnailUrl : maniti!.thumbnailUrl}
             alt=""
           />
           <div className="FontSBold">우호도 {result!.favorability}점</div>
@@ -65,9 +62,9 @@ function PairResultPage(pairResultProps: PairResultProps) {
             </div>
             <div className={styles.WordCloud}>
               {pairResultProps.tag === 1 ? (
-                <WordCloud {...{ width: 130, height: 70, data: result.myWordcount }} />
+                <WordCloud {...{ width: 130, height: 100, data: result.myWordcount }} />
               ) : (
-                <WordCloud {...{ width: 130, height: 70, data: result.wordcount }} />
+                <WordCloud {...{ width: 130, height: 100, data: result.wordcount }} />
               )}
             </div>
           </div>

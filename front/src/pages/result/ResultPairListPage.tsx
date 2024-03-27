@@ -9,12 +9,9 @@ type ResultPairListProps = {
   pairList: ResultListProps;
 };
 function ResultPairListPage(resultPairListProps: ResultPairListProps) {
-  console.log(resultPairListProps);
   const myManito = resultPairListProps.pairList.pairList.find((it) => {
-    console.log(it.manito.manitiId, resultPairListProps.me.guestId);
     return it.manito.manitiId === resultPairListProps.me.guestId;
   })?.manito;
-  console.log(myManito);
 
   const children = (
     <div>
