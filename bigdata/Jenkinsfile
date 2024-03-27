@@ -49,12 +49,12 @@ pipeline {
                     failOnError: true,
                     publishers: [
                         sshPublisherDesc(
-                            configName: "User_Service",
+                            configName: "bigdata",
                             verbose: true,
                             transfers: [
-                                sshTransfer(execCommand: "sudo docker rm -f user"),
-                                sshTransfer(execCommand: "sudo docker pull " + repository +":User_${BUILD_NUMBER}"),
-                                sshTransfer(execCommand: "sudo docker run -d -p 8881:8881 --name user --log-driver=fluentd -e")
+                                sshTransfer(execCommand: "sudo docker rm -f bigdata"),
+                                sshTransfer(execCommand: "sudo docker pull " + repository +":${BUILD_NUMBER}"),
+                                sshTransfer(execCommand: "sudo docker run -d -p 8881:8881 --name bigdata")
                             ]
                         )
                     ]
