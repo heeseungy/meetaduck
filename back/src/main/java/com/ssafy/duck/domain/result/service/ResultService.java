@@ -121,7 +121,7 @@ public class ResultService {
         List<MissionResultRes> missionResultResList = new ArrayList<>();
         // 미션을 날짜별로 확인 : 총 4개
         // day1 : successtime이 있으면 1순위, 없으면 confirmdate가 있으면서 id가 큰 순서 2순위, confirmdate가 없으면 id가 가장 작은거
-        for (int i = 0; i < missionStatusList.size(); i += 4) {
+        for (int i = 0; i < missionStatusList.size(); i += 3) {
             MissionResultRes.MissionResultResBuilder mrRes = MissionResultRes.builder();
 
             for (int j = i; j < i + 3; j++) {
@@ -173,7 +173,7 @@ public class ResultService {
         List<MissionStatus> missionStatusList = missionStatusRepository.findByGuestGuestIdOrderByGetTime(manito.getGuestId());
         List<MissionResultRes> missionResultResList = new ArrayList<>();
 
-        for (int i = 0; i < missionStatusList.size(); i += 4) {
+        for (int i = 0; i < missionStatusList.size(); i += 3) {
             MissionResultRes.MissionResultResBuilder mrRes = MissionResultRes.builder();
 
             for (int j = i; j < i + 3; j++) {
