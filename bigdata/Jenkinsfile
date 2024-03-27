@@ -17,7 +17,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                    dockerImage = docker.build("bigdata", "-f bigdata/Dockerfile ./bigdata") // Dockerfile 경로 수정
+                    dockerImage = docker.build("${repository}:bigdata_${BUILD_NUMBER}", "-f bigdata/Dockerfile ./bigdata") // Dockerfile 경로 수정
                 }
             }
         }
@@ -31,14 +31,14 @@ pipeline {
         stage('Push User Image to DockerHub') {
             steps {
                 script {
-                    sh "docker push \${repository}:User_\${BUILD_NUMBER}"
+                    sh "docker push \${repository}:bigdata_\${BUILD_NUMBER}"
                 }
             }
         }
         stage('Clean User Image') {
             steps {
                 script {
-                    sh "docker rmi \${repository}:User_\${BUILD_NUMBER}"
+                    sh "docker rmi \${repository}:bigdata_\${BUILD_NUMBER}"
                 }
             }
         }
@@ -53,7 +53,7 @@ pipeline {
                             verbose: true,
                             transfers: [
                                 sshTransfer(execCommand: "sudo docker rm -f bigdata"),
-                                sshTransfer(execCommand: "sudo docker pull " + repository),
+                                sshTransfer(execCommand: "sudo docker pull " + repository+":bigdata_${BUILD_NUMBER}"),
                                 sshTransfer(execCommand: "sudo docker run -d -p 8881:8881 --name bigdata")
                             ]
                         )
