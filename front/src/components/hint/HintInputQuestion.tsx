@@ -52,7 +52,7 @@ function HintInputQuestion() {
     try {
       // 각 힌트에 대한 답변을 서버에 업데이트
       await Promise.all(hints.map(hint =>
-        updateHintAnswersService(guestId, hint.hintStatusAnswer)
+        updateHintAnswersService(guestId, { hintId: hint.hintId, hintStatusAnswer: hint.hintStatusAnswer })
       ));
       alert('입력이 완료되었습니다~!');
       navigate('/mission');
