@@ -24,6 +24,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         // addEndpoint(): WebSocket 연결을 위한 endpoint를 "/ws"로 설정 -> 여기로 'Connect' 시도
         // setAllowedOrigins(): 현재 모든 출처에서 열려 있으나("*"), 향후 특정 도메인만 허용하도록 변경 필요
-        registry.addEndpoint("/ws").setAllowedOrigins("*");
+        registry.addEndpoint("/wss").setAllowedOrigins("*");
     }
 }
