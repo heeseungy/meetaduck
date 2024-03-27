@@ -22,8 +22,9 @@ public class Guest {
     @Column(name = "maniti_id")
     private Long manitiId;
 
+
     @Column(name = "voted_id")
-    private Long votedId;
+    private Long votedId; // 초기값 설정
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "party_id", nullable = false, updatable = false)

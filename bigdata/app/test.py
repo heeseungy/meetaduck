@@ -42,8 +42,25 @@ def predict_sentiment(content, point, isMe):
 
 
 def make_dt(time_str):
-    # ISO 8601 형식의 시간 문자열을 파싱하여 datetime 객체로 변환
-    time = dt.datetime.fromisoformat(time_str)
+    # 정규 표현식을 사용하여 마이크로초를 추출
+    microseconds_match = re.search(r'\.\d+', time_str)
+    microseconds_str = microseconds_match.group()[1:]  # '.'을 제외한 숫자 부분만 가져옴
+
+    # 마이크로초의 길이가 6자리 이상이면 초당 증가하는 마이크로초가 아니므로 뒤에 0을 추가하여 6자리로 만듭니다.
+    if len(microseconds_str) > 6:
+        microseconds_str = microseconds_str[:6]
+
+    # 마이크로초를 int 형으로 변환
+    microseconds = int(microseconds_str)
+
+    # 마이크로초를 제외한 시간 문자열 생성
+    time_str_without_microseconds = re.sub(r'\.\d+', '', time_str)
+
+    # 시간 문자열을 datetime 객체로 변환
+    time = dt.datetime.strptime(time_str_without_microseconds, "%Y-%m-%dT%H:%M:%SZ")
+
+    # datetime 객체에 마이크로초 추가 (범위 내로 조정)
+    time = time.replace(microsecond=min(microseconds, 999999))
     return time
 
 
@@ -170,8 +187,7 @@ def calc_favorability(guest_id, chat_list):
     h=np.array([h])
     l=np.array([l])
     v=np.array([v]) 
-    print(p, h, l, v)
-
+    score = scoreStock(p,h,l,v)
     score_fng = FearGreed(score).compute_stock(duration=(dur-2)) 
     print("favor ", score_fng[0][0])
     return [score_fng[0][0], ratio]

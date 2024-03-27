@@ -41,4 +41,11 @@ application-prod.yml
 
 ### VS Code ###
 .vscode/
-.pem
+
+#
+*.yaml
+*.p12
+
+#
+*.env
+*.pem
