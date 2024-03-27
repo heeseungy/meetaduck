@@ -17,7 +17,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
-                    dockerImage = docker.build("bigdata", "-f /Dockerfile ./bigdata") + ":$BUILD_NUMBER" // Dockerfile 경로 수정
+                    dockerImage = docker.build("bigdata", "-f /Dockerfile ./bigdata") // Dockerfile 경로 수정
                 }
             }
         }
@@ -53,7 +53,7 @@ pipeline {
                             verbose: true,
                             transfers: [
                                 sshTransfer(execCommand: "sudo docker rm -f bigdata"),
-                                sshTransfer(execCommand: "sudo docker pull " + repository +":${BUILD_NUMBER}"),
+                                sshTransfer(execCommand: "sudo docker pull " + repository),
                                 sshTransfer(execCommand: "sudo docker run -d -p 8881:8881 --name bigdata")
                             ]
                         )
