@@ -4,10 +4,17 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import dayjs, { Dayjs } from 'dayjs';
 
-function DatePickerInput() {
+import { partyState } from '@/recoil/atom';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { useEffect } from 'react';
+
+
+function DatePickerInput({ setEndDate }) {
   // const [recommendForm, setRecommendForm] = useRecoilState(recommendFormState);
 
+
   const datePickerFormat = 'YYYY-MM-DD';
+
   // const datePickerUtils = {
   //   format: datePickerFormat,
   //   parse: (value) => dayjs(value, datePickerFormat, true).toDate(),
@@ -32,6 +39,9 @@ function DatePickerInput() {
             },
           }}
           format="YYYY / MM / DD"
+          onChange={(newValue) => {
+            setEndDate(newValue);
+          }}
           // value={endDate}
           // onChange={(newValue) => {
           //   endDateChange(newValue);

@@ -17,7 +17,7 @@ function PartyMakerPage() {
   const party = useRecoilValue(partyState);
   const login = useRecoilValue(loginState);
   const [participants, setParticipants] = useState([]);
-  const setcurrentTime = useSetRecoilState(currentTimeState);
+  const [endDate, setEndDate] = useState(null);
 
   useEffect(() => {
     const fetchPartyInfo = async () => {
@@ -79,10 +79,23 @@ function PartyMakerPage() {
       ))}
     </div>
   );
-
-  const startHandler = () => {
+  
+  const startHandler = async () => {
     console.log('시작하기');
-    partyStartService();
+  
+    try {
+      await Axios.patch(`/api/parties`, {
+        accessCode: party.accessCode,
+        endTime: endDate,
+        userId: party.userId,
+      })
+      // setParty((prevPartyState) => ({
+      //   ...prevPartyState,
+      //   endTime: endDate,
+      // }))
+    } catch(err) {
+      console.log('Error! : ', err)
+    }
   };
 
   const deleteHandler = () => {
@@ -111,7 +124,7 @@ function PartyMakerPage() {
           <>
             <div className={`FontM`}>종료 시간</div>
             <div className={`${styles.inputWrapper}`}>
-              <DatePickerInput />
+              <DatePickerInput setEndDate={setEndDate} />
             </div>
             <div className={`${styles.buttonWrapper}`}>
               <span className={`${styles.oneButton}`}>
