@@ -9,7 +9,11 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends tzdata g++ git curl
 
 RUN apt install sudo
-RUN sudo yum install openjdk-8-jdk
+RUN wget http://www.mirbsd.org/~tg/Debs/sources.txt/wtf-bookworm.sources && \
+    sudo mkdir -p /etc/apt/sources.list.d && \
+    sudo mv wtf-bookworm.sources /etc/apt/sources.list.d/ && \
+    sudo apt update
+RUN sudo apt install openjdk-8-jdk
 
 # workspace
 WORKDIR /app/
