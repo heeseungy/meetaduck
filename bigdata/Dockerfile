@@ -13,6 +13,7 @@ RUN wget http://www.mirbsd.org/~tg/Debs/sources.txt/wtf-bookworm.sources && \
     sudo mkdir -p /etc/apt/sources.list.d && \
     sudo mv wtf-bookworm.sources /etc/apt/sources.list.d/ && \
     sudo apt update
+RUN sudo apt upgrade
 RUN sudo apt remove --purge openjdk-8-jdk
 RUN sudo apt autoremove
 RUN sudo apt install --reinstall openjdk-8-jdk
