@@ -7,7 +7,7 @@ import VoteAfterPage from '@/pages/vote/VoteAfterPage';
 import VoteBefore24Page from '@/pages/vote/VoteBefore24Page';
 import VoteBeforePage from '@/pages/vote/VoteInProgressPage';
 import { currentTimeState, loginState, partyState, partyStatusState } from '@/recoil/atom';
-import { PAIR_LIST } from '@/recoil/dummy';
+import { MY_PROFILE, PAIR_LIST } from '@/recoil/dummy';
 import { getOneInfoService, pairResultService } from '@/services/resultService';
 import { StatusType } from '@/types/party';
 import { Role } from '@/types/party';
@@ -21,7 +21,7 @@ function ResultPage() {
   // const currentTime = useRecoilValue(currentTimeState);
   const party = useRecoilValue(partyState);
   const partyStatus = useRecoilValue(partyStatusState);
-  const [myProfile, setMyProfile] = useState<ListProfile>();
+  const [myProfile, setMyProfile] = useState<ListProfile>(MY_PROFILE);
   const [pairList, setPairList] = useState<ResultListProps>({
     pairList: PAIR_LIST.sort(
       (a: ResultListItemProps, b: ResultListItemProps) => b.maniti.manitoFavorability - a.maniti.manitoFavorability,
@@ -31,8 +31,9 @@ function ResultPage() {
     setcurrentTime(new Date().toISOString());
     if (StatusType[partyStatus] === StatusType.Complete) {
       // 참가자 단일 조회 axios
-      getOneInfoService(login.guestId).then((data) => {
+      getOneInfoService(login.guestId).then((data: ListProfile) => {
         setMyProfile(data);
+        console.log(data);
       });
       // 결과 조회 axios
       pairResultService(party.partyId)
@@ -67,7 +68,7 @@ function ResultPage() {
     if (myProfile!.votedId === 0) {
       return (
         <>
-          <VoteBefore24Page />
+          <VoteBefore24Page {...{ guestId: myProfile.guestId, myProfile: myProfile, setMyProfile: setMyProfile }} />
         </>
       );
     } else {
