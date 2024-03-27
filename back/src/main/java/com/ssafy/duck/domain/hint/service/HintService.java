@@ -23,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -98,11 +99,29 @@ public class HintService {
     public List<HintStatusRes> getHintQnA(Long guestId) {
         GuestRes myInfo = guestService.getGuestByUserId(guestId);    // 내 정보
         GuestRes manitoInfo = guestService.findManito(guestId);         // 마니또 정보
+        // 마니또 종료 여부 확인
+        Party party = partyRepository.findByPartyId(myInfo.getPartyId())
+                .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
+        boolean isEnd = TimeUtil.calcDate(TimeUtil.convertToKST(Instant.now()).toString(), party.getEndTime().toString()) == 0;
 
         List<HintStatusRes> hintStatusResList = new ArrayList<>();
         List<HintStatus> hintStatusList = hintStatusRepository.findAllByGuestGuestId(manitoInfo.getGuestId());
-        // 예상 마니또 있는지 확인. 없으면 mission확인하고 개수만큼 가져오기
-        if (myInfo.getVotedId() == 0) {
+
+        // 파티 종료 or 예상 마니또 있는지 확인. 있으면 hint status 전부 가져오기
+        if (myInfo.getVotedId() != 0L || isEnd) {
+            for (HintStatus hs : hintStatusList) {
+                Hint hint = hintRepository.findById(hs.getHint().getHintId())
+                        .orElseThrow(() -> new HintException(HintErrorCode.QUESTION_NOT_FOUND));
+                HintStatusRes res = HintStatusRes.builder()
+                        .hintContent(hint.getHintContent())
+                        .hintId(hint.getHintId())
+                        .hintStatusAnswer(hs.getHintStatusAnswer())
+                        .build();
+                hintStatusResList.add(res);
+            }
+        }
+        // 없으면 mission확인하고 개수만큼 가져오기
+        else {
             int hintCount = missionService.calcMissionFailCount(manitoInfo.getGuestId());
             for (int i = 0; i < hintCount; i++) {
                 HintStatus eachHs = hintStatusList.get(i);
@@ -112,19 +131,6 @@ public class HintService {
                         .hintContent(hint.getHintContent())
                         .hintId(hint.getHintId())
                         .hintStatusAnswer(eachHs.getHintStatusAnswer())
-                        .build();
-                hintStatusResList.add(res);
-            }
-        }
-        // 있으면 hint status 전부 가져오기
-        else {
-            for (HintStatus hs : hintStatusList) {
-                Hint hint = hintRepository.findById(hs.getHint().getHintId())
-                        .orElseThrow(() -> new HintException(HintErrorCode.QUESTION_NOT_FOUND));
-                HintStatusRes res = HintStatusRes.builder()
-                        .hintContent(hint.getHintContent())
-                        .hintId(hint.getHintId())
-                        .hintStatusAnswer(hs.getHintStatusAnswer())
                         .build();
                 hintStatusResList.add(res);
             }

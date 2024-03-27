@@ -12,11 +12,9 @@ import java.time.Instant;
 @AllArgsConstructor
 @Builder
 public class MissionResultRes {
-//    private Long guestId;
     private Long missionStatusId;
     private Instant getTime;
     private Instant confirmTime;
-//    private Instant successTime;
     private String missionContent;
     private String missionImageUrl;
 
