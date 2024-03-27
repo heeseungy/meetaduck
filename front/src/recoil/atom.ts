@@ -18,7 +18,7 @@ export const loginState = atom<LoginProfile>({
     // guestId: 0,
     // partyId: 0,
     kakaoId: 123456,
-    guestId: 15,
+    guestId: 2,
     partyId: 3,
     nickname: '가철수',
     profileUrl: '',
@@ -30,15 +30,16 @@ export const loginState = atom<LoginProfile>({
 
 export const partyState = atom<Party>({
   key: 'partyState',
-  default: {
-    partyId: 0,
-    accessCode: '',
-    partyName: '',
-    startTime: '',
-    endTime: '',
-    deleted: false,
-    userId: 0,
-  },
+  default: PARTY1,
+  // default: {
+  //   partyId: 0,
+  //   accessCode: '',
+  //   partyName: '',
+  //   startTime: '',
+  //   endTime: '',
+  //   deleted: false,
+  //   userId: 0,
+  // },
   effects_UNSTABLE: [persistAtom],
 });
 

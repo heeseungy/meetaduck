@@ -23,7 +23,7 @@ export const PARTY1: Party = {
   accessCode: 'tlz5vy',
   partyName: '마니또도도독 너 내 동료가 되라',
   startTime: '2024-03-11T21:00:00.000Z',
-  endTime: '2024-03-30T21:00:00.000Z',
+  endTime: '2024-03-20T21:00:00.000Z',
   deleted: false,
   userId: 152,
 };
@@ -373,7 +373,7 @@ export const MISSION_STATUS_LIST: MissionContent[] = [
   {
     missionStatusId: 578,
     confirmTime: '2024-03-13T00:00:00Z',
-    missionImageUrl: '',
+    missionImageUrl: null,
     missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
   },
   {
@@ -397,6 +397,7 @@ export const MY_MANITO_MISSION: MissionResult = {
   getTime: '2024-03-13T00:00:00Z',
   confirmTime: null,
   successTime: null,
+  failedTime: null,
   // successTime: '2024-03-14T12:50:20Z',
   missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
   missionImageUrl: '',
@@ -410,6 +411,7 @@ export const MISSION_RESULT_LIST: MissionResultList = {
       missionStatusId: 578,
       getTime: '2024-03-13T00:00:00Z',
       confirmTime: null,
+      failedTime: null,
       successTime: null,
       missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
       missionImageUrl: null,
@@ -419,6 +421,7 @@ export const MISSION_RESULT_LIST: MissionResultList = {
       missionStatusId: 621,
       getTime: '2024-03-14T00:00:00Z',
       confirmTime: '2024-03-14T12:33:20Z',
+      failedTime: null,
       successTime: '2024-03-14T12:50:20Z',
       missionContent: '마니띠에게 본인을 잘 설명하는 키워드 1개를 알려주세요',
       missionImageUrl: 'http://example.com/mission/success/1',
@@ -428,6 +431,7 @@ export const MISSION_RESULT_LIST: MissionResultList = {
       missionStatusId: 616,
       getTime: '2024-03-15T00:00:00Z',
       confirmTime: '2024-03-15T16:33:20Z',
+      failedTime: null,
       successTime: null,
       missionContent: '마니띠에게 좋은 아침이나 좋은 밤 메시지를 보내주세요',
       missionImageUrl: null,
@@ -437,6 +441,7 @@ export const MISSION_RESULT_LIST: MissionResultList = {
       missionStatusId: 578,
       getTime: '2024-03-13T00:00:00Z',
       confirmTime: null,
+      failedTime: null,
       successTime: null,
       missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
       missionImageUrl: null,
@@ -446,6 +451,7 @@ export const MISSION_RESULT_LIST: MissionResultList = {
       missionStatusId: 621,
       getTime: '2024-03-14T00:00:00Z',
       confirmTime: '2024-03-14T12:33:20Z',
+      failedTime: null,
       successTime: '2024-03-14T12:50:20Z',
       missionContent: '마니띠에게 본인을 잘 설명하는 키워드 1개를 알려주세요',
       missionImageUrl: 'http://example.com/mission/success/1',
@@ -455,6 +461,7 @@ export const MISSION_RESULT_LIST: MissionResultList = {
       missionStatusId: 616,
       getTime: '2024-03-15T00:00:00Z',
       confirmTime: '2024-03-15T16:33:20Z',
+      failedTime: null,
       successTime: null,
       missionContent: '마니띠에게 좋은 아침이나 좋은 밤 메시지를 보내주세요',
       missionImageUrl: null,
@@ -466,6 +473,7 @@ export const MISSION_RESULT_LIST: MissionResultList = {
       missionStatusId: 617,
       getTime: '2024-03-13T00:00:00Z',
       confirmTime: '2024-03-13T12:33:20Z',
+      failedTime: null,
       successTime: '2024-03-13T16:32:48Z',
       missionContent: '마니띠의 혈액형을 작성 후, 캡쳐해주세요',
       missionImageUrl: 'http://example.com/mission/success/1',
@@ -475,6 +483,7 @@ export const MISSION_RESULT_LIST: MissionResultList = {
       missionStatusId: 579,
       getTime: '2024-03-14T00:00:00Z',
       confirmTime: null,
+      failedTime: null,
       successTime: null,
       missionContent: '마니띠에게 본인을 잘 설명하는 키워드 1개를 알려주세요',
       missionImageUrl: null,
@@ -484,6 +493,7 @@ export const MISSION_RESULT_LIST: MissionResultList = {
       missionStatusId: 580,
       getTime: '2024-03-15T00:00:00Z',
       confirmTime: null,
+      failedTime: null,
       successTime: null,
       missionContent: '마니띠에게 좋은 아침이나 좋은 밤 메시지를 보내주세요',
       missionImageUrl: null,
@@ -494,6 +504,7 @@ export const MISSION_RESULT_LIST: MissionResultList = {
       getTime: '2024-03-13T00:00:00Z',
       confirmTime: null,
       successTime: null,
+      failedTime: null,
       missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
       missionImageUrl: null,
     },
@@ -502,6 +513,7 @@ export const MISSION_RESULT_LIST: MissionResultList = {
       missionStatusId: 621,
       getTime: '2024-03-14T00:00:00Z',
       confirmTime: '2024-03-14T12:33:20Z',
+      failedTime: null,
       successTime: '2024-03-14T12:50:20Z',
       missionContent: '마니띠에게 본인을 잘 설명하는 키워드 1개를 알려주세요',
       missionImageUrl: 'http://example.com/mission/success/1',
@@ -510,6 +522,7 @@ export const MISSION_RESULT_LIST: MissionResultList = {
       guestId: 5,
       missionStatusId: 616,
       getTime: '2024-03-15T00:00:00Z',
+      failedTime: null,
       confirmTime: '2024-03-15T16:33:20Z',
       successTime: null,
       missionContent: '마니띠에게 좋은 아침이나 좋은 밤 메시지를 보내주세요',
@@ -562,44 +575,264 @@ export const HINT_ALL: Answer[] = [
 
 // 대화분석 (마니또)
 export const MANITO_RESULT: ManitoResultAnalysis = {
-  favorability: 80,
-  wordcount: [
-    { key: '내', value: 10 },
-    { key: '밥솥', value: 8 },
-    { key: '내놔', value: 7 },
+  favorability: 50,
+  ratio: 44,
+  myWordcount: [
+    {
+      count: 8,
+      word: '있어',
+    },
+    {
+      count: 7,
+      word: '오늘',
+    },
+    {
+      count: 7,
+      word: '음악',
+    },
+    {
+      count: 6,
+      word: '뭐',
+    },
+    {
+      count: 6,
+      word: '집',
+    },
+    {
+      count: 5,
+      word: '나',
+    },
+    {
+      count: 5,
+      word: '나도',
+    },
+    {
+      count: 5,
+      word: '너',
+    },
+    {
+      count: 5,
+      word: '듣고',
+    },
+    {
+      count: 4,
+      word: '안녕하세요',
+    },
+    {
+      count: 4,
+      word: '요리',
+    },
+    {
+      count: 4,
+      word: '좋아',
+    },
+    {
+      count: 4,
+      word: '좋아해',
+    },
+    {
+      count: 4,
+      word: '하고',
+    },
+    {
+      count: 3,
+      word: '계획',
+    },
   ],
-  ratio: { positive: 80, negative: 10, neutral: 10 },
-  missionSuccess: 2,
-};
-
-export const MY_MANITO_RESULT: ManitoResultAnalysis = {
-  favorability: 60,
   wordcount: [
-    { key: '넌', value: 3 },
-    { key: '안경', value: 2 },
-    { key: '얹어', value: 1 },
+    {
+      count: 9,
+      word: '있어',
+    },
+    {
+      count: 6,
+      word: '나도',
+    },
+    {
+      count: 6,
+      word: '좋아해',
+    },
+    {
+      count: 5,
+      word: '어떤',
+    },
+    {
+      count: 5,
+      word: '요리',
+    },
+    {
+      count: 5,
+      word: '음악',
+    },
+    {
+      count: 5,
+      word: '좋아',
+    },
+    {
+      count: 5,
+      word: '집',
+    },
+    {
+      count: 4,
+      word: '나',
+    },
+    {
+      count: 4,
+      word: '너',
+    },
+    {
+      count: 4,
+      word: '듣고',
+    },
+    {
+      count: 4,
+      word: '정말',
+    },
+    {
+      count: 3,
+      word: '계획',
+    },
+    {
+      count: 3,
+      word: '곡',
+    },
+    {
+      count: 3,
+      word: '그래',
+    },
   ],
-  ratio: { positive: 50, negative: 10, neutral: 40 },
-  missionSuccess: 3,
+  chatCount: 139,
+  missionCount: 0,
 };
 
 // 대화분석 (마니띠)
-export const MANITI_RESULT: ResultAnalysis = {
-  favorability: 60,
-  wordcount: [
-    { key: '아니', value: 10 },
-    { key: '진짜', value: 7 },
-    { key: '세상에', value: 1 },
+export const MANITI_RESULT: ManitoResultAnalysis = {
+  favorability: 50,
+  ratio: 44,
+  myWordcount: [
+    {
+      count: 8,
+      word: '있어',
+    },
+    {
+      count: 7,
+      word: '오늘',
+    },
+    {
+      count: 7,
+      word: '음악',
+    },
+    {
+      count: 6,
+      word: '뭐',
+    },
+    {
+      count: 6,
+      word: '집',
+    },
+    {
+      count: 5,
+      word: '나',
+    },
+    {
+      count: 5,
+      word: '나도',
+    },
+    {
+      count: 5,
+      word: '너',
+    },
+    {
+      count: 5,
+      word: '듣고',
+    },
+    {
+      count: 4,
+      word: '안녕하세요',
+    },
+    {
+      count: 4,
+      word: '요리',
+    },
+    {
+      count: 4,
+      word: '좋아',
+    },
+    {
+      count: 4,
+      word: '좋아해',
+    },
+    {
+      count: 4,
+      word: '하고',
+    },
+    {
+      count: 3,
+      word: '계획',
+    },
   ],
-  ratio: { positive: 50, negative: 10, neutral: 40 },
-};
-
-export const MY_MANITI_RESULT: ResultAnalysis = {
-  favorability: 80,
   wordcount: [
-    { key: '아', value: 12 },
-    { key: '재석이형', value: 6 },
-    { key: '망했어', value: 2 },
+    {
+      count: 9,
+      word: '있어',
+    },
+    {
+      count: 6,
+      word: '나도',
+    },
+    {
+      count: 6,
+      word: '좋아해',
+    },
+    {
+      count: 5,
+      word: '어떤',
+    },
+    {
+      count: 5,
+      word: '요리',
+    },
+    {
+      count: 5,
+      word: '음악',
+    },
+    {
+      count: 5,
+      word: '좋아',
+    },
+    {
+      count: 5,
+      word: '집',
+    },
+    {
+      count: 4,
+      word: '나',
+    },
+    {
+      count: 4,
+      word: '너',
+    },
+    {
+      count: 4,
+      word: '듣고',
+    },
+    {
+      count: 4,
+      word: '정말',
+    },
+    {
+      count: 3,
+      word: '계획',
+    },
+    {
+      count: 3,
+      word: '곡',
+    },
+    {
+      count: 3,
+      word: '그래',
+    },
   ],
-  ratio: { positive: 80, negative: 10, neutral: 10 },
+  chatCount: 139,
+  missionCount: 0,
 };
