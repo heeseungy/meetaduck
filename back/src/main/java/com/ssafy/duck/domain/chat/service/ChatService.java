@@ -58,7 +58,7 @@ public class ChatService {
                     .chatId(chat.getChatId().intValue())
                     .build();
             MessageRes messageRes = createMessage(chat.getChatId().intValue(), messageReq);
-            notifyNewMessage(chat.getChatId().intValue(), messageRes);
+//            notifyNewMessage(chat.getChatId().intValue(), messageRes);
         }
     }
 
@@ -118,12 +118,12 @@ public class ChatService {
         return toMessageRes(savedMessage);
     }
 
-    public void notifyNewMessage(Integer chatId, MessageRes messageRes) {
-        // 아래 경로로 chatId를 구독하는 사용자들에게 messageRes를 응답
-        // -> 클라이언트 구독은 프론트에서 STOMP/SockJS 로 해야함.
-        // 백에선 여기가 프론트에 보내는 마지막 코드임
-        simpMessagingTemplate.convertAndSend("/sub/api/chats/" + chatId + "/messages", messageRes);
-    }
+//    public void notifyNewMessage(Integer chatId, MessageRes messageRes) {
+//        // 아래 경로로 chatId를 구독하는 사용자들에게 messageRes를 응답
+//        // -> 클라이언트 구독은 프론트에서 STOMP/SockJS 로 해야함.
+//        // 백에선 여기가 프론트에 보내는 마지막 코드임
+//        simpMessagingTemplate.convertAndSend("/sub/api/chats/" + chatId + "/messages", messageRes);
+//    }
 
     private MessageRes toMessageRes(Message message) {
         return MessageRes.builder()
