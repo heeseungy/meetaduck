@@ -24,26 +24,6 @@ pipeline {
         	}
         }
 
-        stage('key download') {
-        	steps {
-            	withCredentials([file(credentialsId: 'key', variable: 'key')]) {
-                	script {
-                    	sh 'cp -f ${key} ./front/'
-                    }
-        		}
-        	}
-        }
-
-        stage('.cert download') {
-        	steps {
-            	withCredentials([file(credentialsId: 'cert', variable: 'cert')]) {
-                	script {
-                    	sh 'cp -f ${cert} ./front/'
-                    }
-        		}
-        	}
-        }
-
         stage('Build Image') {
             steps {
                 script {
