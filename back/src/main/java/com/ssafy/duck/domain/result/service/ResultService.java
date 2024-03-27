@@ -209,7 +209,7 @@ public class ResultService {
                             .confirmTime(ms.getConfirmTime());
                     break;
                 }
-            }doc
+            }
             missionResultResList.add(mrRes.build());
         }
 //        for (MissionResultRes mrRes : missionResultResList) {

@@ -8,6 +8,9 @@ RUN apt-get update && \
     apt-get upgrade && \
     apt-get install -y --no-install-recommends tzdata g++ git curl
 
+RUN apt install sudo
+RUN sudo yum install openjdk-8-jdk
+
 # workspace
 WORKDIR /app/
 COPY ./app /app 
