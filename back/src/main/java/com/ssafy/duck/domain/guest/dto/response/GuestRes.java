@@ -26,7 +26,4 @@ public class GuestRes {
     //
     private Favorability favorability;
 
-    public Long getVotedId() {
-        return votedId != null ? votedId : 0L;
-    }
 }
