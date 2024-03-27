@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 
 import Button from '@/components/commons/Button';
 import Card from '@/components/commons/Card';
 import DatePickerInput from '@/components/party/DatePickerInput';
 import ShareButton from '@/components/party/ShareButton';
-import { loginState, partyState } from '@/recoil/atom';
+import { currentTimeState, loginState, partyState } from '@/recoil/atom';
 import { Axios } from '@/services/axios';
 import { partyDeleteervice } from '@/services/partyDeleteService';
 import { partyStartService } from '@/services/partyStartService';
@@ -18,6 +17,7 @@ function PartyMakerPage() {
   const party = useRecoilValue(partyState);
   const login = useRecoilValue(loginState);
   const [participants, setParticipants] = useState([]);
+  const setcurrentTime = useSetRecoilState(currentTimeState);
 
   useEffect(() => {
     const fetchPartyInfo = async () => {

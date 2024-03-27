@@ -37,7 +37,7 @@ function DatePickerInput() {
           //   endDateChange(newValue);
           // }}
           shouldDisableDate={(day) => {
-            return dayjs(dayjs(day as Dayjs).format(`YYYY-MM-DD`)).isBefore(`2024-03-19`);
+            return dayjs(dayjs(day as Dayjs).format(`YYYY-MM-DD`)).isBefore(`2024-03-27`);
           }}
         />
       </LocalizationProvider>
