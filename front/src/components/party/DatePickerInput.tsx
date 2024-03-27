@@ -4,22 +4,13 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import dayjs, { Dayjs } from 'dayjs';
 
-function DatePickerInput() {
-  // const [recommendForm, setRecommendForm] = useRecoilState(recommendFormState);
+import { partyState } from '@/recoil/atom';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { useEffect } from 'react';
 
+
+function DatePickerInput({ setEndDate }) {
   const datePickerFormat = 'YYYY-MM-DD';
-  // const datePickerUtils = {
-  //   format: datePickerFormat,
-  //   parse: (value) => dayjs(value, datePickerFormat, true).toDate(),
-  // };
-
-  // const endDateChange = (date) => {
-  //   const formattedDate = dayjs(date).format(datePickerFormat);
-  //   setRecommendForm((prev) => ({
-  //     ...prev,
-  //     endDate: formattedDate,
-  //   }));
-  // };
 
   return (
     <>
@@ -32,12 +23,15 @@ function DatePickerInput() {
             },
           }}
           format="YYYY / MM / DD"
+          onChange={(newValue) => {
+            setEndDate(newValue);
+          }}
           // value={endDate}
           // onChange={(newValue) => {
           //   endDateChange(newValue);
           // }}
           shouldDisableDate={(day) => {
-            return dayjs(dayjs(day as Dayjs).format(`YYYY-MM-DD`)).isBefore(`2024-03-19`);
+            return dayjs(dayjs(day as Dayjs).format(`YYYY-MM-DD`)).isBefore(`2024-03-27`);
           }}
         />
       </LocalizationProvider>
