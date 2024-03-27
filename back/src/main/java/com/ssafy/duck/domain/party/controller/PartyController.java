@@ -46,9 +46,17 @@ public class PartyController {
         return ResponseEntity.badRequest().build();
     }
 
-    @GetMapping("/{accessCode}/users/{userId}")
+    @GetMapping("/{partyId}")
     @Operation(summary = "파티: 조회")
-    public ResponseEntity<PartyRes> find(
+    public ResponseEntity<PartyRes> findByPartyId(
+            @PathVariable Long partyId) {
+        return ResponseEntity.ok().body(partyService.findByPartyId(partyId));
+    }
+
+
+    @GetMapping("/{accessCode}/users/{userId}")
+    @Operation(summary = "파티: 가입")
+    public ResponseEntity<PartyRes> join(
             @PathVariable String accessCode,
             @PathVariable Long userId) {
         PartyRes partyRes = partyService.find(accessCode);
