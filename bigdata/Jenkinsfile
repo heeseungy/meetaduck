@@ -47,29 +47,16 @@ pipeline {
                             verbose: true,
                             transfers: [
                                 sshTransfer(execCommand: "sudo docker rm -f bigdata"),
-                                sshTransfer(execCommand: "echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin")
+                                sshTransfer(execCommand: "echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin"),
                                 sshTransfer(execCommand: "sudo docker pull " + repository +":bigdata_${BUILD_NUMBER}"),
-                                sshTransfer(execCommand: "sudo docker run -d -p 8881:8881 --name bigdata")
+                                sshTransfer(execCommand: "sudo docker run -d -p 8881:8881 --name bigdata"),
+                                sshTransfer(execCommand: "docker system prune -af")
                             ]
                         )
                     ]
                 )
             }
         }
-        stage("run container") {
-            steps {
-                script {
-                    sh 'docker rm -f backend'
-                    sh "docker run -d --restart=always -p 8080:8080 --name bigdata bigdata"
-                }
-            }
-        }
-        stage('Clean Common Image') {
-            steps {
-                script {
-                    sh "docker system prune -af"
-                }
-            }
-        }
+        
     }
 }
