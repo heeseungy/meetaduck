@@ -29,11 +29,13 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'keystore', variable: 'keystoreFile')]) {
                     script {
-                        sh 'cp -f $keystoreFile ./back/keystore.p12'
+                        sh 'cp -f $keystoreFile ./back/'
+                        echo '${env.keystoreFile}'
                     }
                 }
             }
         }
+
 
         stage('Build Common-Server .JAR') {
             steps {
