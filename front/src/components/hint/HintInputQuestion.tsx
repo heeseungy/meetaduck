@@ -24,6 +24,11 @@ function HintInputQuestion() {
     }
   ]);
 
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const login = useRecoilValue(loginState);
+  const guestId = login.guestId;
+
   // useEffect(() => {
   //   async function fetchHints() {
   //     try {
@@ -36,11 +41,6 @@ function HintInputQuestion() {
 
   //   fetchHints();
   // }, [guestId]);
-  
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
-  const login = useRecoilValue(loginState);
-  const guestId = login.guestId;
 
   const hintSubmitHandler = async () => {
     // 모든 입력란이 비어 있는지 확인
