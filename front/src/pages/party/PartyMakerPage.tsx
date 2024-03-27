@@ -17,22 +17,12 @@ function PartyMakerPage() {
   const setParty = useSetRecoilState(partyState);
   const party = useRecoilValue(partyState);
   const login = useRecoilValue(loginState);
-
-  // const location = useLocation();
-  // const { accessCode, partyName } = location.state;
-  // console.log('location.state: ', location.state);
-
-  console.log('login.userId:', login.userId);
   const [participants, setParticipants] = useState([]);
 
-  // if (partyId === -1 || partyId === undefined) {
-  //   partyId = login.userId;
-  // }
   useEffect(() => {
     const fetchPartyInfo = async () => {
       try {
         const usersInfo = await Axios.get(`/api/guests/all/${party.partyId}`);
-        console.log('usersInfo.data :', usersInfo.data);
         setParticipants(usersInfo.data);
       } catch (err) {
         console.log('Err :', err);
@@ -60,17 +50,7 @@ function PartyMakerPage() {
       accessCode: party.accessCode,
       partyName: party.partyName,
     }));
-    // setParty({
-    //   partyId: 3,
-    //   accessCode: 'tlz5vy',
-    //   startTime: '2024-03-11T21:00:00.000Z',
-    //   endTime: '2024-03-20T21:00:00.000Z',
-    //   deleted: false,
-    //   userId: 152,
-    // });
   }, []);
-
-  // login.userId === response.userId
 
   useEffect(() => {
     // login State 가져와서 같은지 확인
