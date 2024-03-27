@@ -1,6 +1,5 @@
 package com.ssafy.duck.domain.result.controller;
 
-import com.ssafy.duck.domain.guest.repository.GuestRepository;
 import com.ssafy.duck.domain.result.dto.response.ResultWithManitiRes;
 import com.ssafy.duck.domain.result.dto.response.ResultWithManitoRes;
 import com.ssafy.duck.domain.result.service.ResultService;
@@ -18,8 +17,6 @@ public class ResultController {
 
     private final ResultService resultService;
 
-    private final GuestRepository guestRepository;
-
     @GetMapping("/maniti/{guestId}")
     public ResponseEntity<ResultWithManitiRes> getMeAndManitiResult(@PathVariable("guestId") Long guestId) {
         ResultWithManitiRes manitiResult = resultService.findMeManitiResult(guestId);
@@ -29,7 +26,6 @@ public class ResultController {
     @GetMapping("/manito/{guestId}")
     public ResponseEntity<ResultWithManitoRes> getMeAndManitoResult(@PathVariable("guestId") Long guestId) {
         ResultWithManitoRes manitoResult = resultService.findMeManitoResult(guestId);
-
         return ResponseEntity.ok(manitoResult);
     }
 
@@ -39,3 +35,4 @@ public class ResultController {
         resultService.reserveAnalysis(partyId);
     }
 }
+

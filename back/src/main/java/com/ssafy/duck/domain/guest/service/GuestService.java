@@ -20,7 +20,6 @@ import com.ssafy.duck.domain.result.repository.ResultRepository;
 import com.ssafy.duck.domain.user.entity.User;
 import com.ssafy.duck.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,7 +32,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GuestService {
 
-    @Autowired
     private final UserRepository userRepository;
     private final PartyRepository partyRepository;
     private final GuestRepository guestRepository;
@@ -112,19 +110,20 @@ public class GuestService {
     }
 
     public GuestRes findByUserId(Long userId) {
-        boolean isPartyGuest = guestRepository.findByUserId(userId).isPresent();
-        if (isPartyGuest) {
-            Guest guest = guestRepository.findByUserId(userId).get();
-            return GuestRes.builder()
-                    .guestId(guest.getGuestId())
-                    .partyId(guest.getParty().getPartyId())
-                    .build();
-        } else {
+        List<Guest> guestList = guestRepository.findAllByUserId(userId);
+
+        if (guestList.isEmpty()) {
             final Long NON_EXIST_GUEST_ID = 0L;
             final Long NON_EXIST_PARTY_ID = 0L;
             return GuestRes.builder()
                     .guestId(NON_EXIST_GUEST_ID)
                     .partyId(NON_EXIST_PARTY_ID)
+                    .build();
+        } else {
+            Guest guest = guestRepository.findTopByUserUserIdOrderByGuestIdDesc(userId).get();
+            return GuestRes.builder()
+                    .guestId(guest.getGuestId())
+                    .partyId(guest.getParty().getPartyId())
                     .build();
         }
     }
