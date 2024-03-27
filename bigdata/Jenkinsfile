@@ -1,0 +1,80 @@
+pipeline {
+    environment {
+        repository = "angryj/bigdata"
+        DOCKERHUB_CREDENTIALS = credentials('bigduck') // jenkins에 등록해 놓은 docker hub credentials 이름
+        dockerImage = ''
+    }
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    // 코드 체크아웃
+                    checkout scm
+                }
+            }
+        }
+        stage('Build Image') {
+            steps {
+                script {
+                    dockerImage = docker.build("bigdata", "-f /Dockerfile ./bigdata") + ":$BUILD_NUMBER" // Dockerfile 경로 수정
+                }
+            }
+        }
+        stage('DockerHub Login') {
+            steps {
+                script {
+                    sh "echo \${DOCKERHUB_CREDENTIALS_PSW} | docker login -u \${DOCKERHUB_CREDENTIALS_USR} --password-stdin"
+                }
+            }
+        }
+        stage('Push User Image to DockerHub') {
+            steps {
+                script {
+                    sh "docker push \${repository}:User_\${BUILD_NUMBER}"
+                }
+            }
+        }
+        stage('Clean User Image') {
+            steps {
+                script {
+                    sh "docker rmi \${repository}:User_\${BUILD_NUMBER}"
+                }
+            }
+        }
+        stage("Deploy") {
+            steps {
+                sshPublisher(
+                    continueOnError: false,
+                    failOnError: true,
+                    publishers: [
+                        sshPublisherDesc(
+                            configName: "User_Service",
+                            verbose: true,
+                            transfers: [
+                                sshTransfer(execCommand: "sudo docker rm -f user"),
+                                sshTransfer(execCommand: "sudo docker pull " + repository +":User_${BUILD_NUMBER}"),
+                                sshTransfer(execCommand: "sudo docker run -d -p 8881:8881 --name user --log-driver=fluentd -e")
+                            ]
+                        )
+                    ]
+                )
+            }
+        }
+        stage("run container") {
+            steps {
+                script {
+                    sh 'docker rm -f backend'
+                    sh "docker run -d --restart=always -p 8080:8080 --name bigdata bigdata"
+                }
+            }
+        }
+        stage('Clean Common Image') {
+            steps {
+                script {
+                    sh "docker system prune -af"
+                }
+            }
+        }
+    }
+}

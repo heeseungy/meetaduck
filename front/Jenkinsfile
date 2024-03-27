@@ -18,7 +18,7 @@ pipeline {
         	steps {
             	withCredentials([file(credentialsId: 'env', variable: 'env')]) {
                 	script {
-                    	sh 'cp -f ${env} ./front/.env'
+                    	sh 'cp -f ${env} ./front/'
                     }
         		}
         	}
@@ -28,7 +28,7 @@ pipeline {
         	steps {
             	withCredentials([file(credentialsId: 'key', variable: 'key')]) {
                 	script {
-                    	sh 'cp -f ${key} ./front/j10c108.p.ssafy.io-key.pem'
+                    	sh 'cp -f ${key} ./front/'
                     }
         		}
         	}
@@ -38,7 +38,7 @@ pipeline {
         	steps {
             	withCredentials([file(credentialsId: 'cert', variable: 'cert')]) {
                 	script {
-                    	sh 'cp -f ${cert} ./front/j10c108.p.ssafy.io.pem'
+                    	sh 'cp -f ${cert} ./front/'
                     }
         		}
         	}
