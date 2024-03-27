@@ -208,8 +208,8 @@ public class MissionService {
     // hint에서 사용 : 마니또의 미션 수행 실패 개수 반환
     // 실패 개수 = 어제까지 미션 status 조회 후 전체 개수/3 - 성공 개수
     public int calcMissionFailCount(Long manitoId) {
-        Instant today = Instant.now();
-//        today = today.plus(Duration.ofDays(1)); // 테스트를 위해 오늘 날짜 변경
+        Instant today = TimeUtil.convertTo00(Instant.now());
+//        today = today.plus(Duration.ofDays(6)); // 테스트를 위해 오늘 날짜 변경
 //        System.out.println("calcMissionFailCount " + today);
 
         List<MissionStatus> missionStatusList = missionStatusRepository.findAllByGuestGuestIdAndGetTimeBefore(manitoId, today);
