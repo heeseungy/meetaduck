@@ -8,6 +8,9 @@ RUN apt-get update && \
     apt-get upgrade && \
     apt-get install -y --no-install-recommends tzdata g++ git curl
 
+RUN apt install sudo
+RUN sudo yum install openjdk-8-jdk
+
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
 ENV SPARK_HOME=/opt/spark
 ENV PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
