@@ -188,7 +188,7 @@ public class GuestService {
                 .guestId(guest.getGuestId())
                 .nickname(user.getNickname())
                 .thumbnailUrl(user.getThumbnailUrl())
-                .manatiId(guest.getManitiId())
+                .manitiId(guest.getManitiId())
                 .votedId(guest.getVotedId())
                 .favorability(favorability)
                 .build();
@@ -222,7 +222,7 @@ public class GuestService {
     public GuestRes toGuestRes(Guest guest) {
         return GuestRes.builder()
                 .guestId(guest.getGuestId())
-                .manatiId(guest.getManitiId())
+                .manitiId(guest.getManitiId())
                 .votedId(guest.getVotedId())
                 .partyId(guest.getParty().getPartyId())
                 .chatId(guest.getChat().getChatId())

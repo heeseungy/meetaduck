@@ -49,7 +49,7 @@ public class ResultService {
             throw new ResultException(ResultErrorCode.MY_RESULT_NOT_FOUND);
 
         // 마니띠의 결과 조회
-        Result manitiResult = resultRepository.findByGuestGuestId(myInfo.getManatiId());
+        Result manitiResult = resultRepository.findByGuestGuestId(myInfo.getManitiId());
         if (manitiResult == null || manitiResult.getManitoWordcount() == null)
             throw new ResultException(ResultErrorCode.MANITI_RESULT_NOT_FOUND);
 
