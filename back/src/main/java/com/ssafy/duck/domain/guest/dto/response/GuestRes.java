@@ -13,7 +13,7 @@ import lombok.*;
 public class GuestRes {
 
     private Long guestId;
-    private Long manatiId;
+    private Long manitiId;
     private Long votedId;
     private Long partyId;
     private Long chatId;
