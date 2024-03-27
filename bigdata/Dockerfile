@@ -9,7 +9,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends tzdata g++ git curl
 
 # workspace
-WORKDIR /app
+WORKDIR /app/
 COPY ./app /app 
 
 SHELL ["/bin/bash", "-c"]
