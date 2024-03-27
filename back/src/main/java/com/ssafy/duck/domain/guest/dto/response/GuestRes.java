@@ -13,7 +13,7 @@ import lombok.*;
 public class GuestRes {
 
     private Long guestId;
-    private Long manatiId;
+    private Long manitiId;
     private Long votedId;
     private Long partyId;
     private Long chatId;
@@ -26,7 +26,4 @@ public class GuestRes {
     //
     private Favorability favorability;
 
-    public Long getVotedId() {
-        return votedId != null ? votedId : 0L;
-    }
 }

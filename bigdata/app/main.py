@@ -34,22 +34,22 @@ spark = SparkSession.builder \
 
 # 데이터베이스 연결 설정
 def get_db_connection():
-    return pymysql.connect(
-        host="stg-yswa-kr-practice-db-master.mariadb.database.azure.com",
-        port=3306,
-        user="S10P21C108@stg-yswa-kr-practice-db-master.mariadb.database.azure.com",
-        password="XGzFAZq8e7",
-        db="s10p21c108",
-        cursorclass=pymysql.cursors.DictCursor
-    ) 
     # return pymysql.connect(
     #     host="stg-yswa-kr-practice-db-master.mariadb.database.azure.com",
     #     port=3306,
-    #     user="S10P22C108@stg-yswa-kr-practice-db-master.mariadb.database.azure.com",
-    #     password="iF6wrgXGd6",
-    #     db="s10p22c108",
+    #     user="S10P21C108@stg-yswa-kr-practice-db-master.mariadb.database.azure.com",
+    #     password="XGzFAZq8e7",
+    #     db="s10p21c108",
     #     cursorclass=pymysql.cursors.DictCursor
     # ) 
+    return pymysql.connect(
+        host="stg-yswa-kr-practice-db-master.mariadb.database.azure.com",
+        port=3306,
+        user="S10P22C108@stg-yswa-kr-practice-db-master.mariadb.database.azure.com",
+        password="iF6wrgXGd6",
+        db="s10p22c108",
+        cursorclass=pymysql.cursors.DictCursor
+    ) 
 
 def get_guest_info(guest_id : int, isMe : bool) :
     connection = get_db_connection()

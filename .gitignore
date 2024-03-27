@@ -1,6 +1,4 @@
-
-volumes
-bigdata/app/koelectra-base-finetuned-sentiment-analysis.bin
+volumes 
 
 #
 *.yaml
@@ -8,4 +6,4 @@ bigdata/app/koelectra-base-finetuned-sentiment-analysis.bin
 
 #
 *.env
-*.pem
+*.pem 
