@@ -2,9 +2,9 @@ import Card from '@/components/commons/Card';
 import ResultCountCard from '@/components/result/ResultCountCard';
 import ResultDoughnutChart from '@/components/result/ResultDoughnutChart';
 import ResultWordCloudChart from '@/components/result/resultWordCloud';
-import { MANITI_RESULT, MANITO_RESULT, MY_MANITI_RESULT, MY_MANITO_RESULT } from '@/recoil/dummy';
+import { MANITI_RESULT, MANITO_RESULT } from '@/recoil/dummy';
 import styles from '@/styles/result/ResultPage.module.css';
-import { ManitoResultAnalysis, ResultAnalysis, ResultListProps } from '@/types/result';
+import { ManitoResultAnalysis, ResultListProps } from '@/types/result';
 // import ResultWord from '@/components/result/ResultWord';
 import { PairRank } from '@/types/user.interface';
 
@@ -49,7 +49,7 @@ function PairResultPage(pairResultProps: PairResultProps) {
         <div className={styles.Row}>
           <div className={styles.Column}>
             <div className="FontMBold">{pairResultProps.tag === 1 ? '마니또 단어' : '내 단어'}</div>
-            <ResultWordCloudChart />
+            {/* <ResultWordCloudChart /> */}
             {/* <ResultWord />  모르겠다 일단넘겨*/}
             <div>
               {pairResultProps.tag === 1 ? manitoResult!.myWordcount[0].count : manitiResult!.myWordcount[0].count}
