@@ -40,9 +40,6 @@ import java.util.List;
 @Slf4j
 public class MissionService {
 
-    private final PartyService partyService;
-    private final GuestService guestService;
-
     private final PartyRepository partyRepository;
     private final GuestRepository guestRepository;
     private final MissionRepository missionRepository;
@@ -53,7 +50,7 @@ public class MissionService {
     }
 
     public void set(List<Mission> allMissions, StartReq startReq) {
-        int period = TimeUtil.calcDate(Instant.now() + "", startReq.getEndTime());
+        int period = TimeUtil.calcDate(Instant.now() + "", startReq.getEndTime())-1;
         Collections.shuffle(allMissions);
         List<Mission> subMissions = allMissions.subList(0, period * 3);
         Party party = partyRepository.findByAccessCode(startReq.getAccessCode())
