@@ -66,7 +66,7 @@ public class GuestService {
     public void createGuest(String accessCode, Long userId) {
         Guest guest = Guest.builder()
                 .manitiId(null)
-                .votedId(null)
+                .votedId(0L)
                 .party(partyRepository.findByAccessCode(accessCode)
                         .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY)))
                 .chat(chatService.createChat(accessCode))
