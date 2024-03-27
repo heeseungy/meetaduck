@@ -22,8 +22,8 @@ export const PARTY1: Party = {
   partyId: 1,
   accessCode: 'tlz5vy',
   partyName: '마니또도도독 너 내 동료가 되라',
-  startTime: '2024-03-11T21:00:00.000Z',
-  endTime: '2024-03-20T10:00:00.000Z',
+  startTime: '',
+  endTime: '',
   deleted: false,
   userId: 152,
 };

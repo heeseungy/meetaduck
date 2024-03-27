@@ -35,6 +35,7 @@ function RedirectionPage() {
 
         // 방법2 recoil에 token을 저장해서 필요할때마다
         // token이 있는지 없는지 확인 후 로그인 상태를 검사함.
+        sessionStorage.setItem('isAuthenticated', 'true');
         alert('로그인 되었습니다');
         navigate('/party');
       })
@@ -42,7 +43,6 @@ function RedirectionPage() {
         console.log(err);
       });
   }, []);
-
 
   return <div className="FontM">로그인 중입니다.</div>;
 }
