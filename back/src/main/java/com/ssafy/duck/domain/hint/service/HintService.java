@@ -1,5 +1,6 @@
 package com.ssafy.duck.domain.hint.service;
 
+import com.ssafy.duck.common.TimeUtil;
 import com.ssafy.duck.domain.guest.dto.response.GuestRes;
 import com.ssafy.duck.domain.guest.entity.Guest;
 import com.ssafy.duck.domain.guest.service.GuestService;
@@ -69,7 +70,7 @@ public class HintService {
         //마니또 기간 계산
         Party party = partyRepository.findByPartyId(partyId)
                 .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
-        int period = PartyRes.calcDate(party.getStartTime().toString(), party.getEndTime().toString()) - 1;
+        int period = TimeUtil.calcDate(party.getStartTime().toString(), party.getEndTime().toString()) - 1;
 
         Collections.shuffle(hintList);
         // guest 마다 hint status에 데이터 추가하기
