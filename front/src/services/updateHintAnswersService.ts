@@ -8,6 +8,7 @@ export async function updateHintAnswersService(guestId, { hintId, hintStatusAnsw
     });
     console.log('힌트 답변이 성공적으로 업데이트되었습니다.');
   } catch (err) {
+    alert('오류!')
     console.error('힌트 답변 업데이트 중 오류 발생:', err);
     throw err;
   }
