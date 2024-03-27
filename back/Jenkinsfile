@@ -30,7 +30,6 @@ pipeline {
                 withCredentials([file(credentialsId: 'keystore', variable: 'keystoreFile')]) {
                     script {
                         sh 'cp -f $keystoreFile ./back/'
-                        echo '${env.keystoreFile}'
                     }
                 }
             }
