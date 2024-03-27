@@ -30,7 +30,6 @@ out/
 application.yml
 application-dev.yml
 application-prod.yml
-*.p12
 
 ### NetBeans ###
 /nbproject/private/
@@ -44,7 +43,6 @@ application-prod.yml
 
 #
 *.yaml
-*.p12
 
 #
 *.env

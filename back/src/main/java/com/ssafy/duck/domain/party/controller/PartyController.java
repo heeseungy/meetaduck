@@ -1,5 +1,6 @@
 package com.ssafy.duck.domain.party.controller;
 
+import com.ssafy.duck.common.TimeUtil;
 import com.ssafy.duck.domain.chat.service.ChatService;
 import com.ssafy.duck.domain.guest.service.GuestService;
 import com.ssafy.duck.domain.hint.service.HintService;
@@ -9,10 +10,14 @@ import com.ssafy.duck.domain.party.dto.request.DeleteReq;
 import com.ssafy.duck.domain.party.dto.request.StartReq;
 import com.ssafy.duck.domain.party.dto.response.PartyRes;
 import com.ssafy.duck.domain.party.service.PartyService;
+import com.ssafy.duck.scheduler.TaskSchedulerService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.Duration;
+import java.time.Instant;
 
 @RestController
 @RequestMapping("/api/parties")
@@ -24,6 +29,7 @@ public class PartyController {
     private final ChatService chatService;
     private final MissionService missionService;
     private final HintService hintService;
+    private final TaskSchedulerService taskSchedulerService;
 
     @PostMapping("")
     @Operation(summary = "파티: 생성")
@@ -60,6 +66,9 @@ public class PartyController {
     public ResponseEntity<PartyRes> start(
             @RequestBody StartReq startReq) {
         PartyRes partyRes = partyService.find(startReq.getAccessCode());
+        Instant today = TimeUtil.convertTo00(Instant.now());
+//        System.out.println("end time " + TimeUtil.stringToInstant(startReq.getEndTime()));
+//        System.out.println("schedule end time "+ TimeUtil.stringToInstant(startReq.getEndTime()).minus(Duration.ofDays(1)) );
         if (partyService.isValidStartReq(startReq, partyRes)) {
             partyService.start(partyRes, startReq);
             guestService.setManiti(partyRes.getPartyId());
@@ -67,10 +76,9 @@ public class PartyController {
             chatService.createChat(partyRes.getAccessCode());
             missionService.set(missionService.fetch(), startReq);
             hintService.set(hintService.fetch(), partyRes.getPartyId());
-
+            taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.stringToInstant(startReq.getEndTime()).minus(Duration.ofDays(1)) );
             return ResponseEntity.ok().build();
         }
-
         return ResponseEntity.badRequest().build();
     }
 
