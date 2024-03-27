@@ -209,7 +209,7 @@ public class ResultService {
                             .confirmTime(ms.getConfirmTime());
                     break;
                 }
-            }
+            }doc
             missionResultResList.add(mrRes.build());
         }
 //        for (MissionResultRes mrRes : missionResultResList) {
@@ -222,9 +222,6 @@ public class ResultService {
 //    }
         return missionResultResList;
     }
-
-
-
 
     public void reserveAnalysis(Long partyId) {
         RestTemplate resultRestTemplate = new RestTemplate();

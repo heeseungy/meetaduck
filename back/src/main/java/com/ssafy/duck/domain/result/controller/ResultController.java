@@ -49,10 +49,5 @@ public class ResultController {
         return ResponseEntity.ok(manitoResult);
     }
 
-    // 결과 분석 요청 TEST API (수정 및 삭제 필요)
-    @GetMapping("/test/{partyId}")
-    public void test(@PathVariable Long partyId) {
-        resultService.reserveAnalysis(partyId);
-    }
 }
 
