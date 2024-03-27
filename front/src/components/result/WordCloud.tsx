@@ -47,7 +47,7 @@ export default function Example({ width = 100, height = 100, data }: ExampleProp
         {(cloudWords) =>
           cloudWords.map((w, i) => (
             <Text
-              key={w.text}
+              key={i}
               fill={colors[i % colors.length]}
               textAnchor={'middle'}
               transform={`translate(${w.x}, ${w.y}) rotate(${w.rotate})`}

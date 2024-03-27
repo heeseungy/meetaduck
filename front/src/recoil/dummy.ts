@@ -19,11 +19,11 @@ import { ListProfile, LoginProfile, ManitiProfile } from '@/types/user.interface
 
 // 파티 조회
 export const PARTY1: Party = {
-  partyId: 3,
+  partyId: 1,
   accessCode: 'tlz5vy',
   partyName: '마니또도도독 너 내 동료가 되라',
   startTime: '2024-03-11T21:00:00.000Z',
-  endTime: '2024-03-27T10:00:00.000Z',
+  endTime: '2024-03-20T10:00:00.000Z',
   deleted: false,
   userId: 152,
 };
@@ -140,230 +140,274 @@ export const PARTYLIST: ListProfile[] = [
 export const PAIR_LIST: ResultListItemProps[] = [
   {
     manito: {
-      guestId: 15,
+      guestId: 1,
       nickname: '가철수',
-      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
       thumbnailUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
       manitiId: 2,
       votedId: 10,
-      manitoFavorability: 80,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
     maniti: {
       guestId: 2,
       nickname: '나철수',
-      profileUrl: 'https://ilyo.co.kr/contents/article/images/2017/1209/1512813041302755.jpg',
       thumbnailUrl: 'https://ilyo.co.kr/contents/article/images/2017/1209/1512813041302755.jpg',
       manitiId: 3,
       votedId: 1,
-      manitoFavorability: 60,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
   },
   {
     manito: {
       guestId: 2,
       nickname: '나철수',
-      profileUrl: 'https://ilyo.co.kr/contents/article/images/2017/1209/1512813041302755.jpg',
       thumbnailUrl: 'https://ilyo.co.kr/contents/article/images/2017/1209/1512813041302755.jpg',
       manitiId: 3,
       votedId: 1,
-      manitoFavorability: 60,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
     maniti: {
       guestId: 3,
       nickname: '다철수',
-      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0_OYPzDohuNgpalEmE87NqxTsiTdVyV-1ZQ&usqp=CAU',
       thumbnailUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0_OYPzDohuNgpalEmE87NqxTsiTdVyV-1ZQ&usqp=CAU',
       manitiId: 4,
       votedId: 4,
-      manitoFavorability: 85,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
   },
   {
     manito: {
       guestId: 3,
       nickname: '다철수',
-      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0_OYPzDohuNgpalEmE87NqxTsiTdVyV-1ZQ&usqp=CAU',
       thumbnailUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0_OYPzDohuNgpalEmE87NqxTsiTdVyV-1ZQ&usqp=CAU',
       manitiId: 4,
       votedId: 4,
-      manitoFavorability: 85,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
     maniti: {
       guestId: 4,
       nickname: '라철수',
-      profileUrl: 'https://cdn.allets.com/500/2018/12/27/500_399045_1545871078.jpeg',
       thumbnailUrl: 'https://cdn.allets.com/500/2018/12/27/500_399045_1545871078.jpeg',
       manitiId: 5,
       votedId: 3,
-      manitoFavorability: 89,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
   },
   {
     manito: {
       guestId: 4,
       nickname: '라철수',
-      profileUrl: 'https://cdn.allets.com/500/2018/12/27/500_399045_1545871078.jpeg',
       thumbnailUrl: 'https://cdn.allets.com/500/2018/12/27/500_399045_1545871078.jpeg',
       manitiId: 5,
       votedId: 3,
-      manitoFavorability: 89,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
     maniti: {
       guestId: 5,
       nickname: '바철수',
-      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9ZRwNPdZBjdT128qQWJRi94ayDBYeGtcW2Q&usqp=CAU',
       thumbnailUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9ZRwNPdZBjdT128qQWJRi94ayDBYeGtcW2Q&usqp=CAU',
       manitiId: 6,
       votedId: 4,
-      manitoFavorability: 78,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
   },
   {
     manito: {
       guestId: 5,
       nickname: '바철수',
-      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9ZRwNPdZBjdT128qQWJRi94ayDBYeGtcW2Q&usqp=CAU',
       thumbnailUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9ZRwNPdZBjdT128qQWJRi94ayDBYeGtcW2Q&usqp=CAU',
       manitiId: 6,
       votedId: 4,
-      manitoFavorability: 78,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
     maniti: {
       guestId: 6,
       nickname: '가영희',
-      profileUrl: 'https://www.sportsq.co.kr/news/photo/201505/46687_83816_428.png',
       thumbnailUrl: 'https://www.sportsq.co.kr/news/photo/201505/46687_83816_428.png',
       manitiId: 7,
       votedId: 1,
-      manitoFavorability: 60,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
   },
   {
     manito: {
       guestId: 6,
       nickname: '가영희',
-      profileUrl: 'https://www.sportsq.co.kr/news/photo/201505/46687_83816_428.png',
       thumbnailUrl: 'https://www.sportsq.co.kr/news/photo/201505/46687_83816_428.png',
       manitiId: 7,
       votedId: 1,
-      manitoFavorability: 60,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
     maniti: {
       guestId: 7,
       nickname: '나영희',
-      profileUrl: 'https://cdn.imweb.me/thumbnail/20230824/20e7077f9429c.png',
       thumbnailUrl: 'https://cdn.imweb.me/thumbnail/20230824/20e7077f9429c.png',
       manitiId: 8,
       votedId: 5,
-      manitoFavorability: 77,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
   },
   {
     manito: {
       guestId: 7,
       nickname: '나영희',
-      profileUrl: 'https://cdn.imweb.me/thumbnail/20230824/20e7077f9429c.png',
       thumbnailUrl: 'https://cdn.imweb.me/thumbnail/20230824/20e7077f9429c.png',
       manitiId: 8,
       votedId: 5,
-      manitoFavorability: 77,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
     maniti: {
       guestId: 8,
       nickname: '다영희',
-      profileUrl: 'https://dimg.donga.com/wps/NEWS/IMAGE/2021/11/12/110217903.2.jpg',
       thumbnailUrl: 'https://dimg.donga.com/wps/NEWS/IMAGE/2021/11/12/110217903.2.jpg',
       manitiId: 9,
       votedId: 9,
-      manitoFavorability: 60,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
   },
   {
     manito: {
       guestId: 8,
       nickname: '다영희',
-      profileUrl: 'https://dimg.donga.com/wps/NEWS/IMAGE/2021/11/12/110217903.2.jpg',
       thumbnailUrl: 'https://dimg.donga.com/wps/NEWS/IMAGE/2021/11/12/110217903.2.jpg',
       manitiId: 9,
       votedId: 9,
-      manitoFavorability: 60,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
     maniti: {
       guestId: 9,
       nickname: '라영희',
-      profileUrl: 'https://i.pinimg.com/236x/fe/40/e3/fe40e3ffbbcde74c5c77e188111ce2f7.jpg',
       thumbnailUrl: 'https://i.pinimg.com/236x/fe/40/e3/fe40e3ffbbcde74c5c77e188111ce2f7.jpg',
       manitiId: 10,
       votedId: 10,
-      manitoFavorability: 45,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
   },
   {
     manito: {
       guestId: 9,
       nickname: '라영희',
-      profileUrl: 'https://i.pinimg.com/236x/fe/40/e3/fe40e3ffbbcde74c5c77e188111ce2f7.jpg',
       thumbnailUrl: 'https://i.pinimg.com/236x/fe/40/e3/fe40e3ffbbcde74c5c77e188111ce2f7.jpg',
       manitiId: 10,
       votedId: 10,
-      manitoFavorability: 45,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
     maniti: {
       guestId: 10,
       nickname: '마영희',
-      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyIru6tQLhwY8EU6OV9IemXdE6EXSEZYrc0A&usqp=CAU',
       thumbnailUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyIru6tQLhwY8EU6OV9IemXdE6EXSEZYrc0A&usqp=CAU',
       manitiId: 11,
       votedId: 3,
-      manitoFavorability: 84,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
   },
   {
     manito: {
       guestId: 10,
       nickname: '마영희',
-      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyIru6tQLhwY8EU6OV9IemXdE6EXSEZYrc0A&usqp=CAU',
       thumbnailUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyIru6tQLhwY8EU6OV9IemXdE6EXSEZYrc0A&usqp=CAU',
       manitiId: 11,
       votedId: 3,
-      manitoFavorability: 84,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
     maniti: {
       guestId: 11,
       nickname: '바영희',
-      profileUrl: 'https://i.ytimg.com/vi/tYM4oISacwY/maxresdefault.jpg',
       thumbnailUrl: 'https://i.ytimg.com/vi/tYM4oISacwY/maxresdefault.jpg',
       manitiId: 1,
       votedId: 1,
-      manitoFavorability: 93,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
   },
   {
     manito: {
       guestId: 11,
       nickname: '바영희',
-      profileUrl: 'https://i.ytimg.com/vi/tYM4oISacwY/maxresdefault.jpg',
       thumbnailUrl: 'https://i.ytimg.com/vi/tYM4oISacwY/maxresdefault.jpg',
       manitiId: 1,
       votedId: 1,
-      manitoFavorability: 93,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
     maniti: {
-      guestId: 15,
+      guestId: 1,
       nickname: '가철수',
-      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
       thumbnailUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
       manitiId: 2,
       votedId: 10,
-      manitoFavorability: 80,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
   },
 ];

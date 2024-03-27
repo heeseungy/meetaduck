@@ -8,3 +8,12 @@ export async function votePersonService(guestId: number, votedId: number) {
     return Promise.reject(error);
   }
 }
+
+export async function partyListAll(partyId: number) {
+  try {
+    const response = await Axios.get(`/api/guests/all/${partyId}`);
+    return response.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}

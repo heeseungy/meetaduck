@@ -36,7 +36,6 @@ function MissionPage() {
   }, []);
 
   if (StatusType[partyStatus] == StatusType.Complete) {
-    const missionResultList: MissionResultList = MISSION_RESULT_LIST;
     return (
       <>
         <Slides className={'Slides'}>

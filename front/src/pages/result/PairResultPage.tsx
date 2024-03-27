@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import Card from '@/components/commons/Card';
 import ResultCountCard from '@/components/result/ResultCountCard';
 import ResultDoughnutChart from '@/components/result/ResultDoughnutChart';
@@ -14,6 +16,7 @@ type PairResultProps = {
   tag: number;
   me: PairRank;
   pairList: ResultListProps;
+  analysis: ManitoResultAnalysis;
 };
 
 function PairResultPage(pairResultProps: PairResultProps) {
@@ -24,9 +27,7 @@ function PairResultPage(pairResultProps: PairResultProps) {
     (it) => pairResultProps.me.manitiId === it.maniti.guestId,
   )?.maniti;
 
-  // axios
-  const manitoResult: ManitoResultAnalysis = MANITO_RESULT;
-  const manitiResult: ManitoResultAnalysis = MANITI_RESULT;
+  const result: ManitoResultAnalysis = pairResultProps.analysis;
 
   const children = (
     <div className={styles.Conatiner}>
@@ -41,9 +42,7 @@ function PairResultPage(pairResultProps: PairResultProps) {
             src={pairResultProps.tag === 1 ? manito!.profileUrl : maniti!.profileUrl}
             alt=""
           />
-          <div className="FontSBold">
-            우호도 {pairResultProps.tag === 1 ? manitoResult!.favorability : manitiResult!.favorability}점
-          </div>
+          <div className="FontSBold">우호도 {result!.favorability}점</div>
         </div>
       </div>
       <div>
@@ -54,9 +53,9 @@ function PairResultPage(pairResultProps: PairResultProps) {
             </div>
             <div className={styles.WordCloud}>
               {pairResultProps.tag === 1 ? (
-                <WordCloud {...{ width: 130, height: 100, data: MANITO_RESULT.wordcount }} />
+                <WordCloud {...{ width: 130, height: 100, data: result.wordcount }} />
               ) : (
-                <WordCloud {...{ width: 130, height: 100, data: MANITI_RESULT.myWordcount }} />
+                <WordCloud {...{ width: 130, height: 100, data: result.myWordcount }} />
               )}
             </div>
           </div>
@@ -66,9 +65,9 @@ function PairResultPage(pairResultProps: PairResultProps) {
             </div>
             <div className={styles.WordCloud}>
               {pairResultProps.tag === 1 ? (
-                <WordCloud {...{ width: 130, height: 70, data: MANITO_RESULT.myWordcount }} />
+                <WordCloud {...{ width: 130, height: 70, data: result.myWordcount }} />
               ) : (
-                <WordCloud {...{ width: 130, height: 70, data: MANITI_RESULT.wordcount }} />
+                <WordCloud {...{ width: 130, height: 70, data: result.wordcount }} />
               )}
             </div>
           </div>
@@ -77,19 +76,11 @@ function PairResultPage(pairResultProps: PairResultProps) {
           <div className={styles.Column}>
             <div className={`${styles.MarginBottom1_5} ${styles.Column}`}>
               <div className={`FontSBold ${styles.MarginBottom1}`}>대화 빈도/횟수</div>
-              {pairResultProps.tag === 1 ? (
-                <ResultCountCard {...{ count: manitoResult.chatCount }} />
-              ) : (
-                <ResultCountCard {...{ count: manitiResult.chatCount }} />
-              )}
+              <ResultCountCard {...{ count: result.chatCount }} />
             </div>
             <div className={`${styles.MarginBottom1_5} ${styles.Column}`}>
               <div className={`FontSBold ${styles.MarginBottom1}`}>미션 수행 횟수</div>
-              {pairResultProps.tag === 1 ? (
-                <ResultCountCard {...{ count: manitoResult.missionCount }} />
-              ) : (
-                <ResultCountCard {...{ count: manitiResult.missionCount }} />
-              )}
+              <ResultCountCard {...{ count: result.missionCount }} />
             </div>
           </div>
           <div>
@@ -101,11 +92,7 @@ function PairResultPage(pairResultProps: PairResultProps) {
             </div>
 
             <div className={styles.DoughnutChartContainer}>
-              {pairResultProps.tag === 1 ? (
-                <ResultDoughnutChart {...{ ratio: manitoResult.ratio }} />
-              ) : (
-                <ResultDoughnutChart {...{ ratio: manitiResult.ratio }} />
-              )}
+              <ResultDoughnutChart {...{ ratio: result.ratio }} />
             </div>
           </div>
         </div>

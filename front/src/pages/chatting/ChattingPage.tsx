@@ -4,11 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import groupChat from '@/assets/images/groupChat.png';
 import pairChat from '@/assets/images/pairChat.png';
 import Card from '@/components/commons/Card';
-import { chatIdListState } from '@/recoil/atom';
+import { chatIdListState, loginState } from '@/recoil/atom';
+import { chatIdListService } from '@/services/chatService';
 import styles from '@/styles/chatting/ChattingPage.module.css';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 function ChattingPage() {
+  const login = useRecoilValue(loginState)
   const chatIdList = useRecoilValue(chatIdListState);
   const setChatIdList = useSetRecoilState(chatIdListState);
 
@@ -16,7 +18,9 @@ function ChattingPage() {
 
   useEffect(() => {
     // api 채팅방 목록 조회
-    // setChatIdList(response.data)
+    chatIdListService(login.guestId).then((data) => {
+      setChatIdList(data);
+    });
   }, []);
   const toDetail = (chatId: number) => {
     navigate(`/chatdetail/${chatId}`);
