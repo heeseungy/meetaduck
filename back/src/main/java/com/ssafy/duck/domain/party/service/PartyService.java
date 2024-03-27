@@ -181,4 +181,9 @@ public class PartyService {
                 .build();
     }
 
+    public PartyRes findByPartyId(Long partyId) {
+        return toPartyRes(partyRepository.findByPartyId(partyId)
+                .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY)));
+    }
+
 }
