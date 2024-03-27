@@ -30,7 +30,7 @@ function TestPage() {
   const loadMessages = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/chats/${chatId}/messages`
+        `https://localhost:8080/api/chats/${chatId}/messages`
       );
       console.log(response.data)
       // const messages
@@ -43,7 +43,7 @@ function TestPage() {
   useEffect(() => {
     loadMessages();
     const client = new Client({
-      brokerURL: `ws://localhost:8080/ws`,   // Server WebSocket URL
+      brokerURL: `wss://localhost:8080/wss`,   // Server WebSocket URL
       reconnectDelay: 5000, // 연결 끊겼을 때, 재연결시도까지 지연시간(ms)
       onConnect: () => {
         console.log("WebSocket 연결됨"); // 이 위치가 서버와의 연결이 성공적으로 이루어졌음을 보장
@@ -87,7 +87,7 @@ function TestPage() {
           chatId: chatId,
         };
   
-        await axios.post(`http://localhost:8080/api/chats/${chatId}/messages`, messageReq);
+        await axios.post(`https://localhost:8080/api/chats/${chatId}/messages`, messageReq);
   
         setNewMessage(""); // 메시지 전송 후 입력 필드 초기화
       } catch (error) {
