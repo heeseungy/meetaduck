@@ -599,6 +599,26 @@ export const MANITO_RESULT: ManitoResultAnalysis = {
       word: '집',
     },
     {
+      count: 8,
+      word: '바보',
+    },
+    {
+      count: 7,
+      word: '뭐야',
+    },
+    {
+      count: 7,
+      word: '밥',
+    },
+    {
+      count: 6,
+      word: '커피',
+    },
+    {
+      count: 6,
+      word: '집',
+    },
+    {
       count: 5,
       word: '나',
     },
@@ -617,6 +637,26 @@ export const MANITO_RESULT: ManitoResultAnalysis = {
     {
       count: 4,
       word: '안녕하세요',
+    },
+    {
+      count: 4,
+      word: '요리',
+    },
+    {
+      count: 4,
+      word: '좋아',
+    },
+    {
+      count: 4,
+      word: '좋아해',
+    },
+    {
+      count: 4,
+      word: '하고',
+    },
+    {
+      count: 3,
+      word: '계획',
     },
     {
       count: 4,

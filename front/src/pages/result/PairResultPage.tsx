@@ -1,7 +1,8 @@
 import Card from '@/components/commons/Card';
 import ResultCountCard from '@/components/result/ResultCountCard';
 import ResultDoughnutChart from '@/components/result/ResultDoughnutChart';
-import ResultWordCloudChart from '@/components/result/resultWordCloud';
+import WordCloud from '@/components/result/WordCloud';
+// import ResultWordCloudChart from '@/components/result/resultWordCloud';
 import { MANITI_RESULT, MANITO_RESULT } from '@/recoil/dummy';
 import styles from '@/styles/result/ResultPage.module.css';
 import { ManitoResultAnalysis, ResultListProps } from '@/types/result';
@@ -48,18 +49,27 @@ function PairResultPage(pairResultProps: PairResultProps) {
       <div>
         <div className={styles.Row}>
           <div className={styles.Column}>
-            <div className="FontMBold">{pairResultProps.tag === 1 ? '마니또 단어' : '내 단어'}</div>
-            {/* <ResultWordCloudChart /> */}
-            {/* <ResultWord />  모르겠다 일단넘겨*/}
-            <div>
-              {pairResultProps.tag === 1 ? manitoResult!.myWordcount[0].count : manitiResult!.myWordcount[0].count}
+            <div className={`FontMBold ${styles.MarginBottom1_5}`}>
+              {pairResultProps.tag === 1 ? '마니또 단어' : '내 단어'}
+            </div>
+            <div className={styles.WordCloud}>
+              {pairResultProps.tag === 1 ? (
+                <WordCloud {...{ width: 130, height: 100, data: MANITO_RESULT.wordcount }} />
+              ) : (
+                <WordCloud {...{ width: 130, height: 100, data: MANITI_RESULT.myWordcount }} />
+              )}
             </div>
           </div>
           <div className={styles.Column}>
-            <div className="FontMBold">{pairResultProps.tag === 1 ? '내 단어' : '마니띠 단어'}</div>
-            {/* <ResultWord /> */}
-            <div>
-              {pairResultProps.tag === 1 ? manitoResult!.myWordcount[0].count : manitiResult!.myWordcount[0].count}
+            <div className={`FontMBold ${styles.MarginBottom1_5}`}>
+              {pairResultProps.tag === 1 ? '내 단어' : '마니띠 단어'}
+            </div>
+            <div className={styles.WordCloud}>
+              {pairResultProps.tag === 1 ? (
+                <WordCloud {...{ width: 130, height: 70, data: MANITO_RESULT.myWordcount }} />
+              ) : (
+                <WordCloud {...{ width: 130, height: 70, data: MANITI_RESULT.wordcount }} />
+              )}
             </div>
           </div>
         </div>

@@ -38,3 +38,21 @@ export async function manitoMissionLoad(guestId: number) {
     return Promise.reject(error);
   }
 }
+
+export async function manitoNickname(guestId: number) {
+  try {
+    const response = await Axios.get(`/api/guests/maniti/${guestId}`);
+    return response.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
+export async function completeMissionLoad(guestId: number) {
+  try {
+    const response = await Axios.get(`/api/results/missions/${guestId}`);
+    return response.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}

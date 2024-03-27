@@ -18,7 +18,7 @@ export const loginState = atom<LoginProfile>({
     // guestId: 0,
     // partyId: 0,
     kakaoId: 123456,
-    guestId: 2,
+    guestId: 1,
     partyId: 3,
     nickname: '가철수',
     profileUrl: '',
