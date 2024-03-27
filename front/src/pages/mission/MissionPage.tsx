@@ -21,7 +21,6 @@ function MissionPage() {
   const party = useRecoilValue(partyState);
   useEffect(() => {
     setcurrentTime(new Date().toISOString());
-    console.log(partyStatus);
   }, []);
 
   const nickname: string = login.nickname;

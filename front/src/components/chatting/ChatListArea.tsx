@@ -36,8 +36,7 @@ function ChatListArea({ tag, messages }: { tag: string; messages: MessageRes[] }
                         ({createdTime.getHours()}:{createdTime.getMinutes()})
                       </div>
                       <div className={`FontS FontBasic ${styles.Message} ${styles.MyMessage}`}>
-                        {/* {msg.messageType ? <img src={msg.content} alt="" /> : msg.content} */}
-                        {msg.messageType ? <img src={pairChat} alt="" /> : msg.content}
+                        {msg.messageType ? <img src={msg.content} alt="" /> : msg.content}
                       </div>
                     </div>
                   ) : (
@@ -64,9 +63,7 @@ function ChatListArea({ tag, messages }: { tag: string; messages: MessageRes[] }
                           </div>
                           <div className={`${styles.FlexHorizontal} ${styles.TheirFlexHorizontal}`}>
                             <div className={`FontS FontBasic ${styles.Message} ${styles.TheirMessage}`}>
-                              {msg.messageType ? <img src={pairChat} alt="" /> : msg.content}
-                              {/* {msg.messageType ? <img src={msg.content} alt="" /> : msg.content} */}
-                              {msg.messageType ? <img src={pairChat} alt="" /> : msg.content}
+                              {msg.messageType ? <img src={msg.content} alt="" /> : msg.content}
                             </div>
                             <div className={`FontXS FontBasic`}>
                               ({createdTime.getHours()}:{createdTime.getMinutes()})

@@ -105,9 +105,8 @@ function ChattingInputArea({ senderId }: { senderId: number }) {
             <div className={styles.DeleteButton} onClick={handlerDelete}>
               <XCircle size={20} color="#4d4637" weight="fill" />
             </div>
-            <img className={`${imgUrl != '' ? styles.PreviewImage : ''}`} src={imgUrl ? pairChat : ''} alt="" />
+            <img className={`${imgUrl != '' ? styles.PreviewImage : ''}`} src={imgUrl ? imgUrl : ''} alt="" />
           </div>
-          {/* <img className={`${imgUrl != '' ? styles.PreviewImage : ''}`} src={imgUrl ? imgUrl : ''} alt="" /> */}
         </div>
         <div className={`${styles.FlexHorizontal} `}>
           <div className={`${styles.FlexHorizontal} ${styles.InputBox}`}>
