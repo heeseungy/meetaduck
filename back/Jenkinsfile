@@ -25,6 +25,17 @@ pipeline {
         	}
         }
 
+        stage('keystore download') {
+            steps {
+                withCredentials([file(credentialsId: 'keystore', variable: 'keystoreFile')]) {
+                    script {
+                        sh 'cp -f $keystoreFile ./back/'
+                    }
+                }
+            }
+        }
+
+
         stage('Build Common-Server .JAR') {
             steps {
                 script {
