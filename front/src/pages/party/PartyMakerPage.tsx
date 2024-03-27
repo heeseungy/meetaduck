@@ -1,38 +1,30 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 
 import Button from '@/components/commons/Button';
 import Card from '@/components/commons/Card';
 import DatePickerInput from '@/components/party/DatePickerInput';
 import ShareButton from '@/components/party/ShareButton';
-import { loginState, partyState } from '@/recoil/atom';
+import { currentTimeState, loginState, partyState } from '@/recoil/atom';
 import { Axios } from '@/services/axios';
 import { partyDeleteervice } from '@/services/partyDeleteService';
 import { partyStartService } from '@/services/partyStartService';
 import styles from '@/styles/party/PartyMaker.module.css';
 import { ArrowsCounterClockwise } from '@phosphor-icons/react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
 
 function PartyMakerPage() {
   const setParty = useSetRecoilState(partyState);
   const party = useRecoilValue(partyState);
   const login = useRecoilValue(loginState);
-
-  // const location = useLocation();
-  // const { accessCode, partyName } = location.state;
-  // console.log('location.state: ', location.state);
-
-  console.log('login.userId:', login.userId);
   const [participants, setParticipants] = useState([]);
+  const [endDate, setEndDate] = useState(null);
+  const navigate = useNavigate();
 
-  // if (partyId === -1 || partyId === undefined) {
-  //   partyId = login.userId;
-  // }
   useEffect(() => {
     const fetchPartyInfo = async () => {
       try {
         const usersInfo = await Axios.get(`/api/guests/all/${party.partyId}`);
-        console.log('usersInfo.data :', usersInfo.data);
         setParticipants(usersInfo.data);
       } catch (err) {
         console.log('Err :', err);
@@ -46,12 +38,12 @@ function PartyMakerPage() {
       const usersInfo = await Axios.get(`/api/guests/all/${party.partyId}`);
       setParticipants(usersInfo.data);
     } catch (err) {
+      alert(err.response.data)
       console.log('Error refreshing party info: ', err);
     }
   };
 
   useEffect(() => {
-    console.log('party:', party);
     // Axios로 파티를 조회한다.
     // recoil에 axios response로 온 파티 정보를 저장함.
 
@@ -60,23 +52,7 @@ function PartyMakerPage() {
       accessCode: party.accessCode,
       partyName: party.partyName,
     }));
-    // setParty({
-    //   partyId: 3,
-    //   accessCode: 'tlz5vy',
-    //   startTime: '2024-03-11T21:00:00.000Z',
-    //   endTime: '2024-03-20T21:00:00.000Z',
-    //   deleted: false,
-    //   userId: 152,
-    // });
   }, []);
-
-  // login.userId === response.userId
-
-  useEffect(() => {
-    // login State 가져와서 같은지 확인
-    console.log('login.userId: ', login.userId);
-    console.log(party.userId);
-  }, [party]);
 
   const joinNumber = participants.length;
 
@@ -99,19 +75,67 @@ function PartyMakerPage() {
       ))}
     </div>
   );
-
-  const startHandler = () => {
-    console.log('시작하기');
-    partyStartService();
+  
+  const startHandler = async () => {
+    try {
+      const isoEndDate = endDate.toISOString();
+      await Axios.patch(`/api/parties`, {
+        accessCode: party.accessCode,
+        endTime: isoEndDate,
+        userId: party.userId,
+      })
+      setParty((prevPartyState) => ({
+        ...prevPartyState,
+        endTime: endDate !== null ? endDate : prevPartyState.endTime,
+      }))
+      navigate('/hintinputform')
+    } catch(err) {
+      console.log("err:", err);
+      alert(err.response.data);
+    }
   };
 
-  const deleteHandler = () => {
+  const deleteHandler = async () => {
     console.log('파티닫기');
-    partyDeleteervice();
+    try {
+      await Axios.delete(`/api/parties`, {
+        data: {
+          accessCode: party.accessCode,
+          userId: party.userId,
+        }
+      })
+      alert('파티가 삭제되었습니다')
+      navigate('/party');
+    } catch(err) {
+      alert(err.response.data);
+      navigate('/party');
+    }
   };
 
-  const leaveHandler = () => {
+  const leaveHandler = async () => {
     console.log('나가기');
+    try {
+      // 로그인 상태에서 JWT 토큰을 가져옵니다.
+      // const jwtToken = login.jwtToken;
+      const jwtToken = 123;
+  
+      // JWT 토큰이 존재하는 경우에만 요청을 보냅니다.
+      if (jwtToken) {
+        await Axios.delete(`/api/guests/${login.guestId}`, {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`, // JWT 토큰을 헤더에 추가합니다.
+          },
+        });
+        alert('파티를 나갔습니다.');
+        navigate('/party');
+      } else {
+        // JWT 토큰이 없는 경우에는 어떻게 처리할지 결정합니다.
+        console.log('JWT 토큰이 없습니다.');
+      }
+    } catch (err) {
+      alert(err.response.data);
+      navigate('/party');
+    }
   };
 
   return (
@@ -131,7 +155,7 @@ function PartyMakerPage() {
           <>
             <div className={`FontM`}>종료 시간</div>
             <div className={`${styles.inputWrapper}`}>
-              <DatePickerInput />
+              <DatePickerInput setEndDate={setEndDate} />
             </div>
             <div className={`${styles.buttonWrapper}`}>
               <span className={`${styles.oneButton}`}>
