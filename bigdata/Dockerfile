@@ -8,6 +8,10 @@ RUN apt-get update && \
     apt-get upgrade && \
     apt-get install -y --no-install-recommends tzdata g++ git curl
 
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
+ENV SPARK_HOME=/opt/spark
+ENV PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
+
 # workspace
 WORKDIR /app/
 COPY ./app /app 
@@ -19,8 +23,6 @@ RUN pip install -r requirements.txt
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
 
-ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
-ENV SPARK_HOME=/opt/spark
-ENV PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
+
 
 
