@@ -29,5 +29,3 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
 ENV SPARK_HOME=/opt/spark
 ENV PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
-
-
