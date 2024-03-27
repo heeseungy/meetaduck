@@ -1,6 +1,5 @@
 .env
-volumes
-bigdata/app/koelectra-base-finetuned-sentiment-analysis.bin
+volumes 
 localhost.p12
 keystore.p12
 localhost-key.pem
