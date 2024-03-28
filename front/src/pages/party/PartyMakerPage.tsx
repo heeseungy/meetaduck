@@ -105,6 +105,7 @@ function PartyMakerPage() {
         }
       })
       alert('파티가 삭제되었습니다')
+      sessionStorage.removeItem("sessionStorage")
       navigate('/party');
     } catch(err) {
       alert(err.response.data);
