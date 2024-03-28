@@ -1,6 +1,19 @@
 .box {
-  border: 1px solid #B3AA99;
+  border: 1px solid #b3aa99;
   border-radius: 4px;
   width: 16rem;
   height: 2rem;
+  outline: none;
+}
+
+.partyBox {
+  border: 1px solid #b3aa99;
+  border-radius: 4px;
+  width: 16rem;
+  height: 2rem;
+  text-align: center;
+  font-family: 'JalnanGothic', sans-serif;
+  font-size: 1.333rem;
+  color: #4d4637;
+  outline: none;
 }

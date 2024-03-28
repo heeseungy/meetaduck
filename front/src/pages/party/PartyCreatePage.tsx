@@ -6,6 +6,7 @@ import Button from '@/components/commons/Button';
 import Input from '@/components/commons/Input';
 import { loginState, partyState } from '@/recoil/atom';
 import { Axios } from '@/services/axios';
+import style from '@/styles/commons/Input.module.css';
 import styles from '@/styles/party/Partyjoin.module.css';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
@@ -51,8 +52,8 @@ function PartyCreatePage() {
     <div className={styles.container}>
       <img src={duckLogo} alt="duckLogo" className={styles.marginTop} />
       <div className={`FontBasic FontL ${styles.joinTitle} `}>파티명</div>
-      <div className={styles.marginTop}>
-        <Input maxLength={6} usersInput={partyName} onChange={handleInputChange} />
+      <div className={`${styles.marginTop}`}>
+        <Input className={style.partyBox} maxLength={6} usersInput={partyName} onChange={handleInputChange} />
       </div>
       <div className={styles.marginTop}>
         <Button onClickHandler={createHandler} bgc="filled">

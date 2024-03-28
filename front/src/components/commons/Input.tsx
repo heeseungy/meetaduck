@@ -4,14 +4,15 @@ interface InputProps {
   maxLength: number;
   usersInput: string;
   onChange: (value: string) => void;
+  className?: string;
 }
 
-function Input({ maxLength, usersInput, onChange }: InputProps) {
+function Input({ maxLength, usersInput, className = styles.box, onChange }: InputProps) {
   const saveUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
   };
   return (
-    <input maxLength={maxLength} type="text" className={`${styles.box}`} value={usersInput} onChange={saveUserInput} />
+    <input maxLength={maxLength} type="text" className={`${className}`} value={usersInput} onChange={saveUserInput} />
   );
 }
 

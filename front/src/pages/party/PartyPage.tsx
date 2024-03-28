@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ReactCodeInput from 'react-code-input';
 import { useNavigate } from 'react-router-dom';
 
 import duckLogo from '@/assets/images/RubberDuckWithLogo.png';
@@ -51,12 +52,39 @@ function PartyPage() {
     setUsersInput(value);
   };
 
+  const props = {
+    inputStyle: {
+      fontFamily: 'JalnanGothic',
+      fontSize: '28px',
+      margin: '4px',
+      width: '30px',
+      height: '30px',
+      paddingTop: '10px',
+      paddingLeft: '12px',
+      paddingRight: '0px',
+      paddingBottom: '5px',
+      boxShadow: 'white 0px 0px 0px 0px',
+      borderRadius: '6px',
+      border: '1px solid #b3aa99',
+      color: '#4D4637',
+      backgroundColor: 'white',
+      outline: 'none',
+    },
+  };
   return (
     <div className={styles.container}>
       <img src={duckLogo} alt="duckLogo" className={styles.marginTop} />
       <div className={`FontBasic FontL ${styles.joinTitle} `}>파티 참여 코드</div>
-      <div className={styles.marginTop}>
-        <Input usersInput={usersInput} onChange={handleInputChange} />
+      <div className={`${styles.FontCode} ${styles.marginTop}`}>
+        <ReactCodeInput
+          type="text"
+          value={usersInput}
+          onChange={handleInputChange}
+          fields={6}
+          name="accessCode"
+          inputMode="numeric"
+          {...props}
+        />
       </div>
       <div className={styles.marginTop}>
         <Button bgc="filled" onClickHandler={joinHandler}>
@@ -64,7 +92,7 @@ function PartyPage() {
         </Button>
       </div>
 
-      <div className={styles.noPartySection}>파티가 없으신가요?</div>
+      <div className={`FontSBold FontComment ${styles.noPartySection}`}>파티가 없으신가요?</div>
       <Button bgc="empty" onClickHandler={createHandler}>
         만들기
       </Button>
