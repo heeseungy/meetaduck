@@ -5,7 +5,7 @@ import Button from '@/components/commons/Button';
 import Card from '@/components/commons/Card';
 import DatePickerInput from '@/components/party/DatePickerInput';
 import ShareButton from '@/components/party/ShareButton';
-import { currentTimeState, loginState, partyState } from '@/recoil/atom';
+import { loginState, partyState } from '@/recoil/atom';
 import { Axios } from '@/services/axios';
 import { partyDeleteervice } from '@/services/partyDeleteService';
 import { partyStartService } from '@/services/partyStartService';
@@ -16,6 +16,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 function PartyMakerPage() {
   const setParty = useSetRecoilState(partyState);
+  const setLogin = useSetRecoilState(loginState);
   const party = useRecoilValue(partyState);
   const login = useRecoilValue(loginState);
   const [participants, setParticipants] = useState<ListProfile[]>([]);
@@ -26,12 +27,23 @@ function PartyMakerPage() {
     const fetchPartyInfo = async () => {
       try {
         const usersInfo = await Axios.get(`/api/guests/all/${party.partyId}`);
+        console.log('useInfo', usersInfo);
         setParticipants(usersInfo.data);
+        return usersInfo.data;
       } catch (err) {
         console.log('Err :', err);
+        return Promise.resolve(err);
       }
     };
-    fetchPartyInfo();
+    fetchPartyInfo().then((response: ListProfile[]) => {
+      const newGuestId = response.filter((p) => p.userId === login.userId);
+      if (newGuestId.length !== 0) {
+        setLogin((prevLoginState) => ({
+          ...prevLoginState,
+          guestId: newGuestId[0].guestId,
+        }));
+      }
+    });
   }, []);
 
   const refreshClickHandler = async () => {
@@ -44,16 +56,15 @@ function PartyMakerPage() {
     }
   };
 
-  useEffect(() => {
-    // Axios로 파티를 조회한다.
-    // recoil에 axios response로 온 파티 정보를 저장함.
-
-    setParty((prevPartyState) => ({
-      ...prevPartyState,
-      accessCode: party.accessCode,
-      partyName: party.partyName,
-    }));
-  }, []);
+  // useEffect(() => {
+  //   // Axios로 파티를 조회한다.
+  //   // recoil에 axios response로 온 파티 정보를 저장함.
+  //   setParty((prevPartyState) => ({
+  //     ...prevPartyState,
+  //     accessCode: party.accessCode,
+  //     partyName: party.partyName,
+  //   }));
+  // }, []);
 
   const joinNumber = participants.length;
 
@@ -106,7 +117,12 @@ function PartyMakerPage() {
         },
       });
       alert('파티가 삭제되었습니다');
-      sessionStorage.removeItem('sessionStorage');
+      setLogin((prevLoginState) => ({
+        ...prevLoginState,
+        guestId: 0,
+        partyId: 0,
+      }));
+      // sessionStorage.removeItem('sessionStorage');
       navigate('/party');
     } catch (err) {
       alert(err.response.data);
@@ -128,6 +144,10 @@ function PartyMakerPage() {
             Authorization: `Bearer ${jwtToken}`, // JWT 토큰을 헤더에 추가합니다.
           },
         });
+        setLogin((prevLoginState) => ({
+          ...prevLoginState,
+          partyId: 0,
+        }));
         alert('파티를 나갔습니다.');
         navigate('/party');
       } else {
