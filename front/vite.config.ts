@@ -17,7 +17,7 @@ export default defineConfig({
     hmr: {
       host: 'j10c108.p.ssafy.io',
       protocol: 'wss',
-      port: 3000,
+      port: 8080,
     }
   },
 
