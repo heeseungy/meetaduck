@@ -35,4 +35,3 @@ ENV PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 RUN pip install -r requirements.txt
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8881"]
->>>>>>> dae3a87b653dd52b8b0723576c4ad8573969be7a
