@@ -15,12 +15,10 @@ import RedirectionPage from './login/RedirectionPage';
 import PartyCreatePage from './party/PartyCreatePage';
 import PartyMakerPage from './party/PartyMakerPage';
 import TestPage from './webSocketTest/TestPage';
-import RabbitTestPage from './webSocketTest/RabbitTestPage';
 // import S3Page from './s3/s3Page';
 // import { S3Page } from './s3/s3Page';
 import SamplePage from './sample/SamplePage';
-import TestPage from './webSocketTest/TestPage';
-
+import RabbitTestPage from './webSocketTest/RabbitTestPage';
 const router = createBrowserRouter([
   {
     path: '/',

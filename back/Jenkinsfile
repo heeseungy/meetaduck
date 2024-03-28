@@ -19,7 +19,7 @@ pipeline {
         	steps {
             	withCredentials([file(credentialsId: 'application2', variable: 'applicationFile')]) {
                 	script {
-                    	sh 'cp -f $applicationFile ./back/src/main/resources/'
+                    	sh 'cp -f $applicationFile ./back/src/main/resources/application.yaml'
                     }
         		}
         	}

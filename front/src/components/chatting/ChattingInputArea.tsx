@@ -1,26 +1,26 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import pairChat from '@/assets/images/pairChat.png';
 import { chatSendImageService } from '@/services/chatSendImageService';
 import { chatSendMessageService } from '@/services/chatSendMessageService';
 import styles from '@/styles/chatting/ChattingInputArea.module.css';
 import { PaperPlaneTilt, Plus, XCircle } from '@phosphor-icons/react';
+import { Client } from '@stomp/stompjs';
 import AWS from 'aws-sdk';
 import imageCompression from 'browser-image-compression';
 
-function ChattingInputArea({ senderId }: { senderId: number }) {
+function ChattingInputArea({ stompClient, senderId }: { stompClient: Client | null; senderId: number }) {
   const chatId = useParams().chatId!;
   // 메시지 입력
   const [newMessage, setNewMessage] = useState<string>(''); // 새 메시지 입력 상태 관리
   const sendMessage = async () => {
     if (newMessage.trim() !== '') {
-      chatSendMessageService(senderId, +chatId, newMessage, setNewMessage);
+      chatSendMessageService(stompClient, senderId, +chatId, newMessage, setNewMessage);
       if (imgUrl !== '') {
-        chatSendImageService(senderId, +chatId, imgUrl, setImgUrl);
+        chatSendImageService(stompClient, senderId, +chatId, imgUrl, setImgUrl);
       }
     } else if (imgUrl !== '') {
-      chatSendImageService(senderId, +chatId, imgUrl, setImgUrl);
+      chatSendImageService(stompClient, senderId, +chatId, imgUrl, setImgUrl);
     }
   };
 
