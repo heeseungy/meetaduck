@@ -55,6 +55,11 @@ public class UserController {
     @GetMapping("/login")
     ResponseEntity<UserRes> login(@RequestParam("code") String code) {
 
+        System.out.println("redirectURI" + redirectURI);
+
+        //
+        Logger logger = LoggerFactory.getLogger(UserController.class);
+
         // Setting For Request Header
         Charset utf8 = Charset.forName("UTF-8");
         MediaType mediaType = new MediaType(MediaType.APPLICATION_FORM_URLENCODED, utf8);
@@ -81,6 +86,8 @@ public class UserController {
                 tokenRequest,
                 String.class
         );
+
+        logger.info("token: {}", tokenResponse.toString());
 
         // Util
         ObjectMapper objectMapper = new ObjectMapper();
@@ -110,6 +117,8 @@ public class UserController {
                 userInfoRequest,
                 String.class
         );
+
+        logger.info("userinfo: {}", userInfoResponse.toString());
 
         //
         KakaoUserInfo userInfo = null;
@@ -146,8 +155,6 @@ public class UserController {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Authorization", "Bearer " + jwtToken);
 
-        //
-        Logger logger = LoggerFactory.getLogger(UserController.class);
         logger.info("{}", userRes.toString());
 
         return ResponseEntity.ok()
