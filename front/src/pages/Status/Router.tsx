@@ -33,15 +33,15 @@ export default function Router() {
           <Route index element={<LoginPage />} />
           <Route path={'/login/oauth2/code/kakao'} element={<RedirectionPage />} />
         </Route>
-        <Route element={<ProtectedRoutes status={'beforePartyjJoin'} />}>
-          <Route index path={'/party'} element={<PartyPage />} />
-          <Route path={'/partycreate'} element={<PartyCreatePage />} />
+        <Route path={'/party'} element={<ProtectedRoutes status={'beforePartyjJoin'} />}>
+          <Route index element={<PartyPage />} />
+          <Route path={'/party/create'} element={<PartyCreatePage />} />
         </Route>
-        <Route element={<ProtectedRoutes status={'partyJoin'} />}>
-          <Route index path={'/partymaker'} element={<PartyMakerPage />} />
+        <Route path={'/partymaker'} element={<ProtectedRoutes status={'partyJoin'} />}>
+          <Route index element={<PartyMakerPage />} />
         </Route>
-        <Route element={<ProtectedRoutes status={'hintInput'} />}>
-          <Route index path={'hintinputform'} element={<HintInputFormPage />} />
+        <Route path={'/hintinputform'} element={<ProtectedRoutes status={'hintInput'} />}>
+          <Route index element={<HintInputFormPage />} />
         </Route>
         <Route element={<ProtectedRoutes status={'partyStart'} />}>
           <Route element={<RootPage />}>

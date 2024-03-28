@@ -28,53 +28,73 @@ export default function PrivateRoute({ status }: PrivateRouteProps): React.React
   const finishHintInput = sessionStorage.getItem('finishHintInput');
 
   if (status === 'login') {
+    // login, redirection
     console.log('login');
-    return loginState === null ? <Outlet /> : <Navigate to="/party" />;
+    if (loginState === null) {
+      //loginState에 값이 null 이면 login page || redirection page
+      return <Outlet />;
+    } else {
+      //loginState에 값이 있으면 party page로 이동
+      return <Navigate to="/party" />;
+    }
   } else if (status === 'beforePartyjJoin') {
+    // party, partycreate
     console.log('beforePartyjJoin');
-    return loginState === null ? (
-      <Navigate to="/" />
-    ) : partyState === null || loginState.partyId === 0 ? (
-      <Outlet />
-    ) : (
-      <Navigate to="/partymaker" />
-    );
+    if (loginState === null) {
+      //loginState에 값이 null 이면 login page
+      return <Navigate to="/" />;
+    } else if (partyState === null || loginState.partyId === 0) {
+      // partyState가 없는 경우 혹은 partyId가 0일 경우 party Page partycreate page
+      return <Outlet />;
+    } else {
+      // 그외 partymaker로 이동
+      return <Navigate to="/partymaker" />;
+    }
   } else if (status === 'partyJoin') {
+    // partymaker
     console.log('partyJoin');
-    return loginState === null ? (
-      <Navigate to="/" />
-    ) : partyState === null || loginState.partyId === 0 ? (
-      <Navigate to="/party" />
-    ) : partyState.endTime === (null || '') ? (
-      <Outlet />
-    ) : (
-      <Navigate to="/hintinputform" />
-    );
+    if (loginState === null) {
+      //loginState에 값이 null 이면 login page || redirection page
+      return <Navigate to="/" />;
+    } else if (partyState === null || loginState.partyId === 0) {
+      // partyState가 없는 경우 혹은 partyId가 0일 경우 party Page
+      return <Navigate to="/party" />;
+    } else if (partyState.endTime === null || partyState.endTime === '') {
+      return <Outlet />;
+    } else {
+      return <Navigate to="/hintinputform" />;
+    }
   } else if (status === 'hintInput') {
+    // hintinputform
     console.log('hintInput');
-    return loginState === null ? (
-      <Navigate to="/" />
-    ) : partyState === null || loginState.partyId === 0 ? (
-      <Navigate to="/party" />
-    ) : partyState.endTime === (null || '') ? (
-      <Navigate to="/partymaker" />
-    ) : finishHintInput === null ? (
-      <Outlet />
-    ) : (
-      <Navigate to="/mission" />
-    );
+    if (loginState === null) {
+      //loginState에 값이 null 이면 login page || redirection page
+      return <Navigate to="/" />;
+    } else if (partyState === null || loginState.partyId === 0) {
+      // partyState가 없는 경우 혹은 partyId가 0일 경우 party Page
+      return <Navigate to="/party" />;
+    } else if (partyState.endTime === null || partyState.endTime === '') {
+      return <Navigate to="/partymaker" />;
+    } else if (finishHintInput === null) {
+      return <Outlet />;
+    } else {
+      return <Navigate to="/mission" />;
+    }
   } else if (status === 'partyStart') {
-    return loginState === null ? (
-      <Navigate to="/" />
-    ) : partyState === null || loginState.partyId === 0 ? (
-      <Navigate to="/party" />
-    ) : partyState.endTime === (null || '') ? (
-      <Navigate to="/partymaker" />
-    ) : finishHintInput === null ? (
-      <Navigate to="/hintinputform" />
-    ) : (
-      <Outlet />
-    );
+    // mission chat hint result vote
+    if (loginState === null) {
+      //loginState에 값이 null 이면 login page || redirection page
+      return <Navigate to="/" />;
+    } else if (partyState === null || loginState.partyId === 0) {
+      // partyState가 없는 경우 혹은 partyId가 0일 경우 party Page
+      return <Navigate to="/party" />;
+    } else if (partyState.endTime === null || partyState.endTime === '') {
+      return <Navigate to="/partymaker" />;
+    } else if (finishHintInput === null) {
+      return <Navigate to="/hintinputform" />;
+    } else {
+      return <Outlet />;
+    }
   } else {
     return <Navigate to="/error" />;
   }
