@@ -15,7 +15,7 @@ function ErrorPage() {
         <Button
           bgc="voteFinish"
           onClickHandler={() => {
-            navigate('/login');
+            navigate('/');
           }}
         >
           홈으로 돌아가기

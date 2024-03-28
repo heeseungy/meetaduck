@@ -33,7 +33,7 @@ export default function PrivateRoute({ status }: PrivateRouteProps): React.React
   } else if (status === 'beforePartyjJoin') {
     console.log('beforePartyjJoin');
     return loginState === null ? (
-      <Navigate to="/login" />
+      <Navigate to="/" />
     ) : partyState === null || loginState.partyId === 0 ? (
       <Outlet />
     ) : (
