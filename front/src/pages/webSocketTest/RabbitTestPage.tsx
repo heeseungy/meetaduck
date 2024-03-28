@@ -43,13 +43,13 @@ function RabbitTestPage() {
   useEffect(() => {
     loadMessages();
     const client = new Client({
-      brokerURL: `wss://localhost:8080/wss/chat`,   // Server WebSocket URL
+      brokerURL: `wss://localhost:8080/wss`,   // Server WebSocket URL
       reconnectDelay: 5000, // 연결 끊겼을 때, 재연결시도까지 지연시간(ms)
       onConnect: () => {
         console.log("WebSocket 연결됨"); // 이 위치가 서버와의 연결이 성공적으로 이루어졌음을 보장
-        client.subscribe(`/sub/api/chats/${chatId}/messages`, (message: IMessage) => {
-          const msg: MessageRes = JSON.parse(message.body); // 메시지를 JSON형태로 파싱
-          setMessages((prevMessages) => [...prevMessages, msg]);  // 기존 메시지 목록에 새 메시지 추가
+        client.subscribe(`/exchange/message.exchange/chats.${chatId}.messages`, (message) => {
+          const msg = JSON.parse(message.body);
+          setMessages((prevMessages) => [...prevMessages, msg]);
         });
       },
     });
@@ -61,7 +61,7 @@ function RabbitTestPage() {
   }, [chatId]); // chatId가 변경될 때마다 useEffect 실행
 
   const sendMessage = async () => {
-    if (newMessage.trim() !== "") {
+    if (newMessage.trim() !== "" && stompClient) {
       try {
         const messageReq = {
           messageType: false, // 메시지 타입 설정, 필요에 따라 조정 가능
@@ -70,7 +70,12 @@ function RabbitTestPage() {
           chatId: chatId,
         };
   
-        await axios.post(`https://localhost:8080/api/chats/${chatId}/messages`, messageReq);
+        // await axios.post(`https://localhost:8080/api/chats/${chatId}/messages`, messageReq);
+            // STOMP를 사용하여 메시지 발행
+        stompClient.publish({
+          destination: `/pub/chats.${chatId}.messages`,
+          body: JSON.stringify(messageReq),
+        });
   
         setNewMessage(""); // 메시지 전송 후 입력 필드 초기화
       } catch (error) {
