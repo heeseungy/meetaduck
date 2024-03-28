@@ -15,6 +15,14 @@ pipeline {
             }
         }
 
+        stage('secret.yml delete') {
+            steps {
+                script{
+                    sh 'rm -f ./back/src/main/resources/application.yaml'
+                }
+            }
+        }
+
         stage('secret.yml download') {
         	steps {
             	withCredentials([file(credentialsId: 'application2', variable: 'applicationFile')]) {
