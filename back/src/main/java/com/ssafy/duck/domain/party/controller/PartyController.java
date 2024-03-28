@@ -76,7 +76,7 @@ public class PartyController {
         PartyRes partyRes = partyService.find(startReq.getAccessCode());
         Instant today = TimeUtil.convertTo00(Instant.now());
 //        System.out.println("end time " + TimeUtil.stringToInstant(startReq.getEndTime()));
-//        System.out.println("schedule end time "+ TimeUtil.stringToInstant(startReq.getEndTime()).minus(Duration.ofDays(1)) );
+//////        System.out.println("schedule end time "+ TimeUtil.stringToInstant(startReq.getEndTime()).minus(Duration.ofDays(1)) );
         if (partyService.isValidStartReq(startReq, partyRes)) {
             partyService.start(partyRes, startReq);
             guestService.setManiti(partyRes.getPartyId());

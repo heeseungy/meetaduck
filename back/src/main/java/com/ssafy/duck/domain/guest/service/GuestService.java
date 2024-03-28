@@ -60,6 +60,17 @@ public class GuestService {
     }
 
     public void deleteByGuestId(Long guestId) {
+        Guest guest = guestRepository.findById(guestId)
+                .orElseThrow(() -> new GuestException(GuestErrorCode.GUEST_NOT_FOUND));
+
+        Long partyId = guest.getParty().getPartyId();
+        Party party = partyRepository.findByPartyId(partyId)
+                        .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
+
+        if (party.getStartTime() != null) {
+            throw new PartyException(PartyErrorCode.ALREADY_STARTED_PARTY);
+        }
+
         guestRepository.deleteById(guestId);
     }
 
