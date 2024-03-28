@@ -142,6 +142,15 @@ function PartyMakerPage() {
           userId: party.userId,
         },
       });
+
+      // 파티가 삭제되었으므로, 모든 참가자를 강제로 퇴장시킵니다.
+      await Promise.all(
+        participants.map(async (participant) => {
+          await Axios.delete(`/api/guests/${participant.guestId}`);
+          navigate('/party')
+        })
+      );
+
       alert('파티가 삭제되었습니다');
       setLogin((prevLoginState) => ({
         ...prevLoginState,
