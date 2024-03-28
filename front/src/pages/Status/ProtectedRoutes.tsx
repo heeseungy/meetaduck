@@ -42,7 +42,7 @@ export default function PrivateRoute({ status }: PrivateRouteProps): React.React
   } else if (status === 'partyJoin') {
     console.log('partyJoin');
     return loginState === null ? (
-      <Navigate to="/login" />
+      <Navigate to="/" />
     ) : partyState === null || loginState.partyId === 0 ? (
       <Navigate to="/party" />
     ) : partyState.endTime === (null || '') ? (
@@ -53,7 +53,7 @@ export default function PrivateRoute({ status }: PrivateRouteProps): React.React
   } else if (status === 'hintInput') {
     console.log('hintInput');
     return loginState === null ? (
-      <Navigate to="/login" />
+      <Navigate to="/" />
     ) : partyState === null || loginState.partyId === 0 ? (
       <Navigate to="/party" />
     ) : partyState.endTime === (null || '') ? (
@@ -65,7 +65,7 @@ export default function PrivateRoute({ status }: PrivateRouteProps): React.React
     );
   } else if (status === 'partyStart') {
     return loginState === null ? (
-      <Navigate to="/login" />
+      <Navigate to="/" />
     ) : partyState === null || loginState.partyId === 0 ? (
       <Navigate to="/party" />
     ) : partyState.endTime === (null || '') ? (

@@ -13,7 +13,7 @@ import Button from '../commons/Button';
 import Input from '../commons/Input';
 
 function HintInputQuestion() {
-  const [hints, setHints] = useState<Hint[]>();
+  const [hints, setHints] = useState<Hint[]>([]);
   // const [hints, setHints] = useState([
   //   {
   //     hintId: 1,
@@ -33,12 +33,12 @@ function HintInputQuestion() {
   const guestId = login.guestId;
 
   useEffect(() => {
-    sessionStorage.setItem('finishHintInput', 'true');
+    // sessionStorage.setItem('finishHintInput', 'true');
 
     async function fetchHints() {
       try {
         const hintsData = await HintInputQuestionService(guestId);
-        console.log(hintsData);
+        console.log("hintsData:", hintsData);
         setHints(hintsData);
       } catch (err) {
         console.log('Error fetching hints:', err);
@@ -46,16 +46,15 @@ function HintInputQuestion() {
     }
 
     fetchHints();
-  }, [guestId]);
+  }, []);
 
-  return <></>;
+
   const hintSubmitHandler = async () => {
     // 모든 입력란이 비어 있는지 확인
-    const isEmpty = hints.some((hint) => !hint.hintStatusAnswer.trim());
+    const isEmpty = hints.some((hint) => !hint.hintStatusAnswer || !hint.hintStatusAnswer.trim());
     if (isEmpty) {
       alert('모든 답변을 입력해주세요.');
       // setError('모든 답변을 입력하세요');
-      //
       return;
     }
     try {

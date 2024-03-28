@@ -5,14 +5,7 @@ export async function updateHintAnswersService(guestId, { hintId, hintStatusAnsw
   console.log("guestId:", guestId)
   console.log("hintId:", hintId)
   console.log("hintStatusAnswer:", hintStatusAnswer)
-  const [hintInfo, setHintInfo] = useState([])
-  setHintInfo({
-    hintId: hintId,
-    hintStatusAnswer: hintStatusAnswer
-  })
-  useEffect(() => {
-    console.log("hintId:", hintId)
-  }, [hintInfo])
+
   try {
     await Axios.patch(`/api/hints/${guestId}`, {
       hindId: hintId,
