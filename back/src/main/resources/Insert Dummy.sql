@@ -19,7 +19,8 @@ VALUES (00000, '관리자', 'http://example.com/prifiles/admin', 'http://example
 
 -- parties
 INSERT INTO parties (party_id, access_code, party_name, start_time, end_time, deleted, user_id)
-VALUES (1, 'abc123', '블랙펄', NOW(), (NOW() + INTERVAL 7 DAY), 0, 1);
+--  VALUES (1, 'abc123', '블랙펄', NOW(), (NOW() + INTERVAL 7 DAY), 1, 1);
+VALUES (1, 'abc123', '블랙펄', null, null, 1, 1);
 
 -- chats 
 INSERT INTO chats (maniti_id, created_time, party_id)
