@@ -59,6 +59,7 @@ function HintInputQuestion() {
         ),
       );
       alert('입력이 완료되었습니다~!');
+      sessionStorage.setItem('finishHintInput', 'true');
       navigate('/mission');
     } catch (err) {
       console.log('errr:', err);

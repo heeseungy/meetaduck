@@ -3,17 +3,21 @@
   height: 2rem;
   border: 1px solid #eea23e;
   border-radius: 8px;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .filled {
   background-color: #eea23e;
   color: white;
+  font-size: 1rem;
+  font-family: 'JalnanGothic', sans-serif;
 }
 
 .empty {
   background-color: white;
   color: #eea23e;
+  font-size: 1rem;
+  font-family: 'JalnanGothic', sans-serif;
 }
 .voteEmptyGray {
   background-color: white;
@@ -21,6 +25,8 @@
   color: #b3aa99;
   width: 15.5rem;
   height: 3rem;
+  font-size: 1.333rem;
+  font-family: 'JalnanGothic', sans-serif;
 }
 
 .voteFilled {
@@ -28,6 +34,8 @@
   color: white;
   width: 15.5rem;
   height: 3rem;
+  font-size: 1.333rem;
+  font-family: 'JalnanGothic', sans-serif;
 }
 
 .voteFinish {
@@ -35,4 +43,6 @@
   color: white;
   width: 18rem;
   height: 4rem;
+  font-size: 1.333rem;
+  font-family: 'JalnanGothic', sans-serif;
 }
