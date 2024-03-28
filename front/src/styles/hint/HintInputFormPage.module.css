@@ -5,7 +5,7 @@
 }
 
 .marginTop {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .cardContainer {
@@ -13,4 +13,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.Header {
+  position: absolute;
+  top: 4rem;
+  left: calc(50dvw - 9.8rem);
 }

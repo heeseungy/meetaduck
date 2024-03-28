@@ -18,8 +18,6 @@ public class Message {
     @Id
     private String id;
 
-    @Field("message_id")
-    private Integer messageId;
     @Field("message_type")
     private Boolean messageType;
     @Field("content")

@@ -17,11 +17,19 @@ export interface LoginProfile extends Profile {
   userId: number;
 }
 
+export interface Favorability {
+  manitoFavorability: number;
+  manitiFavorability: number;
+}
+
 // 마니또 페어
-export interface PairRank extends Profile {
+export interface PairRank {
+  guestId: number;
   manitiId: number;
   votedId: number;
-  manitoFavorability: number;
+  nickname: string;
+  thumbnailUrl: string;
+  favorability: Favorability;
 }
 
 // 마니띠 조회용 프로필
