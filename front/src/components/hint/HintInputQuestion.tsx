@@ -50,25 +50,20 @@ function HintInputQuestion() {
 
 
   const hintSubmitHandler = async () => {
-    // 모든 입력란이 비어 있는지 확인
-    const isEmpty = hints.some((hint) => !hint.hintStatusAnswer || !hint.hintStatusAnswer.trim());
-    if (isEmpty) {
-      alert('모든 답변을 입력해주세요.');
-      // setError('모든 답변을 입력하세요');
-      return;
-    }
+    const hintData = hints.map((hint) => ({
+      hintId: hint.hintId,
+      hintStatusAnswer: hint.hintStatusAnswer,
+    }));
+
     try {
-      // 각 힌트에 대한 답변을 서버에 업데이트
-      await Promise.all(
-        hints.map((hint) =>
-          updateHintAnswersService(guestId, { hintId: hint.hintId, hintStatusAnswer: hint.hintStatusAnswer }),
-        ),
-      );
+      console.log("hintData:", hintData)
+      await updateHintAnswersService(guestId, hintData);
       alert('입력이 완료되었습니다~!');
       sessionStorage.setItem('finishHintInput', 'true');
       navigate('/mission');
     } catch (err) {
-      console.log('errr:', err);
+      console.log('Error updating hint answers:', err);
+      alert('입력 중 오류가 발생했습니다. 다시 시도해주세요.');
     }
   };
 
