@@ -165,7 +165,7 @@ public class ChatService {
         Message savedMessage = messageRepository.save(message);
 
         // exchange 이름, routing-key, 전송하고자 하는 것
-        template.convertAndSend("message_exchange", "chats." + chatId + ".messages", savedMessage);
+        template.convertAndSend("message.exchange", "chats." + chatId + ".messages", savedMessage);
     }
 
 }

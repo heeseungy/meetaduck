@@ -17,7 +17,7 @@ public class RabbitStompController {
 
     private final ChatService chatService;
 
-    @MessageMapping("/chats/{chatId}/messages")
+    @MessageMapping("chats.{chatId}.messages")
     public void MessageHandler(
             @DestinationVariable Integer chatId, MessageReq messageReq
     ) {

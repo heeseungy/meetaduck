@@ -27,7 +27,11 @@ public class StompConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.setApplicationDestinationPrefixes("/pub")
+        // 아래 코드 기준
+        // 구독 경로: exchange/message.exchange/chats.{chatId}.messages -> 이건 RabbitConfig 구성에 따라 변동
+        // 발행 경로: pub/chats.{chatId}.messages
+        registry.setPathMatcher(new AntPathMatcher(".")) // URL을 / -> .으로
+                .setApplicationDestinationPrefixes("/pub")
                 .setUserDestinationPrefix("/user")
                 .enableStompBrokerRelay("/queue", "/topic", "/exchange","/amq/queue")
                 .setRelayHost(mqAddress)

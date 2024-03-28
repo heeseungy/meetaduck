@@ -24,25 +24,30 @@ public class RabbitConfig {
 
     private final RabbitProperties rabbitProperties;
 
-    // RabbitMQ에서 사용할 Exchange Type 설정
-    private static final String TOPIC_EXCHANGE_NAME = "message_exchange";
-
-    // Topic Exchange에 맞는 라우팅 키 지정
+    private static final String CHAT_QUEUE_NAME = "message.queue";
+    private static final String CHAT_EXCHANGE_NAME = "message.exchange";
     private static final String ROUTING_KEY = "chats.*.messages";
 
-//    // 기본 토픽 익스체인지 등록
-//    @Bean
-//    public TopicExchange topicExchange() {
-//        return new TopicExchange(TOPIC_EXCHANGE_NAME);
-//    }
+    //Queue 등록
+    @Bean
+    public Queue queue() {
+        return new Queue(CHAT_QUEUE_NAME, true);
+    }
 
-//    @Bean
-//    public Binding binding() {
-//        return BindingBuilder
-//                .bind(topicExchange())
-//                .to(topicExchange())
-//                .with(ROUTING_KEY);
-//    }
+    //Exchange 등록
+    @Bean
+    public TopicExchange exchange() {
+        return new TopicExchange(CHAT_EXCHANGE_NAME);
+    }
+
+    // Exchange와 Queue바인딩
+    @Bean
+    public Binding binding(Queue queue, TopicExchange exchange){
+        return BindingBuilder
+                .bind(queue)
+                .to(exchange)
+                .with(ROUTING_KEY);
+    }
 
     @Bean
     public RabbitTemplate rabbitTemplate() {
@@ -63,6 +68,7 @@ public class RabbitConfig {
     public ConnectionFactory connectionFactory() {
         CachingConnectionFactory factory = new CachingConnectionFactory();
         factory.setHost(rabbitProperties.getHost());
+        factory.setVirtualHost("/");
         factory.setUsername(rabbitProperties.getUsername());
         factory.setPassword(rabbitProperties.getPassword());
         return factory;
