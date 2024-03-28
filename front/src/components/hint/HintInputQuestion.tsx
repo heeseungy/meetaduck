@@ -54,6 +54,7 @@ function HintInputQuestion() {
     if (isEmpty) {
       alert('모든 답변을 입력해주세요.');
       // setError('모든 답변을 입력하세요');
+      //
       return;
     }
     try {
