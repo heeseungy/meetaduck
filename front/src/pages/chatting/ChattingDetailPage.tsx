@@ -27,7 +27,7 @@ function ChattingDetailPage() {
     //chat
     chatListLoadService(+chatId, setMessages);
     const client = new Client({
-      brokerURL: `wss://localhost:8080/wss`, // Server WebSocket URL
+      brokerURL: `wss://j10c108.p.ssafy.io:8080/wss`, // Server WebSocket URL
       reconnectDelay: 5000, // 연결 끊겼을 때, 재연결시도까지 지연시간(ms)
       onConnect: () => {
         console.log('WebSocket 연결됨'); // 이 위치가 서버와의 연결이 성공적으로 이루어졌음을 보장
