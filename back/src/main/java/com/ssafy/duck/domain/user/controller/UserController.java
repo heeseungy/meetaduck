@@ -55,6 +55,8 @@ public class UserController {
     @GetMapping("/login")
     ResponseEntity<UserRes> login(@RequestParam("code") String code) {
 
+        System.out.println("redirectURI" + redirectURI);
+
         //
         Logger logger = LoggerFactory.getLogger(UserController.class);
 
