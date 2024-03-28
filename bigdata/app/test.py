@@ -14,7 +14,7 @@ model.load_state_dict(torch.load(koelectra_finetuned_model_dir, map_location=tor
 sentiment_classifier = pipeline('sentiment-analysis', tokenizer=tokenizer, model=model)
 
 #상수
-STANDARD_POINT = 300
+STANDARD_POINT = 200
 STANDARD_PERIOD =120
 
 # 긍정어 비율 계산

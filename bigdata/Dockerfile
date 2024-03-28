@@ -27,6 +27,7 @@ RUN wget https://dlcdn.apache.org/spark/spark-3.5.1/spark-3.5.1-bin-hadoop3.tgz 
     tar xvf spark-3.5.1-bin-hadoop3.tgz && \
     sudo mv spark-3.5.1-bin-hadoop3 /opt/spark
 
+
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ENV SPARK_HOME=/opt/spark
 ENV PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
@@ -34,3 +35,4 @@ ENV PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 RUN pip install -r requirements.txt
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8881"]
+>>>>>>> dae3a87b653dd52b8b0723576c4ad8573969be7a
