@@ -146,6 +146,7 @@ public class UserController {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Authorization", "Bearer " + jwtToken);
 
+        //
         Logger logger = LoggerFactory.getLogger(UserController.class);
         logger.info("{}", userRes.toString());
 
