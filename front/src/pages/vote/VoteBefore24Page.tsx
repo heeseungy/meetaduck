@@ -1,17 +1,38 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Button from '@/components/commons/Button';
 import Card from '@/components/commons/Card';
 import VoteRadioButtonList from '@/components/vote/VoteRadioButtonList';
+import { partyState } from '@/recoil/atom';
 import { PARTYLIST } from '@/recoil/dummy';
+import { votePersonService } from '@/services/voteService';
+import { partyListAll } from '@/services/voteService';
 import styles from '@/styles/vote/VoteBefore24Page.module.css';
-import { ListProfile } from '@/types/user.interface';
+import { ResultListItemProps, ResultListProps } from '@/types/result';
+import { ListProfile, PairRank } from '@/types/user.interface';
+import { useRecoilValue } from 'recoil';
 
-function VoteBefore24Page() {
-  const navigate = useNavigate();
-  const partyList: ListProfile[] = PARTYLIST;
+function VoteBefore24Page({
+  guestId,
+  myProfile,
+  setMyProfile,
+}: {
+  guestId: number;
+  myProfile: ListProfile;
+  setMyProfile: React.Dispatch<React.SetStateAction<ListProfile>>;
+}) {
+  const party = useRecoilValue(partyState);
+
+  const [partyList, setPartyList] = useState<ListProfile[]>(PARTYLIST);
   const [selectedValue, setSelectedValue] = useState(0);
+
+  useEffect(() => {
+    partyListAll(party.partyId).then((data) => {
+      setPartyList(data);
+    });
+  }, []);
+  // 라디오 버튼을 누르면 selectedValue값이 바뀜
   function voteRadioButtonListHandler(event: React.ChangeEvent<HTMLInputElement>) {
     console.log(parseInt(event.target.value));
     setSelectedValue(parseInt(event.target.value));
@@ -21,8 +42,11 @@ function VoteBefore24Page() {
     if (selectedValue === 0) {
       window.alert('투표를 해주세요');
     } else {
-      // navigate('/voteFinish');
-      // 조회 한번 하고 다시 렌더링 or 한번은 그냥 voteFinish로 가기
+      votePersonService(guestId, selectedValue);
+      setMyProfile((prevMyProfileState) => ({
+        ...prevMyProfileState,
+        votedId: selectedValue,
+      }));
     }
   };
 

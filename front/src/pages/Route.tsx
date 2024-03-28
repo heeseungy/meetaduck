@@ -19,12 +19,14 @@ import RabbitTestPage from './webSocketTest/RabbitTestPage';
 // import S3Page from './s3/s3Page';
 // import { S3Page } from './s3/s3Page';
 import SamplePage from './sample/SamplePage';
+import TestPage from './webSocketTest/TestPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <RootPage />,
     children: [
+      
       { path: '/', element: <HomePage /> },
       { path: '/mission', element: <MissionPage /> },
       { path: '/chatting', element: <ChattingPage /> },
@@ -41,7 +43,7 @@ const router = createBrowserRouter([
   { path: '/rabbit', element: <RabbitTestPage /> },
   { path: '/chatdetail/:chatId', element: <ChatDetailPage /> },
   { path: '/login/oauth2/code/kakao', element: <RedirectionPage /> },
-  { path: '/sample', element: <SamplePage/> },
+  { path: '/sample', element: <SamplePage /> },
 ]);
 
 function Route() {

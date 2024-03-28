@@ -1,19 +1,19 @@
 import react from '@vitejs/plugin-react-swc';
-import { defineConfig } from 'vite';
 import fs from 'fs';
+import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   define: {
-    'global': {},
+    global: {},
   },
   server: {
     host: '0.0.0.0',
     port: 3000,
-    https: {
-      key: fs.readFileSync('./localhost-key.pem'),
-      cert: fs.readFileSync('./localhost.pem'),
-    },
+    // https: {
+    //   key: fs.readFileSync('./localhost-key.pem'),
+    //   cert: fs.readFileSync('./localhost.pem'),
+    // },
   },
 
   plugins: [react()],
@@ -22,7 +22,7 @@ export default defineConfig({
       {
         find: '@',
         replacement: '/src',
-      },  
+      },
     ],
   },
 });
