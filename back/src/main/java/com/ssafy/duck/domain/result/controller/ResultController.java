@@ -23,12 +23,10 @@ import java.util.Map;
 public class ResultController {
 
     private final ResultService resultService;
-    private final MissionService missionService;
 
     @GetMapping("/missions/{guestId}")
     public ResponseEntity<Map<String, List<MissionResultRes>> > getMissionResult(@PathVariable("guestId") Long guestId){
         System.out.println("getMyMissionResult controller");
-//        List<List<MissionResultRes>> missionResultResList = new ArrayList<>();
         Map<String, List<MissionResultRes>> missionResultResMap = new HashMap<>();
         List<MissionResultRes> myResult = resultService.getMyMissionResult(guestId);
         List<MissionResultRes> manitoResult = resultService.getManitoMissionResult(guestId);
@@ -37,10 +35,6 @@ public class ResultController {
         missionResultResMap.put("manitoMission", manitoResult);
 
         return ResponseEntity.ok(missionResultResMap);
-
-//        missionResultResList.add(myResult);
-//        missionResultResList.add(manitoResult);
-//        return ResponseEntity.ok(missionResultResList);
     }
 
     @GetMapping("/maniti/{guestId}")
@@ -55,10 +49,5 @@ public class ResultController {
         return ResponseEntity.ok(manitoResult);
     }
 
-    // 결과 분석 요청 TEST API (수정 및 삭제 필요)
-    @GetMapping("/test/{partyId}")
-    public void test(@PathVariable Long partyId) {
-        resultService.reserveAnalysis(partyId);
-    }
 }
 

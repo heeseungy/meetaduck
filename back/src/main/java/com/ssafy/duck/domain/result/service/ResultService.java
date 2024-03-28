@@ -223,15 +223,13 @@ public class ResultService {
         return missionResultResList;
     }
 
-
-
-
     public void reserveAnalysis(Long partyId) {
         RestTemplate resultRestTemplate = new RestTemplate();
         List<Guest> guestList = guestRepository.findAllByPartyId(partyId);
         for (Guest guest : guestList) {
+            System.out.println("reserve guestId " + guest.getGuestId());
             resultRestTemplate.postForEntity(
-                    fastAPIUrl + "/{guestId}",
+                    fastAPIUrl + "/spark/{guestId}",
                     String.class,
                     String.class,
                     guest.getGuestId()
