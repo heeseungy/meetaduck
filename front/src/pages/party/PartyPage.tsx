@@ -88,6 +88,7 @@ function PartyPage() {
           fields={6}
           name="accessCode"
           inputMode="numeric"
+          autoFocus={true}
           {...props}
         />
       </div>

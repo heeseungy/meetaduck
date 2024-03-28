@@ -1,8 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import pairChat from '@/assets/images/pairChat.png';
-import { loginState } from '@/recoil/atom';
-import { PARTYLIST } from '@/recoil/dummy';
+import { loginState, partyState } from '@/recoil/atom';
+import { partyListAll } from '@/services/voteService';
 import styles from '@/styles/chatting/ChatListArea.module.css';
 import { MessageRes } from '@/types/chatMessage';
 import { ListProfile } from '@/types/user.interface';
@@ -10,13 +10,17 @@ import { useRecoilValue } from 'recoil';
 
 function ChatListArea({ tag, messages }: { tag: string; messages: MessageRes[] }) {
   //axios 요청으로 사람 목록 불러오기
-  const partyList: ListProfile[] = PARTYLIST;
+  const [partyList, setPartyList] = useState<ListProfile[]>([]);
+  const party = useRecoilValue(partyState);
   const login = useRecoilValue(loginState);
   // 일자 추가하려면 sort 후 각 message.map((msg)=>(msg.map))
   // let sortedMessages = [[]];
   // const dates = messages.map((it) => it.createdTime);
   const scrollRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
+    partyListAll(party.partyId).then((data: ListProfile[]) => {
+      setPartyList(data);
+    });
     scrollRef.current!.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 

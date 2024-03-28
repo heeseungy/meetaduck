@@ -1,12 +1,24 @@
 .margin {
+  margin: auto;
   margin-top: 4rem;
-  margin-left: 5%;
-  margin-right: 5%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100dvw;
+}
+
+.SubTitle {
+  display: flex;
+  justify-content: start;
+  align-items: end;
+  gap: 0.5rem;
 }
 
 .share {
-  background-color: #4FC775;
-  border: 1px solid #4FC775;
+  background-color: #4fc775;
+  border: 1px solid #4fc775;
   border-radius: 8px;
   color: white;
   font-weight: bold;
@@ -44,34 +56,64 @@
 }
 
 .marginBottom {
-  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .spaceB {
+  width: 17rem;
   display: flex;
   justify-content: space-between;
 }
-
-.cardContainer {
+.Title {
+  width: 19rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  align-items: end;
 }
 
 .participant {
   display: flex;
   align-items: center;
   margin-bottom: 10px; /* 각 참가자 사이의 간격 조정 */
+  position: relative;
 }
 
 .profileImage {
-  width: 3.1rem;
-  height: 3.1rem;
-  border-radius: 50%;
-  margin-right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 5rem;
+  margin-right: 0.5rem;
 }
 
 .marginL {
-  margin-left: 0.4rem;
+  display: flex;
+}
+
+.ScrollBox {
+  width: 15rem;
+  height: 15rem;
+  /* background-color: aqua; */
+  padding-top: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 2rem;
+  padding-bottom: 1rem;
+  overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.Badge {
+  color: #4fc775;
+  border: #4fc775 1px solid;
+  border-radius: 0.5rem;
+  font-size: 0.66rem;
+  padding: 0.3rem;
+  font-family: 'JalnanGothic';
+  position: absolute;
+  right: -3rem;
 }

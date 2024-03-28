@@ -38,7 +38,7 @@ function HintInputQuestion() {
     async function fetchHints() {
       try {
         const hintsData = await HintInputQuestionService(guestId);
-        console.log("hintsData:", hintsData);
+        console.log('hintsData:', hintsData);
         setHints(hintsData);
       } catch (err) {
         console.log('Error fetching hints:', err);
@@ -48,7 +48,6 @@ function HintInputQuestion() {
     fetchHints();
   }, []);
 
-
   const hintSubmitHandler = async () => {
     const hintData = hints.map((hint) => ({
       hintId: hint.hintId,
@@ -56,11 +55,15 @@ function HintInputQuestion() {
     }));
 
     try {
-      console.log("hintData:", hintData)
-      await updateHintAnswersService(guestId, hintData);
-      alert('입력이 완료되었습니다~!');
-      sessionStorage.setItem('finishHintInput', 'true');
-      navigate('/mission');
+      console.log('hintData:', hintData);
+      await updateHintAnswersService(guestId, hintData)
+        .then(() => {
+          alert('입력이 완료되었습니다~!');
+          sessionStorage.setItem('finishHintInput', 'true');
+        })
+        .then(() => {
+          navigate('/mission');
+        });
     } catch (err) {
       console.log('Error updating hint answers:', err);
       alert('입력 중 오류가 발생했습니다. 다시 시도해주세요.');

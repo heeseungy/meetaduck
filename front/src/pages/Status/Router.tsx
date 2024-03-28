@@ -14,17 +14,11 @@ import PartyPage from '@/pages/party/PartyPage';
 import ResultPage from '@/pages/result/ResultPage';
 import RootPage from '@/pages/root/RootPage';
 import RabbitTestPage from '@/pages/webSocketTest/RabbitTestPage';
-import { currentTimeState, loginState, partyState, partyStatusState } from '@/recoil/atom';
-import { useRecoilState, useRecoilValue } from 'recoil';
 
 import ProtectedRoutes from './ProtectedRoutes';
 
 export default function Router() {
-  const login = useRecoilValue(loginState);
-  const currentTime = useRecoilValue(currentTimeState);
-  const setCurrentTime = useRecoilState(currentTimeState);
-  const party = useRecoilValue(partyState);
-  const partyStatus = useRecoilValue(partyStatusState);
+
 
   return (
     <BrowserRouter>

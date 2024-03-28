@@ -14,7 +14,7 @@ function ShareButton({ children }: PropType) {
 
   return (
     <CopyToClipboard text={accessCode} onCopy={() => alert('클립보드에 복사되었습니다.')}>
-      <button className={`FontM ${styles.share}`}>{children}</button>
+      <button className={`FontS ${styles.share}`}>{children}</button>
     </CopyToClipboard>
   );
 }
