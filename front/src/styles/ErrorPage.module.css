@@ -1,0 +1,23 @@
+.ErrorContainer {
+  position: relative;
+  width: 22rem;
+  height: 20rem;
+  /* background-color: aqua; */
+  position: absolute;
+  top: 18rem;
+  left: calc(50dvw - 11rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10rem;
+}
+.Title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Content {
+}

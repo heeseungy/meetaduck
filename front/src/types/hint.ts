@@ -7,3 +7,8 @@ export type Hint = {
   hintId: number;
   hintContent: string;
 };
+
+export type AnswerInput = {
+  hintId: number;
+  hintStatusAnswer: string;
+};

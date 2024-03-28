@@ -46,9 +46,17 @@ public class PartyController {
         return ResponseEntity.badRequest().build();
     }
 
-    @GetMapping("/{accessCode}/users/{userId}")
+    @GetMapping("/{partyId}")
     @Operation(summary = "파티: 조회")
-    public ResponseEntity<PartyRes> find(
+    public ResponseEntity<PartyRes> findByPartyId(
+            @PathVariable Long partyId) {
+        return ResponseEntity.ok().body(partyService.findByPartyId(partyId));
+    }
+
+
+    @GetMapping("/{accessCode}/users/{userId}")
+    @Operation(summary = "파티: 가입")
+    public ResponseEntity<PartyRes> join(
             @PathVariable String accessCode,
             @PathVariable Long userId) {
         PartyRes partyRes = partyService.find(accessCode);
@@ -73,7 +81,7 @@ public class PartyController {
             partyService.start(partyRes, startReq);
             guestService.setManiti(partyRes.getPartyId());
             chatService.setManiti(partyRes.getPartyId());
-            chatService.createChat(partyRes.getAccessCode());
+            chatService.sendMessage(partyRes.getAccessCode());
             missionService.set(missionService.fetch(), startReq);
             hintService.set(hintService.fetch(), partyRes.getPartyId());
             taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.stringToInstant(startReq.getEndTime()).minus(Duration.ofDays(1)) );

@@ -1,4 +1,4 @@
-import { Axios } from "./axios";
+import { Axios } from './axios';
 
 export async function partyStartService() {
   try {
@@ -11,6 +11,15 @@ export async function partyStartService() {
     });
     // console.log(response);
   } catch (err) {
-    console.log(err)
+    console.log(err);
+  }
+}
+
+export async function partyInfoService(partyId: number) {
+  try {
+    const response = await Axios.get(`api/parties/${partyId}`);
+    return response.data;
+  } catch (err) {
+    return Promise.reject(err);
   }
 }

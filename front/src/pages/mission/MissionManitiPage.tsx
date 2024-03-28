@@ -7,7 +7,7 @@ import Button from '@/components/commons/Button';
 import Card from '@/components/commons/Card';
 import { chatIdListState, loginState } from '@/recoil/atom';
 import { MY_MANITO_MISSION } from '@/recoil/dummy';
-import { manitoMissionLoad } from '@/services/missionTodayService';
+import { confirmMission, manitoMissionLoad } from '@/services/missionTodayService';
 import styles from '@/styles/mission/Mission.module.css';
 import { MissionResult } from '@/types/mission';
 import { useRecoilValue } from 'recoil';
@@ -28,9 +28,6 @@ function MissionManitiPage(props: MissionManitiProps) {
   useEffect(() => {
     manitoMissionLoad(login.guestId).then((data) => {
       setMyManitoMission(data);
-      ////////////////////////////////////////
-      // 미션 받아오는 데이터가 없어!!????????????
-      ///////////////////////////////////////////
     });
   }, []);
 
@@ -45,19 +42,26 @@ function MissionManitiPage(props: MissionManitiProps) {
   }, [myManitoMission]);
 
   useEffect(() => {
-    console.log(myManitoMission, isConfirmed);
+    manitoMissionLoad(login.guestId).then((data) => {
+      setMyManitoMission(data);
+      console.log(myManitoMission, isConfirmed);
+    });
   }, [isConfirmed]);
+
   const confirmYesHandler = () => {
     // 마니또 성공확인
     setIsConfirmed(true);
     // axios
-
-    console.log('확인 완료!');
+    confirmMission(myManitoMission.missionStatusId, true).then((data) => {
+      console.log('확인 완료!, 성공');
+    });
   };
   const confirmNoHandler = () => {
     setIsConfirmed(false);
     // axios
-    console.log('확인 완료!');
+    confirmMission(myManitoMission.missionStatusId, false).then((data) => {
+      console.log('확인 완료!, 실패');
+    });
   };
 
   const returnChatting = () => {

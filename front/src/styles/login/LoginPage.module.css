@@ -3,7 +3,7 @@
 }
 
 .marginTop {
-  margin-top: 3rem;
+  margin-top: 2.3rem;
 }
 
 .horizonCenter {
@@ -19,12 +19,20 @@
 }
 
 .kakaoButton {
-  background-color: #FEE500;
-  border: 1px solid #FEE500;
+  background-color: #fee500;
+  border: 1px solid #fee500;
   border-radius: 12px;
   width: 280px;
   /* height: auto; */
   margin-top: 3rem;
-  
 }
 
+.FontWhite {
+  color: white;
+}
+
+.Center {
+  position: absolute;
+  left: calc(50dvw - 6rem);
+  top: 20rem;
+}
