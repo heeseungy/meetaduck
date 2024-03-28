@@ -21,8 +21,6 @@ function HintInputQuestion() {
   const guestId = login.guestId;
 
   useEffect(() => {
-    // sessionStorage.setItem('finishHintInput', 'true');
-
     async function fetchHints() {
       try {
         const hintsData = await HintInputQuestionService(guestId);
@@ -37,12 +35,12 @@ function HintInputQuestion() {
   }, []);
 
   const hintSubmitHandler = async () => {
-    const isEmptyInput = hints.some(hint => !hint.hintStatusAnswer);
+    const isEmptyInput = hints.some((hint) => !hint.hintStatusAnswer);
     if (isEmptyInput) {
       alert('힌트 답변을 모두 입력하세요.');
       return;
     }
-    
+
     const hintData = hints.map((hint) => ({
       hintId: hint.hintId,
       hintStatusAnswer: hint.hintStatusAnswer,

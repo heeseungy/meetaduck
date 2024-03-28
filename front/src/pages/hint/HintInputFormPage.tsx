@@ -1,8 +1,22 @@
+import { useEffect } from 'react';
+
 import Card from '@/components/commons/Card';
 import HintInputQuestion from '@/components/hint/HintInputQuestion';
+import { loginState } from '@/recoil/atom';
+import { hintPageService } from '@/services/hintPageService';
 import styles from '@/styles/hint/HintInputFormPage.module.css';
+import { Answer } from '@/types/hint';
+import { useRecoilValue } from 'recoil';
 
 function HintInputFormPage() {
+  const login = useRecoilValue(loginState);
+  useEffect(() => {
+    hintPageService(login.guestId).then((data: Answer) => {
+      if (data.hintStatusAnswer !== null) {
+        sessionStorage.setItem('finishHintInput', 'true');
+      }
+    });
+  });
   const children = (
     <div className={styles.cardMargin}>
       <form action="#">

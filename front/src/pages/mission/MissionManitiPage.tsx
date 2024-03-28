@@ -80,10 +80,10 @@ function MissionManitiPage(props: MissionManitiProps) {
             </div>
           </div>
           <div className={`${styles.container} ${styles.marginTop}`}>
-            {/* <img className={`${styles.PreviewImage}`} src={myManitoMission.missionImageUrl} alt="img" /> */}
-            <div className={`${styles.imageBox}`}>
+            <img className={`${styles.PreviewImage}`} src={myManitoMission.missionImageUrl} alt="img" />
+            {/* <div className={`${styles.imageBox}`}>
               <img src={rubberDuckBase} alt="rubberDuckBase" />
-            </div>
+            </div> */}
 
             {isConfirmed !== null ? (
               // 체크를 했다면

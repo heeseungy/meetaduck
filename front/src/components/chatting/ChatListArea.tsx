@@ -19,6 +19,7 @@ function ChatListArea({ tag, messages }: { tag: string; messages: MessageRes[] }
   const scrollRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     partyListAll(party.partyId).then((data: ListProfile[]) => {
+      // console.log(data);
       setPartyList(data);
     });
     scrollRef.current!.scrollIntoView({ behavior: 'smooth' });
