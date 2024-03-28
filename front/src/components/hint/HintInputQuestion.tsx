@@ -14,18 +14,6 @@ import Input from '../commons/Input';
 
 function HintInputQuestion() {
   const [hints, setHints] = useState<Hint[]>([]);
-  // const [hints, setHints] = useState([
-  //   {
-  //     hintId: 1,
-  //     hintContent: '별자리는 무엇인가요?',
-  //     hintStatusAnswer: '', // 각 힌트에 대한 상태 변수 추가
-  //   },
-  //   {
-  //     hintId: 3,
-  //     hintContent: '최근에 본 가장 인상 깊은 영화는 무엇인가요?',
-  //     hintStatusAnswer: '',
-  //   },
-  // ]);
 
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -50,6 +38,12 @@ function HintInputQuestion() {
 
 
   const hintSubmitHandler = async () => {
+    const isEmptyInput = hints.some(hint => !hint.hintStatusAnswer);
+    if (isEmptyInput) {
+      alert('힌트 답변을 모두 입력하세요.');
+      return;
+    }
+    
     const hintData = hints.map((hint) => ({
       hintId: hint.hintId,
       hintStatusAnswer: hint.hintStatusAnswer,
