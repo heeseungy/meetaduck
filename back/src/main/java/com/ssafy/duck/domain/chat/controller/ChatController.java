@@ -33,14 +33,14 @@ public class ChatController {
         return ResponseEntity.ok().body(chatService.getMessages(chatId));
     }
 
-    @PostMapping("/{chatId}/messages")
-    @Operation(summary = "채팅: 메시지 생성(전송)")
-    public ResponseEntity<Void> createMessage(
-            @PathVariable Integer chatId,
-            @RequestBody MessageReq messageReq) {
-        MessageRes messageRes = chatService.createMessage(chatId, messageReq);
-        chatService.notifyNewMessage(chatId, messageRes);
-        return ResponseEntity.noContent().build();
-    }
+//    @PostMapping("/{chatId}/messages")
+//    @Operation(summary = "채팅: 메시지 생성(전송)")
+//    public ResponseEntity<Void> createMessage(
+//            @PathVariable Integer chatId,
+//            @RequestBody MessageReq messageReq) {
+//        MessageRes messageRes = chatService.createMessage(chatId, messageReq);
+//        chatService.notifyNewMessage(chatId, messageRes);
+//        return ResponseEntity.noContent().build();
+//    }
 
 }
