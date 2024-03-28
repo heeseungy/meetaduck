@@ -17,7 +17,7 @@
 } */
 
 .endWrapper {
-  margin-top: 4rem;
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,10 +27,11 @@
 
 .inputWrapper {
   margin-top: 1rem;
+  
 }
 
 .buttonWrapper {
-  margin-top: 4rem;
+  margin-top: 2rem;
   text-align: center;
 }
 
@@ -74,4 +75,24 @@
 
 .marginL {
   margin-left: 0.4rem;
+}
+
+.timeSelection {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.timeSelection > div {
+  margin-right: 1rem;
+}
+
+.selectBox {
+  width: 80px; /* 선택 상자의 너비 조정 */
+  padding: 0.5rem; /* 선택 상자의 패딩 조정 */
+  border-radius: 4px; /* 선택 상자의 테두리 모서리를 둥글게 만듭니다. */
+  border: 1px solid #ccc; /* 선택 상자에 회색 테두리 추가 */
+  background-color: #fff; /* 선택 상자의 배경색을 흰색으로 설정 */
+  font-size: 0.875rem; /* 선택 상자의 글꼴 크기 조정 */
+  color: #333; /* 선택 상자의 글꼴 색상 설정 */
 }
