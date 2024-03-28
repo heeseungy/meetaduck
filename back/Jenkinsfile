@@ -18,7 +18,7 @@ pipeline {
         stage('secret.yml delete') {
             steps {
                 script{
-                    sh 'rm -f ./back/src/main/resources/application.yaml'
+                    sh 'rm -f ./back/src/main/resources/application.yml'
                 }
             }
         }
@@ -27,7 +27,7 @@ pipeline {
         	steps {
             	withCredentials([file(credentialsId: 'application2', variable: 'applicationFile')]) {
                 	script {
-                    	sh 'cp -f $applicationFile ./back/src/main/resources/application.yaml'
+                    	sh 'cp -f $applicationFile ./back/src/main/resources/application.yml'
                     }
         		}
         	}
