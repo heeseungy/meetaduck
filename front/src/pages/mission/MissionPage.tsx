@@ -65,7 +65,7 @@ function MissionPage() {
       </Slides>
     ) : (
       <div>
-        <div className={`FontXXL ${styles.Heading}`}>오늘의 미션</div>
+        <div className={`FontXL ${styles.Heading}`}>오늘의 미션</div>
         <MissionFirstPage {...{ nickname: login.nickname }} />
       </div>
     );
