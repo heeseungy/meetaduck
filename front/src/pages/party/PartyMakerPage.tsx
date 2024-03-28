@@ -5,7 +5,7 @@ import Button from '@/components/commons/Button';
 import Card from '@/components/commons/Card';
 import DatePickerInput from '@/components/party/DatePickerInput';
 import ShareButton from '@/components/party/ShareButton';
-import {  loginState, partyState } from '@/recoil/atom';
+import { loginState, partyState } from '@/recoil/atom';
 import { Axios } from '@/services/axios';
 import { partyInfoService } from '@/services/partyStartService';
 import styles from '@/styles/party/PartyMaker.module.css';
@@ -76,6 +76,21 @@ function PartyMakerPage() {
     try {
       const usersInfo = await Axios.get(`/api/guests/all/${party.partyId}`);
       setParticipants(usersInfo.data);
+      const currentTime = new Date();
+
+      setRefreshTime(
+        `${
+          currentTime.getHours().toString().length < 2
+            ? `오전 0${currentTime.getHours()}`
+            : currentTime.getHours() < 12
+              ? `오전 ${currentTime.getHours()}`
+              : currentTime.getHours() < 22
+                ? `오후 0${currentTime.getHours() - 12}`
+                : `오후 ${currentTime.getHours() - 12}`
+        }
+          
+          :${currentTime.getMinutes().toString().length < 2 ? `0${currentTime.getMinutes()}` : currentTime.getMinutes()}`,
+      );
     } catch (err) {
       alert(err.response.data);
       console.log('Error refreshing party info: ', err);
@@ -115,8 +130,8 @@ function PartyMakerPage() {
       const isoEndDate = endDate.toISOString(); // 선택한 날짜를 ISO 형식으로 변환
       const selectedDate = endDate.clone().set({ hour: selectedHour, minute: selectedMinute }); // 선택한 시간과 분을 반영한 날짜 설정
       const isoSelectedDate = selectedDate.toISOString(); // 선택한 날짜와 시간을 ISO 형식으로 변환
-      console.log("isoSelectedDate :", isoSelectedDate)
-      
+      console.log('isoSelectedDate :', isoSelectedDate);
+
       await Axios.patch(`/api/parties`, {
         accessCode: party.accessCode,
         endTime: isoSelectedDate, // 종료 시간을 선택한 날짜와 시간으로 설정
@@ -204,17 +219,29 @@ function PartyMakerPage() {
               <DatePickerInput setEndDate={setEndDate} />
               <div className={styles.timeSelection}>
                 <div>
-                  <select className={`${styles.selectBox}`} value={selectedHour} onChange={(e) => setSelectedHour(parseInt(e.target.value))}>
+                  <select
+                    className={`${styles.selectBox}`}
+                    value={selectedHour}
+                    onChange={(e) => setSelectedHour(parseInt(e.target.value))}
+                  >
                     {Array.from({ length: 24 }, (_, i) => i).map((hour) => (
-                      <option key={hour} value={hour}>{`${hour}`.padStart(2, '0')}</option>
+                      <option key={hour} value={hour}>
+                        {`${hour}`.padStart(2, '0')}
+                      </option>
                     ))}
                   </select>
                   시
                 </div>
                 <div>
-                  <select className={`${styles.selectBox}`} value={selectedMinute} onChange={(e) => setSelectedMinute(parseInt(e.target.value))}>
+                  <select
+                    className={`${styles.selectBox}`}
+                    value={selectedMinute}
+                    onChange={(e) => setSelectedMinute(parseInt(e.target.value))}
+                  >
                     {Array.from({ length: 60 }, (_, i) => i).map((minute) => (
-                      <option key={minute} value={minute}>{`${minute}`.padStart(2, '0')}</option>
+                      <option key={minute} value={minute}>
+                        {`${minute}`.padStart(2, '0')}
+                      </option>
                     ))}
                   </select>
                   분
