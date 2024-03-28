@@ -15,6 +15,8 @@ function HintInputFormPage() {
   useEffect(() => {
     hintPageService(login.guestId).then((data: Answer) => {
       if (data.hintStatusAnswer !== null) {
+        console.log(data);
+        sessionStorage.setItem('finishHintInput', 'true');
         navigate('/mission');
       }
     });
