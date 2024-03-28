@@ -17,7 +17,7 @@ pipeline {
 
         stage('secret.yml download') {
         	steps {
-            	withCredentials([file(credentialsId: 'application', variable: 'applicationFile')]) {
+            	withCredentials([file(credentialsId: 'application2', variable: 'applicationFile')]) {
                 	script {
                     	sh 'cp -f $applicationFile ./back/src/main/resources/application.yaml'
                     }
