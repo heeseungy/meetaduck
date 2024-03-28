@@ -14,6 +14,11 @@ export default defineConfig({
     //   key: fs.readFileSync('./localhost-key.pem'),
     //   cert: fs.readFileSync('./localhost.pem'),
     // },
+    hmr: {
+      host: 'j10c108.p.ssafy.io',
+      protocol: 'wss',
+      port: 3000,
+    }
   },
 
   plugins: [react()],
