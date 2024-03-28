@@ -30,7 +30,7 @@ function RabbitTestPage() {
   const loadMessages = async () => {
     try {
       const response = await axios.get(
-        `https://localhost:8080/api/chats/${chatId}/messages`
+        `https://j10c108.p.ssafy.io:8080/api/chats/${chatId}/messages`
       );
       console.log(response.data)
       // const messages
