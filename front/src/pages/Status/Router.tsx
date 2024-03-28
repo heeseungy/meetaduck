@@ -13,6 +13,7 @@ import PartyMakerPage from '@/pages/party/PartyMakerPage';
 import PartyPage from '@/pages/party/PartyPage';
 import ResultPage from '@/pages/result/ResultPage';
 import RootPage from '@/pages/root/RootPage';
+import RabbitTestPage from '@/pages/webSocketTest/RabbitTestPage';
 import { currentTimeState, loginState, partyState, partyStatusState } from '@/recoil/atom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
@@ -51,6 +52,7 @@ export default function Router() {
           </Route>
           <Route path={'/chatdetail/:chatId'} element={<ChatDetailPage />} />
         </Route>
+        <Route path={'/rabbit'} element={<RabbitTestPage />} />
         <Route path={'*'} element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
