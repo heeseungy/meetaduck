@@ -36,13 +36,6 @@ pipeline {
             }
         }
 
-        stage('Clean User Image'){
-                    steps{
-                        script{
-                            sh "docker rmi \${repository}:bigdata_\${BUILD_NUMBER}"
-                        }
-                    }
-                }
         
         stage("Deploy") {
             steps {
@@ -62,6 +55,14 @@ pipeline {
                         )
                     ]
                 )
+            }
+        }
+
+        stage('Clean Common Image') {
+            steps {
+                script {
+                    sh "docker system prune -af"
+                }
             }
         }
         
