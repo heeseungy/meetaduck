@@ -22,7 +22,7 @@ function HintPage() {
   }, []);
   const nickname: string = login.nickname;
 
-  const [hintList, setHintList] = useState<Answer[]>(HINT_NONE);
+  const [hintList, setHintList] = useState<Answer[]>([]);
 
   useEffect(() => {
     // 미션조회
@@ -41,7 +41,7 @@ function HintPage() {
     // 24시간 전+ 진행중
     //
     // const hintList: Answer[] = HINTNONE;
-    const hintList: Answer[] = HINT_PART;
+    // const hintList: Answer[] = HINT_PART;
     if (hintList.length != 0) {
       return <HintInProgressPage {...{ nickname: nickname, hintList: hintList! }} />;
     } else {

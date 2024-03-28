@@ -7,10 +7,11 @@ import Card from '@/components/commons/Card';
 import { chatIdListState, loginState } from '@/recoil/atom';
 import { chatIdListService } from '@/services/chatService';
 import styles from '@/styles/chatting/ChattingPage.module.css';
+import { ChatId } from '@/types/chat';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 function ChattingPage() {
-  const login = useRecoilValue(loginState)
+  const login = useRecoilValue(loginState);
   const chatIdList = useRecoilValue(chatIdListState);
   const setChatIdList = useSetRecoilState(chatIdListState);
 
@@ -18,8 +19,9 @@ function ChattingPage() {
 
   useEffect(() => {
     // api 채팅방 목록 조회
-    chatIdListService(login.guestId).then((data) => {
+    chatIdListService(login.guestId).then((data: ChatId) => {
       setChatIdList(data);
+      console.log(data);
     });
   }, []);
   const toDetail = (chatId: number) => {

@@ -9,20 +9,18 @@
 }
 
 .TopCardContainer {
-  width: 20rem;
+  position: relative;
   display: flex;
+  justify-content: center;
+  align-items: start;
+  width: 22.5rem;
+  height: 25rem;
+  margin: auto;
   margin-top: 2rem;
 }
 
 .Card {
   width: 20.4rem;
-  border-radius: 2.25rem;
-  background-color: white;
-  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
-}
-
-.PartyCard {
-  width: 23rem;
   border-radius: 2.25rem;
   background-color: white;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);

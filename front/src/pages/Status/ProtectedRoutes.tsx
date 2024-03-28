@@ -9,9 +9,11 @@ interface PrivateRouteProps {
 export default function PrivateRoute({ status }: PrivateRouteProps): React.ReactElement | null {
   // console.log(typeof sessionStorage.getItem('sessionStorage'));
   const loginState =
-    sessionStorage.getItem('sessionStorage') !== null
+    sessionStorage.getItem('sessionStorage') !== null && sessionStorage.getItem('sessionStorage') !== undefined
       ? JSON.parse(sessionStorage.getItem('sessionStorage')!).loginState !== null
-        ? JSON.parse(sessionStorage.getItem('sessionStorage')!).loginState
+        ? JSON.parse(sessionStorage.getItem('sessionStorage')!).loginState !== undefined
+          ? JSON.parse(sessionStorage.getItem('sessionStorage')!).loginState
+          : null
         : null
       : null;
 

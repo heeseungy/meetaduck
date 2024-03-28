@@ -4,12 +4,14 @@ import styles from '@/styles/mission/Mission.module.css';
 
 type MissionFirstProps = {
   nickname: string;
+  setCheckDate: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 function MissionFirstPage(props: MissionFirstProps) {
   const checkHandler = () => {
-    const checkDate = new Date().getDate();
+    const checkDate = new Date().getDate().toString();
     sessionStorage.setItem('checkDate', checkDate.toString());
+    props.setCheckDate(checkDate);
     console.log('미션 확인!');
   };
 
