@@ -15,6 +15,7 @@ function PartyPage() {
   const navigate = useNavigate();
   const login = useRecoilValue(loginState);
   const setParty = useSetRecoilState(partyState);
+  const setLogin = useSetRecoilState(loginState);
   const party = useRecoilValue(partyState);
 
   const joinHandler = async () => {
@@ -28,6 +29,10 @@ function PartyPage() {
       setParty((prevPartyState) => ({
         ...prevPartyState,
         accessCode: accessCode,
+        partyId: response.data.partyId,
+      }));
+      setLogin((prevLoginState) => ({
+        ...prevLoginState,
         partyId: response.data.partyId,
       }));
       navigate('/partymaker');
@@ -45,7 +50,7 @@ function PartyPage() {
   };
 
   const createHandler = async () => {
-    navigate('/partycreate');
+    navigate('/party/create');
   };
 
   const handleInputChange = (value: string) => {
@@ -83,6 +88,7 @@ function PartyPage() {
           fields={6}
           name="accessCode"
           inputMode="numeric"
+          autoFocus={true}
           {...props}
         />
       </div>

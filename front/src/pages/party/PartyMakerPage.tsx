@@ -5,89 +5,141 @@ import Button from '@/components/commons/Button';
 import Card from '@/components/commons/Card';
 import DatePickerInput from '@/components/party/DatePickerInput';
 import ShareButton from '@/components/party/ShareButton';
-import { currentTimeState, loginState, partyState } from '@/recoil/atom';
+import { loginState, partyState } from '@/recoil/atom';
 import { Axios } from '@/services/axios';
-import { partyDeleteervice } from '@/services/partyDeleteService';
-import { partyStartService } from '@/services/partyStartService';
+import { partyInfoService } from '@/services/partyStartService';
 import styles from '@/styles/party/PartyMaker.module.css';
+import { Party } from '@/types/party';
 import { ListProfile } from '@/types/user.interface';
 import { ArrowsCounterClockwise } from '@phosphor-icons/react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 function PartyMakerPage() {
   const setParty = useSetRecoilState(partyState);
+  const setLogin = useSetRecoilState(loginState);
   const party = useRecoilValue(partyState);
   const login = useRecoilValue(loginState);
+  const [refreshTime, setRefreshTime] = useState('');
   const [participants, setParticipants] = useState<ListProfile[]>([]);
   const [endDate, setEndDate] = useState(null);
+  const [selectedHour, setSelectedHour] = useState(0); // 시간 상태 변수
+  const [selectedMinute, setSelectedMinute] = useState(0); // 분 상태 변수
   const navigate = useNavigate();
 
   useEffect(() => {
+    // 파티 목록 조회
     const fetchPartyInfo = async () => {
       try {
         const usersInfo = await Axios.get(`/api/guests/all/${party.partyId}`);
+        console.log('useInfo', usersInfo);
         setParticipants(usersInfo.data);
+        const currentTime = new Date();
+        setRefreshTime(
+          `${
+            currentTime.getHours().toString().length < 2
+              ? `오전 0${currentTime.getHours()}`
+              : currentTime.getHours() < 12
+                ? `오전 ${currentTime.getHours()}`
+                : currentTime.getHours() < 22
+                  ? `오후 0${currentTime.getHours() - 12}`
+                  : `오후 ${currentTime.getHours() - 12}`
+          }
+            
+            :${currentTime.getMinutes().toString().length < 2 ? `0${currentTime.getMinutes()}` : currentTime.getMinutes()}`,
+        );
+        return usersInfo.data;
       } catch (err) {
         console.log('Err :', err);
+        return Promise.resolve(err);
       }
     };
-    fetchPartyInfo();
+
+    fetchPartyInfo()
+      .then((response: ListProfile[]) => {
+        const newGuestId = response.filter((p) => p.userId === login.userId);
+        if (newGuestId.length !== 0) {
+          setLogin((prevLoginState) => ({
+            ...prevLoginState,
+            guestId: newGuestId[0].guestId,
+          }));
+        }
+      })
+      .then(() => {
+        partyInfoService(party.partyId).then((data: Party) => {
+          console.log(data);
+          setParty(data);
+        });
+      });
   }, []);
 
   const refreshClickHandler = async () => {
     try {
       const usersInfo = await Axios.get(`/api/guests/all/${party.partyId}`);
       setParticipants(usersInfo.data);
+      const currentTime = new Date();
+
+      setRefreshTime(
+        `${
+          currentTime.getHours().toString().length < 2
+            ? `오전 0${currentTime.getHours()}`
+            : currentTime.getHours() < 12
+              ? `오전 ${currentTime.getHours()}`
+              : currentTime.getHours() < 22
+                ? `오후 0${currentTime.getHours() - 12}`
+                : `오후 ${currentTime.getHours() - 12}`
+        }
+          
+          :${currentTime.getMinutes().toString().length < 2 ? `0${currentTime.getMinutes()}` : currentTime.getMinutes()}`,
+      );
     } catch (err) {
       alert(err.response.data);
       console.log('Error refreshing party info: ', err);
     }
   };
 
-  useEffect(() => {
-    // Axios로 파티를 조회한다.
-    // recoil에 axios response로 온 파티 정보를 저장함.
-
-    setParty((prevPartyState) => ({
-      ...prevPartyState,
-      accessCode: party.accessCode,
-      partyName: party.partyName,
-    }));
-  }, []);
-
   const joinNumber = participants.length;
 
   const children = (
     <div className={styles.cardMargin}>
-      <div className={`${styles.marginBottom} ${styles.spaceB}`}>
-        <span className={`FontM`}>
-          참여 현황
-          <span onClick={refreshClickHandler} className={styles.marginL}>
-            <ArrowsCounterClockwise size={18} />
-          </span>
-        </span>
-        <span>{joinNumber}명 창여중</span>
-      </div>
-      {participants.map((participant, index) => (
-        <div key={index} className={styles.participant}>
-          <img src={participant.thumbnailUrl} alt="ProfileImg" className={styles.profileImage} />
-          <span className={styles.nickname}>{participant.nickname}</span>
+      <div className={`${styles.marginBottom} `}>
+        <div className={`${styles.spaceB}`}>
+          <div className={`FontS ${styles.SubTitle}`}>
+            참여 현황
+            <div onClick={refreshClickHandler} className={styles.marginL}>
+              <ArrowsCounterClockwise weight="bold" size={16} />
+            </div>
+          </div>
+          <span className="FontS">{joinNumber}명 참여중</span>
         </div>
-      ))}
+        <div className={`FontXS FontComment`}>최근 업데이트 {refreshTime}</div>
+      </div>
+      <div className={`${styles.ScrollBox}`}>
+        {participants.map((participant, index) => (
+          <div key={index} className={styles.participant}>
+            <img src={participant.thumbnailUrl} alt="ProfileImg" className={styles.profileImage} />
+            <span className={`FontS FontBasic`}>{participant.nickname}</span>
+            {party.userId === participant.userId && <div className={`${styles.Badge}`}>주최자</div>}
+          </div>
+        ))}
+      </div>
     </div>
   );
 
   const startHandler = async () => {
     try {
-      const isoEndDate = endDate.toISOString();
+      const isoEndDate = endDate.toISOString(); // 선택한 날짜를 ISO 형식으로 변환
+      const selectedDate = endDate.clone().set({ hour: selectedHour, minute: selectedMinute }); // 선택한 시간과 분을 반영한 날짜 설정
+      const isoSelectedDate = selectedDate.toISOString(); // 선택한 날짜와 시간을 ISO 형식으로 변환
+      console.log('isoSelectedDate :', isoSelectedDate);
+
       await Axios.patch(`/api/parties`, {
         accessCode: party.accessCode,
-        endTime: isoEndDate,
+        endTime: isoSelectedDate, // 종료 시간을 선택한 날짜와 시간으로 설정
         userId: party.userId,
       });
       setParty((prevPartyState) => ({
         ...prevPartyState,
-        endTime: endDate !== null ? endDate : prevPartyState.endTime,
+        endTime: selectedDate, // recoil 상태에 선택한 날짜와 시간으로 설정
       }));
       navigate('/hintinputform');
     } catch (err) {
@@ -106,7 +158,12 @@ function PartyMakerPage() {
         },
       });
       alert('파티가 삭제되었습니다');
-      sessionStorage.removeItem('sessionStorage');
+      setLogin((prevLoginState) => ({
+        ...prevLoginState,
+        guestId: 0,
+        partyId: 0,
+      }));
+      // sessionStorage.removeItem('sessionStorage');
       navigate('/party');
     } catch (err) {
       alert(err.response.data);
@@ -128,6 +185,10 @@ function PartyMakerPage() {
             Authorization: `Bearer ${jwtToken}`, // JWT 토큰을 헤더에 추가합니다.
           },
         });
+        setLogin((prevLoginState) => ({
+          ...prevLoginState,
+          partyId: 0,
+        }));
         alert('파티를 나갔습니다.');
         navigate('/party');
       } else {
@@ -142,22 +203,50 @@ function PartyMakerPage() {
 
   return (
     <div className={styles.margin}>
-      <header className={styles.spaceB}>
-        <span className={`FontL FontBasic`}>{party.partyName} 마니또</span>
+      <header className={styles.Title}>
+        <span className={`FontXL FontBasic`}>{party.partyName}</span>
         <span>
           <ShareButton>참여 코드 공유</ShareButton>
         </span>
       </header>
-      <div className={styles.cardContainer}>
-        <Card {...{ tag: 4, children: children }} />
-      </div>
+      <Card {...{ tag: 4, children: children }} />
       <div className={styles.endWrapper}>
-        {/* recoil에 있는 party의 userId와 login의 userId가 같으면 */}
         {login.userId === party.userId ? (
+          // recoil에 있는 party의 userId와 login의 userId가 같으면
           <>
             <div className={`FontM`}>종료 시간</div>
             <div className={`${styles.inputWrapper}`}>
               <DatePickerInput setEndDate={setEndDate} />
+              <div className={styles.timeSelection}>
+                <div>
+                  <select
+                    className={`${styles.selectBox}`}
+                    value={selectedHour}
+                    onChange={(e) => setSelectedHour(parseInt(e.target.value))}
+                  >
+                    {Array.from({ length: 24 }, (_, i) => i).map((hour) => (
+                      <option key={hour} value={hour}>
+                        {`${hour}`.padStart(2, '0')}
+                      </option>
+                    ))}
+                  </select>
+                  시
+                </div>
+                <div>
+                  <select
+                    className={`${styles.selectBox}`}
+                    value={selectedMinute}
+                    onChange={(e) => setSelectedMinute(parseInt(e.target.value))}
+                  >
+                    {Array.from({ length: 60 }, (_, i) => i).map((minute) => (
+                      <option key={minute} value={minute}>
+                        {`${minute}`.padStart(2, '0')}
+                      </option>
+                    ))}
+                  </select>
+                  분
+                </div>
+              </div>
             </div>
             <div className={`${styles.buttonWrapper}`}>
               <span className={`${styles.oneButton}`}>

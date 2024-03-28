@@ -20,10 +20,15 @@ function MissionPage() {
   const currentTime = useRecoilValue(currentTimeState);
   const partyStatus = useRecoilValue(partyStatusState);
   const party = useRecoilValue(partyState);
+
   const [manitiNickname, setManitiNickname] = useState('');
   const [missionResultList, setMissionResultList] = useState<MissionResultList>(MISSION_RESULT_LIST);
+  const [firstcheck, setFirstCheck] = useState(false);
+  const [checkDate, setCheckDate] = useState(sessionStorage.getItem('checkDate'));
+  const [currentDate, setCurrentDate] = useState(new Date().getDate().toString());
   useEffect(() => {
     setcurrentTime(new Date().toISOString());
+    setCurrentDate(new Date().getDate().toString());
     manitoNickname(login.guestId).then((data) => {
       setManitiNickname(data);
     });
@@ -34,6 +39,10 @@ function MissionPage() {
       });
     }
   }, []);
+
+  useEffect(() => {
+    setFirstCheck(checkDate === currentDate);
+  }, [checkDate, currentDate]);
 
   if (StatusType[partyStatus] == StatusType.Complete) {
     return (
@@ -56,9 +65,8 @@ function MissionPage() {
   } else {
     // return (
     // );
-    const checkDate = sessionStorage.getItem('checkDate');
-    const currentDate = new Date(currentTime).getDate().toString();
-    return checkDate === currentDate ? (
+
+    return firstcheck ? (
       <Slides {...{ className: 'Slides' }}>
         <MissionManitoPage {...{ nickname: manitiNickname }} />
         <MissionManitiPage {...{ nickname: login.nickname }} />
@@ -66,7 +74,7 @@ function MissionPage() {
     ) : (
       <div>
         <div className={`FontXL ${styles.Heading}`}>오늘의 미션</div>
-        <MissionFirstPage {...{ nickname: login.nickname }} />
+        <MissionFirstPage {...{ nickname: login.nickname, setCheckDate: setCheckDate }} />
       </div>
     );
   }

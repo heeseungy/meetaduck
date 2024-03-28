@@ -1,8 +1,24 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import Card from '@/components/commons/Card';
 import HintInputQuestion from '@/components/hint/HintInputQuestion';
+import { loginState } from '@/recoil/atom';
+import { hintPageService } from '@/services/hintPageService';
 import styles from '@/styles/hint/HintInputFormPage.module.css';
+import { Answer } from '@/types/hint';
+import { useRecoilValue } from 'recoil';
 
 function HintInputFormPage() {
+  const navigate = useNavigate();
+  const login = useRecoilValue(loginState);
+  useEffect(() => {
+    hintPageService(login.guestId).then((data: Answer) => {
+      if (data.hintStatusAnswer !== null) {
+        navigate('/mission');
+      }
+    });
+  });
   const children = (
     <div className={styles.cardMargin}>
       <form action="#">

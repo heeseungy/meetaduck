@@ -37,7 +37,7 @@ function Card(cardProps: CardPorps) {
   } else if (cardProps.tag === 4) {
     return (
       <div className={styles.TopCardContainer}>
-        <div className={`${styles.Card4} ${styles.PartyCard}`}>
+        <div className={`${styles.Card4} ${styles.Card}`}>
           <div className={styles.CardContent}>{cardProps.children}</div>
         </div>
       </div>

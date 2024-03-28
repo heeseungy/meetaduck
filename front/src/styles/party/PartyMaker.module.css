@@ -1,12 +1,24 @@
 .margin {
+  margin: auto;
   margin-top: 4rem;
-  margin-left: 5%;
-  margin-right: 5%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100dvw;
+}
+
+.SubTitle {
+  display: flex;
+  justify-content: start;
+  align-items: end;
+  gap: 0.5rem;
 }
 
 .share {
-  background-color: #4FC775;
-  border: 1px solid #4FC775;
+  background-color: #4fc775;
+  border: 1px solid #4fc775;
   border-radius: 8px;
   color: white;
   font-weight: bold;
@@ -17,7 +29,7 @@
 } */
 
 .endWrapper {
-  margin-top: 4rem;
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,7 +42,7 @@
 }
 
 .buttonWrapper {
-  margin-top: 4rem;
+  margin-top: 2rem;
   text-align: center;
 }
 
@@ -44,34 +56,85 @@
 }
 
 .marginBottom {
-  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .spaceB {
+  width: 17rem;
   display: flex;
   justify-content: space-between;
 }
-
-.cardContainer {
+.Title {
+  width: 19rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  align-items: end;
 }
 
 .participant {
   display: flex;
   align-items: center;
   margin-bottom: 10px; /* 각 참가자 사이의 간격 조정 */
+  position: relative;
 }
 
 .profileImage {
-  width: 3.1rem;
-  height: 3.1rem;
-  border-radius: 50%;
-  margin-right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 5rem;
+  margin-right: 0.5rem;
 }
 
 .marginL {
-  margin-left: 0.4rem;
+  display: flex;
+}
+
+.ScrollBox {
+  width: 15rem;
+  height: 15rem;
+  /* background-color: aqua; */
+  padding-top: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 2rem;
+  padding-bottom: 1rem;
+  overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.Badge {
+  color: #4fc775;
+  border: #4fc775 1px solid;
+  border-radius: 0.5rem;
+  font-size: 0.66rem;
+  padding: 0.3rem;
+  font-family: 'JalnanGothic';
+  position: absolute;
+  right: -3rem;
+}
+
+.timeSelection {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.timeSelection > div {
+  margin-right: 1rem;
+}
+
+.selectBox {
+  width: 80px; /* 선택 상자의 너비 조정 */
+  padding: 0.5rem; /* 선택 상자의 패딩 조정 */
+  border-radius: 4px; /* 선택 상자의 테두리 모서리를 둥글게 만듭니다. */
+  border: 1px solid #ccc; /* 선택 상자에 회색 테두리 추가 */
+  background-color: #fff; /* 선택 상자의 배경색을 흰색으로 설정 */
+  font-size: 0.875rem; /* 선택 상자의 글꼴 크기 조정 */
+  color: #333; /* 선택 상자의 글꼴 색상 설정 */
 }
