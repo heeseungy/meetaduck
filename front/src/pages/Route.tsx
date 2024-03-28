@@ -14,6 +14,8 @@ import HintInputFormPage from './hint/HintInputFormPage';
 import RedirectionPage from './login/RedirectionPage';
 import PartyCreatePage from './party/PartyCreatePage';
 import PartyMakerPage from './party/PartyMakerPage';
+import TestPage from './webSocketTest/TestPage';
+import RabbitTestPage from './webSocketTest/RabbitTestPage';
 // import S3Page from './s3/s3Page';
 // import { S3Page } from './s3/s3Page';
 import SamplePage from './sample/SamplePage';
@@ -38,6 +40,7 @@ const router = createBrowserRouter([
   { path: '/partymaker', element: <PartyMakerPage /> },
   { path: '/hintinputform', element: <HintInputFormPage /> },
   { path: '/testpage', element: <TestPage /> },
+  { path: '/rabbit', element: <RabbitTestPage /> },
   { path: '/chatdetail/:chatId', element: <ChatDetailPage /> },
   { path: '/login/oauth2/code/kakao', element: <RedirectionPage /> },
   { path: '/sample', element: <SamplePage /> },

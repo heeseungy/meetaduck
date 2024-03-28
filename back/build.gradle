@@ -58,6 +58,11 @@ dependencies {
     // json
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
+    // RabbitMQ
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+    implementation 'org.springframework.boot:spring-boot-starter-reactor-netty:3.0.0'
+//    testImplementation 'org.springframework.amqp:spring-rabbit-test'
+
 }
 
 tasks.named('test') {

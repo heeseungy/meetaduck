@@ -4,5 +4,4 @@ volumes
 *.yaml
 
 #
-*.env
-*.pem 
+*.env 
