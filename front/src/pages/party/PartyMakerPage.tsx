@@ -21,6 +21,8 @@ function PartyMakerPage() {
   const login = useRecoilValue(loginState);
   const [participants, setParticipants] = useState<ListProfile[]>([]);
   const [endDate, setEndDate] = useState(null);
+  const [selectedHour, setSelectedHour] = useState(0); // 시간 상태 변수
+  const [selectedMinute, setSelectedMinute] = useState(0); // 분 상태 변수
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -90,15 +92,19 @@ function PartyMakerPage() {
 
   const startHandler = async () => {
     try {
-      const isoEndDate = endDate.toISOString();
+      const isoEndDate = endDate.toISOString(); // 선택한 날짜를 ISO 형식으로 변환
+      const selectedDate = endDate.clone().set({ hour: selectedHour, minute: selectedMinute }); // 선택한 시간과 분을 반영한 날짜 설정
+      const isoSelectedDate = selectedDate.toISOString(); // 선택한 날짜와 시간을 ISO 형식으로 변환
+      console.log("isoSelectedDate :", isoSelectedDate)
+      
       await Axios.patch(`/api/parties`, {
         accessCode: party.accessCode,
-        endTime: isoEndDate,
+        endTime: isoSelectedDate, // 종료 시간을 선택한 날짜와 시간으로 설정
         userId: party.userId,
       });
       setParty((prevPartyState) => ({
         ...prevPartyState,
-        endTime: endDate !== null ? endDate : prevPartyState.endTime,
+        endTime: selectedDate, // recoil 상태에 선택한 날짜와 시간으로 설정
       }));
       navigate('/hintinputform');
     } catch (err) {
@@ -178,6 +184,24 @@ function PartyMakerPage() {
             <div className={`FontM`}>종료 시간</div>
             <div className={`${styles.inputWrapper}`}>
               <DatePickerInput setEndDate={setEndDate} />
+              <div className={styles.timeSelection}>
+                <div>
+                  <select className={`${styles.selectBox}`} value={selectedHour} onChange={(e) => setSelectedHour(parseInt(e.target.value))}>
+                    {Array.from({ length: 24 }, (_, i) => i).map((hour) => (
+                      <option key={hour} value={hour}>{`${hour}`.padStart(2, '0')}</option>
+                    ))}
+                  </select>
+                  시
+                </div>
+                <div>
+                  <select className={`${styles.selectBox}`} value={selectedMinute} onChange={(e) => setSelectedMinute(parseInt(e.target.value))}>
+                    {Array.from({ length: 60 }, (_, i) => i).map((minute) => (
+                      <option key={minute} value={minute}>{`${minute}`.padStart(2, '0')}</option>
+                    ))}
+                  </select>
+                  분
+                </div>
+              </div>
             </div>
             <div className={`${styles.buttonWrapper}`}>
               <span className={`${styles.oneButton}`}>
