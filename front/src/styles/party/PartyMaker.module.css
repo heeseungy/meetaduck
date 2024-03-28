@@ -39,7 +39,6 @@
 
 .inputWrapper {
   margin-top: 1rem;
-  
 }
 
 .buttonWrapper {
@@ -104,6 +103,7 @@
   overflow: auto;
   display: flex;
   flex-wrap: wrap;
+  align-items: start;
   justify-content: space-between;
   gap: 0.5rem;
 }

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Card from '@/components/commons/Card';
 import HintInputQuestion from '@/components/hint/HintInputQuestion';
@@ -9,11 +10,12 @@ import { Answer } from '@/types/hint';
 import { useRecoilValue } from 'recoil';
 
 function HintInputFormPage() {
+  const navigate = useNavigate();
   const login = useRecoilValue(loginState);
   useEffect(() => {
     hintPageService(login.guestId).then((data: Answer) => {
       if (data.hintStatusAnswer !== null) {
-        sessionStorage.setItem('finishHintInput', 'true');
+        navigate('/mission');
       }
     });
   });
