@@ -46,4 +46,3 @@ application-prod.yml
 
 #
 *.env
-*.pem
