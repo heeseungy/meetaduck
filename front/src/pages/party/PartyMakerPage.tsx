@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Button from '@/components/commons/Button';
 import Card from '@/components/commons/Card';
@@ -9,15 +10,15 @@ import { Axios } from '@/services/axios';
 import { partyDeleteervice } from '@/services/partyDeleteService';
 import { partyStartService } from '@/services/partyStartService';
 import styles from '@/styles/party/PartyMaker.module.css';
+import { ListProfile } from '@/types/user.interface';
 import { ArrowsCounterClockwise } from '@phosphor-icons/react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { useNavigate } from 'react-router-dom';
 
 function PartyMakerPage() {
   const setParty = useSetRecoilState(partyState);
   const party = useRecoilValue(partyState);
   const login = useRecoilValue(loginState);
-  const [participants, setParticipants] = useState([]);
+  const [participants, setParticipants] = useState<ListProfile[]>([]);
   const [endDate, setEndDate] = useState(null);
   const navigate = useNavigate();
 
@@ -38,7 +39,7 @@ function PartyMakerPage() {
       const usersInfo = await Axios.get(`/api/guests/all/${party.partyId}`);
       setParticipants(usersInfo.data);
     } catch (err) {
-      alert(err.response.data)
+      alert(err.response.data);
       console.log('Error refreshing party info: ', err);
     }
   };
@@ -75,7 +76,7 @@ function PartyMakerPage() {
       ))}
     </div>
   );
-  
+
   const startHandler = async () => {
     try {
       const isoEndDate = endDate.toISOString();
@@ -83,14 +84,14 @@ function PartyMakerPage() {
         accessCode: party.accessCode,
         endTime: isoEndDate,
         userId: party.userId,
-      })
+      });
       setParty((prevPartyState) => ({
         ...prevPartyState,
         endTime: endDate !== null ? endDate : prevPartyState.endTime,
-      }))
-      navigate('/hintinputform')
-    } catch(err) {
-      console.log("err:", err);
+      }));
+      navigate('/hintinputform');
+    } catch (err) {
+      console.log('err:', err);
       alert(err.response.data);
     }
   };
@@ -102,12 +103,12 @@ function PartyMakerPage() {
         data: {
           accessCode: party.accessCode,
           userId: party.userId,
-        }
-      })
-      alert('파티가 삭제되었습니다')
-      sessionStorage.removeItem("sessionStorage")
+        },
+      });
+      alert('파티가 삭제되었습니다');
+      sessionStorage.removeItem('sessionStorage');
       navigate('/party');
-    } catch(err) {
+    } catch (err) {
       alert(err.response.data);
       navigate('/party');
     }
@@ -119,7 +120,7 @@ function PartyMakerPage() {
       // 로그인 상태에서 JWT 토큰을 가져옵니다.
       // const jwtToken = login.jwtToken;
       const jwtToken = 123;
-  
+
       // JWT 토큰이 존재하는 경우에만 요청을 보냅니다.
       if (jwtToken) {
         await Axios.delete(`/api/guests/${login.guestId}`, {
