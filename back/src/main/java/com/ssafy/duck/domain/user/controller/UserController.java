@@ -13,6 +13,8 @@ import com.ssafy.duck.domain.user.dto.response.UserRes;
 import com.ssafy.duck.domain.user.service.UserService;
 import com.ssafy.duck.jwt.JwtProperties;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -22,9 +24,11 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.slf4j.Logger;
 
 import java.nio.charset.Charset;
 
+@Slf4j
 @CrossOrigin
 @RestController
 @RequestMapping("/api/users")
@@ -141,6 +145,9 @@ public class UserController {
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Authorization", "Bearer " + jwtToken);
+
+        Logger logger = LoggerFactory.getLogger(UserController.class);
+        logger.info("{}", userRes.toString());
 
         return ResponseEntity.ok()
                 .headers(responseHeaders)
