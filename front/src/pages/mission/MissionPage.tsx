@@ -60,7 +60,9 @@ function MissionPage() {
     //     <MissionFirstPage {...{ nickname: nickname }} />
     //   </div>
     // );
+    const checkDate = sessionStorage.getItem('checkDate')
     return (
+      
       <Slides {...{ className: 'Slides' }}>
         <MissionManitoPage {...{ nickname: manitiNickname }} />
         <MissionManitiPage {...{ nickname: login.nickname }} />
