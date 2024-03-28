@@ -42,7 +42,7 @@ export default function PrivateRoute({ status }: PrivateRouteProps): React.React
       <Navigate to="/login" />
     ) : partyState === null || loginState.partyId === 0 ? (
       <Navigate to="/party" />
-    ) : partyState.endTime === '' ? (
+    ) : partyState.endTime === null ? (
       <Outlet />
     ) : (
       <Navigate to="/hintinputform" />

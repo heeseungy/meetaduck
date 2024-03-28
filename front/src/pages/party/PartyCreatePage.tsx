@@ -11,6 +11,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 function PartyCreatePage() {
   const [partyName, setPartyName] = useState('');
+  const [nameCount, setNameCount] = useState(0);
   const navigate = useNavigate();
 
   const login = useRecoilValue(loginState);
@@ -34,9 +35,8 @@ function PartyCreatePage() {
       navigate('/partymaker');
     } catch (err) {
       console.log(err);
-      alert(err.response.data)
+      alert(err);
     }
-
   };
 
   useEffect(() => {
@@ -52,20 +52,20 @@ function PartyCreatePage() {
       <img src={duckLogo} alt="duckLogo" className={styles.marginTop} />
       <div className={`FontBasic FontL ${styles.joinTitle} `}>파티명</div>
       <div className={styles.marginTop}>
-        <Input usersInput={partyName} onChange={handleInputChange} />
+        <Input maxLength={6} usersInput={partyName} onChange={handleInputChange} />
       </div>
       <div className={styles.marginTop}>
         <Button onClickHandler={createHandler} bgc="filled">
           파티열기
         </Button>
       </div>
-      <div className={styles.noPartySection}>
+      {/* <div className={styles.noPartySection}>
         <div>오늘의 명언(삭제예정)</div>
         <div>먼저핀꽃은 먼저진다</div>
         <div>남보다 먼저 공을 세우려고</div>
         <div>조급히 서둘것이 아니다</div>
         <div>– 채근담</div>
-      </div>
+      </div> */}
     </div>
   );
 }
