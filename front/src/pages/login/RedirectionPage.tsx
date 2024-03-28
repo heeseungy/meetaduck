@@ -43,7 +43,6 @@ function RedirectionPage() {
                   userId: data.userId,
                 });
               }
-
               return response;
               // 방법2 recoil에 token을 저장해서 필요할때마다
               // token이 있는지 없는지 확인 후 로그인 상태를 검사함.
@@ -63,10 +62,20 @@ function RedirectionPage() {
 
               navigate('/partymaker');
             });
+        } else {
+          setLogin({
+            kakaoId: response.data.kakaoId,
+            guestId: response.data.guestId,
+            partyId: response.data.partyId,
+            nickname: response.data.nickname,
+            profileUrl: response.data.profileUrl,
+            thumbnailUrl: response.data.thumbnailUrl,
+            userId: response.data.userId,
+          });
+          console.log(login.partyId);
+
+          navigate('/party');
         }
-      })
-      .then(() => {
-        navigate('/party');
       })
       .catch((err) => {
         console.log(err);
