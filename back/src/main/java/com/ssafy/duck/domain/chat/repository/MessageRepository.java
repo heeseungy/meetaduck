@@ -10,4 +10,5 @@ public interface MessageRepository extends MongoRepository<Message, String> {
 
     Long countByChatId(Integer chatId);
 
+    Boolean existsByChatIdAndCreatedTimeStartingWith(Long chatId, String createdTime);
 }

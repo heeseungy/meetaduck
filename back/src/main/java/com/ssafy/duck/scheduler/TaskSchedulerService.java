@@ -1,5 +1,6 @@
 package com.ssafy.duck.scheduler;
 
+import com.ssafy.duck.domain.party.dto.response.PartyRes;
 import com.ssafy.duck.domain.result.service.ResultService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.TaskScheduler;
@@ -17,7 +18,9 @@ public class TaskSchedulerService {
     public void scheduleTask(Long partyId, Instant scheduledTime) {
         Runnable task = () -> {
             resultService.reserveAnalysis(partyId);
+            resultService.updateResult(partyId);
         };
         taskScheduler.schedule(task, scheduledTime);
     }
+
 }

@@ -49,4 +49,9 @@ public class Result {
     @JoinColumn(name = "`guest_id`", nullable = false, updatable = false)
     private Guest guest;
 
+
+    public void updateFavorability(int manitiFavorability, int manitoFavorability){
+        this.manitiFavorability = manitiFavorability;
+        this.manitoFavorability = manitoFavorability;
+    }
 }

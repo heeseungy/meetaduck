@@ -85,6 +85,7 @@ public class PartyController {
             missionService.set(missionService.fetch(), startReq);
             hintService.set(hintService.fetch(), partyRes.getPartyId());
             taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.stringToInstant(startReq.getEndTime()).minus(Duration.ofDays(1)) );
+//            taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.stringToInstant(startReq.getEndTime()).plus(Duration.ofMinutes(5)) );
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();
