@@ -16,12 +16,15 @@ export default function PrivateRoute({ status }: PrivateRouteProps): React.React
       : null;
 
   const partyState =
-    sessionStorage.getItem('sessionStorage') !== null
-      ? JSON.parse(sessionStorage.getItem('sessionStorage')!).partyState !== null
-        ? JSON.parse(sessionStorage.getItem('sessionStorage')!).partyState
+    sessionStorage.getItem('sessionStorage') !== null && sessionStorage.getItem('sessionStorage') !== undefined
+      ? JSON.parse(sessionStorage.getItem('sessionStorage')!)?.partyState !== null
+        ? JSON.parse(sessionStorage.getItem('sessionStorage')!)?.partyState !== undefined
+          ? JSON.parse(sessionStorage.getItem('sessionStorage')!)?.partyState
+          : null
         : null
       : null;
 
+  console.log('partyState', partyState);
   const finishHintInput = sessionStorage.getItem('finishHintInput');
 
   if (status === 'login') {
@@ -42,7 +45,7 @@ export default function PrivateRoute({ status }: PrivateRouteProps): React.React
       <Navigate to="/login" />
     ) : partyState === null || loginState.partyId === 0 ? (
       <Navigate to="/party" />
-    ) : partyState.endTime === null ? (
+    ) : partyState.endTime === (null || '') ? (
       <Outlet />
     ) : (
       <Navigate to="/hintinputform" />
@@ -53,7 +56,7 @@ export default function PrivateRoute({ status }: PrivateRouteProps): React.React
       <Navigate to="/login" />
     ) : partyState === null || loginState.partyId === 0 ? (
       <Navigate to="/party" />
-    ) : partyState.endTime === '' ? (
+    ) : partyState.endTime === (null || '') ? (
       <Navigate to="/partymaker" />
     ) : finishHintInput === null ? (
       <Outlet />
@@ -65,7 +68,7 @@ export default function PrivateRoute({ status }: PrivateRouteProps): React.React
       <Navigate to="/login" />
     ) : partyState === null || loginState.partyId === 0 ? (
       <Navigate to="/party" />
-    ) : partyState.endTime === '' ? (
+    ) : partyState.endTime === (null || '') ? (
       <Navigate to="/partymaker" />
     ) : finishHintInput === null ? (
       <Navigate to="/hintinputform" />
