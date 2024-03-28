@@ -8,8 +8,8 @@ type MissionFirstProps = {
 
 function MissionFirstPage(props: MissionFirstProps) {
   const checkHandler = () => {
-    const checkedTme = new Date().getDate();
-    sessionStorage.setItem('checkDate', checkedTme.toString());
+    const checkDate = new Date().getDate();
+    sessionStorage.setItem('checkDate', checkDate.toString());
     console.log('미션 확인!');
   };
 

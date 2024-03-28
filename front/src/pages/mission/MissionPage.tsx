@@ -55,18 +55,19 @@ function MissionPage() {
     );
   } else {
     // return (
-    //   <div>
-    //     <div className={`FontXXL ${styles.Heading}`}>오늘의 미션</div>
-    //     <MissionFirstPage {...{ nickname: nickname }} />
-    //   </div>
     // );
-    const checkDate = sessionStorage.getItem('checkDate')
-    return (
-      
+    const checkDate = sessionStorage.getItem('checkDate');
+    const currentDate = new Date(currentTime).getDate().toString();
+    return checkDate === currentDate ? (
       <Slides {...{ className: 'Slides' }}>
         <MissionManitoPage {...{ nickname: manitiNickname }} />
         <MissionManitiPage {...{ nickname: login.nickname }} />
       </Slides>
+    ) : (
+      <div>
+        <div className={`FontXXL ${styles.Heading}`}>오늘의 미션</div>
+        <MissionFirstPage {...{ nickname: login.nickname }} />
+      </div>
     );
   }
 }

@@ -33,7 +33,7 @@ function HintInputQuestion() {
   const guestId = login.guestId;
 
   useEffect(() => {
-    // sessionStorage.setItem('finishHintInput', 'true');
+    sessionStorage.setItem('finishHintInput', 'true');
 
     async function fetchHints() {
       try {
@@ -48,6 +48,7 @@ function HintInputQuestion() {
     fetchHints();
   }, [guestId]);
 
+  return <></>;
   const hintSubmitHandler = async () => {
     // 모든 입력란이 비어 있는지 확인
     const isEmpty = hints.some((hint) => !hint.hintStatusAnswer.trim());
