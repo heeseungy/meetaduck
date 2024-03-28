@@ -137,12 +137,12 @@ public class PartyService {
             throw new PartyException(PartyErrorCode.MAXIMUM_OF_3_TO_7_DAYS_ALLOWED);    // 설정한 날짜가 3일보다 작거나, 7일보다 클 경우
         }
         // 인원 수가 3명보다 적을 때
-//        Party party = partyRepository.findByAccessCode(startReq.getAccessCode())
-//                .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
-//        List<Guest> guests = guestRepository.findByParty_PartyId(party.getPartyId());
-//        if (guests.size() <= 2) {
-//            throw new PartyException(PartyErrorCode.NOT_ENOUGH_PEOPLE);
-//        }
+        Party party = partyRepository.findByAccessCode(startReq.getAccessCode())
+                .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
+        List<Guest> guests = guestRepository.findByParty_PartyId(party.getPartyId());
+        if (guests.size() <= 2) {
+            throw new PartyException(PartyErrorCode.NOT_ENOUGH_PEOPLE);
+        }
 
         return true;
     }
