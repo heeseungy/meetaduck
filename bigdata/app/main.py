@@ -114,7 +114,7 @@ def word_count(sender_id, chat_id) :
                       .sortBy(lambda x: (-x["count"], x["word"])) \
                       .collect()
     # JSON 형태로 변환
-    json_data = json.dumps(word_counts[:25], ensure_ascii=False)
+    json_data = json.dumps(word_counts[:15], ensure_ascii=False)
     return json_data
 
 def get_favorability(guest_id, chat_id):    
@@ -164,7 +164,7 @@ def get_message( chat_id):
             "chat_id": message["chat_id"]
         }
         message_list.append(message_dict)  
-    print("message list ", message_list)
+    # print("message list ", message_list)
   
     return message_list
 

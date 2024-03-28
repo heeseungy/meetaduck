@@ -14,7 +14,7 @@ model.load_state_dict(torch.load(koelectra_finetuned_model_dir, map_location=tor
 sentiment_classifier = pipeline('sentiment-analysis', tokenizer=tokenizer, model=model)
 
 #상수
-STANDARD_POINT = 200
+STANDARD_POINT = 100
 STANDARD_PERIOD =120
 
 # 긍정어 비율 계산
@@ -29,15 +29,16 @@ def predict_sentiment(content, point, isMe):
     label = pred[0]["label"]
     # 긍정이면 +1, 부정이면 -1
     if label == 'LABEL_1':
-        point -= 1 
+        point -= 200
     elif label == 'LABEL_2':
-        point += 1
+        point += 200
         if(isMe) : positive +=1
     else :
+        point += 100
         if(isMe) : neutral +=1
     
     if(isMe) : total_count+=1
-
+    if(point < 50) : point = 10
     return point
 
 
@@ -74,7 +75,7 @@ class TimeAndPoint:
 
 
 def calc_favorability(guest_id, chat_list): 
-    print("chat_list ", chat_list)
+    #print("chat_list ", chat_list)
     if chat_list == 0 :
         return [0, -1]
     
@@ -97,7 +98,7 @@ def calc_favorability(guest_id, chat_list):
     for chat_message in chat_list: 
         # 시간 범위
         compare_time = make_dt(chat_message['created_time'])
-        print("chat message ", chat_message)
+        #print("chat message ", chat_message)
 
         # 한시간이상 차이 나면 다른 뭉치로 분류
         if (compare_time - time).total_seconds() > 3600:
@@ -187,6 +188,10 @@ def calc_favorability(guest_id, chat_list):
     h=np.array([h])
     l=np.array([l])
     v=np.array([v]) 
+    print(p)
+    print(h)
+    print(l)
+    print(v)
     score = scoreStock(p,h,l,v)
     score_fng = FearGreed(score).compute_stock(duration=(dur-2)) 
     print("favor ", score_fng[0][0])

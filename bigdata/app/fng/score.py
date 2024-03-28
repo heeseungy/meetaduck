@@ -443,7 +443,7 @@ class FearGreed(object):
 
         return score_compensation
 
-    def compute_stock(self, duration=120):
+    def compute_stock(self, duration):
         """
         Parameters
         ----------
