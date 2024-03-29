@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Button from '@/components/commons/Button';
@@ -26,6 +26,11 @@ function PartyMakerPage() {
   const [selectedHour, setSelectedHour] = useState(0); // 시간 상태 변수
   const [selectedMinute, setSelectedMinute] = useState(0); // 분 상태 변수
   const navigate = useNavigate();
+
+  // useEffect(() =>
+  //   // endTime 상태가 변경될 때마다 실행되는 부분
+  //   navigate('/hintinputform');
+  // }, [party.endTime]); // endTime 상태가  {변경될 때 useEffect 실행
 
   useEffect(() => {
     // 파티 목록 조회
@@ -125,7 +130,7 @@ function PartyMakerPage() {
       </div>
     </div>
   );
-
+  
   const startHandler = async () => {
     try {
       const isoEndDate = endDate.toISOString(); // 선택한 날짜를 ISO 형식으로 변환
@@ -142,7 +147,9 @@ function PartyMakerPage() {
         ...prevPartyState,
         endTime: selectedDate, // recoil 상태에 선택한 날짜와 시간으로 설정
       }));
+
       navigate('/hintinputform');
+
     } catch (err) {
       console.log('err:', err);
       alert(err.response.data);
