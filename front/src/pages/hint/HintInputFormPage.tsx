@@ -13,8 +13,8 @@ function HintInputFormPage() {
   const navigate = useNavigate();
   const login = useRecoilValue(loginState);
   useEffect(() => {
-    hintPageService(login.guestId).then((data: Answer) => {
-      if (data.hintStatusAnswer !== null) {
+    hintPageService(login.guestId).then((data: Answer[]) => {
+      if (data[0].hintStatusAnswer !== null) {
         console.log(data);
         sessionStorage.setItem('finishHintInput', 'true');
         navigate('/mission');

@@ -37,6 +37,9 @@ function MissionManitoPage(props: MissionManitoProps) {
       )[0],
   );
 
+  // 제출되었나요?
+  const [isSubmitCompleted, setIsSubmitCompleted] = useState(todayMission.missionImageUrl !== null);
+
   useEffect(() => {
     // 미션조회
     missionTodayService(login.guestId).then((data) => {
@@ -64,6 +67,7 @@ function MissionManitoPage(props: MissionManitoProps) {
   // => ImgUrl 바꾸기
   useEffect(() => {
     setImgUrl(todayMission.missionImageUrl);
+    setIsSubmitCompleted(todayMission.missionImageUrl !== null && todayMission.missionImageUrl !== undefined);
   }, [todayMission]);
 
   // 미션 넘기는 function
@@ -146,7 +150,6 @@ function MissionManitoPage(props: MissionManitoProps) {
   };
 
   // 제출 완료했나요?
-  const [isSubmitCompleted, setIsSubmitCompleted] = useState(todayMission.missionImageUrl !== null);
   const submitHandler = () => {
     if (imgUrl === null) {
       window.alert('사진을 올려주세요!');
