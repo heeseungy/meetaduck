@@ -221,8 +221,7 @@ public class MissionService {
     // 실패 개수 = 어제까지 미션 status 조회 후 전체 개수/3 - 성공 개수
     public int calcMissionFailCount(Long manitoId) {
         Instant today = TimeUtil.convertTo00(Instant.now());
-        today = today.plus(Duration.ofDays(5)); // 테스트를 위해 오늘 날짜 변경
-//        System.out.println("calcMissionFailCount " + today);
+//        today = today.plus(Duration.ofDays(5)); // 테스트를 위해 오늘 날짜 변경
 
         List<MissionStatus> missionStatusList = missionStatusRepository.findAllByGuestGuestIdAndGetTimeBefore(manitoId, today);
         int failCount = missionStatusList.size() / 3; // 어제까지의 미션 개수
