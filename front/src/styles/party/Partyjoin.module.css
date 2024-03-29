@@ -14,9 +14,12 @@
   margin-top: 3rem;
 }
 
+.buttonGap {
+  display: flex;
+  gap: 2rem;
+}
+
 .noPartySection {
   margin-top: 10rem;
   margin-bottom: 1rem;
 }
-
-

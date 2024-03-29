@@ -45,6 +45,9 @@ function PartyCreatePage() {
     }
   };
 
+  const backHandler = async () => {
+    navigate('/party');
+  };
   useEffect(() => {
     console.log('party.partyId :', party.partyId);
   }, [party]);
@@ -60,7 +63,10 @@ function PartyCreatePage() {
       <div className={`${styles.marginTop}`}>
         <Input className={style.partyBox} maxLength={5} usersInput={partyName} onChange={handleInputChange} />
       </div>
-      <div className={styles.marginTop}>
+      <div className={`${styles.buttonGap} ${styles.marginTop}`}>
+        <Button onClickHandler={backHandler} bgc="empty">
+          돌아가기
+        </Button>
         <Button onClickHandler={createHandler} bgc="filled">
           파티열기
         </Button>
