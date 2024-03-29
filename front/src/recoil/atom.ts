@@ -76,4 +76,5 @@ export const chatIdListState = atom<ChatId>({
     manitoChatId: 0,
     manitiChatId: 0,
   },
+  effects_UNSTABLE: [persistAtom],
 });

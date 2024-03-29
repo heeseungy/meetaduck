@@ -7,13 +7,16 @@ type VoteCarouselListProps = {
   partyList: ListProfile[];
 };
 function VoteCarouselList(voteCarouselListProps: VoteCarouselListProps) {
+  console.log(voteCarouselListProps);
   const tempList1 = voteCarouselListProps.partyList.slice();
   const tempList2 = voteCarouselListProps.partyList.slice();
   // tempList1.sort((a, b) => a.guestId - b.guestId);
   // tempList2.sort((a, b) => a.guestId - b.guestId);
-  const item1: ListProfile[] = tempList1.splice(0, 1);
-  const item2: ListProfile[] = tempList1.splice(0, 2);
+  const item1: ListProfile[] = tempList1.splice(0, 0);
+  console.log(item1);
+  const item2: ListProfile[] = tempList1.splice(0, 1);
   tempList1.splice(tempList1.length, 0, ...item1);
+  console.log(tempList1);
   tempList2.splice(tempList1.length, 0, ...item2);
 
   const voteCarouselListProps1: VoteCarouselListProps = {

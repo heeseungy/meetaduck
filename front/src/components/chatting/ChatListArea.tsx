@@ -19,8 +19,10 @@ function ChatListArea({ tag, messages }: { tag: string; messages: MessageRes[] }
   const scrollRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     partyListAll(party.partyId).then((data: ListProfile[]) => {
-      // console.log(data);
+      console.log(data);
+      console.log(messages);
       setPartyList(data);
+      console.log(tag);
     });
     scrollRef.current!.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
@@ -38,7 +40,17 @@ function ChatListArea({ tag, messages }: { tag: string; messages: MessageRes[] }
                     // 내 메세지
                     <div className={`${styles.MyFlexHorizontal} ${styles.FlexHorizontal}`}>
                       <div className={`FontXS FontBasic`}>
-                        ({createdTime.getHours()}:{createdTime.getMinutes()})
+                        (
+                        {`${createdTime.getUTCHours() < 12 ? '오전' : '오후'} 
+                        ${
+                          createdTime.getUTCHours() < 12
+                            ? `0${createdTime.getUTCHours()}`
+                            : createdTime.getUTCHours() < 22
+                              ? `0${createdTime.getUTCHours() - 12}`
+                              : createdTime.getUTCHours() - 12
+                        }
+                        :${createdTime.getMinutes()}`}
+                        )
                       </div>
                       <div className={`FontS FontBasic ${styles.Message} ${styles.MyMessage}`}>
                         {msg.messageType ? <img src={msg.content} alt="" /> : msg.content}
@@ -71,7 +83,17 @@ function ChatListArea({ tag, messages }: { tag: string; messages: MessageRes[] }
                               {msg.messageType ? <img src={msg.content} alt="" /> : msg.content}
                             </div>
                             <div className={`FontXS FontBasic`}>
-                              ({createdTime.getHours()}:{createdTime.getMinutes()})
+                              (
+                              {`${createdTime.getUTCHours() < 12 ? '오전' : '오후'} 
+                        ${
+                          createdTime.getUTCHours() < 12
+                            ? `0${createdTime.getUTCHours()}`
+                            : createdTime.getUTCHours() < 22
+                              ? `0${createdTime.getUTCHours() - 12}`
+                              : createdTime.getUTCHours() - 12
+                        }
+                        :${createdTime.getMinutes()}`}
+                              )
                             </div>
                           </div>
                         </div>

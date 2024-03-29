@@ -24,6 +24,10 @@ function ChattingDetailPage() {
         ? 'manitiChat'
         : 'manitoChat';
   useEffect(() => {
+    console.log(chatId);
+    console.log(chatIdList);
+  }, []);
+  useEffect(() => {
     //chat
     chatListLoadService(+chatId, setMessages);
     const client = new Client({
