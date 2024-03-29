@@ -41,7 +41,7 @@ function ChattingPage() {
         </div>
       </div>
       <div
-        onClick={() => toDetail(chatIdList.manitoChatId)}
+        onClick={() => toDetail(chatIdList.manitiChatId)}
         className={`${styles.Button} ${styles.ManitoChat} ${styles.Right} FontL FontBasic`}
       >
         <div className={styles.Background}>
@@ -50,7 +50,7 @@ function ChattingPage() {
         <div>마니또와 대화</div>
       </div>
       <div
-        onClick={() => toDetail(chatIdList.manitiChatId)}
+        onClick={() => toDetail(chatIdList.manitoChatId)}
         className={`${styles.Button} ${styles.ManitiChat} ${styles.Left} FontL FontBasic`}
       >
         <div>마니띠와 대화</div>
