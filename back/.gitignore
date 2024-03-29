@@ -1,5 +1,6 @@
 HELP.md
 .gradle
+.keystore
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
@@ -39,3 +40,11 @@ application-prod.yml
 
 ### VS Code ###
 .vscode/
+
+#
+*.yaml
+
+#
+*.env
+*.p12
+*.pem

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ReactCodeInput from 'react-code-input';
 import { useNavigate } from 'react-router-dom';
 
 import duckLogo from '@/assets/images/RubberDuckWithLogo.png';
@@ -12,9 +13,9 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 function PartyPage() {
   const [usersInput, setUsersInput] = useState('');
   const navigate = useNavigate();
-  const setLogin = useSetRecoilState(loginState);
   const login = useRecoilValue(loginState);
   const setParty = useSetRecoilState(partyState);
+  const setLogin = useSetRecoilState(loginState);
   const party = useRecoilValue(partyState);
 
   const joinHandler = async () => {
@@ -24,14 +25,24 @@ function PartyPage() {
     try {
       const response = await Axios.get(`/api/parties/${accessCode}/users/${userId}`);
       console.log(response);
+      // Axios.get(`/api/guests/all/${partyId}`)
       setParty((prevPartyState) => ({
         ...prevPartyState,
         accessCode: accessCode,
+        partyId: response.data.partyId,
       }));
-      navigate('/partymaker', {state: {
-        accessCode: response.data.accessCode,
-        partyName: response.data.partyName,
-      }})
+      setLogin((prevLoginState) => ({
+        ...prevLoginState,
+        partyId: response.data.partyId,
+      }));
+      navigate('/partymaker');
+      // navigate('/partymaker', {
+      //   state: {
+      //     accessCode: response.data.accessCode,
+      //     partyName: response.data.partyName,
+      //     partyId:  response.data.partyId,
+      //   },
+      // });
     } catch (err) {
       alert('입력 코드가 올바르지 않습니다');
       console.log('err :', err);
@@ -39,19 +50,47 @@ function PartyPage() {
   };
 
   const createHandler = async () => {
-    navigate('/partycreate');
+    navigate('/party/create');
   };
 
   const handleInputChange = (value: string) => {
     setUsersInput(value);
   };
 
+  const props = {
+    inputStyle: {
+      fontFamily: 'JalnanGothic',
+      fontSize: '28px',
+      margin: '4px',
+      width: '30px',
+      height: '30px',
+      paddingTop: '10px',
+      paddingLeft: '12px',
+      paddingRight: '0px',
+      paddingBottom: '5px',
+      boxShadow: 'white 0px 0px 0px 0px',
+      borderRadius: '6px',
+      border: '1px solid #b3aa99',
+      color: '#4D4637',
+      backgroundColor: 'white',
+      outline: 'none',
+    },
+  };
   return (
     <div className={styles.container}>
       <img src={duckLogo} alt="duckLogo" className={styles.marginTop} />
       <div className={`FontBasic FontL ${styles.joinTitle} `}>파티 참여 코드</div>
-      <div className={styles.marginTop}>
-        <Input usersInput={usersInput} onChange={handleInputChange} />
+      <div className={`${styles.FontCode} ${styles.marginTop}`}>
+        <ReactCodeInput
+          type="text"
+          value={usersInput}
+          onChange={handleInputChange}
+          fields={6}
+          name="accessCode"
+          inputMode="numeric"
+          autoFocus={true}
+          {...props}
+        />
       </div>
       <div className={styles.marginTop}>
         <Button bgc="filled" onClickHandler={joinHandler}>
@@ -59,7 +98,7 @@ function PartyPage() {
         </Button>
       </div>
 
-      <div className={styles.noPartySection}>파티가 없으신가요?</div>
+      <div className={`FontSBold FontComment ${styles.noPartySection}`}>파티가 없으신가요?</div>
       <Button bgc="empty" onClickHandler={createHandler}>
         만들기
       </Button>

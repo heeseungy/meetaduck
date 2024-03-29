@@ -16,13 +16,15 @@ public interface GuestRepository extends JpaRepository<Guest, Long> {
             "WHERE guest.party.partyId = :partyId")
     List<Guest> findAllByPartyId(Long partyId);
 
-    @Query("SELECT guest FROM Guest guest " +
-            "WHERE guest.user.userId = :userId")
-    Optional<Guest> findByUserId(Long userId);
-
     List<Guest> findByParty_PartyId(Long partyId);
 
     Optional<Guest> findByUser_UserId(Long userId);
 
     Optional<Guest> findByManitiId(Long manitiId);
+
+    @Query("SELECT guest FROM Guest guest " +
+            "WHERE guest.user.userId = :userId")
+    List<Guest> findAllByUserId(Long userId);
+
+    Optional<Guest> findTopByUserUserIdOrderByGuestIdDesc(Long userId);
 }

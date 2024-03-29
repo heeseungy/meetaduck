@@ -15,26 +15,23 @@ export type ResultListProps = {
 };
 
 export type ResultDoughnutChartProps = {
-  positive: number;
-  negative: number;
-  neutral: number;
+  ratio: number
 };
 
 export type WordType = {
-  key: string;
-  value: number;
-};
-
-export type ResultAnalysis = {
-  favorability: number;
-  wordcount: WordType[];
-  ratio: ResultDoughnutChartProps;
+  word: string;
+  count: number;
 };
 
 export type ResultCountCardProps = {
   count: number;
 };
 
-export interface ManitoResultAnalysis extends ResultAnalysis {
-  missionSuccess: number;
+export interface ManitoResultAnalysis {
+  favorability: number;
+  ratio: number;
+  myWordcount: WordType[];
+  wordcount: WordType[];
+  chatCount: number;
+  missionCount: number;
 }

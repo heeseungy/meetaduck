@@ -3,18 +3,24 @@ SET foreign_key_checks = 0;
 
 -- users
 INSERT INTO users (kakao_id, nickname, profile_url, thumbnail_url, birthday, phonenumber)
-VALUES  (00000, '관리자', 'http://example.com/prifiles/admin', 'http://example.com/thumbnails/admin', '0000', '000-0000-0000'),
-        (10001, '강지수', 'http://example.com/profiles/kang', 'http://example.com/thumbnails/kang', '0101', '010-1234-5678'),
-        (10002, '김현영', 'http://example.com/profiles/kim', 'http://example.com/thumbnails/kim', '0202', '010-2345-6789'),
-        (10003, '안준선', 'http://example.com/profiles/ahn', 'http://example.com/thumbnails/ahn', '0303', '010-3456-7890'),
-        (10004, '양희승', 'http://example.com/profiles/yang', 'http://example.com/thumbnails/yang', '0404', '010-4567-8901'),
-        (10005, '전원빈', 'http://example.com/profiles/jeon', 'http://example.com/thumbnails/jeon', '0505', '010-5678-9012'),
-        (10006, '최지웅', 'http://example.com/profiles/choi', 'http://example.com/thumbnails/choi', '0606', '010-6789-0123');
+VALUES (00000, '관리자', 'http://example.com/prifiles/admin', 'http://example.com/thumbnails/admin', '0000',
+        '000-0000-0000'),
+       (10001, '강지수', 'http://example.com/profiles/kang', 'http://example.com/thumbnails/kang', '0101',
+        '010-1234-5678'),
+       (10002, '김현영', 'http://example.com/profiles/kim', 'http://example.com/thumbnails/kim', '0202', '010-2345-6789'),
+       (10003, '안준선', 'http://example.com/profiles/ahn', 'http://example.com/thumbnails/ahn', '0303', '010-3456-7890'),
+       (10004, '양희승', 'http://example.com/profiles/yang', 'http://example.com/thumbnails/yang', '0404',
+        '010-4567-8901'),
+       (10005, '전원빈', 'http://example.com/profiles/jeon', 'http://example.com/thumbnails/jeon', '0505',
+        '010-5678-9012'),
+       (10006, '최지웅', 'http://example.com/profiles/choi', 'http://example.com/thumbnails/choi', '0606',
+        '010-6789-0123');
 
 
 -- parties
 INSERT INTO parties (party_id, access_code, party_name, start_time, end_time, deleted, user_id)
-VALUES (1, 'abc123', '블랙펄', NOW(), (NOW() + INTERVAL 7 DAY), 0, 1);
+--  VALUES (1, 'abc123', '블랙펄', NOW(), (NOW() + INTERVAL 7 DAY), 1, 1);
+VALUES (1, 'abc123', '블랙펄', null, null, 1, 1);
 
 -- chats 
 INSERT INTO chats (maniti_id, created_time, party_id)
@@ -104,7 +110,6 @@ VALUES ("한 달 동안 인터넷 없이 생활하기 VS 한 달 동안 친구�
        ("초능력을 얻는 대신 매일 랜덤한 부작용을 겪기 VS 평범한 삶을 사는 대신 매일 행운을 얻기"),
        ("매일 새로운 악기 연주법을 배우기 VS 매일 새로운 언어를 배우기"),
        ("헤어질 수 없는 진정한 사랑을 찾기 VS 세계에서 가장 영향력 있는 인물이 되기");
-
 
 
 -- missions

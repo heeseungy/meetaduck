@@ -15,11 +15,37 @@ pipeline {
             }
         }
 
+        stage('keystore delete') {
+            steps {
+                script{
+                    sh 'rm -f ./back/src/main/resources/keystore.p12'
+                }
+            }
+        }
+
+        stage('keystore download') {
+            steps {
+                withCredentials([file(credentialsId: 'keystore', variable: 'keystoreFile')]) {
+                    script {
+                        sh 'cp -f $keystoreFile ./back/src/main/resources/keystore.p12'
+                    }
+                }
+            }
+        }
+
+        stage('secret.yml delete') {
+            steps {
+                script{
+                    sh 'rm -f ./back/src/main/resources/application.yml'
+                }
+            }
+        }
+
         stage('secret.yml download') {
         	steps {
-            	withCredentials([file(credentialsId: 'application', variable: 'applicationFile')]) {
+            	withCredentials([file(credentialsId: 'application2', variable: 'applicationFile')]) {
                 	script {
-                    	sh 'cp -f $applicationFile ./back/src/main/resources/'
+                    	sh 'cp -f $applicationFile ./back/src/main/resources/application.yml'
                     }
         		}
         	}

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import ChatListArea from '@/components/chatting/ChatListArea';
 import ChattingHeader from '@/components/chatting/ChattingHeader';
 import ChattingInputArea from '@/components/chatting/ChattingInputArea';
-import { chatIdListState } from '@/recoil/atom';
+import { chatIdListState, loginState } from '@/recoil/atom';
 import { chatListLoadService } from '@/services/chatListLoadService';
 import styles from '@/styles/chatting/ChattingDetailPage.module.css';
 import { MessageRes } from '@/types/chatMessage';
@@ -12,28 +12,35 @@ import { Client, IMessage } from '@stomp/stompjs';
 import { useRecoilValue } from 'recoil';
 
 function ChattingDetailPage() {
+  const login = useRecoilValue(loginState);
   const chatIdList = useRecoilValue(chatIdListState);
-  const chatId = useParams().chatId;
-  // const chatId = 1;
+  const chatId = useParams().chatId!;
   const [stompClient, setStompClient] = useState<Client | null>(null); // STOMP 클라이언트 상태 관리
   const [messages, setMessages] = useState<MessageRes[]>([]); // 채팅 메시지 목록 상태 관리
   const tag: string =
-    chatId === chatIdList.groupChatId.toString()
+    +chatId === chatIdList.groupChatId
       ? 'groupChat'
-      : chatId === chatIdList.manitiChatId.toString()
+      : +chatId === chatIdList.manitiChatId
         ? 'manitiChat'
         : 'manitoChat';
   useEffect(() => {
+    console.log(chatId);
+    console.log(chatIdList);
+  }, []);
+  useEffect(() => {
     //chat
-    chatListLoadService(chatId, setMessages);
+    chatListLoadService(+chatId, setMessages);
     const client = new Client({
-      brokerURL: `ws://localhost:8080/ws`, // Server WebSocket URL
+      brokerURL: `wss://j10c108.p.ssafy.io:8080/wss`, // Server WebSocket URL
       reconnectDelay: 5000, // 연결 끊겼을 때, 재연결시도까지 지연시간(ms)
       onConnect: () => {
         console.log('WebSocket 연결됨'); // 이 위치가 서버와의 연결이 성공적으로 이루어졌음을 보장
-        client.subscribe(`/sub/api/chats/${chatId}/messages`, (message: IMessage) => {
-          const msg: MessageRes = JSON.parse(message.body); // 메시지를 JSON형태로 파싱
-          setMessages((prevMessages) => [...prevMessages, msg]); // 기존 메시지 목록에 새 메시지 추가
+        client.subscribe(`/exchange/message.exchange/chats.${chatId}.messages`, (message) => {
+          const msg = JSON.parse(message.body);
+          setMessages((prevMessages) => [...prevMessages, msg]);
+          // client.subscribe(`/sub/api/chats/${chatId}/messages`, (message: IMessage) => {
+          //   const msg: MessageRes = JSON.parse(message.body); // 메시지를 JSON형태로 파싱
+          //   setMessages((prevMessages) => [...prevMessages, msg]); // 기존 메시지 목록에 새 메시지 추가
         });
       },
     });
@@ -48,7 +55,7 @@ function ChattingDetailPage() {
     <div className={styles.bgc}>
       <ChattingHeader {...{ tag: tag }} />
       <ChatListArea {...{ tag: tag, messages: messages }} />
-      <ChattingInputArea />
+      <ChattingInputArea {...{ stompClient: stompClient, senderId: login.guestId }} />
     </div>
   );
 }

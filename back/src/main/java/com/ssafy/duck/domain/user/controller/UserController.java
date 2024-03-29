@@ -4,7 +4,6 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ssafy.duck.common.jwt.JwtProperties;
 import com.ssafy.duck.domain.guest.dto.response.GuestRes;
 import com.ssafy.duck.domain.guest.service.GuestService;
 import com.ssafy.duck.domain.user.dto.model.KakaoUserInfo;
@@ -12,7 +11,10 @@ import com.ssafy.duck.domain.user.dto.model.OAuthToken;
 import com.ssafy.duck.domain.user.dto.request.UserSignUpReq;
 import com.ssafy.duck.domain.user.dto.response.UserRes;
 import com.ssafy.duck.domain.user.service.UserService;
+import com.ssafy.duck.jwt.JwtProperties;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -20,14 +22,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.slf4j.Logger;
 
 import java.nio.charset.Charset;
 
+@Slf4j
+@CrossOrigin
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
@@ -51,7 +53,12 @@ public class UserController {
     private String userInfoURL;
 
     @GetMapping("/login")
-     ResponseEntity<UserRes> login(@RequestParam("code") String code) {
+    ResponseEntity<UserRes> login(@RequestParam("code") String code) {
+
+        System.out.println("redirectURI" + redirectURI);
+
+        //
+        Logger logger = LoggerFactory.getLogger(UserController.class);
 
         // Setting For Request Header
         Charset utf8 = Charset.forName("UTF-8");
@@ -79,6 +86,8 @@ public class UserController {
                 tokenRequest,
                 String.class
         );
+
+        logger.info("token: {}", tokenResponse.toString());
 
         // Util
         ObjectMapper objectMapper = new ObjectMapper();
@@ -109,6 +118,8 @@ public class UserController {
                 String.class
         );
 
+        logger.info("userinfo: {}", userInfoResponse.toString());
+
         //
         KakaoUserInfo userInfo = null;
         try {
@@ -138,11 +149,13 @@ public class UserController {
 
         String jwtToken
                 = JWT.create()
-                .withSubject(userRes.getNickname())
+                .withSubject(userRes.getKakaoId().toString())
                 .sign(Algorithm.HMAC512(jwtProperties.getSecretKey()));
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Authorization", "Bearer " + jwtToken);
+
+        logger.info("{}", userRes.toString());
 
         return ResponseEntity.ok()
                 .headers(responseHeaders)

@@ -19,11 +19,11 @@ import { ListProfile, LoginProfile, ManitiProfile } from '@/types/user.interface
 
 // 파티 조회
 export const PARTY1: Party = {
-  partyId: 3,
+  partyId: 1,
   accessCode: 'tlz5vy',
   partyName: '마니또도도독 너 내 동료가 되라',
-  startTime: '2024-03-11T21:00:00.000Z',
-  endTime: '2024-03-20T21:00:00.000Z',
+  startTime: '',
+  endTime: '',
   deleted: false,
   userId: 152,
 };
@@ -43,23 +43,23 @@ export const PARTY_STATUS: PartyStatus = {
 
 // 참가자 1명 조회
 export const MY_PROFILE: ListProfile = {
-  userId: 152,
-  guestId: 1,
-  nickname: '가철수',
-  thumbnailUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
+  userId: 0,
+  guestId: 0,
+  nickname: '',
+  thumbnailUrl: '',
   votedId: 0,
 };
 
 // 마니띠 조회
 export const MANITI_PROFILE: ManitiProfile = {
-  nickname: '나철수',
+  nickname: '',
 };
 
 // 참가자 목록 조회 (시작전)
 export const PARTYLIST: ListProfile[] = [
   {
     userId: 152,
-    guestId: 1,
+    guestId: 15,
     nickname: '가철수',
     thumbnailUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
     votedId: 0,
@@ -142,228 +142,272 @@ export const PAIR_LIST: ResultListItemProps[] = [
     manito: {
       guestId: 1,
       nickname: '가철수',
-      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
       thumbnailUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
       manitiId: 2,
       votedId: 10,
-      manitoFavorability: 80,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
     maniti: {
       guestId: 2,
       nickname: '나철수',
-      profileUrl: 'https://ilyo.co.kr/contents/article/images/2017/1209/1512813041302755.jpg',
       thumbnailUrl: 'https://ilyo.co.kr/contents/article/images/2017/1209/1512813041302755.jpg',
       manitiId: 3,
       votedId: 1,
-      manitoFavorability: 60,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
   },
   {
     manito: {
       guestId: 2,
       nickname: '나철수',
-      profileUrl: 'https://ilyo.co.kr/contents/article/images/2017/1209/1512813041302755.jpg',
       thumbnailUrl: 'https://ilyo.co.kr/contents/article/images/2017/1209/1512813041302755.jpg',
       manitiId: 3,
       votedId: 1,
-      manitoFavorability: 60,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
     maniti: {
       guestId: 3,
       nickname: '다철수',
-      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0_OYPzDohuNgpalEmE87NqxTsiTdVyV-1ZQ&usqp=CAU',
       thumbnailUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0_OYPzDohuNgpalEmE87NqxTsiTdVyV-1ZQ&usqp=CAU',
       manitiId: 4,
       votedId: 4,
-      manitoFavorability: 85,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
   },
   {
     manito: {
       guestId: 3,
       nickname: '다철수',
-      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0_OYPzDohuNgpalEmE87NqxTsiTdVyV-1ZQ&usqp=CAU',
       thumbnailUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0_OYPzDohuNgpalEmE87NqxTsiTdVyV-1ZQ&usqp=CAU',
       manitiId: 4,
       votedId: 4,
-      manitoFavorability: 85,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
     maniti: {
       guestId: 4,
       nickname: '라철수',
-      profileUrl: 'https://cdn.allets.com/500/2018/12/27/500_399045_1545871078.jpeg',
       thumbnailUrl: 'https://cdn.allets.com/500/2018/12/27/500_399045_1545871078.jpeg',
       manitiId: 5,
       votedId: 3,
-      manitoFavorability: 89,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
   },
   {
     manito: {
       guestId: 4,
       nickname: '라철수',
-      profileUrl: 'https://cdn.allets.com/500/2018/12/27/500_399045_1545871078.jpeg',
       thumbnailUrl: 'https://cdn.allets.com/500/2018/12/27/500_399045_1545871078.jpeg',
       manitiId: 5,
       votedId: 3,
-      manitoFavorability: 89,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
     maniti: {
       guestId: 5,
       nickname: '바철수',
-      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9ZRwNPdZBjdT128qQWJRi94ayDBYeGtcW2Q&usqp=CAU',
       thumbnailUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9ZRwNPdZBjdT128qQWJRi94ayDBYeGtcW2Q&usqp=CAU',
       manitiId: 6,
       votedId: 4,
-      manitoFavorability: 78,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
   },
   {
     manito: {
       guestId: 5,
       nickname: '바철수',
-      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9ZRwNPdZBjdT128qQWJRi94ayDBYeGtcW2Q&usqp=CAU',
       thumbnailUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9ZRwNPdZBjdT128qQWJRi94ayDBYeGtcW2Q&usqp=CAU',
       manitiId: 6,
       votedId: 4,
-      manitoFavorability: 78,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
     maniti: {
       guestId: 6,
       nickname: '가영희',
-      profileUrl: 'https://www.sportsq.co.kr/news/photo/201505/46687_83816_428.png',
       thumbnailUrl: 'https://www.sportsq.co.kr/news/photo/201505/46687_83816_428.png',
       manitiId: 7,
       votedId: 1,
-      manitoFavorability: 60,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
   },
   {
     manito: {
       guestId: 6,
       nickname: '가영희',
-      profileUrl: 'https://www.sportsq.co.kr/news/photo/201505/46687_83816_428.png',
       thumbnailUrl: 'https://www.sportsq.co.kr/news/photo/201505/46687_83816_428.png',
       manitiId: 7,
       votedId: 1,
-      manitoFavorability: 60,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
     maniti: {
       guestId: 7,
       nickname: '나영희',
-      profileUrl: 'https://cdn.imweb.me/thumbnail/20230824/20e7077f9429c.png',
       thumbnailUrl: 'https://cdn.imweb.me/thumbnail/20230824/20e7077f9429c.png',
       manitiId: 8,
       votedId: 5,
-      manitoFavorability: 77,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
   },
   {
     manito: {
       guestId: 7,
       nickname: '나영희',
-      profileUrl: 'https://cdn.imweb.me/thumbnail/20230824/20e7077f9429c.png',
       thumbnailUrl: 'https://cdn.imweb.me/thumbnail/20230824/20e7077f9429c.png',
       manitiId: 8,
       votedId: 5,
-      manitoFavorability: 77,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
     maniti: {
       guestId: 8,
       nickname: '다영희',
-      profileUrl: 'https://dimg.donga.com/wps/NEWS/IMAGE/2021/11/12/110217903.2.jpg',
       thumbnailUrl: 'https://dimg.donga.com/wps/NEWS/IMAGE/2021/11/12/110217903.2.jpg',
       manitiId: 9,
       votedId: 9,
-      manitoFavorability: 60,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
   },
   {
     manito: {
       guestId: 8,
       nickname: '다영희',
-      profileUrl: 'https://dimg.donga.com/wps/NEWS/IMAGE/2021/11/12/110217903.2.jpg',
       thumbnailUrl: 'https://dimg.donga.com/wps/NEWS/IMAGE/2021/11/12/110217903.2.jpg',
       manitiId: 9,
       votedId: 9,
-      manitoFavorability: 60,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
     maniti: {
       guestId: 9,
       nickname: '라영희',
-      profileUrl: 'https://i.pinimg.com/236x/fe/40/e3/fe40e3ffbbcde74c5c77e188111ce2f7.jpg',
       thumbnailUrl: 'https://i.pinimg.com/236x/fe/40/e3/fe40e3ffbbcde74c5c77e188111ce2f7.jpg',
       manitiId: 10,
       votedId: 10,
-      manitoFavorability: 45,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
   },
   {
     manito: {
       guestId: 9,
       nickname: '라영희',
-      profileUrl: 'https://i.pinimg.com/236x/fe/40/e3/fe40e3ffbbcde74c5c77e188111ce2f7.jpg',
       thumbnailUrl: 'https://i.pinimg.com/236x/fe/40/e3/fe40e3ffbbcde74c5c77e188111ce2f7.jpg',
       manitiId: 10,
       votedId: 10,
-      manitoFavorability: 45,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
     maniti: {
       guestId: 10,
       nickname: '마영희',
-      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyIru6tQLhwY8EU6OV9IemXdE6EXSEZYrc0A&usqp=CAU',
       thumbnailUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyIru6tQLhwY8EU6OV9IemXdE6EXSEZYrc0A&usqp=CAU',
       manitiId: 11,
       votedId: 3,
-      manitoFavorability: 84,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
   },
   {
     manito: {
       guestId: 10,
       nickname: '마영희',
-      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyIru6tQLhwY8EU6OV9IemXdE6EXSEZYrc0A&usqp=CAU',
       thumbnailUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyIru6tQLhwY8EU6OV9IemXdE6EXSEZYrc0A&usqp=CAU',
       manitiId: 11,
       votedId: 3,
-      manitoFavorability: 84,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
     maniti: {
       guestId: 11,
       nickname: '바영희',
-      profileUrl: 'https://i.ytimg.com/vi/tYM4oISacwY/maxresdefault.jpg',
       thumbnailUrl: 'https://i.ytimg.com/vi/tYM4oISacwY/maxresdefault.jpg',
       manitiId: 1,
       votedId: 1,
-      manitoFavorability: 93,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
   },
   {
     manito: {
       guestId: 11,
       nickname: '바영희',
-      profileUrl: 'https://i.ytimg.com/vi/tYM4oISacwY/maxresdefault.jpg',
       thumbnailUrl: 'https://i.ytimg.com/vi/tYM4oISacwY/maxresdefault.jpg',
       manitiId: 1,
       votedId: 1,
-      manitoFavorability: 93,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
     maniti: {
       guestId: 1,
       nickname: '가철수',
-      profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
       thumbnailUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
       manitiId: 2,
       votedId: 10,
-      manitoFavorability: 80,
+      favorability: {
+        manitoFavorability: 50,
+        manitiFavorability: 52,
+      },
     },
   },
 ];
@@ -371,34 +415,21 @@ export const PAIR_LIST: ResultListItemProps[] = [
 // 미션 조회
 export const MISSION_STATUS_LIST: MissionContent[] = [
   {
-    missionStatusId: 578,
-    confirmTime: '2024-03-13T00:00:00Z',
-    missionImageUrl: '',
-    missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
-  },
-  {
-    missionStatusId: 578,
-    confirmTime: '2024-03-13T05:00:00Z',
+    missionStatusId: 0,
+    confirmTime: '',
     missionImageUrl: null,
-    missionContent: '노래를 선물하세요',
-  },
-  {
-    missionStatusId: 578,
-    confirmTime: null,
-    missionImageUrl: '',
-    missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
+    missionContent: '',
   },
 ];
 
 //미션: 마니또가 수행한 미션조회
 export const MY_MANITO_MISSION: MissionResult = {
-  guestId: 5,
-  missionStatusId: 578,
-  getTime: '2024-03-13T00:00:00Z',
+  missionStatusId: 0,
+  getTime: '',
   confirmTime: null,
   successTime: null,
-  // successTime: '2024-03-14T12:50:20Z',
-  missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
+  failedTime: null,
+  missionContent: '',
   missionImageUrl: '',
 };
 
@@ -406,113 +437,23 @@ export const MY_MANITO_MISSION: MissionResult = {
 export const MISSION_RESULT_LIST: MissionResultList = {
   manitoMission: [
     {
-      guestId: 5,
-      missionStatusId: 578,
-      getTime: '2024-03-13T00:00:00Z',
+      missionStatusId: 1,
+      getTime: '0',
       confirmTime: null,
+      failedTime: null,
       successTime: null,
-      missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
-      missionImageUrl: null,
-    },
-    {
-      guestId: 5,
-      missionStatusId: 621,
-      getTime: '2024-03-14T00:00:00Z',
-      confirmTime: '2024-03-14T12:33:20Z',
-      successTime: '2024-03-14T12:50:20Z',
-      missionContent: '마니띠에게 본인을 잘 설명하는 키워드 1개를 알려주세요',
-      missionImageUrl: 'http://example.com/mission/success/1',
-    },
-    {
-      guestId: 5,
-      missionStatusId: 616,
-      getTime: '2024-03-15T00:00:00Z',
-      confirmTime: '2024-03-15T16:33:20Z',
-      successTime: null,
-      missionContent: '마니띠에게 좋은 아침이나 좋은 밤 메시지를 보내주세요',
-      missionImageUrl: null,
-    },
-    {
-      guestId: 5,
-      missionStatusId: 578,
-      getTime: '2024-03-13T00:00:00Z',
-      confirmTime: null,
-      successTime: null,
-      missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
-      missionImageUrl: null,
-    },
-    {
-      guestId: 5,
-      missionStatusId: 621,
-      getTime: '2024-03-14T00:00:00Z',
-      confirmTime: '2024-03-14T12:33:20Z',
-      successTime: '2024-03-14T12:50:20Z',
-      missionContent: '마니띠에게 본인을 잘 설명하는 키워드 1개를 알려주세요',
-      missionImageUrl: 'http://example.com/mission/success/1',
-    },
-    {
-      guestId: 5,
-      missionStatusId: 616,
-      getTime: '2024-03-15T00:00:00Z',
-      confirmTime: '2024-03-15T16:33:20Z',
-      successTime: null,
-      missionContent: '마니띠에게 좋은 아침이나 좋은 밤 메시지를 보내주세요',
+      missionContent: '',
       missionImageUrl: null,
     },
   ],
   myMission: [
     {
-      guestId: 1,
       missionStatusId: 617,
-      getTime: '2024-03-13T00:00:00Z',
-      confirmTime: '2024-03-13T12:33:20Z',
-      successTime: '2024-03-13T16:32:48Z',
-      missionContent: '마니띠의 혈액형을 작성 후, 캡쳐해주세요',
-      missionImageUrl: 'http://example.com/mission/success/1',
-    },
-    {
-      guestId: 1,
-      missionStatusId: 579,
-      getTime: '2024-03-14T00:00:00Z',
+      getTime: '0',
       confirmTime: null,
+      failedTime: null,
       successTime: null,
-      missionContent: '마니띠에게 본인을 잘 설명하는 키워드 1개를 알려주세요',
-      missionImageUrl: null,
-    },
-    {
-      guestId: 1,
-      missionStatusId: 580,
-      getTime: '2024-03-15T00:00:00Z',
-      confirmTime: null,
-      successTime: null,
-      missionContent: '마니띠에게 좋은 아침이나 좋은 밤 메시지를 보내주세요',
-      missionImageUrl: null,
-    },
-    {
-      guestId: 5,
-      missionStatusId: 578,
-      getTime: '2024-03-13T00:00:00Z',
-      confirmTime: null,
-      successTime: null,
-      missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
-      missionImageUrl: null,
-    },
-    {
-      guestId: 5,
-      missionStatusId: 621,
-      getTime: '2024-03-14T00:00:00Z',
-      confirmTime: '2024-03-14T12:33:20Z',
-      successTime: '2024-03-14T12:50:20Z',
-      missionContent: '마니띠에게 본인을 잘 설명하는 키워드 1개를 알려주세요',
-      missionImageUrl: 'http://example.com/mission/success/1',
-    },
-    {
-      guestId: 5,
-      missionStatusId: 616,
-      getTime: '2024-03-15T00:00:00Z',
-      confirmTime: '2024-03-15T16:33:20Z',
-      successTime: null,
-      missionContent: '마니띠에게 좋은 아침이나 좋은 밤 메시지를 보내주세요',
+      missionContent: '',
       missionImageUrl: null,
     },
   ],
@@ -562,44 +503,304 @@ export const HINT_ALL: Answer[] = [
 
 // 대화분석 (마니또)
 export const MANITO_RESULT: ManitoResultAnalysis = {
-  favorability: 80,
-  wordcount: [
-    { key: '내', value: 10 },
-    { key: '밥솥', value: 8 },
-    { key: '내놔', value: 7 },
+  favorability: 50,
+  ratio: 44,
+  myWordcount: [
+    {
+      count: 8,
+      word: '있어',
+    },
+    {
+      count: 7,
+      word: '오늘',
+    },
+    {
+      count: 7,
+      word: '음악',
+    },
+    {
+      count: 6,
+      word: '뭐',
+    },
+    {
+      count: 6,
+      word: '집',
+    },
+    {
+      count: 8,
+      word: '바보',
+    },
+    {
+      count: 7,
+      word: '뭐야',
+    },
+    {
+      count: 7,
+      word: '밥',
+    },
+    {
+      count: 6,
+      word: '커피',
+    },
+    {
+      count: 6,
+      word: '집',
+    },
+    {
+      count: 5,
+      word: '나',
+    },
+    {
+      count: 5,
+      word: '나도',
+    },
+    {
+      count: 5,
+      word: '너',
+    },
+    {
+      count: 5,
+      word: '듣고',
+    },
+    {
+      count: 4,
+      word: '안녕하세요',
+    },
+    {
+      count: 4,
+      word: '요리',
+    },
+    {
+      count: 4,
+      word: '좋아',
+    },
+    {
+      count: 4,
+      word: '좋아해',
+    },
+    {
+      count: 4,
+      word: '하고',
+    },
+    {
+      count: 3,
+      word: '계획',
+    },
+    {
+      count: 4,
+      word: '요리',
+    },
+    {
+      count: 4,
+      word: '좋아',
+    },
+    {
+      count: 4,
+      word: '좋아해',
+    },
+    {
+      count: 4,
+      word: '하고',
+    },
+    {
+      count: 3,
+      word: '계획',
+    },
   ],
-  ratio: { positive: 80, negative: 10, neutral: 10 },
-  missionSuccess: 2,
-};
-
-export const MY_MANITO_RESULT: ManitoResultAnalysis = {
-  favorability: 60,
   wordcount: [
-    { key: '넌', value: 3 },
-    { key: '안경', value: 2 },
-    { key: '얹어', value: 1 },
+    {
+      count: 9,
+      word: '있어',
+    },
+    {
+      count: 6,
+      word: '나도',
+    },
+    {
+      count: 6,
+      word: '좋아해',
+    },
+    {
+      count: 5,
+      word: '어떤',
+    },
+    {
+      count: 5,
+      word: '요리',
+    },
+    {
+      count: 5,
+      word: '음악',
+    },
+    {
+      count: 5,
+      word: '좋아',
+    },
+    {
+      count: 5,
+      word: '집',
+    },
+    {
+      count: 4,
+      word: '나',
+    },
+    {
+      count: 4,
+      word: '너',
+    },
+    {
+      count: 4,
+      word: '듣고',
+    },
+    {
+      count: 4,
+      word: '정말',
+    },
+    {
+      count: 3,
+      word: '계획',
+    },
+    {
+      count: 3,
+      word: '곡',
+    },
+    {
+      count: 3,
+      word: '그래',
+    },
   ],
-  ratio: { positive: 50, negative: 10, neutral: 40 },
-  missionSuccess: 3,
+  chatCount: 139,
+  missionCount: 0,
 };
 
 // 대화분석 (마니띠)
-export const MANITI_RESULT: ResultAnalysis = {
-  favorability: 60,
-  wordcount: [
-    { key: '아니', value: 10 },
-    { key: '진짜', value: 7 },
-    { key: '세상에', value: 1 },
+export const MANITI_RESULT: ManitoResultAnalysis = {
+  favorability: 50,
+  ratio: 44,
+  myWordcount: [
+    {
+      count: 8,
+      word: '있어',
+    },
+    {
+      count: 7,
+      word: '오늘',
+    },
+    {
+      count: 7,
+      word: '음악',
+    },
+    {
+      count: 6,
+      word: '뭐',
+    },
+    {
+      count: 6,
+      word: '집',
+    },
+    {
+      count: 5,
+      word: '나',
+    },
+    {
+      count: 5,
+      word: '나도',
+    },
+    {
+      count: 5,
+      word: '너',
+    },
+    {
+      count: 5,
+      word: '듣고',
+    },
+    {
+      count: 4,
+      word: '안녕하세요',
+    },
+    {
+      count: 4,
+      word: '요리',
+    },
+    {
+      count: 4,
+      word: '좋아',
+    },
+    {
+      count: 4,
+      word: '좋아해',
+    },
+    {
+      count: 4,
+      word: '하고',
+    },
+    {
+      count: 3,
+      word: '계획',
+    },
   ],
-  ratio: { positive: 50, negative: 10, neutral: 40 },
-};
-
-export const MY_MANITI_RESULT: ResultAnalysis = {
-  favorability: 80,
   wordcount: [
-    { key: '아', value: 12 },
-    { key: '재석이형', value: 6 },
-    { key: '망했어', value: 2 },
+    {
+      count: 9,
+      word: '있어',
+    },
+    {
+      count: 6,
+      word: '나도',
+    },
+    {
+      count: 6,
+      word: '좋아해',
+    },
+    {
+      count: 5,
+      word: '어떤',
+    },
+    {
+      count: 5,
+      word: '요리',
+    },
+    {
+      count: 5,
+      word: '음악',
+    },
+    {
+      count: 5,
+      word: '좋아',
+    },
+    {
+      count: 5,
+      word: '집',
+    },
+    {
+      count: 4,
+      word: '나',
+    },
+    {
+      count: 4,
+      word: '너',
+    },
+    {
+      count: 4,
+      word: '듣고',
+    },
+    {
+      count: 4,
+      word: '정말',
+    },
+    {
+      count: 3,
+      word: '계획',
+    },
+    {
+      count: 3,
+      word: '곡',
+    },
+    {
+      count: 3,
+      word: '그래',
+    },
   ],
-  ratio: { positive: 80, negative: 10, neutral: 10 },
+  chatCount: 139,
+  missionCount: 0,
 };

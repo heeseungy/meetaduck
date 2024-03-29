@@ -9,10 +9,9 @@ type ResultPairListProps = {
   pairList: ResultListProps;
 };
 function ResultPairListPage(resultPairListProps: ResultPairListProps) {
-  const myManito = resultPairListProps.pairList.pairList.find(
-    (it) => it.manito.manitiId === resultPairListProps.me.guestId,
-  )?.manito;
-  // console.log(myManito!.nickname);
+  const myManito = resultPairListProps.pairList.pairList.find((it) => {
+    return it.manito.manitiId === resultPairListProps.me.guestId;
+  })?.manito;
 
   const children = (
     <div>
@@ -33,7 +32,7 @@ function ResultPairListPage(resultPairListProps: ResultPairListProps) {
   );
   return (
     <>
-      <img className={styles.ProfileUrl} src={myManito!.profileUrl} alt="profileImage" />
+      <img className={styles.ProfileUrl} src={myManito!.thumbnailUrl} alt="profileImage" />
       <Card {...{ tag: 3, children: children }} />
     </>
   );

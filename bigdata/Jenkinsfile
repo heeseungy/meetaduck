@@ -1,0 +1,70 @@
+pipeline {
+    environment {
+        repository = "angryj/bigdata"
+        DOCKERHUB_CREDENTIALS = credentials('bigduck') // jenkins에 등록해 놓은 docker hub credentials 이름
+        dockerImage = ''
+    }
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    // 코드 체크아웃
+                    checkout scm
+                }
+            }
+        }
+        stage('Build Image') {
+            steps {
+                script {
+                    dockerImage = docker.build("${repository}:bigdata_${BUILD_NUMBER}", "-f bigdata/Dockerfile ./bigdata") // Dockerfile 경로 수정
+                }
+            }
+        }
+        stage('DockerHub Login') {
+            steps {
+                script {
+                    sh "echo \${DOCKERHUB_CREDENTIALS_PSW} | docker login -u \${DOCKERHUB_CREDENTIALS_USR} --password-stdin"
+                }
+            }
+        }
+        stage('Push User Image to DockerHub') {
+            steps {
+                script {
+                    sh "docker push \${repository}:bigdata_\${BUILD_NUMBER}"
+                }
+            }
+        }
+
+        
+        stage("Deploy") {
+            steps {
+                sshPublisher(
+                    continueOnError: false,
+                    failOnError: true,
+                    publishers: [
+                        sshPublisherDesc(
+                            configName: "bigdata",
+                            verbose: true,
+                            transfers: [
+                                sshTransfer(execCommand: "sudo docker rm -f bigdata"),
+                                sshTransfer(execCommand: "sudo docker pull " + repository +":bigdata_${BUILD_NUMBER}"),
+                                sshTransfer(execCommand: "sudo docker run -d -p 8881:8881 --name bigdata " + repository +":bigdata_${BUILD_NUMBER}"),
+                                sshTransfer(execCommand: "docker system prune -af")
+                            ]
+                        )
+                    ]
+                )
+            }
+        }
+
+        stage('Clean Common Image') {
+            steps {
+                script {
+                    sh "docker system prune -af"
+                }
+            }
+        }
+        
+    }
+}

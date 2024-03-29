@@ -8,12 +8,12 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 function ResultDoughnutChart(resultDoughnutChartProps: ResultDoughnutChartProps) {
   const data = {
-    labels: ['긍정어', '부정어', '기타'],
+    labels: ['긍정어', '부정어'],
     datasets: [
       {
         label: 'Dataset1',
-        data: [resultDoughnutChartProps.positive, resultDoughnutChartProps.negative, resultDoughnutChartProps.neutral],
-        backgroundColor: ['#4fc775', '#ff5952', '#e5e5e7'],
+        data: [resultDoughnutChartProps.ratio, 100 - resultDoughnutChartProps.ratio],
+        backgroundColor: ['#4fc775', '#ff5952'],
       },
     ],
   };

@@ -12,6 +12,7 @@ import javax.annotation.Nullable;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @Getter
+@ToString
 public class Result {
 
     @Id
@@ -33,7 +34,8 @@ public class Result {
 
     @Nullable
     @Column(name = "`maniti_wordcount`")
-    private String mantiWordcount;
+    private String manitiWordcount;
+
 
     @Nullable
     @Column(name = "`manito_ratio`")
@@ -47,4 +49,11 @@ public class Result {
     @JoinColumn(name = "`guest_id`", nullable = false, updatable = false)
     private Guest guest;
 
+
+    public void updateManitiFavorability(int manitiFavorability){
+        this.manitiFavorability = manitiFavorability;
+    }
+    public void updateManitoFavorability(int manitoFavorability){
+        this.manitoFavorability = manitoFavorability;
+    }
 }

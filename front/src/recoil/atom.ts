@@ -14,27 +14,28 @@ const { persistAtom } = recoilPersist({
 export const loginState = atom<LoginProfile>({
   key: 'loginState',
   default: {
-    kakaoId: 123456,
-    guestId: 1,
-    partyId: 3,
-    nickname: '가철수',
-    profileUrl: 'https://image.yes24.com/goods/104804448/XL',
-    thumbnailUrl: 'https://image.yes24.com/goods/104804448/XL',
-    userId: 123455,
-    // kakaoId: 0,
-    // guestId: 0,
-    // partyId: 0,
-    // nickname: '',
-    // profileUrl: '',
-    // thumbnailUrl: '',
-    // userId: 0,
+    kakaoId: 0,
+    guestId: 0,
+    partyId: 0,
+    nickname: '',
+    profileUrl: '',
+    thumbnailUrl: '',
+    userId: 0,
   },
   effects_UNSTABLE: [persistAtom],
 });
 
 export const partyState = atom<Party>({
   key: 'partyState',
-  default: PARTY1,
+  default: {
+    partyId: 0,
+    accessCode: '',
+    partyName: '',
+    startTime: '',
+    endTime: '',
+    deleted: false,
+    userId: 0,
+  },
   effects_UNSTABLE: [persistAtom],
 });
 
@@ -70,5 +71,10 @@ export const partyStatusState = selector({
 
 export const chatIdListState = atom<ChatId>({
   key: 'chatIdListState',
-  default: CHAT_ID_LIST,
+  default: {
+    groupChatId: 0,
+    manitoChatId: 0,
+    manitiChatId: 0,
+  },
+  effects_UNSTABLE: [persistAtom],
 });
