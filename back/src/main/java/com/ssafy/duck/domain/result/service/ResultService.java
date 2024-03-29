@@ -271,21 +271,26 @@ public class ResultService {
 
             System.out.println(" chat " + (chatCount  ) + " " + period);
             long chatFavorability = Math.round(100* (double)chatCount / (double)period*0.3/2);
+
             System.out.println("mfav " + missionFavorability + " cfav " + chatFavorability);
 
-            Result result = null;
-            int cnt = 0;
-            while(result == null){
-                System.out.println("cnt "+ cnt++);
-                result = resultRepository.findByGuestGuestId(guest.getGuestId());
-                if(result == null)
-                    throw new ResultException(ResultErrorCode.MY_RESULT_NOT_FOUND);
-                else {
-                    result.updateFavorability(result.getManitiFavorability()+(int)chatFavorability+(int)missionFavorability,
-                            result.getManitoFavorability()+(int)chatFavorability);
-                    resultRepository.save(result);
-                }
-            }
+            // 내 우호도 업데이트
+            Result result = resultRepository.findByGuestGuestId(guest.getGuestId());
+            if(result == null)
+                throw new ResultException(ResultErrorCode.MY_RESULT_NOT_FOUND);
+            System.out.println(result.toString());
+            result.updateManitiFavorability(result.getManitiFavorability()+(int)chatFavorability+(int)missionFavorability);
+            System.out.println(result.toString());
+            resultRepository.save(result);
+
+            // 마니띠 우호도 업데이트
+            Result manitiResult = resultRepository.findByGuestGuestId(guest.getManitiId());
+            if(manitiResult == null)
+                throw new ResultException(ResultErrorCode.MANITI_RESULT_NOT_FOUND);
+            System.out.println(manitiResult.toString());
+            manitiResult.updateManitoFavorability(manitiResult.getManitoFavorability()+(int)chatFavorability+(int)missionFavorability);
+            System.out.println(manitiResult.toString());
+            resultRepository.save(manitiResult);
         }
     }
 

@@ -23,7 +23,11 @@ function PartyMakerPage() {
   const login = useRecoilValue(loginState);
   const [refreshTime, setRefreshTime] = useState('');
   const [participants, setParticipants] = useState<ListProfile[]>([]);
-  const [endDate, setEndDate] = useState('');
+  const [endDate, setEndDate] = useState(() => {
+    const date = new Date(); // 현재 날짜와 시간을 가져옵니다.
+    date.setDate(date.getDate() + 3); // 현재 날짜에 3일을 더합니다.
+    return date.toISOString(); // ISO 8601 문자열 형식으로 변환합니다.
+  });
   const [selectedHour, setSelectedHour] = useState(0); // 시간 상태 변수
   const [selectedMinute, setSelectedMinute] = useState(0); // 분 상태 변수
   const navigate = useNavigate();

@@ -1,14 +1,17 @@
 package com.ssafy.duck.domain.result.controller;
 
+import com.ssafy.duck.common.TimeUtil;
 import com.ssafy.duck.domain.mission.service.MissionService;
 import com.ssafy.duck.domain.result.dto.response.MissionResultRes;
 import com.ssafy.duck.domain.result.dto.response.ResultWithManitiRes;
 import com.ssafy.duck.domain.result.dto.response.ResultWithManitoRes;
 import com.ssafy.duck.domain.result.service.ResultService;
+import com.ssafy.duck.scheduler.TaskSchedulerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +23,7 @@ import java.util.Map;
 public class ResultController {
 
     private final ResultService resultService;
+    private final TaskSchedulerService taskSchedulerService;
 
     @GetMapping("/missions/{guestId}")
     public ResponseEntity<Map<String, List<MissionResultRes>> > getMissionResult(@PathVariable("guestId") Long guestId){
@@ -48,11 +52,10 @@ public class ResultController {
 
 
     @PatchMapping("/test/{partyId}")
-    public void resulttest(@PathVariable("partyId") Long partyId) {
-        resultService.reserveAnalysis(partyId);
+    public void resulttest(@PathVariable("partyId") Long partyId,   @RequestBody String endTime) {
 
-        System.out.println("update 들어간다");
-        resultService.updateResult(partyId);
+        System.out.println("스케쥴러 타임 " + TimeUtil.convertToUTC(endTime).minus(Duration.ofMinutes(1)));
+        taskSchedulerService.scheduleTask(partyId, TimeUtil.convertToUTC(endTime).minus(Duration.ofMinutes(1)) );
 
     }
 
