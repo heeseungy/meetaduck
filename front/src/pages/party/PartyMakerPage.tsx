@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Button from '@/components/commons/Button';
 import Card from '@/components/commons/Card';
+import LeaveButton from '@/components/commons/LeavButton';
 import DatePickerInput from '@/components/party/DatePickerInput';
 import ShareButton from '@/components/party/ShareButton';
 import { loginState, partyState } from '@/recoil/atom';
@@ -13,7 +14,6 @@ import { Party } from '@/types/party';
 import { ListProfile } from '@/types/user.interface';
 import { ArrowsCounterClockwise } from '@phosphor-icons/react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import LeaveButton from '@/components/commons/LeavButton';
 
 function PartyMakerPage() {
   const setParty = useSetRecoilState(partyState);
@@ -71,10 +71,17 @@ function PartyMakerPage() {
         }
       })
       .then(() => {
-        partyInfoService(party.partyId).then((data: Party) => {
-          console.log(data);
-          setParty(data);
-        });
+        partyInfoService(party.partyId)
+          .then((data: Party) => {
+            console.log(data);
+            setParty(data);
+            return data;
+          })
+          .then((data) => {
+            if (data.endTime !== null && data.endTime !== undefined) {
+              navigate('/hintinputform');
+            }
+          });
       });
   }, []);
 
@@ -170,8 +177,8 @@ function PartyMakerPage() {
       await Promise.all(
         participants.map(async (participant) => {
           await Axios.delete(`/api/guests/${participant.guestId}`);
-          navigate('/party')
-        })
+          navigate('/party');
+        }),
       );
 
       alert('파티가 삭제되었습니다');

@@ -23,6 +23,7 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route></Route>
         <Route path={'/'} element={<ProtectedRoutes status={'login'} />}>
           <Route index element={<LoginPage />} />
           <Route path={'/login/oauth2/code/kakao'} element={<RedirectionPage />} />

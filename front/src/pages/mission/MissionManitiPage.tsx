@@ -26,9 +26,15 @@ function MissionManitiPage(props: MissionManitiProps) {
 
   // 마니또 미션 로드
   useEffect(() => {
-    manitoMissionLoad(login.guestId).then((data) => {
-      setMyManitoMission(data);
-    });
+    console.log(login.guestId);
+    manitoMissionLoad(login.guestId)
+      .then((data) => {
+        setMyManitoMission(data);
+        return data;
+      })
+      .then((data) => {
+        console.log(data);
+      });
   }, []);
 
   // 마니또의 미션 성공/실패/확인 여부
@@ -70,7 +76,7 @@ function MissionManitiPage(props: MissionManitiProps) {
   const children = (
     <div>
       <div className={`FontL ${styles.Title}`}>오늘의 미션</div>
-      {myManitoMission.missionImageUrl !== null ? (
+      {myManitoMission.missionImageUrl !== null && myManitoMission.missionImageUrl !== '' ? (
         // 이미지 URL 존재 여부
         <div>
           <div className={`${styles.marginTop}`}>

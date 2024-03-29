@@ -415,35 +415,21 @@ export const PAIR_LIST: ResultListItemProps[] = [
 // 미션 조회
 export const MISSION_STATUS_LIST: MissionContent[] = [
   {
-    missionStatusId: 578,
-    confirmTime: '2024-03-13T00:00:00Z',
+    missionStatusId: 0,
+    confirmTime: '',
     missionImageUrl: null,
-    missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
-  },
-  {
-    missionStatusId: 578,
-    confirmTime: '2024-03-13T05:00:00Z',
-    missionImageUrl: null,
-    missionContent: '노래를 선물하세요',
-  },
-  {
-    missionStatusId: 578,
-    confirmTime: null,
-    missionImageUrl: '',
-    missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
+    missionContent: '',
   },
 ];
 
 //미션: 마니또가 수행한 미션조회
 export const MY_MANITO_MISSION: MissionResult = {
-  guestId: 5,
-  missionStatusId: 578,
-  getTime: '2024-03-13T00:00:00Z',
+  missionStatusId: 0,
+  getTime: '',
   confirmTime: null,
   successTime: null,
   failedTime: null,
-  // successTime: '2024-03-14T12:50:20Z',
-  missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
+  missionContent: '',
   missionImageUrl: '',
 };
 
@@ -451,63 +437,12 @@ export const MY_MANITO_MISSION: MissionResult = {
 export const MISSION_RESULT_LIST: MissionResultList = {
   manitoMission: [
     {
-      guestId: 5,
-      missionStatusId: 578,
-      getTime: '2024-03-13T00:00:00Z',
+      missionStatusId: null,
+      getTime: null,
       confirmTime: null,
       failedTime: null,
       successTime: null,
       missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
-      missionImageUrl: null,
-    },
-    {
-      guestId: 5,
-      missionStatusId: 621,
-      getTime: '2024-03-14T00:00:00Z',
-      confirmTime: '2024-03-14T12:33:20Z',
-      failedTime: null,
-      successTime: '2024-03-14T12:50:20Z',
-      missionContent: '마니띠에게 본인을 잘 설명하는 키워드 1개를 알려주세요',
-      missionImageUrl: 'http://example.com/mission/success/1',
-    },
-    {
-      guestId: 5,
-      missionStatusId: 616,
-      getTime: '2024-03-15T00:00:00Z',
-      confirmTime: '2024-03-15T16:33:20Z',
-      failedTime: null,
-      successTime: null,
-      missionContent: '마니띠에게 좋은 아침이나 좋은 밤 메시지를 보내주세요',
-      missionImageUrl: null,
-    },
-    {
-      guestId: 5,
-      missionStatusId: 578,
-      getTime: '2024-03-13T00:00:00Z',
-      confirmTime: null,
-      failedTime: null,
-      successTime: null,
-      missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
-      missionImageUrl: null,
-    },
-    {
-      guestId: 5,
-      missionStatusId: 621,
-      getTime: '2024-03-14T00:00:00Z',
-      confirmTime: '2024-03-14T12:33:20Z',
-      failedTime: null,
-      successTime: '2024-03-14T12:50:20Z',
-      missionContent: '마니띠에게 본인을 잘 설명하는 키워드 1개를 알려주세요',
-      missionImageUrl: 'http://example.com/mission/success/1',
-    },
-    {
-      guestId: 5,
-      missionStatusId: 616,
-      getTime: '2024-03-15T00:00:00Z',
-      confirmTime: '2024-03-15T16:33:20Z',
-      failedTime: null,
-      successTime: null,
-      missionContent: '마니띠에게 좋은 아침이나 좋은 밤 메시지를 보내주세요',
       missionImageUrl: null,
     },
   ],

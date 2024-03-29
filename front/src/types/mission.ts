@@ -6,7 +6,6 @@ export interface MissionContent {
 }
 
 export interface MissionResult extends MissionContent {
-  guestId: number;
   getTime: string;
   successTime: string | null;
   failedTime: string | null;
