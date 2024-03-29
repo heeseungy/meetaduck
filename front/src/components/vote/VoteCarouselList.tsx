@@ -9,8 +9,8 @@ type VoteCarouselListProps = {
 function VoteCarouselList(voteCarouselListProps: VoteCarouselListProps) {
   const tempList1 = voteCarouselListProps.partyList.slice();
   const tempList2 = voteCarouselListProps.partyList.slice();
-  tempList1.sort((a, b) => a.guestId - b.guestId);
-  tempList2.sort((a, b) => a.guestId - b.guestId);
+  // tempList1.sort((a, b) => a.guestId - b.guestId);
+  // tempList2.sort((a, b) => a.guestId - b.guestId);
   const item1: ListProfile[] = tempList1.splice(0, 1);
   const item2: ListProfile[] = tempList1.splice(0, 2);
   tempList1.splice(tempList1.length, 0, ...item1);
