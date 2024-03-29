@@ -3,6 +3,7 @@ import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
 from fng.score import scoreStock, FearGreed
 import numpy as np
+import matplotlib.pyplot as plt
 import datetime as dt
 import re 
 
@@ -14,7 +15,7 @@ model.load_state_dict(torch.load(koelectra_finetuned_model_dir, map_location=tor
 sentiment_classifier = pipeline('sentiment-analysis', tokenizer=tokenizer, model=model)
 
 #상수
-STANDARD_POINT = 100
+STANDARD_POINT = 50
 STANDARD_PERIOD =120
 
 # 긍정어 비율 계산
@@ -29,16 +30,16 @@ def predict_sentiment(content, point, isMe):
     label = pred[0]["label"]
     # 긍정이면 +1, 부정이면 -1
     if label == 'LABEL_1':
-        point -= 200
+        point -= 100
     elif label == 'LABEL_2':
-        point += 200
+        point += 100
         if(isMe) : positive +=1
     else :
         point += 100
         if(isMe) : neutral +=1
     
     if(isMe) : total_count+=1
-    if(point < 50) : point = 10
+    if (point < 0) : point = 50
     return point
 
 
@@ -88,7 +89,7 @@ def calc_favorability(guest_id, chat_list):
     #객체를 삽입할 배열
     time_block=[[TimeAndPoint(time, point)]]
 
-    # 긍정어, 중립 개수 초기화
+    # 긍정어, 중립 개Q수 초기화
     global positive, neutral, total_count
     positive = 0
     neutral = 0
@@ -115,6 +116,7 @@ def calc_favorability(guest_id, chat_list):
             point = predict_sentiment(chat_message['content'], point, chat_message['sender_id'] ==guest_id)
             time_block[len(time_block)-1].append(TimeAndPoint(compare_time, point))
         time=compare_time
+
     print("pos ", positive, "  neutral" , neutral, " total ", total_count)
     total_count -= neutral
     ratio = positive/total_count *100 
@@ -188,11 +190,15 @@ def calc_favorability(guest_id, chat_list):
     h=np.array([h])
     l=np.array([l])
     v=np.array([v]) 
-    print(p)
-    print(h)
-    print(l)
-    print(v)
+    # print(p)
+    # print(h)
+    # print(l)
+    # print(v)
     score = scoreStock(p,h,l,v)
     score_fng = FearGreed(score).compute_stock(duration=(dur-2)) 
-    print("favor ", score_fng[0][0])
-    return [score_fng[0][0], ratio]
+
+    if(p[0][-1] > 100 and score_fng < 50) : score_fng = 100 - score_fng
+    elif(p[0][-1] < 100 and score_fng > 50) : score_fng = 100 - score_fng
+    print("score_fng ", score_fng[0][0])
+
+    return [score_fng[0][0]*0.3, ratio]
