@@ -76,10 +76,17 @@ function HintInputQuestion() {
               <Input
                 usersInput={hint.hintStatusAnswer || ''}
                 // 상태 변수를 해당 힌트의 상태 변수로 변경
+                // onChange={(newValue) => {
+                //   const updatedHints = [...hints];
+                //   updatedHints[index].hintStatusAnswer = newValue;
+                //   setHints(updatedHints);
+                // }}
                 onChange={(newValue) => {
-                  const updatedHints = [...hints];
-                  updatedHints[index].hintStatusAnswer = newValue;
-                  setHints(updatedHints);
+                  setHints(prevHints => {
+                    const updatedHints = [...prevHints]; // 이전 상태를 복사하여 새로운 배열 생성
+                    updatedHints[index].hintStatusAnswer = newValue; // 새로운 배열에서 해당 힌트의 상태 업데이트
+                    return updatedHints; // 새로운 상태 반환
+                  });
                 }}
               />
             </div>

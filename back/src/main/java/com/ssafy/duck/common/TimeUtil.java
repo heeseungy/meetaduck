@@ -16,8 +16,7 @@ public class TimeUtil {
         // 시스템 기본 시간대(ZoneId)를 사용하여 LocalDate로 변환
         LocalDate startDate = startTime.atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate endDate = endTime.atZone(ZoneId.systemDefault()).toLocalDate();
-
-        return (int) ChronoUnit.DAYS.between(startDate, endDate);
+        return (int) ChronoUnit.DAYS.between(startDate, endDate)+1;
     }
 
     // 2. LocalDate -> Instant
@@ -40,6 +39,11 @@ public class TimeUtil {
         ZonedDateTime zonedDateTime = inputTime.atZone(ZoneId.systemDefault());
         ZonedDateTime startOfDay = zonedDateTime.toLocalDate().atStartOfDay(ZoneId.systemDefault());
         return startOfDay.toInstant();
+    }
+
+    // 4-3. 현재시간(UTC) 리턴 (Instant Type)
+    public static Instant convertToUTC(String inputTime) {
+        return Instant.parse(inputTime).minus(Duration.ofHours(9));
     }
 
 }

@@ -1,5 +1,6 @@
 package com.ssafy.duck.domain.result.service;
 
+import com.ssafy.duck.common.TimeUtil;
 import com.ssafy.duck.domain.chat.repository.MessageRepository;
 import com.ssafy.duck.domain.guest.dto.response.GuestRes;
 import com.ssafy.duck.domain.guest.entity.Guest;
@@ -7,6 +8,9 @@ import com.ssafy.duck.domain.guest.repository.GuestRepository;
 import com.ssafy.duck.domain.guest.service.GuestService;
 import com.ssafy.duck.domain.mission.entity.MissionStatus;
 import com.ssafy.duck.domain.mission.repository.MissionStatusRepository;
+import com.ssafy.duck.domain.mission.service.MissionService;
+import com.ssafy.duck.domain.party.dto.response.PartyRes;
+import com.ssafy.duck.domain.party.service.PartyService;
 import com.ssafy.duck.domain.result.dto.response.MissionResultRes;
 import com.ssafy.duck.domain.result.dto.response.ResultWithManitiRes;
 import com.ssafy.duck.domain.result.dto.response.ResultWithManitoRes;
@@ -23,6 +27,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +41,9 @@ public class ResultService {
     private final MessageRepository messageRepository;
     private final MissionStatusRepository missionStatusRepository;
     private final GuestRepository guestRepository;
+    private final PartyService partyService;
     private final GuestService guestService;
+    private final MissionService missionService;
 
     @Value("${fast-api.url}")
     private String fastAPIUrl;
@@ -70,7 +78,6 @@ public class ResultService {
     }
 
 
-
     public ResultWithManitoRes findMeManitoResult(Long guestId) {
         GuestRes manitoInfo = guestService.findManito(guestId);         // 마니또 정보
 
@@ -100,7 +107,7 @@ public class ResultService {
 
 
     // str은 항상 json 배열 형태로 들어옴
-    public JSONArray stringToJson(String str){
+    public JSONArray stringToJson(String str) {
         JSONArray jsonArray = new JSONArray();
         try {
             JSONParser parser = new JSONParser();
@@ -164,7 +171,6 @@ public class ResultService {
     }
 
 
-
     // 마니또의 미션 수행 반환
     // 수행한 미션 : imageUrl / 실패한 미션 : null
     public List<MissionResultRes> getManitoMissionResult(Long guestId) {
@@ -226,19 +232,61 @@ public class ResultService {
     public void reserveAnalysis(Long partyId) {
         RestTemplate resultRestTemplate = new RestTemplate();
         List<Guest> guestList = guestRepository.findAllByPartyId(partyId);
+        System.out.println(partyId + "번 파티 분석 시작");
+
         for (Guest guest : guestList) {
-            System.out.println("reserve guestId " + guest.getGuestId());
+            System.out.println("---------------------------- reserve guestId " + guest.getGuestId());
             resultRestTemplate.postForEntity(
                     fastAPIUrl + "/spark/{guestId}",
                     String.class,
                     String.class,
                     guest.getGuestId()
             );
+            System.out.println("insert ");
         }
     }
 
 
+    // 우호도 비율 업데이트
+    public void updateResult(Long partyId){
+        List<Guest> guestList = guestRepository.findAllByPartyId(partyId);
+        // 파티 진행기간
+        PartyRes party = partyService.findByPartyId(partyId);
+        int period = TimeUtil.calcDate(party.getStartTime().toString(), party.getEndTime().toString())-1;
+        System.out.println("period total " + period);
+        for (Guest guest : guestList) {
+            System.out.println("---------------------------- reserve ratio guestId " + guest.getGuestId());
+            // 데일리미션 성공 여부 : 100 * (1 - 미션실패개수 / 미션 총개수) * 0.4(비율)
+            long missionFavorability = Math.round(100 * (period - missionService.calcMissionFailCount(guest.getGuestId())) / period * 0.4);
 
+            // 데일리 채팅 여부 : 100 * (데일리채팅여부 / 미션 총개수) * 0.3(비율)
+            int chatCount = 0;
+            for (int i = 0; i < period; i++) {
+                String strCreatedTime = party.getStartTime().plus(Duration.ofDays(i)).toString().substring(0, 10);
+                System.out.println("createdTime " + strCreatedTime);
+                Boolean isChat =messageRepository.existsByChatIdAndCreatedTimeStartingWith(guest.getChat().getChatId(), strCreatedTime);
+                chatCount +=  isChat? 1 : 0;
+                System.out.println("isChat " + isChat +  " chat count " + chatCount);
+            }
 
+            System.out.println(" chat " + (chatCount  ) + " " + period);
+            long chatFavorability = Math.round(100* (double)chatCount / (double)period*0.3/2);
+            System.out.println("mfav " + missionFavorability + " cfav " + chatFavorability);
+
+            Result result = null;
+            int cnt = 0;
+            while(result == null){
+                System.out.println("cnt "+ cnt++);
+                result = resultRepository.findByGuestGuestId(guest.getGuestId());
+                if(result == null)
+                    throw new ResultException(ResultErrorCode.MY_RESULT_NOT_FOUND);
+                else {
+                    result.updateFavorability(result.getManitiFavorability()+(int)chatFavorability+(int)missionFavorability,
+                            result.getManitoFavorability()+(int)chatFavorability);
+                    resultRepository.save(result);
+                }
+            }
+        }
+    }
 
 }

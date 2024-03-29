@@ -7,10 +7,7 @@ import com.ssafy.duck.domain.result.dto.response.ResultWithManitoRes;
 import com.ssafy.duck.domain.result.service.ResultService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,6 +44,16 @@ public class ResultController {
     public ResponseEntity<ResultWithManitoRes> getMeAndManitoResult(@PathVariable("guestId") Long guestId) {
         ResultWithManitoRes manitoResult = resultService.findMeManitoResult(guestId);
         return ResponseEntity.ok(manitoResult);
+    }
+
+
+    @PatchMapping("/test/{partyId}")
+    public void resulttest(@PathVariable("partyId") Long partyId) {
+        resultService.reserveAnalysis(partyId);
+
+        System.out.println("update 들어간다");
+        resultService.updateResult(partyId);
+
     }
 
 }

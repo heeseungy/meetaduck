@@ -151,7 +151,7 @@ def get_message( chat_id):
                     .select("message_type", "content", "created_time", "sender_id", "chat_id")
                     .collect() )
     if not origincontent:
-        return 0
+        return []
   
     # JSON 리스트로 변환
     message_list = []
