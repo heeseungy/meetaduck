@@ -45,7 +45,7 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'keystore', variable: 'keystoreFile')]) {
                     script {
-                        sh 'cp -f $keystoreFile ./back/'
+                        sh 'cp -f $keystoreFile ./back/keystore.p12'
                     }
                 }
             }
