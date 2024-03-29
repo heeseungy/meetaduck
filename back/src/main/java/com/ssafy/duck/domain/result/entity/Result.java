@@ -50,8 +50,10 @@ public class Result {
     private Guest guest;
 
 
-    public void updateFavorability(int manitiFavorability, int manitoFavorability){
+    public void updateManitiFavorability(int manitiFavorability){
         this.manitiFavorability = manitiFavorability;
+    }
+    public void updateManitoFavorability(int manitoFavorability){
         this.manitoFavorability = manitoFavorability;
     }
 }
