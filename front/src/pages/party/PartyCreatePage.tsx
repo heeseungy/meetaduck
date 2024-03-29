@@ -26,7 +26,7 @@ function PartyCreatePage() {
         partyName: partyName,
         userId: login.userId,
       });
-      
+
       setLogin((prevLoginState) => ({
         ...prevLoginState,
         partyId: response.data.partyId,
@@ -58,7 +58,7 @@ function PartyCreatePage() {
       <img src={duckLogo} alt="duckLogo" className={styles.marginTop} />
       <div className={`FontBasic FontL ${styles.joinTitle} `}>파티명</div>
       <div className={`${styles.marginTop}`}>
-        <Input className={style.partyBox} maxLength={6} usersInput={partyName} onChange={handleInputChange} />
+        <Input className={style.partyBox} maxLength={5} usersInput={partyName} onChange={handleInputChange} />
       </div>
       <div className={styles.marginTop}>
         <Button onClickHandler={createHandler} bgc="filled">
