@@ -265,7 +265,7 @@ function PartyMakerPage() {
               </span>
               <span>
                 <Button onClickHandler={deleteHandler} bgc="empty">
-                  파티닫기
+                  파티삭제
                 </Button>
               </span>
             </div>
@@ -274,7 +274,7 @@ function PartyMakerPage() {
           // recoil에 있는 party의 userId와 login의 userId가 다르면
           <span>
             <Button onClickHandler={leaveHandler} bgc="empty">
-              나가기
+              파티떠나기
             </Button>
           </span>
         )}
