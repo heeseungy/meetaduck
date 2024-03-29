@@ -94,7 +94,7 @@
 
 .ScrollBox {
   width: 15rem;
-  height: 15rem;
+  max-height: 15rem;
   /* background-color: aqua; */
   padding-top: 1rem;
   padding-left: 0.5rem;
