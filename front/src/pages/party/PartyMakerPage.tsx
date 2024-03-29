@@ -158,11 +158,20 @@ function PartyMakerPage() {
     </div>
   );
 
+  useEffect(() => {
+    console.log('selectedHour :', selectedHour);
+    console.log('selectedMinute :', selectedMinute);
+  }, [selectedHour, selectedMinute])
+
   const startHandler = async () => {
     try {
-      const isoEndDate = endDate.toISOString(); // 선택한 날짜를 ISO 형식으로 변환
-      const selectedDate = endDate.clone().set({ hour: selectedHour, minute: selectedMinute }); // 선택한 시간과 분을 반영한 날짜 설정
-      const isoSelectedDate = selectedDate.toISOString(); // 선택한 날짜와 시간을 ISO 형식으로 변환
+      const selectedDate = new Date(endDate); // 선택한 날짜를 기반으로 Date 객체 생성
+      selectedDate.setHours(selectedHour); // 선택한 시간 설정
+      selectedDate.setMinutes(selectedMinute); // 선택한 분 설정
+  
+      const isoSelectedDate = selectedDate.toISOString(); // ISO 형식으로 변환
+
+      console.log('selectedDate :', selectedDate);
       console.log('isoSelectedDate :', isoSelectedDate);
 
       await Axios.patch(`/api/parties`, {
@@ -172,7 +181,7 @@ function PartyMakerPage() {
       });
       setParty((prevPartyState) => ({
         ...prevPartyState,
-        endTime: selectedDate, // recoil 상태에 선택한 날짜와 시간으로 설정
+        endTime: isoSelectedDate, // recoil 상태에 선택한 날짜와 시간으로 설정
       }));
 
       navigate('/hintinputform');
@@ -206,7 +215,6 @@ function PartyMakerPage() {
         guestId: 0,
         partyId: 0,
       }));
-      // sessionStorage.removeItem('sessionStorage');
       navigate('/party');
     } catch (err) {
       alert(err.response.data);
@@ -229,6 +237,19 @@ function PartyMakerPage() {
       navigate('/party');
     }
   };
+
+  // const testHandler = () => {
+  //   const selectedDate = new Date(endDate); // 선택한 날짜를 기반으로 Date 객체 생성
+  //   selectedDate.setHours(selectedHour); // 선택한 시간 설정
+  //   selectedDate.setMinutes(selectedMinute); // 선택한 분 설정
+
+  //   const isoSelectedDate = selectedDate.toISOString(); // ISO 형식으로 변환
+
+  //   console.log('selectedHour :', selectedHour);
+  //   console.log('selectedMinute :', selectedMinute);
+  //   console.log('selectedDate :', selectedDate);
+  //   console.log('isoSelectedDate :', isoSelectedDate);
+  // }
 
   return (
     <div className={styles.margin}>
@@ -282,6 +303,9 @@ function PartyMakerPage() {
                 <Button onClickHandler={startHandler} bgc="filled">
                   시작하기
                 </Button>
+                {/* <button onClick={testHandler}>
+                  test
+                </button> */}
               </span>
               <span>
                 <Button onClickHandler={deleteHandler} bgc="empty">

@@ -49,7 +49,7 @@ public class Party {
 
     public void start(Instant endTime) {
         this.startTime = TimeUtil.convertToKST(Instant.now());
-        this.endTime = endTime;
+        this.endTime =TimeUtil.convertToKST(TimeUtil.stringToInstant(endTime.toString()));
     }
 
 }
