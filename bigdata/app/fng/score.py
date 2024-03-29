@@ -360,7 +360,7 @@ class scoreStock(object):
         -------
         beta_com: return of P with m variables and t-1 times
         """
-        beta = 2 + np.absolute(ewm_w) - 4/(1+np.exp(np.absolute(-ewm_w)))
+        beta = 3 + np.absolute(ewm_w) - 4/(1+np.exp(np.absolute(-ewm_w)))
 
         list_ewm_w_neg = list(np.where(ewm_w < 0))
         idx_ewm_w_neg = tuple(zip(*list_ewm_w_neg))
@@ -443,7 +443,7 @@ class FearGreed(object):
 
         return score_compensation
 
-    def compute_stock(self, duration):
+    def compute_stock(self, duration=120):
         """
         Parameters
         ----------

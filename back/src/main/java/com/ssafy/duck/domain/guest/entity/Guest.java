@@ -12,6 +12,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Getter
+@ToString
 public class Guest {
 
     @Id
