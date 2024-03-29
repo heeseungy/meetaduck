@@ -51,6 +51,7 @@ public class MissionService {
 
     public void set(List<Mission> allMissions, StartReq startReq) {
         int period = TimeUtil.calcDate(Instant.now() + "", startReq.getEndTime())-1;
+//        int period = TimeUtil.calcDate("2024-03-25T20:23:00.123456789Z", startReq.getEndTime())-1;
         Collections.shuffle(allMissions);
         List<Mission> subMissions = allMissions.subList(0, period * 3);
         Party party = partyRepository.findByAccessCode(startReq.getAccessCode())
@@ -58,6 +59,7 @@ public class MissionService {
         List<Guest> guests = guestRepository.findByParty_PartyId(party.getPartyId());
         for (Guest guest : guests) {
             Instant now = Instant.now();
+//            Instant now = TimeUtil.stringToInstant("2024-03-25T20:23:00.123456789Z");
             int day = -1, count = 0;
             for (Mission mission : subMissions) {
                 if (count++ % 3 == 0) day++;
