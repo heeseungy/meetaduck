@@ -13,13 +13,21 @@ function HintInputFormPage() {
   const navigate = useNavigate();
   const login = useRecoilValue(loginState);
   useEffect(() => {
-    hintPageService(login.guestId).then((data: Answer[]) => {
-      if (data && data.length > 0 && data[0].hintStatusAnswer !== undefined) {
-        console.log(data);
-        sessionStorage.setItem('finishHintInput', 'true');
+    hintPageService(login.guestId)
+      .then((data: Answer[]) => {
+        if (
+          data &&
+          data[0].hintStatusAnswer !== undefined &&
+          data[0].hintStatusAnswer !== null &&
+          data[0].hintStatusAnswer !== ''
+        ) {
+          console.log(data);
+          sessionStorage.setItem('finishHintInput', 'true');
+        }
+      })
+      .then(() => {
         navigate('/mission');
-      }
-    });
+      });
   });
   const children = (
     <div className={styles.cardMargin}>

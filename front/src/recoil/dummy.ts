@@ -43,16 +43,16 @@ export const PARTY_STATUS: PartyStatus = {
 
 // 참가자 1명 조회
 export const MY_PROFILE: ListProfile = {
-  userId: 152,
-  guestId: 15,
-  nickname: '가철수',
-  thumbnailUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKxnXqmGmOaxoeLkB8eWisfFLkCuguI2ZiRQ&usqp=CAU',
+  userId: 0,
+  guestId: 0,
+  nickname: '',
+  thumbnailUrl: '',
   votedId: 0,
 };
 
 // 마니띠 조회
 export const MANITI_PROFILE: ManitiProfile = {
-  nickname: '나철수',
+  nickname: '',
 };
 
 // 참가자 목록 조회 (시작전)
@@ -437,74 +437,23 @@ export const MY_MANITO_MISSION: MissionResult = {
 export const MISSION_RESULT_LIST: MissionResultList = {
   manitoMission: [
     {
-      missionStatusId: null,
-      getTime: null,
+      missionStatusId: 1,
+      getTime: '0',
       confirmTime: null,
       failedTime: null,
       successTime: null,
-      missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
+      missionContent: '',
       missionImageUrl: null,
     },
   ],
   myMission: [
     {
-      guestId: 1,
       missionStatusId: 617,
-      getTime: '2024-03-13T00:00:00Z',
-      confirmTime: '2024-03-13T12:33:20Z',
-      failedTime: null,
-      successTime: '2024-03-13T16:32:48Z',
-      missionContent: '마니띠의 혈액형을 작성 후, 캡쳐해주세요',
-      missionImageUrl: 'http://example.com/mission/success/1',
-    },
-    {
-      guestId: 1,
-      missionStatusId: 579,
-      getTime: '2024-03-14T00:00:00Z',
+      getTime: '0',
       confirmTime: null,
       failedTime: null,
       successTime: null,
-      missionContent: '마니띠에게 본인을 잘 설명하는 키워드 1개를 알려주세요',
-      missionImageUrl: null,
-    },
-    {
-      guestId: 1,
-      missionStatusId: 580,
-      getTime: '2024-03-15T00:00:00Z',
-      confirmTime: null,
-      failedTime: null,
-      successTime: null,
-      missionContent: '마니띠에게 좋은 아침이나 좋은 밤 메시지를 보내주세요',
-      missionImageUrl: null,
-    },
-    {
-      guestId: 5,
-      missionStatusId: 578,
-      getTime: '2024-03-13T00:00:00Z',
-      confirmTime: null,
-      successTime: null,
-      failedTime: null,
-      missionContent: '마니띠의 스트레스를 줄일 수 있는 작은 장난감을 선물하세요',
-      missionImageUrl: null,
-    },
-    {
-      guestId: 5,
-      missionStatusId: 621,
-      getTime: '2024-03-14T00:00:00Z',
-      confirmTime: '2024-03-14T12:33:20Z',
-      failedTime: null,
-      successTime: '2024-03-14T12:50:20Z',
-      missionContent: '마니띠에게 본인을 잘 설명하는 키워드 1개를 알려주세요',
-      missionImageUrl: 'http://example.com/mission/success/1',
-    },
-    {
-      guestId: 5,
-      missionStatusId: 616,
-      getTime: '2024-03-15T00:00:00Z',
-      failedTime: null,
-      confirmTime: '2024-03-15T16:33:20Z',
-      successTime: null,
-      missionContent: '마니띠에게 좋은 아침이나 좋은 밤 메시지를 보내주세요',
+      missionContent: '',
       missionImageUrl: null,
     },
   ],
