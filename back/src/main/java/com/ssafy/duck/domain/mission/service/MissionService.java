@@ -168,7 +168,17 @@ public class MissionService {
                         .build();
             }
         }
-
+        if(myManitoMissionRes == null){
+            myManitoMissionRes = MyManitoMissionRes.builder()
+                    .missionStatusId(null)
+                    .getTime(null)
+                    .confirmTime(null)
+                    .successTime(null)
+                    .failedTime(null)
+                    .missionContent(null)
+                    .missionImageUrl(null)
+                    .build();
+        }
         return myManitoMissionRes;
     }
 
