@@ -23,15 +23,10 @@ function PartyMakerPage() {
   const login = useRecoilValue(loginState);
   const [refreshTime, setRefreshTime] = useState('');
   const [participants, setParticipants] = useState<ListProfile[]>([]);
-  const [endDate, setEndDate] = useState(null);
+  const [endDate, setEndDate] = useState('');
   const [selectedHour, setSelectedHour] = useState(0); // 시간 상태 변수
   const [selectedMinute, setSelectedMinute] = useState(0); // 분 상태 변수
   const navigate = useNavigate();
-
-  // useEffect(() =>
-  //   // endTime 상태가 변경될 때마다 실행되는 부분
-  //   navigate('/hintinputform');
-  // }, [party.endTime]); // endTime 상태가  {변경될 때 useEffect 실행
 
   useEffect(() => {
     // 파티 목록 조회
@@ -83,7 +78,7 @@ function PartyMakerPage() {
               window.alert('파티가 시작됩니다.');
               navigate('/hintinputform');
             } else if (data.deleted) {
-              partyLeaveService(login.guestId).then((data) => {
+              partyLeaveService(login.guestId).then(() => {
                 setParty({
                   partyId: 0,
                   accessCode: '',
@@ -161,14 +156,14 @@ function PartyMakerPage() {
   useEffect(() => {
     console.log('selectedHour :', selectedHour);
     console.log('selectedMinute :', selectedMinute);
-  }, [selectedHour, selectedMinute])
+  }, [selectedHour, selectedMinute]);
 
   const startHandler = async () => {
     try {
       const selectedDate = new Date(endDate); // 선택한 날짜를 기반으로 Date 객체 생성
       selectedDate.setHours(selectedHour); // 선택한 시간 설정
       selectedDate.setMinutes(selectedMinute); // 선택한 분 설정
-  
+
       const isoSelectedDate = selectedDate.toISOString(); // ISO 형식으로 변환
 
       console.log('selectedDate :', selectedDate);
@@ -178,11 +173,16 @@ function PartyMakerPage() {
         accessCode: party.accessCode,
         endTime: isoSelectedDate, // 종료 시간을 선택한 날짜와 시간으로 설정
         userId: party.userId,
+      }).then(() => {
+        partyInfoService(party.partyId).then((data: Party) => {
+          console.log(data);
+          setParty(data);
+        });
       });
-      setParty((prevPartyState) => ({
-        ...prevPartyState,
-        endTime: isoSelectedDate, // recoil 상태에 선택한 날짜와 시간으로 설정
-      }));
+      // setParty((prevPartyState) => ({
+      //   ...prevPartyState,
+      //   endTime: isoSelectedDate, // recoil 상태에 선택한 날짜와 시간으로 설정
+      // }));
 
       navigate('/hintinputform');
     } catch (err) {
@@ -238,18 +238,20 @@ function PartyMakerPage() {
     }
   };
 
-  // const testHandler = () => {
-  //   const selectedDate = new Date(endDate); // 선택한 날짜를 기반으로 Date 객체 생성
-  //   selectedDate.setHours(selectedHour); // 선택한 시간 설정
-  //   selectedDate.setMinutes(selectedMinute); // 선택한 분 설정
+  const testHandler = () => {
+    if (endDate !== '' || endDate !== null || endDate !== undefined) {
+      const selectedDate = new Date(endDate); // 선택한 날짜를 기반으로 Date 객체 생성
+      selectedDate.setHours(selectedHour); // 선택한 시간 설정
+      selectedDate.setMinutes(selectedMinute); // 선택한 분 설정
 
-  //   const isoSelectedDate = selectedDate.toISOString(); // ISO 형식으로 변환
+      const isoSelectedDate = selectedDate.toISOString(); // ISO 형식으로 변환
 
-  //   console.log('selectedHour :', selectedHour);
-  //   console.log('selectedMinute :', selectedMinute);
-  //   console.log('selectedDate :', selectedDate);
-  //   console.log('isoSelectedDate :', isoSelectedDate);
-  // }
+      console.log('selectedHour :', selectedHour);
+      console.log('selectedMinute :', selectedMinute);
+      console.log('selectedDate :', selectedDate);
+      console.log('isoSelectedDate :', isoSelectedDate);
+    }
+  };
 
   return (
     <div className={styles.margin}>
@@ -301,11 +303,9 @@ function PartyMakerPage() {
             <div className={`${styles.buttonWrapper}`}>
               <span className={`${styles.oneButton}`}>
                 <Button onClickHandler={startHandler} bgc="filled">
+                  {/* <Button onClickHandler={testHandler} bgc="filled"> */}
                   시작하기
                 </Button>
-                {/* <button onClick={testHandler}>
-                  test
-                </button> */}
               </span>
               <span>
                 <Button onClickHandler={deleteHandler} bgc="empty">

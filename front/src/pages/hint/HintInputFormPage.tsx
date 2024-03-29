@@ -15,18 +15,26 @@ function HintInputFormPage() {
   useEffect(() => {
     hintPageService(login.guestId)
       .then((data: Answer[]) => {
+        console.log(data);
         if (
           data &&
           data[0].hintStatusAnswer !== undefined &&
           data[0].hintStatusAnswer !== null &&
           data[0].hintStatusAnswer !== ''
         ) {
-          console.log(data);
           sessionStorage.setItem('finishHintInput', 'true');
         }
+        return data;
       })
-      .then(() => {
-        navigate('/mission');
+      .then((data) => {
+        if (
+          data &&
+          data[0].hintStatusAnswer !== undefined &&
+          data[0].hintStatusAnswer !== null &&
+          data[0].hintStatusAnswer !== ''
+        ) {
+          navigate('/mission');
+        }
       });
   });
   const children = (

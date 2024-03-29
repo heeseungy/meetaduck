@@ -6,14 +6,14 @@ import { HintInputQuestionService } from '@/services/HintInputQuestionService';
 import { Axios } from '@/services/axios';
 import { updateHintAnswersService } from '@/services/updateHintAnswersService';
 import styles from '@/styles/hint/HintInputQuestion.module.css';
-import { Hint } from '@/types/hint';
+import { Answer } from '@/types/hint';
 import { useRecoilValue } from 'recoil';
 
 import Button from '../commons/Button';
 import Input from '../commons/Input';
 
 function HintInputQuestion() {
-  const [hints, setHints] = useState<Hint[]>([]);
+  const [hints, setHints] = useState<Answer[]>([]);
 
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -82,7 +82,7 @@ function HintInputQuestion() {
                 //   setHints(updatedHints);
                 // }}
                 onChange={(newValue) => {
-                  setHints(prevHints => {
+                  setHints((prevHints) => {
                     const updatedHints = [...prevHints]; // 이전 상태를 복사하여 새로운 배열 생성
                     updatedHints[index].hintStatusAnswer = newValue; // 새로운 배열에서 해당 힌트의 상태 업데이트
                     return updatedHints; // 새로운 상태 반환
