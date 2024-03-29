@@ -50,7 +50,7 @@ public class Party {
     public void start(Instant endTime) {
         this.startTime = TimeUtil.convertToKST(Instant.now());
 //        this.startTime = TimeUtil.convertToKST(TimeUtil.stringToInstant("2024-03-25T20:23:00.123456789Z"));
-        this.endTime =TimeUtil.convertToKST(TimeUtil.stringToInstant(endTime.toString()));
+        this.endTime =TimeUtil.stringToInstant(endTime.toString());
     }
 
 }
