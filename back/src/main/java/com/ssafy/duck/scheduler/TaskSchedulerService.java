@@ -16,11 +16,12 @@ public class TaskSchedulerService {
     private final ResultService resultService;
 
     public void scheduleTask(Long partyId, Instant scheduledTime) {
+        System.out.println("now schedule  " + scheduledTime);
         Runnable task = () -> {
+//            System.out.println("df");
             resultService.reserveAnalysis(partyId);
             resultService.updateResult(partyId);
         };
         taskScheduler.schedule(task, scheduledTime);
     }
-
 }

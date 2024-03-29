@@ -18,29 +18,24 @@ sentiment_classifier = pipeline('sentiment-analysis', tokenizer=tokenizer, model
 STANDARD_POINT = 50
 STANDARD_PERIOD =120
 
-# 긍정어 비율 계산
-positive = 0 
-neutral = 0
-total_count = 0
-
 #점수 계산 함수
-def predict_sentiment(content, point, isMe):
-    global positive, neutral, total_count
+def predict_sentiment(content, point, isMe): 
     pred = sentiment_classifier(content)
+    positive = neutral = 0
     label = pred[0]["label"]
     # 긍정이면 +1, 부정이면 -1
     if label == 'LABEL_1':
         point -= 100
     elif label == 'LABEL_2':
         point += 100
-        if(isMe) : positive +=1
+        if(isMe) : positive =1
     else :
         point += 100
-        if(isMe) : neutral +=1
+        if(isMe) : neutral =1
     
     if(isMe) : total_count+=1
     if (point < 0) : point = 50
-    return point
+    return point, positive, neutral
 
 
 def make_dt(time_str):
@@ -77,49 +72,38 @@ class TimeAndPoint:
 
 def calc_favorability(guest_id, chat_list): 
     #print("chat_list ", chat_list)
-    if chat_list == 0 :
+    if chat_list == [] :
         return [0, -1]
     
-  
     #시작포인트, 시간 초기화
+    positive_total = 0
+    neutral_total = 0                
     point = STANDARD_POINT
-    time= make_dt(chat_list[0]['created_time'])
-    point=predict_sentiment(chat_list[0]['content'], point, False)
 
     #객체를 삽입할 배열
-    time_block=[[TimeAndPoint(time, point)]]
-
-    # 긍정어, 중립 개Q수 초기화
-    global positive, neutral, total_count
-    positive = 0
-    neutral = 0
-    total_count = 0
-    print("pos ", positive, "  neutral" , neutral)
+    time_block=[]
   
     for chat_message in chat_list: 
         # 시간 범위
         compare_time = make_dt(chat_message['created_time'])
-        #print("chat message ", chat_message)
+        point, positive, neutral = predict_sentiment(chat_message['content'], point, chat_message['sender_id'] ==guest_id)        
+        positive_total += positive
+        neutral_total += neutral
 
         # 한시간이상 차이 나면 다른 뭉치로 분류
+        one_time = TimeAndPoint(compare_time, point)
+
         if (compare_time - time).total_seconds() > 3600:
-            if len(time_block[len(time_block)-1]) == 1:
-                time_block.pop()
-                if len(time_block) == 0:
-                    point = STANDARD_POINT
-                else:
-                    point = time_block[len(time_block)-1][len(time_block[len(time_block)-1])-1].point           
-            
-            point = predict_sentiment(chat_message['content'], point, chat_message['sender_id'] ==guest_id)
-            time_block.append([TimeAndPoint(compare_time, point)])
+            time_block.append([one_time])
         else:
-            point = predict_sentiment(chat_message['content'], point, chat_message['sender_id'] ==guest_id)
-            time_block[len(time_block)-1].append(TimeAndPoint(compare_time, point))
+            time_block[len(time_block)-1].append(one_time)
         time=compare_time
 
-    print("pos ", positive, "  neutral" , neutral, " total ", total_count)
-    total_count -= neutral
-    ratio = positive/total_count *100 
+    for block in time_block:
+        if len(block) == 1 : 
+            time_block.remove(block)
+
+    ratio = positive_total/(len(chat_list) - neutral_total) *100 
     print("ratio ", ratio , " point ", point )
     
 
@@ -136,26 +120,28 @@ def calc_favorability(guest_id, chat_list):
     #기준시간 간격
     period = total_time/STANDARD_PERIOD
     #처리가 끝난 2차 행렬
-    preprocessed_data = [[]]
-    #값을 넣을 주소값
-    checked_idx = 0
+    preprocessed_data = [[]] 
 
     for oneblock in time_block:
         number_of_period = 0
+
         for chat  in oneblock:
-            loop_is_done = True
-            while(loop_is_done):
-                if chat.time >= oneblock[0].time + dt.timedelta(seconds=(period * number_of_period)) and chat.time < oneblock[0].time + dt.timedelta(seconds=(period * (number_of_period + 1))):
-                    preprocessed_data[checked_idx].append(chat.point)
-                    loop_is_done = False
+
+            while(True):
+                startTime = oneblock[0].time + dt.timedelta(seconds=(period * number_of_period))
+                endTime = startTime + dt.timedelta(0,period)
+
+                if chat.time >= startTime and  chat.time < endTime:
+                    preprocessed_data[-1].append(chat.point)
+                    break
+
                 else:
                     preprocessed_data.append([])
                     number_of_period += 1
-                    checked_idx += 1
-        preprocessed_data.append([])
-        checked_idx += 1
+
+        preprocessed_data.append([]) 
     
-    if(len(preprocessed_data[len(preprocessed_data)-1]) == 0):
+    if(len(preprocessed_data[-1]) == 0):
         preprocessed_data.pop()
 
 
@@ -169,20 +155,14 @@ def calc_favorability(guest_id, chat_list):
     last = preprocessed_data[0][0]
 
     for interval in preprocessed_data:
-        count = 0
-        min = last
-        max = last
-        for each_point in interval:
-            count += 1
-            last = each_point
-            if(last > max):
-                max = last
-            if(last < min):
-                min = last
-        p.append(last)
-        h.append(max)
-        l.append(min)
-        v.append(count)
+        if len(interval)==0 : 
+            p.append(last)
+        else :  
+            p.append(interval[-1])
+        h.append(min(interval or last))
+        l.append(max(interval or last))
+        v.append(len(interval))
+        last = p[-1]
 
     dur= len(p)
 
@@ -197,8 +177,8 @@ def calc_favorability(guest_id, chat_list):
     score = scoreStock(p,h,l,v)
     score_fng = FearGreed(score).compute_stock(duration=(dur-2)) 
 
-    if(p[0][-1] > 100 and score_fng < 50) : score_fng = 100 - score_fng
-    elif(p[0][-1] < 100 and score_fng > 50) : score_fng = 100 - score_fng
+    if(p[0][-1] > STANDARD_POINT*2 and score_fng < 50) : score_fng = 100 - score_fng
+    elif(p[0][-1] < STANDARD_POINT*2 and score_fng > 50) : score_fng = 100 - score_fng
     print("score_fng ", score_fng[0][0])
 
     return [score_fng[0][0]*0.3, ratio]

@@ -232,7 +232,7 @@ public class ResultService {
     public void reserveAnalysis(Long partyId) {
         RestTemplate resultRestTemplate = new RestTemplate();
         List<Guest> guestList = guestRepository.findAllByPartyId(partyId);
-        System.out.println("분석 시작");
+        System.out.println(partyId + "번 파티 분석 시작");
 
         for (Guest guest : guestList) {
             System.out.println("---------------------------- reserve guestId " + guest.getGuestId());

@@ -72,6 +72,7 @@ public class HintService {
         Party party = partyRepository.findByPartyId(partyId)
                 .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
         int period = TimeUtil.calcDate(party.getStartTime().toString(), party.getEndTime().toString()) - 1;
+        System.out.println("period" +period);
 
         Collections.shuffle(hintList);
         // guest 마다 hint status에 데이터 추가하기

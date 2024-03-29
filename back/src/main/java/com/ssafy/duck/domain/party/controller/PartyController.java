@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Time;
 import java.time.Duration;
 import java.time.Instant;
 
@@ -75,8 +76,7 @@ public class PartyController {
             @RequestBody StartReq startReq) {
         PartyRes partyRes = partyService.find(startReq.getAccessCode());
         Instant today = TimeUtil.convertTo00(Instant.now());
-//        System.out.println("end time " + TimeUtil.stringToInstant(startReq.getEndTime()));
-//////        System.out.println("schedule end time "+ TimeUtil.stringToInstant(startReq.getEndTime()).minus(Duration.ofDays(1)) );
+
         if (partyService.isValidStartReq(startReq, partyRes)) {
             partyService.start(partyRes, startReq);
             guestService.setManiti(partyRes.getPartyId());
@@ -84,8 +84,8 @@ public class PartyController {
             chatService.createChat(partyRes.getAccessCode());
             missionService.set(missionService.fetch(), startReq);
             hintService.set(hintService.fetch(), partyRes.getPartyId());
-            taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.stringToInstant(startReq.getEndTime()).minus(Duration.ofDays(1)) );
-//            taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.stringToInstant(startReq.getEndTime()).plus(Duration.ofMinutes(5)) );
+//            taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.convertToUTC(startReq.getEndTime()).minus(Duration.ofDays(1)) );
+            taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.convertToUTC(startReq.getEndTime()).minus(Duration.ofMinutes(1)) );
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();
