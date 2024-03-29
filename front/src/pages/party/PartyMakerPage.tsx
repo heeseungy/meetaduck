@@ -178,7 +178,7 @@ function PartyMakerPage() {
       navigate('/hintinputform');
     } catch (err) {
       console.log('err:', err);
-      alert(err.response.data);
+      alert('올바른 시간을 입력해주세요.');
     }
   };
 
