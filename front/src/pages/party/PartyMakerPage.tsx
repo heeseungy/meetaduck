@@ -8,6 +8,7 @@ import DatePickerInput from '@/components/party/DatePickerInput';
 import ShareButton from '@/components/party/ShareButton';
 import { loginState, partyState } from '@/recoil/atom';
 import { Axios } from '@/services/axios';
+import { partyLeaveService } from '@/services/partyDeleteService';
 import { partyInfoService } from '@/services/partyStartService';
 import styles from '@/styles/party/PartyMaker.module.css';
 import { Party } from '@/types/party';
@@ -79,7 +80,26 @@ function PartyMakerPage() {
           })
           .then((data) => {
             if (data.endTime !== null && data.endTime !== undefined) {
+              window.alert('파티가 시작됩니다.');
               navigate('/hintinputform');
+            } else if (data.deleted) {
+              partyLeaveService(login.guestId).then((data) => {
+                setParty({
+                  partyId: 0,
+                  accessCode: '',
+                  partyName: '',
+                  startTime: '',
+                  endTime: '',
+                  deleted: false,
+                  userId: 0,
+                });
+                setLogin((prevLoginState) => ({
+                  ...prevLoginState,
+                  partyId: 0,
+                }));
+                window.alert('삭제된 파티입니다.');
+                navigate('/party');
+              });
             }
           });
       });
@@ -137,7 +157,7 @@ function PartyMakerPage() {
       </div>
     </div>
   );
-  
+
   const startHandler = async () => {
     try {
       const isoEndDate = endDate.toISOString(); // 선택한 날짜를 ISO 형식으로 변환
@@ -156,7 +176,6 @@ function PartyMakerPage() {
       }));
 
       navigate('/hintinputform');
-
     } catch (err) {
       console.log('err:', err);
       alert(err.response.data);
@@ -173,13 +192,13 @@ function PartyMakerPage() {
         },
       });
 
-      // 파티가 삭제되었으므로, 모든 참가자를 강제로 퇴장시킵니다.
-      await Promise.all(
-        participants.map(async (participant) => {
-          await Axios.delete(`/api/guests/${participant.guestId}`);
-          navigate('/party');
-        }),
-      );
+      // // 파티가 삭제되었으므로, 모든 참가자를 강제로 퇴장시킵니다.
+      // await Promise.all(
+      //   participants.map(async (participant) => {
+      //     await Axios.delete(`/api/guests/${participant.guestId}`);
+      //     navigate('/party');
+      //   }),
+      // );
 
       alert('파티가 삭제되었습니다');
       setLogin((prevLoginState) => ({

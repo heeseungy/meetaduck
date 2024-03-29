@@ -26,7 +26,7 @@ function PartyCreatePage() {
         partyName: partyName,
         userId: login.userId,
       });
-      
+
       setLogin((prevLoginState) => ({
         ...prevLoginState,
         partyId: response.data.partyId,
@@ -45,6 +45,9 @@ function PartyCreatePage() {
     }
   };
 
+  const backHandler = async () => {
+    navigate('/party');
+  };
   useEffect(() => {
     console.log('party.partyId :', party.partyId);
   }, [party]);
@@ -58,9 +61,12 @@ function PartyCreatePage() {
       <img src={duckLogo} alt="duckLogo" className={styles.marginTop} />
       <div className={`FontBasic FontL ${styles.joinTitle} `}>파티명</div>
       <div className={`${styles.marginTop}`}>
-        <Input className={style.partyBox} maxLength={6} usersInput={partyName} onChange={handleInputChange} />
+        <Input className={style.partyBox} maxLength={5} usersInput={partyName} onChange={handleInputChange} />
       </div>
-      <div className={styles.marginTop}>
+      <div className={`${styles.buttonGap} ${styles.marginTop}`}>
+        <Button onClickHandler={backHandler} bgc="empty">
+          돌아가기
+        </Button>
         <Button onClickHandler={createHandler} bgc="filled">
           파티열기
         </Button>
