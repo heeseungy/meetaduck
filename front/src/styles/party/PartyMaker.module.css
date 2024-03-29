@@ -138,3 +138,29 @@
   font-size: 0.875rem; /* 선택 상자의 글꼴 크기 조정 */
   color: #333; /* 선택 상자의 글꼴 색상 설정 */
 }
+
+.box {
+  width: 7rem;
+  height: 2rem;
+  border: 1px solid #eea23e;
+  border-radius: 8px;
+  /* font-weight: bold; */
+}
+
+.filled {
+  background-color: #eea23e;
+  color: white;
+  font-size: 1rem;
+  font-family: 'JalnanGothic', sans-serif;
+}
+
+.empty {
+  background-color: white;
+  color: #eea23e;
+  font-size: 1rem;
+  font-family: 'JalnanGothic', sans-serif;
+}
+
+.marginTop {
+  margin-top: 4rem;
+}

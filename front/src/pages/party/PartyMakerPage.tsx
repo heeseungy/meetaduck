@@ -13,6 +13,7 @@ import { Party } from '@/types/party';
 import { ListProfile } from '@/types/user.interface';
 import { ArrowsCounterClockwise } from '@phosphor-icons/react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import LeaveButton from '@/components/commons/LeavButton';
 
 function PartyMakerPage() {
   const setParty = useSetRecoilState(partyState);
@@ -183,27 +184,13 @@ function PartyMakerPage() {
   const leaveHandler = async () => {
     console.log('나가기');
     try {
-      // 로그인 상태에서 JWT 토큰을 가져옵니다.
-      // const jwtToken = login.jwtToken;
-      const jwtToken = 123;
-
-      // JWT 토큰이 존재하는 경우에만 요청을 보냅니다.
-      if (jwtToken) {
-        await Axios.delete(`/api/guests/${login.guestId}`, {
-          headers: {
-            Authorization: `Bearer ${jwtToken}`, // JWT 토큰을 헤더에 추가합니다.
-          },
-        });
-        setLogin((prevLoginState) => ({
-          ...prevLoginState,
-          partyId: 0,
-        }));
-        alert('파티를 나갔습니다.');
-        navigate('/party');
-      } else {
-        // JWT 토큰이 없는 경우에는 어떻게 처리할지 결정합니다.
-        console.log('JWT 토큰이 없습니다.');
-      }
+      await Axios.delete(`/api/guests/${login.guestId}`);
+      setLogin((prevLoginState) => ({
+        ...prevLoginState,
+        partyId: 0,
+      }));
+      alert('파티를 나갔습니다.');
+      navigate('/party');
     } catch (err) {
       alert(err.response.data);
       navigate('/party');
@@ -272,7 +259,7 @@ function PartyMakerPage() {
           </>
         ) : (
           // recoil에 있는 party의 userId와 login의 userId가 다르면
-          <span>
+          <span className={styles.marginTop}>
             <Button onClickHandler={leaveHandler} bgc="empty">
               나가기
             </Button>
