@@ -171,7 +171,7 @@ public class MissionService {
         if(myManitoMissionRes == null){
             myManitoMissionRes = MyManitoMissionRes.builder()
                     .missionStatusId(0L)
-                    .getTime(Instant.parse("0000-00-00T00:00:00.000000Z"))
+                    .getTime(Instant.now())
                     .confirmTime(null)
                     .successTime(null)
                     .failedTime(null)
