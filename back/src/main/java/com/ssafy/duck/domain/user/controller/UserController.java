@@ -152,11 +152,17 @@ public class UserController {
                 .withSubject(userRes.getKakaoId().toString())
                 .sign(Algorithm.HMAC512(jwtProperties.getSecretKey()));
 
+        userRes.setJwtToken(jwtToken);
+
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Authorization", "Bearer " + jwtToken);
 
+        System.out.println(responseHeaders);
         logger.info("{}", userRes.toString());
 
+        System.out.println(ResponseEntity.ok()
+                .headers(responseHeaders)
+                .body(userRes));
         return ResponseEntity.ok()
                 .headers(responseHeaders)
                 .body(userRes);

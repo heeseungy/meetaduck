@@ -29,6 +29,10 @@ function RedirectionPage() {
       },
     })
       .then((response) => {
+        console.log(response.headers);
+        const authHeader = response.headers['Authorization'];
+        console.log(authHeader);
+        console.log(response);
         console.log(response.data);
         if (response.data.partyId !== 0) {
           partyInfoService(response.data.partyId)

@@ -21,4 +21,7 @@ public class UserRes {
     //
     private Long partyId;
     private Long guestId;
+
+    //
+    private String jwtToken;
 }
