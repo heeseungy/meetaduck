@@ -56,7 +56,7 @@ export const partyStatusState = selector({
     } else {
       const endTime = new Date(date2);
       const currentTime = new Date(now);
-      const before24Time = new Date(endTime.getTime() - 2 * 60 * 60 * 1000);
+      const before24Time = new Date(endTime.getTime() - 50 * 60 * 60 * 1000);
 
       if (currentTime < before24Time) {
         return 'InProgress';
