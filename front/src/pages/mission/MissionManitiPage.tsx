@@ -24,48 +24,40 @@ function MissionManitiPage(props: MissionManitiProps) {
   // 마니또 미션
   const [myManitoMission, setMyManitoMission] = useState<MissionResult>(MY_MANITO_MISSION);
 
+  // 마니또의 미션 성공/실패/확인 여부
+  // true: 성공 false: 실패 null: 값 없음
+  const [isConfirmed, setIsConfirmed] = useState<true | false | null>(null);
+
   // 마니또 미션 로드
   useEffect(() => {
     console.log(login.guestId);
     manitoMissionLoad(login.guestId)
       .then((data) => {
         setMyManitoMission(data);
+        console.log(data);
         return data;
       })
       .then((data) => {
-        console.log(data);
+        console.log('data2', data);
+        setIsConfirmed(data.successTime !== null ? true : data.failedTime !== null ? false : null);
+      })
+      .then(() => {
+        console.log(isConfirmed);
       });
   }, []);
 
-  // 마니또의 미션 성공/실패/확인 여부
-  // true: 성공 false: 실패 null: 값 없음
-  const [isConfirmed, setIsConfirmed] = useState<true | false | null>(null);
-
-  // 마니또 미션이 변경되면
-  // 미션 확인 여부 수정
-  useEffect(() => {
-    setIsConfirmed(myManitoMission.successTime !== null ? true : myManitoMission.failedTime !== null ? false : null);
-  }, [myManitoMission]);
-
-  useEffect(() => {
-    manitoMissionLoad(login.guestId).then((data) => {
-      setMyManitoMission(data);
-      console.log(myManitoMission, isConfirmed);
-    });
-  }, [isConfirmed]);
-
   const confirmYesHandler = () => {
     // 마니또 성공확인
-    setIsConfirmed(true);
     // axios
-    confirmMission(myManitoMission.missionStatusId, true).then((data) => {
+    confirmMission(myManitoMission.missionStatusId, true).then(() => {
+      setIsConfirmed(true);
       console.log('확인 완료!, 성공');
     });
   };
   const confirmNoHandler = () => {
-    setIsConfirmed(false);
     // axios
-    confirmMission(myManitoMission.missionStatusId, false).then((data) => {
+    confirmMission(myManitoMission.missionStatusId, false).then(() => {
+      setIsConfirmed(false);
       console.log('확인 완료!, 실패');
     });
   };

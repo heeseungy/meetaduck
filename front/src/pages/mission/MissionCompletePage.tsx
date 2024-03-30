@@ -27,7 +27,7 @@ function MissionCompletePage({ role, party, nickname, missionResultList }: Missi
   let days: string[] = [];
   for (let i = 0; i < date; i++) {
     const d = new Date();
-    const month = new Date(d.setDate(startTime.getMonth() + i)).getMonth();
+    const month = new Date(d.setMonth(startTime.getMonth() + 1)).getMonth();
     const day = new Date(d.setDate(startTime.getDate() + i)).getDate();
     days.push(`${month}/${day}`);
   }
@@ -47,7 +47,7 @@ function MissionCompletePage({ role, party, nickname, missionResultList }: Missi
               <div
                 className={`${styles.HorizonScrollItem} 
                 ${
-                  mission[idx].successTime != null
+                  mission[idx].missionImageUrl != null
                     ? Role.Manito === role
                       ? 'BackgroundOrange'
                       : styles.ManitoButton
@@ -57,7 +57,7 @@ function MissionCompletePage({ role, party, nickname, missionResultList }: Missi
                 `}
               >
                 <div
-                  className={`${styles.ItemText} ${role != Role.Manito && mission[idx].successTime != null ? 'FontOrange' : 'FontWhite'}`}
+                  className={`${styles.ItemText} ${role != Role.Manito && mission[idx].missionImageUrl != null ? 'FontOrange' : 'FontWhite'}`}
                 >
                   <div>{it}</div>
                   <div>{idx + 1}일</div>
