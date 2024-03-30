@@ -62,7 +62,7 @@ function ChatListArea({ tag, messages }: { tag: string; messages: MessageRes[] }
                       <div className={`${styles.TheirFlexHorizontal} ${styles.FlexHorizontal}`}>
                         {/* 마니또와 채팅 시에는 img고정 */}
                         {tag === 'manitoChat' ? (
-                          <div className={styles.Thumbnail}>
+                          <div className={`${styles.Thumbnail}`}>
                             <img className={styles.ManitoImage} src={pairChat} alt="" />
                           </div>
                         ) : (
@@ -82,7 +82,8 @@ function ChatListArea({ tag, messages }: { tag: string; messages: MessageRes[] }
                             <div className={`FontS FontBasic ${styles.Message} ${styles.TheirMessage}`}>
                               {msg.messageType ? <img src={msg.content} alt="" /> : msg.content}
                             </div>
-                            <div className={`FontXS FontBasic`}>
+                            
+                            <div className={`FontXS FontBasic ${styles.timeDown}`}>
                               (
                               {`${createdTime.getUTCHours() < 12 ? '오전' : '오후'} 
                         ${
@@ -95,6 +96,7 @@ function ChatListArea({ tag, messages }: { tag: string; messages: MessageRes[] }
                         :${createdTime.getMinutes()}`}
                               )
                             </div>
+                            
                           </div>
                         </div>
                       </div>
