@@ -1,64 +1,81 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { loginState } from '@/recoil/atom';
 import { HintInputQuestionService } from '@/services/HintInputQuestionService';
 import { Axios } from '@/services/axios';
 import { updateHintAnswersService } from '@/services/updateHintAnswersService';
 import styles from '@/styles/hint/HintInputQuestion.module.css';
-import { Answer } from '@/types/hint';
+import { Answer, Hint } from '@/types/hint';
 import { useRecoilValue } from 'recoil';
 
 import Button from '../commons/Button';
 import Input from '../commons/Input';
 
 function HintInputQuestion() {
-  const [hints, setHints] = useState<Answer[]>([]);
-
-  const [error, setError] = useState('');
+  const [hints, setHints] = useState<Hint[]>([]);
+  const [hintsAnswer, setHintsAnswer] = useState<Answer[]>([]);
+  const location = useLocation();
+  console.log(location);
   const navigate = useNavigate();
   const login = useRecoilValue(loginState);
   const guestId = login.guestId;
 
   useEffect(() => {
-    async function fetchHints() {
-      try {
-        const hintsData = await HintInputQuestionService(guestId);
-        console.log('hintsData:', hintsData);
-        setHints(hintsData);
-      } catch (err) {
-        console.log('Error fetching hints:', err);
+    HintInputQuestionService(guestId).then((data: Hint[]) => {
+      console.log('data:', data);
+      setHints(data);
+      if (data.length === 1 && data[0].hintId === 0) {
+        sessionStorage.setItem('finishHintInput', 'true');
+        navigate('/mission');
+      } else {
+        setHintsAnswer(
+          data.map((it) => ({
+            hintId: it.hintId,
+            hintContent: it.hintContent,
+            hintStatusAnswer: '',
+          })),
+        );
       }
-    }
+    });
+    // async function fetchHints() {
+    //   try {
+    //     const hintsData = await HintInputQuestionService(guestId);
+    //     console.log('hintsData:', hintsData);
+    //     setHints(hintsData);
+    //   } catch (err) {
+    //     console.log('Error fetching hints:', err);
+    //   }
+    // }
 
-    fetchHints();
+    // fetchHints();
   }, []);
 
   const hintSubmitHandler = async () => {
-    const isEmptyInput = hints.some((hint) => !hint.hintStatusAnswer);
+    const isEmptyInput = hintsAnswer.some((hint) => hint.hintStatusAnswer === '');
     if (isEmptyInput) {
       alert('힌트 답변을 모두 입력하세요.');
       return;
-    }
+    } else {
+      const hintData = hintsAnswer.map((hint) => ({
+        hintId: hint.hintId,
+        hintStatusAnswer: hint.hintStatusAnswer,
+      }));
 
-    const hintData = hints.map((hint) => ({
-      hintId: hint.hintId,
-      hintStatusAnswer: hint.hintStatusAnswer,
-    }));
-
-    try {
-      console.log('hintData:', hintData);
-      await updateHintAnswersService(guestId, hintData)
-        .then(() => {
-          alert('입력이 완료되었습니다~!');
-          sessionStorage.setItem('finishHintInput', 'true');
-        })
-        .then(() => {
-          navigate('/mission');
-        });
-    } catch (err) {
-      console.log('Error updating hint answers:', err);
-      alert('입력 중 오류가 발생했습니다. 다시 시도해주세요.');
+      try {
+        console.log('hintData:', hintData);
+        await updateHintAnswersService(guestId, hintData)
+          .then(() => {
+            alert('입력이 완료되었습니다~!');
+            sessionStorage.setItem('finishHintInput', 'true');
+          })
+          .then(() => {
+            navigate('/mission');
+          });
+      } catch (err) {
+        console.log('Error updating hint answers:', err);
+        alert('입력 중 오류가 발생했습니다. 다시 시도해주세요.');
+      }
     }
   };
 
@@ -68,7 +85,7 @@ function HintInputQuestion() {
         {hints.length === 0 ? (
           <div>힌트가 없습니다.</div>
         ) : (
-          hints.map((hint, index) => (
+          hintsAnswer.map((hint, index) => (
             <div key={hint.hintId} className={styles.bottom2}>
               <div className={styles.bottom}>
                 <div className="FontSBold">{hint.hintContent}</div>
@@ -82,10 +99,10 @@ function HintInputQuestion() {
                 //   setHints(updatedHints);
                 // }}
                 onChange={(newValue) => {
-                  setHints((prevHints) => {
+                  setHintsAnswer((prevHints) => {
                     const updatedHints = [...prevHints]; // 이전 상태를 복사하여 새로운 배열 생성
                     updatedHints[index].hintStatusAnswer = newValue; // 새로운 배열에서 해당 힌트의 상태 업데이트
-                    console.log(hints);
+                    console.log(hintsAnswer);
                     return updatedHints; // 새로운 상태 반환
                   });
                 }}
