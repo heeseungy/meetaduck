@@ -20,6 +20,7 @@ import java.sql.Time;
 import java.time.Duration;
 import java.time.Instant;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/parties")
 @RequiredArgsConstructor
@@ -84,7 +85,7 @@ public class PartyController {
             missionService.set(missionService.fetch(), startReq);
             hintService.set(hintService.fetch(), partyRes.getPartyId());
 //            taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.convertToUTC(startReq.getEndTime()).minus(Duration.ofDays(1)) );
-            taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.convertToUTC(startReq.getEndTime()).minus(Duration.ofDays(2)) );
+            taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.convertToUTC(startReq.getEndTime()).minus(Duration.ofDays(2).minus(Duration.ofMinutes(45)) ) );
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();
