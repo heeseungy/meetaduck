@@ -49,7 +49,7 @@ function ChatListArea({ tag, messages }: { tag: string; messages: MessageRes[] }
                               ? `0${createdTime.getUTCHours() - 12}`
                               : createdTime.getUTCHours() - 12
                         }
-                        :${createdTime.getUTCMinutes()<10? `0${createdTime.getUTCMinutes()}`:createdTime.getUTCMinutes()}`}
+                        :${createdTime.getUTCMinutes() < 10 ? `0${createdTime.getUTCMinutes()}` : createdTime.getUTCMinutes()}`}
                         )
                       </div>
                       <div className={`FontS FontBasic ${styles.Message} ${styles.MyMessage}`}>
@@ -82,7 +82,7 @@ function ChatListArea({ tag, messages }: { tag: string; messages: MessageRes[] }
                             <div className={`FontS FontBasic ${styles.Message} ${styles.TheirMessage}`}>
                               {msg.messageType ? <img src={msg.content} alt="" /> : msg.content}
                             </div>
-                            
+
                             <div className={`FontXS FontBasic ${styles.timeDown}`}>
                               (
                               {`${createdTime.getUTCHours() < 12 ? '오전' : '오후'} 
@@ -93,10 +93,9 @@ function ChatListArea({ tag, messages }: { tag: string; messages: MessageRes[] }
                               ? `0${createdTime.getUTCHours() - 12}`
                               : createdTime.getUTCHours() - 12
                         }
-                        :${createdTime.getUTCMinutes()<10? `0${createdTime.getUTCMinutes()}`:createdTime.getUTCMinutes()}`}
+                        :${createdTime.getUTCMinutes() < 10 ? `0${createdTime.getUTCMinutes()}` : createdTime.getUTCMinutes()}`}
                               )
                             </div>
-                            
                           </div>
                         </div>
                       </div>
@@ -107,7 +106,7 @@ function ChatListArea({ tag, messages }: { tag: string; messages: MessageRes[] }
                   // partyList에 없는 senderId면 admin class
                   <div className={`FontWhite BackgroundGreen ${styles.Admin}`}>
                     <div className={`FontXS`}>
-                      {createdTime.getMonth()+1}월 {createdTime.getDate()}일의 대화 주제
+                      {createdTime.getMonth() + 1}월 {createdTime.getDate()}일의 대화 주제
                     </div>
                     <div className={`${styles.FlexHorizontal} ${styles.Gap}`}>
                       <div className={`FontS ${styles.Admin1}`}>{msg.content.split(' VS ')[0]}</div>

@@ -5,6 +5,7 @@ import { loginState, partyState } from '@/recoil/atom';
 import { Axios } from '@/services/axios';
 import { partyInfoService } from '@/services/partyStartService';
 import styles from '@/styles/login/LoginPage.module.css';
+import axios from 'axios';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 function RedirectionPage() {
