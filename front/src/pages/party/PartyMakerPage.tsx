@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Button from '@/components/commons/Button';
 import Card from '@/components/commons/Card';
-import LeaveButton from '@/components/commons/LeavButton';
+import LeaveButton from '@/components/commons/LeaveButton';
 import DatePickerInput from '@/components/party/DatePickerInput';
 import ShareButton from '@/components/party/ShareButton';
 import { loginState, partyState } from '@/recoil/atom';

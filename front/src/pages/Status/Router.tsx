@@ -18,8 +18,6 @@ import RabbitTestPage from '@/pages/webSocketTest/RabbitTestPage';
 import ProtectedRoutes from './ProtectedRoutes';
 
 export default function Router() {
-
-
   return (
     <BrowserRouter>
       <Routes>

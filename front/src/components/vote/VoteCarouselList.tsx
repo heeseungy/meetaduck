@@ -31,9 +31,9 @@ function VoteCarouselList(voteCarouselListProps: VoteCarouselListProps) {
       <div>
         <VoteCarouselListItem {...voteCarouselListProps} />
       </div>
-      <div className={styles.Carouselsecond}>
+      {/* <div className={styles.Carouselsecond}>
         <VoteCarouselListItem {...voteCarouselListProps1} />
-      </div>
+      </div> */}
       <div className={styles.Carouselthird}>
         <VoteCarouselListItem {...voteCarouselListProps2} />
       </div>
