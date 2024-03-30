@@ -53,7 +53,9 @@ function ChattingDetailPage() {
 
   return (
     <div className={styles.bgc}>
-      <ChattingHeader {...{ tag: tag }} />
+      <div className={styles.chatHeader}>
+        <ChattingHeader {...{ tag: tag }} />
+      </div>
       <ChatListArea {...{ tag: tag, messages: messages }} />
       <ChattingInputArea {...{ stompClient: stompClient, senderId: login.guestId }} />
     </div>
