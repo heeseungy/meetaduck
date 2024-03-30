@@ -76,22 +76,12 @@ Meet A Duck ! 은 새로운 만남 속에서 새로운 사람들과 친밀감을
 
 ## 파일 구조
 
-<details>
-<summary>
-<b>Frontend</b>
-</summary>
-
-```log
-frontend 패키지 구조 (향후 추가)
+### FRONTEND
+```ini
+향후추가
 ```
-</details>
 
-<br>
-
-<details>
-<summary>
-<b>Backend</b>
-</summary>
+### BACKEND
 ```ini
 back
  ┣ gradle
