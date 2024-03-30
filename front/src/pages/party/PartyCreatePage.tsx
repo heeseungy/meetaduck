@@ -9,6 +9,7 @@ import { Axios } from '@/services/axios';
 import style from '@/styles/commons/Input.module.css';
 import styles from '@/styles/party/Partyjoin.module.css';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import Swal from 'sweetalert2';
 
 function PartyCreatePage() {
   const [partyName, setPartyName] = useState('');
@@ -21,6 +22,14 @@ function PartyCreatePage() {
   const setLogin = useSetRecoilState(loginState);
   const setParty = useSetRecoilState(partyState);
   const createHandler = async () => {
+    if (partyName === '') {
+      Swal.fire({
+        icon: 'error',
+        html: '파티 이름을 입력해주세요.',
+        confirmButtonColor: '#eea23e',
+      });
+      return;
+    }
     try {
       const response = await Axios.post('/api/parties', {
         partyName: partyName,
@@ -41,7 +50,7 @@ function PartyCreatePage() {
       navigate('/partymaker');
     } catch (err) {
       console.log(err);
-      alert(err);
+      // alert(err);
     }
   };
 

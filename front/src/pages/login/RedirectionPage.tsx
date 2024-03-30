@@ -5,6 +5,7 @@ import { loginState, partyState } from '@/recoil/atom';
 import { Axios } from '@/services/axios';
 import { partyInfoService } from '@/services/partyStartService';
 import styles from '@/styles/login/LoginPage.module.css';
+import axios from 'axios';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 function RedirectionPage() {
@@ -28,6 +29,10 @@ function RedirectionPage() {
       },
     })
       .then((response) => {
+        console.log(response.headers);
+        const authHeader = response.headers['Authorization'];
+        console.log(authHeader);
+        console.log(response);
         console.log(response.data);
         if (response.data.partyId !== 0) {
           partyInfoService(response.data.partyId)

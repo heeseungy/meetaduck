@@ -9,6 +9,7 @@ import { loginState, partyState } from '@/recoil/atom';
 import { Axios } from '@/services/axios';
 import styles from '@/styles/party/Partyjoin.module.css';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import Swal from 'sweetalert2';
 
 function PartyPage() {
   const [usersInput, setUsersInput] = useState('');
@@ -44,7 +45,12 @@ function PartyPage() {
       //   },
       // });
     } catch (err) {
-      alert('입력 코드가 올바르지 않습니다');
+      Swal.fire({
+        icon: 'error',
+        html: '입력 코드가 올바르지 않습니다',
+        confirmButtonColor: '#eea23e',
+      });
+      // alert('입력 코드가 올바르지 않습니다');
       console.log('err :', err);
     }
   };

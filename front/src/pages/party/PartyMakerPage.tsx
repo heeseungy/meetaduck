@@ -15,6 +15,7 @@ import { Party } from '@/types/party';
 import { ListProfile } from '@/types/user.interface';
 import { ArrowsCounterClockwise } from '@phosphor-icons/react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import Swal from 'sweetalert2';
 
 function PartyMakerPage() {
   const setParty = useSetRecoilState(partyState);
@@ -82,7 +83,14 @@ function PartyMakerPage() {
           })
           .then((data) => {
             if (data.endTime !== null && data.endTime !== undefined) {
-              window.alert('파티가 시작됩니다.');
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: '파티가 시작됩니다.',
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              // window.alert('파티가 시작됩니다.');
               navigate('/hintinputform');
             } else if (data.deleted) {
               partyLeaveService(login.guestId).then(() => {
@@ -99,7 +107,13 @@ function PartyMakerPage() {
                   ...prevLoginState,
                   partyId: 0,
                 }));
-                window.alert('삭제된 파티입니다.');
+                Swal.fire({
+                  icon: 'error',
+                  title: '삭제된 파티입니다.',
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                // window.alert('삭제된 파티입니다.');
                 navigate('/party');
               });
             }
@@ -127,7 +141,7 @@ function PartyMakerPage() {
           :${currentTime.getMinutes().toString().length < 2 ? `0${currentTime.getMinutes()}` : currentTime.getMinutes()}`,
       );
     } catch (err) {
-      alert(err.response.data);
+      // alert(err.response.data);
       console.log('Error refreshing party info: ', err);
     }
   };
@@ -167,7 +181,12 @@ function PartyMakerPage() {
 
   const startHandler = async () => {
     if (endDate === '') {
-      alert('올바른 시간을 입력해주세요.');
+      Swal.fire({
+        icon: 'error',
+        html: '올바른 시간을 입력해주세요.',
+        confirmButtonColor: '#eea23e',
+      });
+      // alert('올바른 시간을 입력해주세요.');
       return;
     } else {
       try {
@@ -197,8 +216,13 @@ function PartyMakerPage() {
 
         navigate('/hintinputform');
       } catch (err) {
-        console.log('err:', err);
-        alert('올바른 시간을 입력해주세요.');
+        Swal.fire({
+          icon: 'error',
+          html: '올바른 시간을 입력해주세요.',
+          confirmButtonColor: '#eea23e',
+        });
+        // console.log('err:', err);
+        // alert('올바른 시간을 입력해주세요.');
       }
     }
   };
@@ -220,8 +244,13 @@ function PartyMakerPage() {
       //     navigate('/party');
       //   }),
       // );
-
-      alert('파티가 삭제되었습니다');
+      Swal.fire({
+        icon: 'error',
+        html: '파티가 삭제되었습니다.',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      // alert('파티가 삭제되었습니다');
       setLogin((prevLoginState) => ({
         ...prevLoginState,
         guestId: 0,
@@ -229,7 +258,7 @@ function PartyMakerPage() {
       }));
       navigate('/party');
     } catch (err) {
-      alert(err.response.data);
+      // alert(err.response.data);
       navigate('/party');
     }
   };
@@ -242,10 +271,16 @@ function PartyMakerPage() {
         ...prevLoginState,
         partyId: 0,
       }));
-      alert('파티를 나갔습니다.');
+      Swal.fire({
+        icon: 'warning',
+        html: '파티를 나갔습니다.',
+        showCancelButton: false,
+        timer: 1500,
+      });
+      // alert('파티를 나갔습니다.');
       navigate('/party');
     } catch (err) {
-      alert(err.response.data);
+      // alert(err.response.data);
       navigate('/party');
     }
   };
