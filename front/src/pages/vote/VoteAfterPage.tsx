@@ -19,19 +19,23 @@ function VoteAfterPage() {
       nickname: '마니또',
       thumbnailUrl: missionBefore1,
       guestId: 10235486123,
-      profileUrl: '',
       manitiId: 10235486124,
       votedId: 102354861245,
-      manitoFavorability: 100,
+      favorability: {
+        manitiFavorability: 100,
+        manitoFavorability: 100,
+      },
     },
     maniti: {
       nickname: '마니띠',
       thumbnailUrl: RubberDuckBase1,
       guestId: 10235486124,
-      profileUrl: '',
       manitiId: 102354861244,
       votedId: 10235486123,
-      manitoFavorability: 100,
+      favorability: {
+        manitiFavorability: 100,
+        manitoFavorability: 100,
+      },
     },
   };
   return (

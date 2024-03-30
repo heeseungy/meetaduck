@@ -41,7 +41,7 @@ export const partyState = atom<Party>({
 
 export const currentTimeState = atom<string>({
   key: 'currentTimeState',
-  default: '2026-03-30T16:30:27Z',
+  default: '2020-03-30T16:30:27Z',
 }); // new Date()
 
 export const partyStatusState = selector({
@@ -50,14 +50,13 @@ export const partyStatusState = selector({
     const party = get(partyState);
     const date2 = party.endTime;
     const now = get(currentTimeState);
-
     if (date2 === '') {
       return 'Todo';
     } else {
-      const endTime = new Date(date2);
+      const endTime = new Date(new Date(date2).getTime() - 9 * 60 * 60 * 1000);
       const currentTime = new Date(now);
-      const before24Time = new Date(endTime.getTime() - 50 * 60 * 60 * 1000);
-
+      // const currentTime = new Date(new Date(now).getTime() + 100 * 60 * 60 * 1000);
+      const before24Time = new Date(endTime.getTime() - 24 * 60 * 60 * 1000);
       if (currentTime < before24Time) {
         return 'InProgress';
       } else if (currentTime < endTime) {
