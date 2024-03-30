@@ -19,5 +19,12 @@
   align-items: center;
 }
 
-.Content {
+.Loading {
+  position: absolute;
+  top: 20rem;
+  left: calc(50dvw - 6rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
