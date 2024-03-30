@@ -25,6 +25,7 @@ function HintInputFormPage() {
   
     hintPageService(login.guestId)
       .then((data: Answer[]) => {
+        console.log(data);
         if (
           data &&
           data[0].hintStatusAnswer !== undefined &&
@@ -33,7 +34,18 @@ function HintInputFormPage() {
         ) {
           console.log(data);
           sessionStorage.setItem('finishHintInput', 'true'); // 세션 스토리지 설정
-          navigate('/mission'); // 조건이 만족되면 리디렉션
+          // navigate('/mission'); // 조건이 만족되면 리디렉션
+        }
+        return data;
+      })
+      .then((data) => {
+        if (
+          data &&
+          data[0].hintStatusAnswer !== undefined &&
+          data[0].hintStatusAnswer !== null &&
+          data[0].hintStatusAnswer !== ''
+        ) {
+          navigate('/mission');
         }
       });
   }, [login.guestId]); // 의존성 배열 수정

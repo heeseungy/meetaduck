@@ -1,7 +1,7 @@
 import styles from '@/styles/commons/Input.module.css';
 
 interface InputProps {
-  maxLength: number;
+  maxLength?: number;
   usersInput: string;
   onChange: (value: string) => void;
   className?: string;

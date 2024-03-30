@@ -3,8 +3,7 @@ SET foreign_key_checks = 0;
 
 -- users
 INSERT INTO users (kakao_id, nickname, profile_url, thumbnail_url, birthday, phonenumber)
-VALUES (00000, '관리자', 'http://example.com/prifiles/admin', 'http://example.com/thumbnails/admin', '0000',
-        '000-0000-0000'),
+
        (10001, '강지수', 'http://example.com/profiles/kang', 'http://example.com/thumbnails/kang', '0101',
         '010-1234-5678'),
        (10002, '김현영', 'http://example.com/profiles/kim', 'http://example.com/thumbnails/kim', '0202', '010-2345-6789'),
