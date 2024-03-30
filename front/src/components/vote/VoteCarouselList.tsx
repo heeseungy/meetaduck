@@ -1,41 +1,43 @@
+import { useEffect, useState } from 'react';
+
+import { partyState } from '@/recoil/atom';
+import { partyListAll } from '@/services/voteService';
 import styles from '@/styles/vote/VoteCarouselList.module.css';
 import { ListProfile } from '@/types/user.interface';
+import { useRecoilValue } from 'recoil';
 
 import VoteCarouselListItem from './VoteCarouselListItem';
 
-type VoteCarouselListProps = {
-  partyList: ListProfile[];
-};
-function VoteCarouselList(voteCarouselListProps: VoteCarouselListProps) {
-  console.log(voteCarouselListProps);
-  const tempList1 = voteCarouselListProps.partyList.slice();
-  const tempList2 = voteCarouselListProps.partyList.slice();
-  // tempList1.sort((a, b) => a.guestId - b.guestId);
-  // tempList2.sort((a, b) => a.guestId - b.guestId);
-  const item1: ListProfile[] = tempList1.splice(0, 0);
-  console.log(item1);
-  const item2: ListProfile[] = tempList1.splice(0, 1);
-  tempList1.splice(tempList1.length, 0, ...item1);
-  console.log(tempList1);
-  tempList2.splice(tempList1.length, 0, ...item2);
-
-  const voteCarouselListProps1: VoteCarouselListProps = {
-    partyList: tempList1,
-  };
-  const voteCarouselListProps2: VoteCarouselListProps = {
-    partyList: tempList2,
-  };
-
+function VoteCarouselList() {
+  const party = useRecoilValue(partyState);
+  const [partyList, setPartyList] = useState<ListProfile[]>([]);
+  const [voteCarouselListProps1, setVoteCarouselListProps1] = useState<ListProfile[]>([]);
+  const [voteCarouselListProps2, setVoteCarouselListProps2] = useState<ListProfile[]>([]);
+  useEffect(() => {
+    partyListAll(party.partyId).then((data) => {
+      setPartyList(data);
+    });
+  }, []);
+  useEffect(() => {
+    let tempList1 = partyList.slice();
+    const item1 = tempList1.pop();
+    tempList1.unshift(item1!);
+    let tempList2 = tempList1.slice();
+    const item2 = tempList2.pop();
+    tempList2.unshift(item2!);
+    setVoteCarouselListProps1(tempList1);
+    setVoteCarouselListProps2(tempList2);
+  }, [partyList]);
   return (
     <div className={styles.CarouselContainer}>
       <div>
-        <VoteCarouselListItem {...voteCarouselListProps} />
+        <VoteCarouselListItem {...{ partyList: partyList }} />
       </div>
-      {/* <div className={styles.Carouselsecond}>
-        <VoteCarouselListItem {...voteCarouselListProps1} />
-      </div> */}
+      <div className={styles.Carouselsecond}>
+        <VoteCarouselListItem {...{ partyList: voteCarouselListProps1 }} />
+      </div>
       <div className={styles.Carouselthird}>
-        <VoteCarouselListItem {...voteCarouselListProps2} />
+        <VoteCarouselListItem {...{ partyList: voteCarouselListProps2 }} />
       </div>
     </div>
   );

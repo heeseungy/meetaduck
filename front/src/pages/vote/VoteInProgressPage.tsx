@@ -2,19 +2,14 @@ import { useEffect, useState } from 'react';
 
 import VoteCard from '@/components/vote/VoteCard';
 import VoteCarouselList from '@/components/vote/VoteCarouselList';
+import { partyState } from '@/recoil/atom';
 import styles from '@/styles/vote/VoteInProgressPage.module.css';
 import { ListProfile } from '@/types/user.interface';
 import { useRecoilValue } from 'recoil';
-import { partyState } from '@/recoil/atom';
-import { partyListAll } from '@/services/voteService';
+
 function VoteInProgressPage() {
-  const party = useRecoilValue(partyState)
-  const [partyList, setPartyList] = useState<ListProfile[]>([]);
-  useEffect(()=>{
-    partyListAll(party.partyId).then((data)=>{
-      setPartyList(data)
-    })
-  }, [])
+  const party = useRecoilValue(partyState);
+
   return (
     <div className={`${styles.Container}`}>
       <div className={styles.Title}>
@@ -25,7 +20,7 @@ function VoteInProgressPage() {
         <VoteCard />
       </div>
       <div className={styles.Carousel}>
-        <VoteCarouselList {...{ partyList: partyList }} />
+        <VoteCarouselList />
       </div>
     </div>
   );

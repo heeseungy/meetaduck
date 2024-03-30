@@ -14,10 +14,10 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 function ResultPage() {
   const login = useRecoilValue(loginState);
   const setcurrentTime = useSetRecoilState(currentTimeState);
-  // const currentTime = useRecoilValue(currentTimeState);
+  const currentTime = useRecoilValue(currentTimeState);
   const partyStatus = useRecoilValue(partyStatusState);
   const [myProfile, setMyProfile] = useState<ListProfile>(MY_PROFILE);
-
+  const [check, setCheck] = useState(false);
   useEffect(() => {
     setcurrentTime(new Date().toISOString());
     // 참가자 단일 조회 axios
@@ -27,12 +27,17 @@ function ResultPage() {
     });
   }, []);
 
+  useEffect(() => {
+    if (partyStatus === 'Complete') {
+      setCheck(true);
+    }
+  }, [currentTime]);
   if (StatusType[partyStatus] === StatusType.Todo) {
     // 시작 전
     return <div>아직 파티가 시작하지 않았습니다.</div>;
   } else if (StatusType[partyStatus] === StatusType.Complete) {
     // 결과 발표
-    return <ResultSlides />;
+    return check ? <ResultSlides /> : <div></div>;
   } else if (StatusType[partyStatus] === StatusType.Before24) {
     // 24시간 전부터
     if (myProfile.votedId === 0) {

@@ -41,7 +41,7 @@ export const partyState = atom<Party>({
 
 export const currentTimeState = atom<string>({
   key: 'currentTimeState',
-  default: '',
+  default: '2026-03-30T16:30:27Z',
 }); // new Date()
 
 export const partyStatusState = selector({

@@ -19,7 +19,7 @@ function Carousel({ children, className }: CarouselProps) {
     autoplay: true,
     autoplaySpeed: 0,
     speed: 5000,
-    slidesToShow: 2.5,
+    slidesToShow: 3.5,
     slidesToScroll: 1,
     arrows: false,
     pauseOnFocus: false,
