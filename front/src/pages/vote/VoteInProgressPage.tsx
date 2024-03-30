@@ -1,15 +1,8 @@
-import { useEffect, useState } from 'react';
-
 import VoteCard from '@/components/vote/VoteCard';
 import VoteCarouselList from '@/components/vote/VoteCarouselList';
-import { partyState } from '@/recoil/atom';
 import styles from '@/styles/vote/VoteInProgressPage.module.css';
-import { ListProfile } from '@/types/user.interface';
-import { useRecoilValue } from 'recoil';
 
 function VoteInProgressPage() {
-  const party = useRecoilValue(partyState);
-
   return (
     <div className={`${styles.Container}`}>
       <div className={styles.Title}>
