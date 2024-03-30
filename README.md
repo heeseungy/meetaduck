@@ -122,7 +122,7 @@ Backend 패키지 구조 (향후 추가)
 
 ## ERD
 
-![ERD](https://lab.ssafy.com/s10-bigdata-dist-sub2/S10P22C108/-/blob/develop/exec/ERD.png?ref_type=heads)
+![ERD](/uploads/cf53f079788317a7fb7245584bba1419/ERD.png)
 
 ## 서비스 소개 (주요 기능)
 
