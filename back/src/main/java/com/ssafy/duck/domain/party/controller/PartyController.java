@@ -20,6 +20,7 @@ import java.sql.Time;
 import java.time.Duration;
 import java.time.Instant;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/parties")
 @RequiredArgsConstructor
