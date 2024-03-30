@@ -11,6 +11,7 @@ import { ArrowsClockwise, PlusCircle } from '@phosphor-icons/react';
 import AWS from 'aws-sdk';
 import imageCompression from 'browser-image-compression';
 import { useRecoilValue } from 'recoil';
+import Swal from 'sweetalert2';
 
 type MissionManitoProps = {
   nickname: string;
@@ -114,7 +115,13 @@ function MissionManitoPage(props: MissionManitoProps) {
           // return uploadToServer(compressedFile); // write your own logic
         })
         .catch(function (error) {
-          window.alert('이미지 파일을 업로드해주세요.');
+          Swal.fire({
+            icon: 'error',
+            html: '이미지 파일을 업로드해주세요.',
+            confirmButtonColor: '#eea23e',
+          });
+
+          // window.alert('이미지 파일을 업로드해주세요.');
           console.log(error.message);
         });
     }
@@ -152,7 +159,12 @@ function MissionManitoPage(props: MissionManitoProps) {
   // 제출 완료했나요?
   const submitHandler = () => {
     if (imgUrl === null) {
-      window.alert('사진을 올려주세요!');
+      Swal.fire({
+        icon: 'error',
+        html: '이미지 파일을 업로드해주세요.',
+        confirmButtonColor: '#eea23e',
+      });
+      // window.alert('사진을 올려주세요!');
       return;
     }
     // 제출 axios

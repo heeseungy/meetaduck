@@ -7,5 +7,6 @@ export const Axios = axios.create({
     Accept: '*',
     'Content-Type': 'application/json;charset=utf-8',
     'Access-Control-Allow-Origin': '*',
+    Authorization: `Bearer ${sessionStorage.getItem('JWTToken')}`,
   },
 });
