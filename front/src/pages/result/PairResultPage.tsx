@@ -72,7 +72,7 @@ function PairResultPage(pairResultProps: PairResultProps) {
         <div className={styles.Row}>
           <div className={styles.Column}>
             <div className={`${styles.MarginBottom1_5} ${styles.Column}`}>
-              <div className={`FontSBold ${styles.MarginBottom1}`}>대화 빈도/횟수</div>
+              <div className={`FontSBold ${styles.MarginBottom1}`}>대화 횟수</div>
               <ResultCountCard {...{ count: result.chatCount }} />
             </div>
             <div className={`${styles.MarginBottom1_5} ${styles.Column}`}>
