@@ -29,6 +29,11 @@
   justify-content: center;
   align-items: center;
 }
+
+.timeDown {
+  align-self: flex-end;
+}
+
 .ManitoImage {
   width: 2rem;
   height: auto;

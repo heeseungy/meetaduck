@@ -8,7 +8,7 @@ import { chatIdListState, loginState } from '@/recoil/atom';
 import { chatListLoadService } from '@/services/chatListLoadService';
 import styles from '@/styles/chatting/ChattingDetailPage.module.css';
 import { MessageRes } from '@/types/chatMessage';
-import { Client, IMessage } from '@stomp/stompjs';
+import { Client } from '@stomp/stompjs';
 import { useRecoilValue } from 'recoil';
 
 function ChattingDetailPage() {
