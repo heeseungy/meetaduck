@@ -100,7 +100,7 @@ function ChattingInputArea({ stompClient, senderId }: { stompClient: Client | nu
     <>
       <div className={`${styles.inputArea}`}>
         <div className={`${imgUrl != '' ? styles.PreviewBackground : styles.PreviewHidden}`}>
-          <input className={styles.ImageInput} type="file" id="file" onChange={handleFileInput} />
+          <input className={styles.ImageInput} type="file" accept="image/*" id="file" onChange={handleFileInput} />
           <div className={styles.ImageBox}>
             <div className={styles.DeleteButton} onClick={handlerDelete}>
               <XCircle size={20} color="#4d4637" weight="fill" />

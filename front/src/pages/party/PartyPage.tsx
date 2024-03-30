@@ -87,7 +87,7 @@ function PartyPage() {
           onChange={handleInputChange}
           fields={6}
           name="accessCode"
-          inputMode="numeric"
+          inputMode="verbatim"
           autoFocus={true}
           {...props}
         />

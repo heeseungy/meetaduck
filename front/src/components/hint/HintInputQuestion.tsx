@@ -85,6 +85,7 @@ function HintInputQuestion() {
                   setHints((prevHints) => {
                     const updatedHints = [...prevHints]; // 이전 상태를 복사하여 새로운 배열 생성
                     updatedHints[index].hintStatusAnswer = newValue; // 새로운 배열에서 해당 힌트의 상태 업데이트
+                    console.log(hints);
                     return updatedHints; // 새로운 상태 반환
                   });
                 }}

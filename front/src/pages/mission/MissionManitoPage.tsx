@@ -217,7 +217,13 @@ function MissionManitoPage(props: MissionManitoProps) {
               </Button>
             )}
           </div>
-          <input className={styles.ImageInput} type="file" id="MissionFile" onChange={handleFileInput} />
+          <input
+            className={styles.ImageInput}
+            type="file"
+            accept="image/*"
+            id="MissionFile"
+            onChange={handleFileInput}
+          />
         </div>
       </div>
     </div>
