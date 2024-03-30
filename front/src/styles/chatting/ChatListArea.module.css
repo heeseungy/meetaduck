@@ -79,16 +79,15 @@
   word-break: keep-all;
   white-space: normal;
 }
-
 .Message {
   border-radius: 0.3125rem;
   padding: 0.5rem;
-  max-width: 17rem;
+  max-width: 13rem;
   word-break: break-all;
   white-space: normal;
 }
 .Message img {
-  max-width: 16.5rem;
+  max-width: 12.5rem;
   height: auto;
   background-color: white;
   border-radius: 0.3125rem;
