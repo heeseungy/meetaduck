@@ -122,7 +122,7 @@ Backend 패키지 구조 (향후 추가)
 
 ## ERD
 
-![ERD](/uploads/cf53f079788317a7fb7245584bba1419/ERD.png)
+![ERD](/uploads/9a2ecd9e6644bdb2e818e294020073a9/ERD.png)
 
 ## 서비스 소개 (주요 기능)
 
