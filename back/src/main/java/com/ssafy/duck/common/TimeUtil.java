@@ -13,10 +13,16 @@ public class TimeUtil {
         Instant startTime = Instant.parse(start);
         Instant endTime = Instant.parse(end);
 
-        // 시스템 기본 시간대(ZoneId)를 사용하여 LocalDate로 변환
-        LocalDate startDate = startTime.atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate endDate = endTime.atZone(ZoneId.systemDefault()).toLocalDate();
+        System.out.println("start " +start + "  end "  + end );
+        System.out.println("startTime " +startTime + "  endTime "  + endTime );
+
+        // ZoneOffset UTC를 사용하여 LocalDate로 변환
+        LocalDate startDate = startTime.atZone(ZoneOffset.UTC).toLocalDate();
+        LocalDate endDate = endTime.atZone(ZoneOffset.UTC).toLocalDate();
+
+        System.out.println("startDate " +startDate + "  endDate "  + endDate );
         return (int) ChronoUnit.DAYS.between(startDate, endDate)+1;
+
     }
 
     // 2. LocalDate -> Instant
