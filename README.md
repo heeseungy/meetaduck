@@ -74,17 +74,21 @@ Meet A Duck ! 은 새로운 만남 속에서 새로운 사람들과 친밀감을
 
 
 **BIGDATA**
+
 ![Hadoop](https://img.shields.io/badge/hadoop-66CCFF.svg?style=for-the-badge&logo=apachehadoop&logoColor=white)
 ![Spark](https://img.shields.io/badge/spark-E25A1C.svg?style=for-the-badge&logo=apachespark&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/fastapi-009688.svg?style=for-the-badge&logo=fastapi&logoColor=white)
 ![Uvicorn](https://img.shields.io/badge/uvicorn-D82390.svg?style=for-the-badge&logo=gunicorn&logoColor=white)
 
+
 **AI**
+
 ![Jupyter](https://img.shields.io/badge/jupyter-F37626.svg?style=for-the-badge&logo=jupyter&logoColor=white)
 ![numpy](https://img.shields.io/badge/numpy-013243.svg?style=for-the-badge&logo=numpy&logoColor=white)
 ![Pandas](https://img.shields.io/badge/pandas-150458.svg?style=for-the-badge&logo=pandas&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikitlearn-F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white)
 ![Pytorch](https://img.shields.io/badge/pytorch-EE4C2C.svg?style=for-the-badge&logo=pytorch&logoColor=white)
+
 
 **Collaboration**
 
