@@ -12,6 +12,7 @@ import javax.annotation.Nullable;
 @AllArgsConstructor
 @Builder
 @Getter
+@ToString
 public class HintStatus {
 
     @Id
