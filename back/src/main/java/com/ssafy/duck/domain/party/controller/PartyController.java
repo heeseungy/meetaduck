@@ -83,8 +83,8 @@ public class PartyController {
             chatService.createChat(partyRes.getAccessCode());
             missionService.set(missionService.fetch(), startReq);
             hintService.set(hintService.fetch(), partyRes.getPartyId());
-            taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.convertToUTC(startReq.getEndTime()).minus(Duration.ofDays(1)) );
-//            taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.convertToUTC(startReq.getEndTime()).minus(Duration.ofMinutes(1)) );
+//            taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.convertToUTC(startReq.getEndTime()).minus(Duration.ofDays(1)) );
+            taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.convertToUTC(startReq.getEndTime()).minus(Duration.ofMinutes(30)) );
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();
