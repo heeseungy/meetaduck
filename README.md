@@ -100,7 +100,7 @@ Backend 패키지 구조 (향후 추가)
 
 ## 시스템 아키텍처
 
-![시스템아키텍처](https://lab.ssafy.com/s10-bigdata-dist-sub2/S10P22C108/-/blob/develop/exec/System%20Architecture.png?ref_type=heads)
+![시스템아키텍처](https://lab.ssafy.com/s10-bigdata-dist-sub2/S10P22C108/-/blob/develop/exec/System%20Architecture.png)
 
 ## 화면 정의서
 
