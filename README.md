@@ -42,7 +42,6 @@ Meet A Duck ! 은 새로운 만남 속에서 새로운 사람들과 친밀감을
 ![Gradle](https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=Gradle&logoColor=white)
 ![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
-![Spring Security]
 
 
 **Frontend**
