@@ -92,15 +92,202 @@ frontend 패키지 구조 (향후 추가)
 <summary>
 <b>Backend</b>
 </summary>
-
-```log
-Backend 패키지 구조 (향후 추가)
+```ini
+back
+ ┣ gradle
+ ┃ ┗ wrapper
+ ┃ ┃ ┣ gradle-wrapper.jar
+ ┃ ┃ ┗ gradle-wrapper.properties
+ ┣ src
+ ┃ ┗ main
+ ┃ ┃ ┣ java
+ ┃ ┃ ┃ ┗ com
+ ┃ ┃ ┃ ┃ ┗ ssafy
+ ┃ ┃ ┃ ┃ ┃ ┗ duck
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ common
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ BaseTimeEntity.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ TimeUtil.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ config
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ CorsMvcConfig.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ RabbitConfig.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ RabbitProperties.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ SchedulerConfig.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ SecurityConfig.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ StompConfig.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ domain
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ chat
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ controller
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ChatController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ RabbitStompController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ dto
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ request
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MessageReq.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ response
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ChatRes.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MessageRes.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ entity
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Chat.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Message.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ Topic.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ChatErrorCode.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ChatException.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ repository
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ChatRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MessageRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ TopicRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ service
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ChatService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ guest
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ controller
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ GuestController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ dto
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ request
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ GuestReq.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ VoteReq.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ response
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ GuestRes.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ PairRes.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ VoteRes.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ entity
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ Guest.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ GuestErrorCode.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ GuestException.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ repository
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ GuestRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ service
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ GuestService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ hint
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ controller
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ HintController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ dto
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ request
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ HintReq.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ HintStatusReq.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ response
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ HintRes.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ HintStatusRes.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ entity
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Hint.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ HintStatus.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ HintErrorCode.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ HintException.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ repository
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ HintRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ HintStatusRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ service
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ HintService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ mission
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ controller
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MissionController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ dto
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ request
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MissionImageUpdateReq.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MissionPassReq.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MissionSuccessReq.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ response
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MissionRes.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MyManitoMissionRes.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ entity
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Mission.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MissionStatus.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MissionErrorCode.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MissionException.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ repository
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MissionRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MissionStatusRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ service
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MissionService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ party
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ controller
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ PartyController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ dto
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ request
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ CreateReq.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ DeleteReq.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ StartReq.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ response
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ CreateRes.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ PartyRes.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ entity
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ Party.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ PartyErrorCode.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ PartyException.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ repository
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ PartyRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ service
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ PartyService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ result
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ controller
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ResultController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ dto
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ model
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Favorability.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ FavorabilityProjection.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ request
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ResultReq.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ response
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MissionResultRes.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ResultRes.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ResultWithManitiRes.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ResultWithManitoRes.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ entity
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ Result.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ResultErrorCode.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ResultException.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ repository
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ResultRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ service
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ResultService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ user
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ controller
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ UserController.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ dto
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ model
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ KakaoUserInfo.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ OAuthToken.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ request
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ UserSignUpReq.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ response
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ UserRes.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ entity
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ User.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ UserErrorCode.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ UserException.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ repository
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ UserRepository.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ service
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ UserService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ GlobalExceptionHandler.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ jwt
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ CustomJwtAuthenticationFilter.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ JwtProperties.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ scheduler
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ TaskSchedulerService.java
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ DuckApplication.java
+ ┃ ┃ ┗ resources
+ ┣ .gitignore
+ ┣ build.gradle
+ ┣ Dockerfile
+ ┣ gradlew
+ ┣ gradlew.bat
+ ┣ Jenkinsfile
+ ┣ keystore.p12
+ ┣ localhost.p12
+ ┗ settings.gradle
 ```
 </details>
 
 ## 시스템 아키텍처
 
-![시스템아키텍처](https://lab.ssafy.com/s10-bigdata-dist-sub2/S10P22C108/-/blob/develop/exec/System%20Architecture.png)
+![시스템아키텍처](/uploads/cc1443628232deb6f709993f73930e49/System_Architecture.png)
 
 ## 화면 정의서
 
