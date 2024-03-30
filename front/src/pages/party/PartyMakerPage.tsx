@@ -23,11 +23,14 @@ function PartyMakerPage() {
   const login = useRecoilValue(loginState);
   const [refreshTime, setRefreshTime] = useState('');
   const [participants, setParticipants] = useState<ListProfile[]>([]);
-  const [endDate, setEndDate] = useState(() => {
-    const date = new Date(); // 현재 날짜와 시간을 가져옵니다.
-    date.setDate(date.getDate() + 3); // 현재 날짜에 3일을 더합니다.
-    return date.toISOString(); // ISO 8601 문자열 형식으로 변환합니다.
-  });
+  const [endDate, setEndDate] = useState<string>(
+    '',
+    //   () => {
+    //   const date = new Date(); // 현재 날짜와 시간을 가져옵니다.
+    //   date.setDate(date.getDate() + 3); // 현재 날짜에 3일을 더합니다.
+    //   return date.toISOString(); // ISO 8601 문자열 형식으로 변환합니다.
+    // }
+  );
   const [selectedHour, setSelectedHour] = useState(0); // 시간 상태 변수
   const [selectedMinute, setSelectedMinute] = useState(0); // 분 상태 변수
   const navigate = useNavigate();
@@ -163,35 +166,40 @@ function PartyMakerPage() {
   }, [selectedHour, selectedMinute]);
 
   const startHandler = async () => {
-    try {
-      const selectedDate = new Date(endDate); // 선택한 날짜를 기반으로 Date 객체 생성
-      selectedDate.setHours(selectedHour); // 선택한 시간 설정
-      selectedDate.setMinutes(selectedMinute); // 선택한 분 설정
-
-      const isoSelectedDate = selectedDate.toISOString(); // ISO 형식으로 변환
-
-      console.log('selectedDate :', selectedDate);
-      console.log('isoSelectedDate :', isoSelectedDate);
-
-      await Axios.patch(`/api/parties`, {
-        accessCode: party.accessCode,
-        endTime: isoSelectedDate, // 종료 시간을 선택한 날짜와 시간으로 설정
-        userId: party.userId,
-      }).then(() => {
-        partyInfoService(party.partyId).then((data: Party) => {
-          console.log(data);
-          setParty(data);
-        });
-      });
-      // setParty((prevPartyState) => ({
-      //   ...prevPartyState,
-      //   endTime: isoSelectedDate, // recoil 상태에 선택한 날짜와 시간으로 설정
-      // }));
-
-      navigate('/hintinputform');
-    } catch (err) {
-      console.log('err:', err);
+    if (endDate === '') {
       alert('올바른 시간을 입력해주세요.');
+      return;
+    } else {
+      try {
+        const selectedDate = new Date(endDate); // 선택한 날짜를 기반으로 Date 객체 생성
+        selectedDate.setHours(selectedHour); // 선택한 시간 설정
+        selectedDate.setMinutes(selectedMinute); // 선택한 분 설정
+
+        const isoSelectedDate = selectedDate.toISOString(); // ISO 형식으로 변환
+
+        console.log('selectedDate :', selectedDate);
+        console.log('isoSelectedDate :', isoSelectedDate);
+
+        await Axios.patch(`/api/parties`, {
+          accessCode: party.accessCode,
+          endTime: isoSelectedDate, // 종료 시간을 선택한 날짜와 시간으로 설정
+          userId: party.userId,
+        }).then(() => {
+          partyInfoService(party.partyId).then((data: Party) => {
+            console.log(data);
+            setParty(data);
+          });
+        });
+        // setParty((prevPartyState) => ({
+        //   ...prevPartyState,
+        //   endTime: isoSelectedDate, // recoil 상태에 선택한 날짜와 시간으로 설정
+        // }));
+
+        navigate('/hintinputform');
+      } catch (err) {
+        console.log('err:', err);
+        alert('올바른 시간을 입력해주세요.');
+      }
     }
   };
 

@@ -26,6 +26,7 @@ function HintInputQuestion() {
       console.log('data:', data);
       setHints(data);
       if (data.length === 1 && data[0].hintId === 0) {
+        sessionStorage.setItem('finishHintInput', 'true');
         navigate('/mission');
       } else {
         setHintsAnswer(
