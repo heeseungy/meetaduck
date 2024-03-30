@@ -44,6 +44,21 @@ public class HintService {
     public List<HintRes> getHintQuestion(Long guestId) {
         //힌트 id 가져오기
         List<HintStatus> hintStatusList = hintStatusRepository.findAllByGuestGuestId(guestId);
+        if(hintStatusList.isEmpty()){
+            throw new HintException(HintErrorCode.STATUS_NOT_FOUND);
+        }
+
+        // 힌트를 이미 입력한 경우 hintId:0 반환
+        if(hintStatusList.get(0).getHintStatusAnswer() != null){
+            System.out.println(hintStatusList.get(0).toString());
+            List<HintRes> hintResList = new ArrayList<>();
+            HintRes hintRes = HintRes.builder()
+                    .hintId(0L)
+                    .hintContent("힌트 이미 입력했습니다.")
+                    .build();
+            hintResList.add(hintRes);
+            return hintResList;
+        }
 
         //힌트 질문 가져오기
         List<Hint> hintList = new ArrayList<>();
@@ -72,7 +87,7 @@ public class HintService {
         Party party = partyRepository.findByPartyId(partyId)
                 .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
         int period = TimeUtil.calcDate(party.getStartTime().toString(), party.getEndTime().toString()) - 1;
-        System.out.println("period" +period);
+        System.out.println("hint period " +period);
 
         Collections.shuffle(hintList);
         // guest 마다 hint status에 데이터 추가하기
