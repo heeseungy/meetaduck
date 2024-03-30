@@ -34,4 +34,4 @@ ENV PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
 
 RUN pip install -r requirements.txt
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8881"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8881", "--reload"]

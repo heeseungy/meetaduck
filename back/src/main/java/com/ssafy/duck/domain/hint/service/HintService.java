@@ -104,7 +104,6 @@ public class HintService {
         Party party = partyRepository.findByPartyId(myInfo.getPartyId())
                 .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
         boolean isEnd = TimeUtil.calcDate(TimeUtil.convertToKST(Instant.now()).toString(), party.getEndTime().toString()) == 0;
-
         List<HintStatusRes> hintStatusResList = new ArrayList<>();
         List<HintStatus> hintStatusList = hintStatusRepository.findAllByGuestGuestId(manitoInfo.getGuestId());
 
@@ -135,7 +134,6 @@ public class HintService {
                         .build();
                 hintStatusResList.add(res);
             }
-
         }
 
 
