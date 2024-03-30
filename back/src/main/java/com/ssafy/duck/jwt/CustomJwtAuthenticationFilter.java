@@ -12,7 +12,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-//@Component
+@Component
 @RequiredArgsConstructor
 public class CustomJwtAuthenticationFilter extends OncePerRequestFilter {
 
@@ -46,6 +46,10 @@ public class CustomJwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         System.out.println("CustomJwtAuthenticationFilter");
+
+        if (request.getMethod().equals("OPTIONS")) {
+            filterChain.doFilter(request, response);
+        }
 
         if (isFilterNotNeeded(request)) {
             filterChain.doFilter(request, response);
