@@ -5,11 +5,11 @@ import ResultSlides from '@/pages/result/ResultSlidesPage';
 import VoteAfterPage from '@/pages/vote/VoteAfterPage';
 import VoteBefore24Page from '@/pages/vote/VoteBefore24Page';
 import VoteInProgressPage from '@/pages/vote/VoteInProgressPage';
-import { currentTimeState, loginState, partyState, partyStatusState } from '@/recoil/atom';
+import { currentTimeState, loginState, partyStatusState } from '@/recoil/atom';
 import { MY_PROFILE } from '@/recoil/dummy';
 import { getOneInfoService } from '@/services/resultService';
 import { StatusType } from '@/types/party';
-import { ListProfile, PairRank } from '@/types/user.interface';
+import { ListProfile } from '@/types/user.interface';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 function ResultPage() {

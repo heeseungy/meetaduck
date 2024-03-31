@@ -4,7 +4,11 @@ import { Axios } from './axios';
 
 export async function chatListLoadService(chatId: number, setMessages: (messages: MessageRes[]) => void) {
   try {
-    const response = await Axios.get(`/api/chats/${chatId}/messages`);
+    const response = await Axios.get(`/api/chats/${chatId}/messages`, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem('JWT')}`,
+      },
+    });
     // console.log(response.data);
     setMessages(response.data);
   } catch (error) {

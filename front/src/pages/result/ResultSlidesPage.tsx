@@ -1,13 +1,11 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
-import Card from '@/components/commons/Card';
 import Loading from '@/components/commons/Loading';
 import Slides from '@/components/commons/Slides';
 import PairResultPage from '@/pages/result/PairResultPage';
 import ResultPairListPage from '@/pages/result/ResultPairListPage';
 import { loginState, partyState } from '@/recoil/atom';
-import { PAIR_LIST } from '@/recoil/dummy';
-import { MANITI_RESULT, MANITO_RESULT } from '@/recoil/dummy';
+import { MANITI_RESULT, MANITO_RESULT, PAIR_LIST } from '@/recoil/dummy';
 import { getManitiAnalysis, getManitoAnalysis, pairResultService } from '@/services/resultService';
 import { Role } from '@/types/party';
 import { ManitoResultAnalysis, ResultListItemProps, ResultListProps } from '@/types/result';

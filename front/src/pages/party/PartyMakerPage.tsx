@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Button from '@/components/commons/Button';
 import Card from '@/components/commons/Card';
-import LeaveButton from '@/components/commons/LeaveButton';
 import DatePickerInput from '@/components/party/DatePickerInput';
 import ShareButton from '@/components/party/ShareButton';
 import { loginState, partyState } from '@/recoil/atom';
@@ -40,7 +39,11 @@ function PartyMakerPage() {
     // 파티 목록 조회
     const fetchPartyInfo = async () => {
       try {
-        const usersInfo = await Axios.get(`/api/guests/all/${party.partyId}`);
+        const usersInfo = await Axios.get(`/api/guests/all/${party.partyId}`, {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('JWT')}`,
+          },
+        });
         console.log('useInfo', usersInfo);
         setParticipants(usersInfo.data);
         const currentTime = new Date();
@@ -123,7 +126,11 @@ function PartyMakerPage() {
 
   const refreshClickHandler = async () => {
     try {
-      const usersInfo = await Axios.get(`/api/guests/all/${party.partyId}`);
+      const usersInfo = await Axios.get(`/api/guests/all/${party.partyId}`, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('JWT')}`,
+        },
+      });
       setParticipants(usersInfo.data);
       const currentTime = new Date();
 
@@ -199,11 +206,19 @@ function PartyMakerPage() {
         console.log('selectedDate :', selectedDate);
         console.log('isoSelectedDate :', isoSelectedDate);
 
-        await Axios.patch(`/api/parties`, {
-          accessCode: party.accessCode,
-          endTime: isoSelectedDate, // 종료 시간을 선택한 날짜와 시간으로 설정
-          userId: party.userId,
-        }).then(() => {
+        await Axios.patch(
+          `/api/parties`,
+          {
+            accessCode: party.accessCode,
+            endTime: isoSelectedDate, // 종료 시간을 선택한 날짜와 시간으로 설정
+            userId: party.userId,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${sessionStorage.getItem('JWT')}`,
+            },
+          },
+        ).then(() => {
           partyInfoService(party.partyId).then((data: Party) => {
             console.log(data);
             setParty(data);
@@ -234,6 +249,9 @@ function PartyMakerPage() {
     console.log('파티닫기');
     try {
       await Axios.delete(`/api/parties`, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('JWT')}`,
+        },
         data: {
           accessCode: party.accessCode,
           userId: party.userId,
@@ -269,7 +287,11 @@ function PartyMakerPage() {
   const leaveHandler = async () => {
     console.log('나가기');
     try {
-      await Axios.delete(`/api/guests/${login.guestId}`);
+      await Axios.delete(`/api/guests/${login.guestId}`, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('JWT')}`,
+        },
+      });
       setLogin((prevLoginState) => ({
         ...prevLoginState,
         partyId: 0,

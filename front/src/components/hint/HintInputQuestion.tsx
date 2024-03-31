@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { loginState } from '@/recoil/atom';
 import { HintInputQuestionService } from '@/services/HintInputQuestionService';
-import { Axios } from '@/services/axios';
 import { updateHintAnswersService } from '@/services/updateHintAnswersService';
 import styles from '@/styles/hint/HintInputQuestion.module.css';
 import { Answer, Hint } from '@/types/hint';
