@@ -38,11 +38,11 @@ function PartyCreatePage() {
           partyName: partyName,
           userId: login.userId,
         },
-        // {
-        //   headers: {
-        //     Authorization: `Bearer ${sessionStorage.getItem('JWT')}`
-        //   }
-        // }
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('JWT')}`,
+          },
+        },
       );
 
       setLogin((prevLoginState) => ({

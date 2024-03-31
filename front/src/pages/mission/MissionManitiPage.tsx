@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import rubberDuckBase from '@/assets/images/RubberDuckBase.png';
 import missionBefore from '@/assets/images/missionBefore.png';
 import Button from '@/components/commons/Button';
 import Card from '@/components/commons/Card';

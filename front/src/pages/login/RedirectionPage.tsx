@@ -2,10 +2,9 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { loginState, partyState } from '@/recoil/atom';
-import { Axios, LoginAxios } from '@/services/axios';
+import { LoginAxios } from '@/services/axios';
 import { partyInfoService } from '@/services/partyStartService';
 import styles from '@/styles/login/LoginPage.module.css';
-import axios from 'axios';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 function RedirectionPage() {

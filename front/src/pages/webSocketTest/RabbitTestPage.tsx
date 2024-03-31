@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 // STOMP 프로토콜을 사용하기 위한 라이브러리를 가져옵니다.
 import styles from '@/styles/webSocket/TestPage2.module.css';
-import { Client, IMessage } from '@stomp/stompjs';
+import { Client } from '@stomp/stompjs';
 import axios from 'axios';
 
 interface MessageReq {

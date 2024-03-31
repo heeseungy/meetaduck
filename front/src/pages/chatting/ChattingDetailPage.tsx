@@ -33,6 +33,9 @@ function ChattingDetailPage() {
     const client = new Client({
       brokerURL: `wss://j10c108.p.ssafy.io:8080/wss`, // Server WebSocket URL
       reconnectDelay: 5000, // 연결 끊겼을 때, 재연결시도까지 지연시간(ms)
+      connectHeaders: {
+        Authorization: `Bearer ${sessionStorage.getItem('JWT')}`, // 여기서 yourJWTToken에 JWT 토큰 값을 대입
+      },
       onConnect: () => {
         console.log('WebSocket 연결됨'); // 이 위치가 서버와의 연결이 성공적으로 이루어졌음을 보장
         client.subscribe(`/exchange/message.exchange/chats.${chatId}.messages`, (message) => {

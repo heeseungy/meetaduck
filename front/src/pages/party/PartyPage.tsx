@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 import duckLogo from '@/assets/images/RubberDuckWithLogo.png';
 import Button from '@/components/commons/Button';
-import Input from '@/components/commons/Input';
 import { loginState, partyState } from '@/recoil/atom';
 import { Axios } from '@/services/axios';
 import styles from '@/styles/party/Partyjoin.module.css';
@@ -26,9 +25,9 @@ function PartyPage() {
     try {
       console.log(sessionStorage.getItem('JWT'));
       const response = await Axios.get(`api/parties/${accessCode}/users/${userId}`, {
-        // headers: {
-        //   Authorization: `Bearer ${sessionStorage.getItem('JWT') !== null ? sessionStorage.getItem('JWT') : ''}`,
-        // },
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('JWT')}`,
+        },
       });
       console.log(response);
       // Axios.get(`/api/guests/all/${partyId}`)
