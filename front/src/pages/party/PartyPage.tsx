@@ -24,7 +24,7 @@ function PartyPage() {
     const accessCode = usersInput;
     const userId = login.userId;
     try {
-      const response = await Axios.get(`/api/parties/${accessCode}/users/${userId}`);
+      const response = await Axios.get(`api/parties/${accessCode}/users/${userId}`);
       console.log(response);
       // Axios.get(`/api/guests/all/${partyId}`)
       setParty((prevPartyState) => ({
