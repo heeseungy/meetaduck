@@ -43,7 +43,7 @@ function ChattingInputArea({ stompClient, senderId }: { stompClient: Client | nu
   const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       var options = {
-        maxSizeMB: 1,
+        maxSizeMB: 1024,
         maxWidthOrHeight: 360,
         useWebWorker: true,
       };
