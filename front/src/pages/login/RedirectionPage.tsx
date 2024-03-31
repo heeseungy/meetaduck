@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { loginState, partyState } from '@/recoil/atom';
-import { Axios } from '@/services/axios';
+import { Axios, LoginAxios } from '@/services/axios';
 import { partyInfoService } from '@/services/partyStartService';
 import styles from '@/styles/login/LoginPage.module.css';
 import axios from 'axios';
@@ -18,7 +18,7 @@ function RedirectionPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    Axios.get('api/users/login', {
+    LoginAxios.get('api/users/login', {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json;charset=utf-8', //json형태로 데이터를 보내겠다는뜻

@@ -31,10 +31,16 @@ function PartyCreatePage() {
       return;
     }
     try {
+      console.log(sessionStorage.getItem('JWTToken'));
       const response = await Axios.post('/api/parties', {
         partyName: partyName,
         userId: login.userId,
-      });
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('JWTToken')}`
+          }
+        });
 
       setLogin((prevLoginState) => ({
         ...prevLoginState,
