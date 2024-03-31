@@ -8,6 +8,7 @@ import { updateHintAnswersService } from '@/services/updateHintAnswersService';
 import styles from '@/styles/hint/HintInputQuestion.module.css';
 import { Answer, Hint } from '@/types/hint';
 import { useRecoilValue } from 'recoil';
+import Swal from 'sweetalert2';
 
 import Button from '../commons/Button';
 import Input from '../commons/Input';
@@ -54,7 +55,13 @@ function HintInputQuestion() {
   const hintSubmitHandler = async () => {
     const isEmptyInput = hintsAnswer.some((hint) => hint.hintStatusAnswer === '');
     if (isEmptyInput) {
-      alert('힌트 답변을 모두 입력하세요.');
+      Swal.fire({
+        icon: 'warning',
+        html: '힌트의 답변을 모두 입력해주세요.',
+        confirmButtonColor: '#eea23e',
+      });
+
+      // alert('힌트 답변을 모두 입력하세요.');
       return;
     } else {
       const hintData = hintsAnswer.map((hint) => ({
@@ -66,7 +73,13 @@ function HintInputQuestion() {
         console.log('hintData:', hintData);
         await updateHintAnswersService(guestId, hintData)
           .then(() => {
-            alert('입력이 완료되었습니다~!');
+            Swal.fire({
+              icon: 'success',
+              html: '입력이 완료되었습니다~!',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            // alert('입력이 완료되었습니다~!');
             sessionStorage.setItem('finishHintInput', 'true');
           })
           .then(() => {
@@ -74,7 +87,12 @@ function HintInputQuestion() {
           });
       } catch (err) {
         console.log('Error updating hint answers:', err);
-        alert('입력 중 오류가 발생했습니다. 다시 시도해주세요.');
+        Swal.fire({
+          icon: 'error',
+          html: '입력 중 오류가 발생했습니다. 다시 시도해주세요.',
+          confirmButtonColor: '#eea23e',
+        });
+        // alert('입력 중 오류가 발생했습니다. 다시 시도해주세요.');
       }
     }
   };

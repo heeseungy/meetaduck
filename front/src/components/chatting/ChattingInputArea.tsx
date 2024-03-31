@@ -8,6 +8,7 @@ import { PaperPlaneTilt, Plus, XCircle } from '@phosphor-icons/react';
 import { Client } from '@stomp/stompjs';
 import AWS from 'aws-sdk';
 import imageCompression from 'browser-image-compression';
+import Swal from 'sweetalert2';
 
 function ChattingInputArea({ stompClient, senderId }: { stompClient: Client | null; senderId: number }) {
   const chatId = useParams().chatId!;
@@ -55,8 +56,13 @@ function ChattingInputArea({ stompClient, senderId }: { stompClient: Client | nu
           // return uploadToServer(compressedFile); // write your own logic
         })
         .catch(function (error) {
-          window.alert('이미지 파일을 업로드해주세요.');
-          console.log(error.message);
+          Swal.fire({
+            icon: 'warning',
+            html: '이미지 파일을 업로드해주세요.',
+            confirmButtonColor: '#eea23e',
+          });
+          // window.alert('이미지 파일을 업로드해주세요.');
+          // console.log(error.message);
         });
     }
   };

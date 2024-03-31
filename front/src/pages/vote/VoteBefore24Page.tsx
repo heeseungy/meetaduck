@@ -12,6 +12,7 @@ import styles from '@/styles/vote/VoteBefore24Page.module.css';
 import { ResultListItemProps, ResultListProps } from '@/types/result';
 import { ListProfile, PairRank } from '@/types/user.interface';
 import { useRecoilValue } from 'recoil';
+import Swal from 'sweetalert2';
 
 function VoteBefore24Page({
   guestId,
@@ -40,7 +41,12 @@ function VoteBefore24Page({
 
   const voteFinish = () => {
     if (selectedValue === 0) {
-      window.alert('투표를 해주세요');
+      Swal.fire({
+        icon: 'info',
+        html: '나의 마니또에게 투표해주세요.',
+        confirmButtonColor: '#eea23e',
+      });
+      // window.alert('투표를 해주세요');
     } else {
       votePersonService(guestId, selectedValue);
       setMyProfile((prevMyProfileState) => ({
@@ -54,7 +60,13 @@ function VoteBefore24Page({
     <div className={styles.Container}>
       <div className={`FontL FontBasic ${styles.Title}`}>내 마니또는 누구?</div>
       <div className={styles.ScrollConatiner}>
-        {<VoteRadioButtonList partyList={partyList} onChange={voteRadioButtonListHandler} value={selectedValue} />}
+        {
+          <VoteRadioButtonList
+            partyList={partyList.filter((it) => it.guestId !== myProfile.guestId)}
+            onChange={voteRadioButtonListHandler}
+            value={selectedValue}
+          />
+        }
       </div>
       <Button onClickHandler={voteFinish} bgc={`${selectedValue ? 'voteFilled' : 'voteEmptyGray'}`}>
         투표하기

@@ -12,8 +12,6 @@ export async function loginService(code: string): Promise<void> {
         code: code,
       },
     });
-    // const JWT_Token = response.headers.jwtToken;
-    // localStorage.setItem('token', JWT_Token);
     console.log('responssssse', response);
   } catch (err) {
     console.log('errrrr', err);

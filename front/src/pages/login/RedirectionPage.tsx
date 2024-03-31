@@ -29,12 +29,7 @@ function RedirectionPage() {
       },
     })
       .then((response) => {
-        console.log(response.headers);
-        const authHeader = response.headers['Authorization'];
-        console.log(authHeader);
-        console.log(response);
-        console.log(response.data);
-        sessionStorage.setItem("JWTToken", response.data.jwtToken);
+        sessionStorage.setItem('JWT', response.data.jwtToken);
         if (response.data.partyId !== 0) {
           partyInfoService(response.data.partyId)
             .then((data) => {
