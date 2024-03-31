@@ -31,6 +31,7 @@ public class JwtAuthInterceptor implements ChannelInterceptor {
         String jwtToken = accessor.getFirstNativeHeader("Authorization");
         if (jwtToken != null && jwtToken.startsWith("Bearer ")) {
             String token = jwtToken.substring(7);
+            System.out.println("valid " + isValidJwtToken(token));
             // 여기서 token을 검증하는 로직을 구현
              if (!isValidJwtToken(token)) { throw new JwtException(JwtErrorCode.INVALID_JWT); }
         }

@@ -50,7 +50,7 @@ public class CustomJwtAuthenticationFilter extends OncePerRequestFilter {
     private boolean isFilterNotNeeded(HttpServletRequest request) {
         String requestUri = request.getRequestURI();
         System.out.println(requestUri);
-        return requestUri.contains("/api/users/login");
+        return requestUri.contains("/api/users/login") || requestUri.contains("/wss");
     }
 
     @Override
@@ -61,6 +61,8 @@ public class CustomJwtAuthenticationFilter extends OncePerRequestFilter {
         if (request.getMethod().equals("OPTIONS")) {
             filterChain.doFilter(request, response);
         }
+
+        System.out.println("isFilterNotNeeded : " + isFilterNotNeeded(request));
 
         if (isFilterNotNeeded(request)) {
             filterChain.doFilter(request, response);
