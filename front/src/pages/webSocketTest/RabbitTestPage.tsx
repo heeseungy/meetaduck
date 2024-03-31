@@ -32,20 +32,33 @@ function RabbitTestPage() {
 
   const loadMessages = async () => {
     try {
-      const response = await axios.get(`https://j10c108.p.ssafy.io:8080/api/chats/${chatId}/messages`);
-      console.log(response.data);
-      // const messages
-      setMessages(response.data);
+      const response = await axios.get(`/api/chats/${chatId}/messages`, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('JWT')}`,
+        },
+      });
+      // API 응답이 배열인지 확인
+      if (Array.isArray(response.data)) {
+        setMessages(response.data);
+      } else {
+        console.warn('응답 데이터가 배열이 아님');
+        setMessages([]); // 응답이 배열이 아니면 빈 배열 설정
+      }
     } catch (error) {
       console.error('채팅 내역 로드 실패', error);
+      setMessages([]); // 오류 발생 시 빈 배열 설정
     }
   };
+  
 
   useEffect(() => {
     loadMessages();
     const client = new Client({
-      brokerURL: `wss://j10c108.p.ssafy.io:8080/wss`, // Server WebSocket URL
+      brokerURL: `wss://j10c108.p.ssafy.io/wss`, // Server WebSocket URL
       reconnectDelay: 5000, // 연결 끊겼을 때, 재연결시도까지 지연시간(ms)
+      connectHeaders: {
+        Authorization: `Bearer ${sessionStorage.getItem('JWT')}`, // 여기서 yourJWTToken에 JWT 토큰 값을 대입
+      },
       onConnect: () => {
         console.log('WebSocket 연결됨'); // 이 위치가 서버와의 연결이 성공적으로 이루어졌음을 보장
         client.subscribe(`/exchange/message.exchange/chats.${chatId}.messages`, (message) => {
