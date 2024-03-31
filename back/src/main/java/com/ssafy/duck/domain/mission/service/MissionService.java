@@ -50,7 +50,7 @@ public class MissionService {
     }
 
     public void set(List<Mission> allMissions, StartReq startReq) {
-        int period = TimeUtil.calcDate( TimeUtil.convertToKST(Instant.now()) + "", startReq.getEndTime())-1;
+        int period = TimeUtil.calcDate( TimeUtil.convertToKST(Instant.now()) + "", TimeUtil.convertToKST(TimeUtil.stringToInstant(startReq.getEndTime())).toString())-1;
         System.out.println("mission period " + period);
 //        int period = TimeUtil.calcDate("2024-03-25T20:23:00.123456789Z", startReq.getEndTime())-1;
         Collections.shuffle(allMissions);

@@ -22,8 +22,9 @@ function MissionCompletePage({ role, party, nickname, missionResultList }: Missi
   // 날짜계산
   const startTime = new Date(party.startTime);
   const endTime = new Date(party.endTime);
-  const date = mission.length;
-  // const date = Math.abs((endTime.getTime() - startTime.getTime()) / (24 * 60 * 60 * 1000));
+  // const date = mission.length;
+  const date = Math.abs((endTime.getTime() - startTime.getTime()) / (24 * 60 * 1000)); 
+  console.log("mission complete date", date)
   let days: string[] = [];
   for (let i = 0; i < date; i++) {
     const d = new Date();

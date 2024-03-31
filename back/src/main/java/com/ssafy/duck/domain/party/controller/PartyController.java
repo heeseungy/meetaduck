@@ -76,6 +76,7 @@ public class PartyController {
     public ResponseEntity<PartyRes> start(
             @RequestBody StartReq startReq) {
         PartyRes partyRes = partyService.find(startReq.getAccessCode());
+        System.out.println("startreq " + startReq.getEndTime());
 
         if (partyService.isValidStartReq(startReq, partyRes)) {
             partyService.start(partyRes, startReq);
@@ -85,7 +86,8 @@ public class PartyController {
             missionService.set(missionService.fetch(), startReq);
             hintService.set(hintService.fetch(), partyRes.getPartyId());
 //            taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.convertToUTC(startReq.getEndTime()).minus(Duration.ofDays(1)) );
-            taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.convertToUTC(startReq.getEndTime()).minus(Duration.ofDays(2).minus(Duration.ofMinutes(45)) ) );
+            taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.stringToInstant(startReq.getEndTime()).minus(Duration.ofMinutes(2)) );
+//            taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.convertToKST(TimeUtil.stringToInstant(startReq.getEndTime()).minus(Duration.ofMinutes(5))) );
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().build();

@@ -39,12 +39,12 @@ function DatePickerInput({ setEndDate }) {
           // onChange={(newValue) => {
           //   endDateChange(newValue);
           // }}
-          shouldDisableDate={(day) => {
-            const selectedDay = dayjs(day as Dayjs);
+          // shouldDisableDate={(day) => {
+          //   const selectedDay = dayjs(day as Dayjs);
 
-            // 최소 날짜 이전이거나 최대 날짜 이후인 경우 비활성화
-            return selectedDay.isBefore(minDate, 'day') || selectedDay.isAfter(maxDate, 'day');
-          }}
+          //   // 최소 날짜 이전이거나 최대 날짜 이후인 경우 비활성화
+          //   return selectedDay.isBefore(minDate, 'day') || selectedDay.isAfter(maxDate, 'day');
+          // }}
         />
       </LocalizationProvider>
     </>

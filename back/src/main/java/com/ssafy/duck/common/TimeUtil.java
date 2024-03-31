@@ -21,13 +21,8 @@ public class TimeUtil {
         LocalDate endDate = endTime.atZone(ZoneOffset.UTC).toLocalDate();
 
         System.out.println("startDate " +startDate + "  endDate "  + endDate );
-        return (int) ChronoUnit.DAYS.between(startDate, endDate)+1;
+        return (int) ChronoUnit.DAYS.between(startDate, endDate)+1 +1; // 하루 추가
 
-    }
-
-    // 2. LocalDate -> Instant
-    public static Instant localDateToInstant(LocalDateTime inputTime) {
-        return inputTime.atZone(ZoneId.systemDefault()).toInstant();
     }
 
     // 3. String -> Instant
