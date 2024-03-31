@@ -216,12 +216,15 @@ function PartyMakerPage() {
 
         navigate('/hintinputform');
       } catch (err) {
+        const { response } = err as unknown as AxiosError;
+        const errMessage: string = response.data;
+        console.log(errMessage);
         Swal.fire({
           icon: 'error',
-          html: '올바른 시간을 입력해주세요.',
+          html: errMessage,
           confirmButtonColor: '#eea23e',
         });
-        // console.log('err:', err);
+        console.log('err:', err);
         // alert('올바른 시간을 입력해주세요.');
       }
     }

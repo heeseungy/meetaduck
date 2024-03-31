@@ -31,16 +31,19 @@ function PartyCreatePage() {
       return;
     }
     try {
-      console.log(sessionStorage.getItem('JWTToken'));
-      const response = await Axios.post('/api/parties', {
-        partyName: partyName,
-        userId: login.userId,
-        },
+      console.log(sessionStorage.getItem('JWT'));
+      const response = await Axios.post(
+        '/api/parties',
         {
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem('JWTToken')}`
-          }
-        });
+          partyName: partyName,
+          userId: login.userId,
+        },
+        // {
+        //   headers: {
+        //     Authorization: `Bearer ${sessionStorage.getItem('JWT')}`
+        //   }
+        // }
+      );
 
       setLogin((prevLoginState) => ({
         ...prevLoginState,
