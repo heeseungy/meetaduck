@@ -26,7 +26,7 @@ function ResultSlidesPage() {
   useLayoutEffect(() => {
     // 결과 조회 axios
     pairResultService(party.partyId)
-      .then((data) => {
+      .then((data: ResultListItemProps[]) => {
         const pairListData = data.sort(
           (a: ResultListItemProps, b: ResultListItemProps) =>
             b.maniti.favorability.manitoFavorability - a.maniti.favorability.manitoFavorability,
@@ -34,6 +34,7 @@ function ResultSlidesPage() {
         setPairList({
           pairList: pairListData,
         });
+        setMe(pairListData.filter((it) => it.manito.guestId === login.guestId)[0].manito);
       })
       .then(() => {
         getManitoAnalysis(login.guestId)
@@ -53,10 +54,6 @@ function ResultSlidesPage() {
         setErr(true);
       });
   }, []);
-
-  useLayoutEffect(() => {
-    setMe(pairList.pairList.filter((it) => it.manito.guestId === login.guestId)[0].manito);
-  }, [pairList]);
 
   return (
     <>
