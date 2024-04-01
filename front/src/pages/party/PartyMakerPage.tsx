@@ -91,7 +91,7 @@ function PartyMakerPage() {
             } else if (data.deleted) {
               partyLeaveService(login.guestId).then(() => {
                 setParty({
-                  partyId: 0,
+                  partyId: 1,
                   accessCode: '',
                   partyName: '',
                   startTime: '',
@@ -101,7 +101,7 @@ function PartyMakerPage() {
                 });
                 setLogin((prevLoginState) => ({
                   ...prevLoginState,
-                  partyId: 0,
+                  partyId: 1,
                 }));
                 Swal.fire({
                   icon: 'error',
@@ -270,7 +270,7 @@ function PartyMakerPage() {
       setLogin((prevLoginState) => ({
         ...prevLoginState,
         guestId: 0,
-        partyId: 0,
+        partyId: 1,
       }));
       navigate('/party');
     } catch (err) {

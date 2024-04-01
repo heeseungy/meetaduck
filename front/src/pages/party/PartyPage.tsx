@@ -30,7 +30,6 @@ function PartyPage() {
         },
       });
       console.log(response);
-      // Axios.get(`/api/guests/all/${partyId}`)
       setParty((prevPartyState) => ({
         ...prevPartyState,
         accessCode: accessCode,
