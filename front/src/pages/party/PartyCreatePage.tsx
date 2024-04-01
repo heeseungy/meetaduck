@@ -49,12 +49,14 @@ function PartyCreatePage() {
         ...prevLoginState,
         partyId: response.data.partyId,
       }));
-      setParty((prevPartyState) => ({
-        ...prevPartyState,
+      setParty(() => ({
         accessCode: response.data.accessCode,
         partyName: partyName,
         userId: login.userId,
         partyId: response.data.partyId,
+        endTime: '',
+        startTime: '',
+        deleted: false,
       }));
       navigate('/partymaker');
     } catch (err) {

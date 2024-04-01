@@ -80,7 +80,7 @@ function PartyMakerPage() {
             return data;
           })
           .then((data) => {
-            if (data.endTime !== null && data.endTime !== undefined) {
+            if (data.endTime !== null && data.endTime !== undefined && data.partyId !== 1) {
               Swal.fire({
                 icon: 'success',
                 title: '파티가 시작됩니다.',
