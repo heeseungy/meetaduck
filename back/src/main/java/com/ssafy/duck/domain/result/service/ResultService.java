@@ -20,6 +20,9 @@ import com.ssafy.duck.domain.result.entity.Result;
 import com.ssafy.duck.domain.result.exception.ResultErrorCode;
 import com.ssafy.duck.domain.result.exception.ResultException;
 import com.ssafy.duck.domain.result.repository.ResultRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
 import jdk.swing.interop.SwingInterOpUtils;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
@@ -300,28 +303,30 @@ public class ResultService {
 
     public ResultRes postResultAgain(Long partyId) {
         System.out.println("post result again " + partyId);
-
-        // 파티아이디로 전체 guest id 가져오기
-        List<GuestRes> guestList = guestService.getAllGuestByPartyId(partyId);
-        for (GuestRes guestRes : guestList) {
-            int deleted = resultRepository.deleteResultByGuestID(guestRes.getGuestId());
-            System.out.println("guest " + guestRes.getGuestId() + " deleted " + deleted);
-        }
-
-        // party_id로 result 삭제하기
-//        int deletedCount = resultRepository.deleteAllByGuestPartyPartyId(partyId);
-//        System.out.println("delete count " + deletedCount);
-
         reserveAnalysis(partyId);
         updateResult(partyId);
 
         // partyid로 result개수랑 partyid로 guest개수 확인해서 일치하는지 확인 -> 일치하면  true, 불일치하면 false
         int newResultCount = resultRepository.countByGuestPartyPartyId(partyId);
-        int guestCount = guestList.size();
+        int guestCount =guestService.getAllGuestByPartyId(partyId).size();
+
         System.out.println("result count " + newResultCount + " guestCount " + guestCount);
         if(newResultCount == guestCount)
             return ResultRes.builder().isSuccess(true).build();
         else
             return ResultRes.builder().isSuccess(false).build();
+    }
+
+    public int deleteResult(Long partyId) {
+        // 파티아이디로 전체 guest id 가져오기
+        List<GuestRes> guestList = guestService.getAllGuestByPartyId(partyId);
+        for (GuestRes guestRes : guestList) {
+            Result result = resultRepository.findByGuestGuestId(guestRes.getGuestId());
+            if (result == null)
+                continue;
+            resultRepository.deleteById(result.getResultId());
+            System.out.println("guest " + guestRes.getGuestId());
+        }
+        return 1;
     }
 }

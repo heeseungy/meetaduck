@@ -19,11 +19,10 @@ public interface ResultRepository extends JpaRepository<Result, Long> {
 
     Result findByGuestGuestId(Long guestId);
 
-    @Transactional
-    @Modifying
-    @Query("DELETE FROM Result r WHERE r.guest.guestId = :guestId")
-    Integer deleteResultByGuestID(Long guestId);
+//    @Transactional
+//    @Modifying
+//    @Query("DELETE FROM Result r WHERE r.guest.guestId = :guestId")
+//    void deleteResultByGuestID(Long guestId);
 
-    Integer deleteAllByGuestPartyPartyId(Long partyId);
     int countByGuestPartyPartyId(Long partyId);
 }

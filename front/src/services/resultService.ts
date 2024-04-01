@@ -53,11 +53,15 @@ export async function getManitiAnalysis(guestId: number) {
 
 export async function resultRetry(partyId: number) {
   try {
-    const response = await Axios.get(`/api/results/${partyId}`, {
-      headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('JWT')}`,
+    const response = await Axios.patch(
+      `/api/results/${partyId}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('JWT')}`,
+        },
       },
-    });
+    );
     return response.data;
   } catch (error) {
     return Promise.reject(error);
