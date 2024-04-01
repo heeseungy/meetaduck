@@ -66,8 +66,8 @@ Meet A Duck ! 은 새로운 만남 속에서 새로운 사람들과 친밀감을
 ![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white)
 ![Jenkins](https://img.shields.io/badge/jenkins-%232C5263.svg?style=for-the-badge&logo=jenkins&logoColor=white)
 ![RabbitMQ](https://img.shields.io/badge/RabbitMQ-FF6600.svg?style=for-the-badge&logo=RabbitMQ&logoColor=white)
-<!-- ![Amazon EC2](https://img.shields.io/badge/amazon--ec2-FF9900.svg?style=for-the-badge&logo=amazonec2&logoColor=white) -->
 ![Amazon S3](https://img.shields.io/badge/amazon--s3-%23569A31.svg?style=for-the-badge&logo=amazon-s3&logoColor=white)
+<!-- ![Amazon EC2](https://img.shields.io/badge/amazon--ec2-FF9900.svg?style=for-the-badge&logo=amazonec2&logoColor=white) -->
 
 
 **BIGDATA**
