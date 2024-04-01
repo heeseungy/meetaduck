@@ -259,8 +259,9 @@ public class ResultService {
         List<Guest> guestList = guestRepository.findAllByPartyId(partyId);
         // 파티 진행기간
         PartyRes party = partyService.findByPartyId(partyId);
-        int period = TimeUtil.calcDate(party.getStartTime().toString(), party.getEndTime().toString())-1;
-        System.out.println("period total " + period);
+        int period = TimeUtil.compareDate(party.getStartTime()+"", party.getEndTime()+"", 2 );
+        System.out.println("result update period " +period + " /3 :" + (period/3-1) );
+
         for (Guest guest : guestList) {
             System.out.println("---------------------------- reserve ratio guestId " + guest.getGuestId());
             // 데일리미션 성공 여부 : 100 * (1 - 미션실패개수 / 미션 총개수) * 0.4(비율)

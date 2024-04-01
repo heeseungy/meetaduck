@@ -21,9 +21,33 @@ public class TimeUtil {
         LocalDate endDate = endTime.atZone(ZoneOffset.UTC).toLocalDate();
 
         System.out.println("startDate " +startDate + "  endDate "  + endDate );
-        return (int) ChronoUnit.DAYS.between(startDate, endDate)+1 +1; // 하루 추가
+        return (int) ChronoUnit.DAYS.between(startDate, endDate);
 
     }
+
+    public static int compareDate(String start, String end, int type) {
+        System.out.println("compare Date");
+        // String -> Instant
+        Instant startTime = Instant.parse(start);
+        Instant endTime = Instant.parse(end);
+
+        System.out.println("start " +start + "  end "  + end );
+        System.out.println("startTime " +startTime + "  endTime "  + endTime );
+
+        // ZoneOffset UTC를 사용하여 LocalDate로 변환
+        LocalDateTime  startDate = LocalDateTime.ofInstant(startTime, ZoneOffset.UTC);
+        LocalDateTime  endDate = LocalDateTime.ofInstant(endTime, ZoneOffset.UTC);
+
+        System.out.println("startDate " +startDate + "  endDate "  + endDate );
+        if(type == 1)
+            return (int) ChronoUnit.SECONDS.between(startDate, endDate);
+        else if (type == 2)
+            return (int) ChronoUnit.MINUTES.between(startDate, endDate);
+        else
+            return (int) ChronoUnit.DAYS.between(startDate, endDate);
+
+    }
+
 
     // 3. String -> Instant
     public static Instant stringToInstant(String inputTime) {

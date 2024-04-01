@@ -9,10 +9,12 @@ import com.ssafy.duck.domain.party.dto.request.CreateReq;
 import com.ssafy.duck.domain.party.dto.request.DeleteReq;
 import com.ssafy.duck.domain.party.dto.request.StartReq;
 import com.ssafy.duck.domain.party.dto.response.PartyRes;
+import com.ssafy.duck.domain.party.entity.Party;
 import com.ssafy.duck.domain.party.service.PartyService;
 import com.ssafy.duck.scheduler.TaskSchedulerService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.sql.ast.tree.expression.Star;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -79,14 +81,19 @@ public class PartyController {
         System.out.println("startreq " + startReq.getEndTime());
 
         if (partyService.isValidStartReq(startReq, partyRes)) {
+            int period = TimeUtil.calcDate(TimeUtil.convertToKST(Instant.now())+"", TimeUtil.convertToKST(TimeUtil.stringToInstant(startReq.getEndTime()))+"" );
+            System.out.println("party start period " + period );
+
             partyService.start(partyRes, startReq);
             guestService.setManiti(partyRes.getPartyId());
             chatService.setManiti(partyRes.getPartyId());
             chatService.createChat(partyRes.getAccessCode());
-            missionService.set(missionService.fetch(), startReq);
-            hintService.set(hintService.fetch(), partyRes.getPartyId());
+            missionService.set(period, missionService.fetch(), startReq);
+            hintService.set(period, hintService.fetch(), partyRes.getPartyId());
 //            taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.convertToUTC(startReq.getEndTime()).minus(Duration.ofDays(1)) );
-            taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.stringToInstant(startReq.getEndTime()).minus(Duration.ofMinutes(2)) );
+//            taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.stringToInstant(startReq.getEndTime()).minus(Duration.ofMinutes(1)) );
+            PartyRes party = partyService.find(startReq.getAccessCode());
+            taskSchedulerService.scheduleTask(partyRes.getPartyId(), party.getEndTime().minus(Duration.ofMinutes(1)) );  // 여기 확인
 //            taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.convertToKST(TimeUtil.stringToInstant(startReq.getEndTime()).minus(Duration.ofMinutes(5))) );
             return ResponseEntity.ok().build();
         }

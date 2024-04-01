@@ -49,8 +49,8 @@ public class MissionService {
         return missionRepository.findAll();
     }
 
-    public void set(List<Mission> allMissions, StartReq startReq) {
-        int period = TimeUtil.calcDate( TimeUtil.convertToKST(Instant.now()) + "", TimeUtil.convertToKST(TimeUtil.stringToInstant(startReq.getEndTime())).toString())-1;
+    public void set(int period, List<Mission> allMissions, StartReq startReq) {
+//        int period = TimeUtil.calcDate( TimeUtil.convertToKST(Instant.now()) + "", TimeUtil.convertToKST(TimeUtil.stringToInstant(startReq.getEndTime())).toString())-1;
         System.out.println("mission period " + period);
 //        int period = TimeUtil.calcDate("2024-03-25T20:23:00.123456789Z", startReq.getEndTime())-1;
         Collections.shuffle(allMissions);
@@ -59,13 +59,14 @@ public class MissionService {
                 .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
         List<Guest> guests = guestRepository.findByParty_PartyId(party.getPartyId());
         for (Guest guest : guests) {
-            Instant now = Instant.now();
+            Instant now = TimeUtil.convertToKST(Instant.now());
 //            Instant now = TimeUtil.stringToInstant("2024-03-25T20:23:00.123456789Z");
             int day = -1, count = 0;
             for (Mission mission : subMissions) {
                 if (count++ % 3 == 0) day++;
                 MissionStatus missionStatus = MissionStatus.builder()
-                        .getTime(now.plus(Duration.ofDays(day)))
+//                        .getTime(now.plus(Duration.ofDays(day)))
+                        .getTime(now.plus(Duration.ofMinutes(day*3)))
                         .confirmTime(null)
                         .successTime(null)
                         .failedTime(null)
@@ -221,8 +222,9 @@ public class MissionService {
     // hint에서 사용 : 마니또의 미션 수행 실패 개수 반환
     // 실패 개수 = 어제까지 미션 status 조회 후 전체 개수/3 - 성공 개수
     public int calcMissionFailCount(Long manitoId) {
-        Instant today = TimeUtil.convertTo00(Instant.now());
+        Instant today = TimeUtil.convertToKST(Instant.now()).minus(Duration.ofMinutes(3));
 //        today = today.plus(Duration.ofDays(5)); // 테스트를 위해 오늘 날짜 변경
+        System.out.println("hint today : "+today);
 
         List<MissionStatus> missionStatusList = missionStatusRepository.findAllByGuestGuestIdAndGetTimeBefore(manitoId, today);
         int failCount = missionStatusList.size() / 3; // 어제까지의 미션 개수
@@ -230,6 +232,7 @@ public class MissionService {
             if (ms.getSuccessTime() != null)
                 failCount--;
         }
+        System.out.println("hint fail count " + failCount);
         return failCount;
     }
 

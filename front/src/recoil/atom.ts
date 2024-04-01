@@ -55,11 +55,11 @@ export const partyStatusState = selector({
     } else {
       // const endTime = new Date(date2);
       const endTime = new Date(new Date(date2).getTime() - 9 * 60 * 60 * 1000);
-      console.log("end time ", endTime)
+      console.log('end time ', endTime);
       const currentTime = new Date(now);
       // const currentTime = new Date(new Date(now).getTime() + 100 * 60 * 60 * 1000);
       // const before24Time = new Date(endTime.getTime() - 24 * 60 * 60 * 1000);
-      const before24Time = new Date(endTime.getTime() - 4 * 60 * 1000); //종료 10분전
+      const before24Time = new Date(endTime.getTime() - 2 * 60 * 1000); //종료 10분전
       if (currentTime < before24Time) {
         return 'InProgress';
       } else if (currentTime < endTime) {
