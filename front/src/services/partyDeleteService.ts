@@ -15,11 +15,16 @@ export async function partyLeaveService(guestId: number) {
 
 export async function partyLeaveCompleteService(guestId: number) {
   try {
-    const response = await Axios.patch(`/api/guests/${guestId}/leave`, {
-      headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('JWT')}`,
+    console.log('leave jwt ', sessionStorage.getItem('JWT'));
+    const response = await Axios.patch(
+      `/api/guests/${guestId}/leave`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem('JWT')}`,
+        },
       },
-    });
+    );
     return response.data;
   } catch (err) {
     return Promise.reject(err);

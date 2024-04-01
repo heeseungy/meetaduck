@@ -51,6 +51,7 @@ public class GuestController {
 
     @PatchMapping("/{guestId}/leave")
     public ResponseEntity<GuestRes> leave(@PathVariable Long guestId) {
+        System.out.println("leave ");
         GuestRes guestRes = guestService.leave(guestId);
         return ResponseEntity.ok(guestRes);
     }
