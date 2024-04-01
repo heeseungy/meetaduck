@@ -17,4 +17,7 @@ public interface ResultRepository extends JpaRepository<Result, Long> {
     Optional<FavorabilityProjection> findFavorabilityByGuestId(Long guestId);
 
     Result findByGuestGuestId(Long guestId);
+
+    Integer deleteAllByGuestPartyPartyId(Long partyId);
+    int countByGuestPartyPartyId(Long partyId);
 }
