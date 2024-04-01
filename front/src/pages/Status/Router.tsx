@@ -14,7 +14,6 @@ import PartyMakerPage from '@/pages/party/PartyMakerPage';
 import PartyPage from '@/pages/party/PartyPage';
 import ResultPage from '@/pages/result/ResultPage';
 import RootPage from '@/pages/root/RootPage';
-import RabbitTestPage from '@/pages/webSocketTest/RabbitTestPage';
 
 import ProtectedRoutes from './ProtectedRoutes';
 
@@ -46,7 +45,6 @@ export default function Router() {
           </Route>
           <Route path={'/chatdetail/:chatId'} element={<ChatDetailPage />} />
         </Route>
-        <Route path={'/rabbit'} element={<RabbitTestPage />} />
         <Route path={'/result/error'} element={<ResultErrorPage />} />
         <Route path={'*'} element={<ErrorPage />} />
       </Routes>
