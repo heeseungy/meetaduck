@@ -17,13 +17,13 @@ interface MissionCompletePageProps {
 
 function MissionCompletePage({ role, party, nickname, missionResultList }: MissionCompletePageProps) {
   const mission = Role.Manito === role ? missionResultList.myMission : missionResultList.manitoMission;
-  const count = mission.filter((it) => it.successTime != null).length;
+  const count = mission.filter((it) => it.missionImageUrl != null).length;
   const [checkedDay, setcheckedDay] = useState(0);
   // 날짜계산
   const startTime = new Date(party.startTime);
   const endTime = new Date(party.endTime);
   // const date = mission.length;
-  const date = Math.abs((endTime.getTime() - startTime.getTime()) / (24 * 60 * 1000)); 
+  const date = Math.ceil(Math.abs((endTime.getTime() - startTime.getTime()) / (24 * 60 * 1000))); 
   console.log("mission complete date", date)
   let days: string[] = [];
   for (let i = 0; i < date; i++) {
