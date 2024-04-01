@@ -12,6 +12,7 @@ import com.ssafy.duck.domain.mission.service.MissionService;
 import com.ssafy.duck.domain.party.dto.response.PartyRes;
 import com.ssafy.duck.domain.party.service.PartyService;
 import com.ssafy.duck.domain.result.dto.response.MissionResultRes;
+import com.ssafy.duck.domain.result.dto.response.ResultRes;
 import com.ssafy.duck.domain.result.dto.response.ResultWithManitiRes;
 import com.ssafy.duck.domain.result.dto.response.ResultWithManitoRes;
 import com.ssafy.duck.domain.result.entity.Result;
@@ -236,12 +237,13 @@ public class ResultService {
 
         for (Guest guest : guestList) {
             System.out.println("---------------------------- reserve guestId " + guest.getGuestId());
-            resultRestTemplate.postForEntity(
+            String sss = String.valueOf(resultRestTemplate.postForEntity(
                     fastAPIUrl + "/spark/{guestId}",
                     String.class,
                     String.class,
                     guest.getGuestId()
-            );
+            ));
+            System.out.println(sss);
             System.out.println("insert ");
         }
     }
@@ -294,4 +296,18 @@ public class ResultService {
         }
     }
 
+    public ResultRes postResultAgain(Long partyId) {
+        // party 삭제하기
+//        resultRepositorydee.
+
+
+
+        
+        reserveAnalysis(partyId);
+        updateResult(partyId);
+        // 여기서 result 확인하기
+        // partyid로 result개수랑 partyid로 guest개수 확인해서 일치하는지 확인 -> 일치하면  true, 불일치하면 false
+        ResultRes resultRes = ResultRes.builder().isSuccess(true).build();
+        return resultRes;
+    }
 }

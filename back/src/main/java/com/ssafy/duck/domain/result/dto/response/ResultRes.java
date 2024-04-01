@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class ResultRes {
-    private Long resultId;
+    private Boolean isSuccess;
 }
