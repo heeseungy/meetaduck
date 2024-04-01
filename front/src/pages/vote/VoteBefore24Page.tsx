@@ -1,17 +1,14 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import Button from '@/components/commons/Button';
 import Card from '@/components/commons/Card';
 import Loading from '@/components/commons/Loading';
 import VoteRadioButtonList from '@/components/vote/VoteRadioButtonList';
 import { partyState } from '@/recoil/atom';
-import { PARTYLIST } from '@/recoil/dummy';
 import { votePersonService } from '@/services/voteService';
 import { partyListAll } from '@/services/voteService';
 import styles from '@/styles/vote/VoteBefore24Page.module.css';
-import { ResultListItemProps, ResultListProps } from '@/types/result';
-import { ListProfile, PairRank } from '@/types/user.interface';
+import { ListProfile } from '@/types/user.interface';
 import { useRecoilValue } from 'recoil';
 import Swal from 'sweetalert2';
 
@@ -54,7 +51,6 @@ function VoteBefore24Page({
         html: '나의 마니또에게 투표해주세요.',
         confirmButtonColor: '#eea23e',
       });
-      // window.alert('투표를 해주세요');
     } else {
       votePersonService(guestId, selectedValue);
       setMyProfile((prevMyProfileState) => ({

@@ -59,6 +59,24 @@ public class GuestService {
         return voteRes;
     }
 
+    public GuestRes leave(Long guestId) {
+        Guest guest = guestRepository.findById(guestId)
+                .orElseThrow(() -> new GuestException(GuestErrorCode.GUEST_NOT_FOUND));
+
+        Long partyId = guest.getParty().getPartyId();
+        Party party = partyRepository.findByPartyId(partyId)
+                .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
+
+        Party dummyParty = partyRepository.findByPartyId(1L)
+                .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
+
+        guest.leaveParty(dummyParty);
+
+        guestRepository.save(guest);
+
+        return toGuestRes(guest);
+    }
+
     public void deleteByGuestId(Long guestId) {
         Guest guest = guestRepository.findById(guestId)
                 .orElseThrow(() -> new GuestException(GuestErrorCode.GUEST_NOT_FOUND));
@@ -125,7 +143,7 @@ public class GuestService {
 
         if (guestList.isEmpty()) {
             final Long NON_EXIST_GUEST_ID = 0L;
-            final Long NON_EXIST_PARTY_ID = 0L;
+            final Long NON_EXIST_PARTY_ID = 1L;
             return GuestRes.builder()
                     .guestId(NON_EXIST_GUEST_ID)
                     .partyId(NON_EXIST_PARTY_ID)

@@ -49,6 +49,12 @@ public class GuestController {
         return ResponseEntity.ok(voteRes);
     }
 
+    @PatchMapping("/{guestId}/leave")
+    public ResponseEntity<GuestRes> leave(@PathVariable Long guestId) {
+        GuestRes guestRes = guestService.leave(guestId);
+        return ResponseEntity.ok(guestRes);
+    }
+
     @DeleteMapping("/{guestId}")
     public ResponseEntity<Void> deleteByGuestId(@PathVariable Long guestId) {
         guestService.deleteByGuestId(guestId);
