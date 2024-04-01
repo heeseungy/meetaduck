@@ -18,10 +18,11 @@ public interface ResultRepository extends JpaRepository<Result, Long> {
     Optional<FavorabilityProjection> findFavorabilityByGuestId(Long guestId);
 
     Result findByGuestGuestId(Long guestId);
+
     @Transactional
     @Modifying
-    @Query("DELETE FROM results r WHERE r.guest.id = :guestId")
-    Integer deleteByGuestId(Long guestId);
+    @Query("DELETE FROM Result r WHERE r.guest.guestId = :guestId")
+    Integer deleteResultByGuestID(Long guestId);
 
     Integer deleteAllByGuestPartyPartyId(Long partyId);
     int countByGuestPartyPartyId(Long partyId);
