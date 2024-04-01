@@ -88,10 +88,11 @@
   border-radius: 0.3125rem;
   padding: 0.5rem;
   max-width: 13rem;
-  max-height: 13rem;
+  height: auto;
   word-break: break-all;
   white-space: normal;
 }
+
 .Message img {
   max-width: 12.5rem;
   max-height: 12.5rem;
