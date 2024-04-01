@@ -28,7 +28,7 @@ public class Guest {
     private Long votedId; // 초기값 설정
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "party_id", nullable = false, updatable = false)
+    @JoinColumn(name = "party_id", nullable = false)
     private Party party;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -46,5 +46,9 @@ public class Guest {
     public Long updateVotedId(Long votedId) {
         this.votedId = votedId;
         return this.votedId;
+    }
+
+    public void leaveParty(Party dummyParty) {
+        this.party = dummyParty;
     }
 }
