@@ -10,6 +10,7 @@ import com.ssafy.duck.domain.mission.entity.MissionStatus;
 import com.ssafy.duck.domain.mission.repository.MissionStatusRepository;
 import com.ssafy.duck.domain.mission.service.MissionService;
 import com.ssafy.duck.domain.party.dto.response.PartyRes;
+import com.ssafy.duck.domain.party.repository.PartyRepository;
 import com.ssafy.duck.domain.party.service.PartyService;
 import com.ssafy.duck.domain.result.dto.response.MissionResultRes;
 import com.ssafy.duck.domain.result.dto.response.ResultRes;
@@ -19,6 +20,7 @@ import com.ssafy.duck.domain.result.entity.Result;
 import com.ssafy.duck.domain.result.exception.ResultErrorCode;
 import com.ssafy.duck.domain.result.exception.ResultException;
 import com.ssafy.duck.domain.result.repository.ResultRepository;
+import jdk.swing.interop.SwingInterOpUtils;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
@@ -62,7 +64,7 @@ public class ResultService {
         if (manitiResult == null || manitiResult.getManitoWordcount() == null)
             throw new ResultException(ResultErrorCode.MANITI_RESULT_NOT_FOUND);
 
-        Long chatCount = messageRepository.countByChatId(myInfo.getChatId().intValue());        // 대화 빈도 계산
+        Long chatCount = messageRepository.countByChatIdAndSenderIdIsNot(myInfo.getChatId().intValue(), 1L);        // 대화 빈도 계산
         int missionCount = missionStatusRepository.countByGuestGuestIdAndSuccessTimeIsNotNull(guestId); // 미션 수행 개수
 
         ResultWithManitiRes resultRes = ResultWithManitiRes.builder()
@@ -92,7 +94,7 @@ public class ResultService {
         if (manitoResult == null || manitoResult.getManitiWordcount() == null)
             throw new ResultException(ResultErrorCode.MANITO_RESULT_NOT_FOUND);
 
-        Long chatCount = messageRepository.countByChatId(manitoInfo.getChatId().intValue());         // 대화 빈도 계산
+        Long chatCount = messageRepository.countByChatIdAndSenderIdIsNot(manitoInfo.getChatId().intValue(), 1L);         // 대화 빈도 계산
         int missionCount = missionStatusRepository.countByGuestGuestIdAndSuccessTimeIsNotNull(manitoInfo.getGuestId()); // 미션 수행 개수
 
         ResultWithManitoRes resultRes = ResultWithManitoRes.builder()
@@ -297,17 +299,31 @@ public class ResultService {
     }
 
     public ResultRes postResultAgain(Long partyId) {
-        // party 삭제하기
-//        resultRepositorydee.
+        System.out.println("post result again ");
 
 
+        // 파티아이디로 전체 guest id 가져오기
+        List<GuestRes> guestList = guestService.getAllGuestByPartyId(partyId);
+        for (GuestRes guestRes : guestList) {
+            int deleted = resultRepository.deleteByGuestId(guestRes.getGuestId());
+            System.out.println("guest " + guestRes.getGuestId() + " deleted " + deleted);
+        }
 
-        
+        // party_id로 result 삭제하기
+//        int deletedCount = resultRepository.deleteAllByGuestPartyPartyId(partyId);
+//        System.out.println("delete count " + deletedCount);
         reserveAnalysis(partyId);
+
         updateResult(partyId);
-        // 여기서 result 확인하기
-        // partyid로 result개수랑 partyid로 guest개수 확인해서 일치하는지 확인 -> 일치하면  true, 불일치하면 false
-        ResultRes resultRes = ResultRes.builder().isSuccess(true).build();
-        return resultRes;
+//
+//        // 여기서 result 확인하기
+//        // partyid로 result개수랑 partyid로 guest개수 확인해서 일치하는지 확인 -> 일치하면  true, 불일치하면 false
+        int newResultCount = resultRepository.countByGuestPartyPartyId(partyId);
+        int guestCount = guestList.size();
+        System.out.println("result count " + newResultCount + " guestCount " + guestCount);
+//        if(newResultCount == guestCount)
+//            return ResultRes.builder().isSuccess(true).build();
+//        else
+        return ResultRes.builder().isSuccess(false).build();
     }
 }
