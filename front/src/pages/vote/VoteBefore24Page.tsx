@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Button from '@/components/commons/Button';
 import Card from '@/components/commons/Card';
+import Loading from '@/components/commons/Loading';
 import VoteRadioButtonList from '@/components/vote/VoteRadioButtonList';
 import { partyState } from '@/recoil/atom';
 import { PARTYLIST } from '@/recoil/dummy';
@@ -25,13 +26,20 @@ function VoteBefore24Page({
 }) {
   const party = useRecoilValue(partyState);
 
-  const [partyList, setPartyList] = useState<ListProfile[]>(PARTYLIST);
+  const [partyList, setPartyList] = useState<ListProfile[]>([]);
+  // const [partyList, setPartyList] = useState<ListProfile[]>(PARTYLIST);
+  const [loading, setLoading] = useState(true);
   const [selectedValue, setSelectedValue] = useState(0);
 
   useEffect(() => {
-    partyListAll(party.partyId).then((data) => {
-      setPartyList(data);
-    });
+    partyListAll(party.partyId)
+      .then((data) => {
+        setPartyList(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
   // 라디오 버튼을 누르면 selectedValue값이 바뀜
   function voteRadioButtonListHandler(event: React.ChangeEvent<HTMLInputElement>) {
@@ -73,7 +81,9 @@ function VoteBefore24Page({
       </Button>
     </div>
   );
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <div>
       <Card {...{ tag: 2, children: children }} />
     </div>

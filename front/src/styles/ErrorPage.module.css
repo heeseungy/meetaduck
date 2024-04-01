@@ -28,3 +28,13 @@
   justify-content: center;
   align-items: center;
 }
+
+.ResultRetry {
+  width: 5rem;
+  height: 5rem;
+  background-color: #eea23e;
+  border-radius: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

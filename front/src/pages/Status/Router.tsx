@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import ErrorPage from '@/pages/Status/ErrorPage';
+import ResultErrorPage from '@/pages/Status/ResultErrorPage';
 import ChatDetailPage from '@/pages/chatting/ChattingDetailPage';
 import ChattingPage from '@/pages/chatting/ChattingPage';
 import HintInputFormPage from '@/pages/hint/HintInputFormPage';
@@ -46,6 +47,7 @@ export default function Router() {
           <Route path={'/chatdetail/:chatId'} element={<ChatDetailPage />} />
         </Route>
         <Route path={'/rabbit'} element={<RabbitTestPage />} />
+        <Route path={'/result/error'} element={<ResultErrorPage />} />
         <Route path={'*'} element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>

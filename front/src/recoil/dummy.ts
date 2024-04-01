@@ -43,8 +43,8 @@ export const PARTY_STATUS: PartyStatus = {
 
 // 참가자 1명 조회
 export const MY_PROFILE: ListProfile = {
-  userId: 0,
-  guestId: 0,
+  userId: -1,
+  guestId: -1,
   nickname: '',
   thumbnailUrl: '',
   votedId: 0,
@@ -64,20 +64,6 @@ export const PARTYLIST: ListProfile[] = [
     thumbnailUrl: '',
     votedId: 0,
   },
-  {
-    userId: 0,
-    guestId: 0,
-    nickname: '',
-    thumbnailUrl: '',
-    votedId: 0,
-  },
-  {
-    userId: 0,
-    guestId: 0,
-    nickname: '',
-    thumbnailUrl: '',
-    votedId: 0,
-  },
 ];
 
 //참가자 목록 조회 (결과)
@@ -86,8 +72,7 @@ export const PAIR_LIST: ResultListItemProps[] = [
     manito: {
       guestId: 0,
       nickname: '',
-      thumbnailUrl:
-        '',
+      thumbnailUrl: '',
       manitiId: 0,
       votedId: 0,
       favorability: {
