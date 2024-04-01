@@ -61,9 +61,7 @@ function HintInputFormPage() {
   // 페이지에 렌더링될 자식 컴포넌트들을 변수에 할당
   const children = (
     <div className={styles.cardMargin}>
-      {/* <form action="#"> */}
       <HintInputQuestion />
-      {/* </form> */}
     </div>
   );
 
