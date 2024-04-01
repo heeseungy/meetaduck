@@ -1,4 +1,5 @@
 import { useLayoutEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Loading from '@/components/commons/Loading';
 import Slides from '@/components/commons/Slides';
@@ -22,7 +23,8 @@ function ResultSlidesPage() {
   const [manitoResult, setManitoResult] = useState<ManitoResultAnalysis>(MANITO_RESULT);
   const [manitiResult, setManitiResult] = useState<ManitoResultAnalysis>(MANITI_RESULT);
   const [me, setMe] = useState<PairRank>(PAIR_LIST[0].manito);
-  const [err, setErr] = useState(false);
+
+  const navigate = useNavigate();
   useLayoutEffect(() => {
     // 결과 조회 axios
     pairResultService(party.partyId)
@@ -40,6 +42,7 @@ function ResultSlidesPage() {
         getManitoAnalysis(login.guestId)
           .then((data: ManitoResultAnalysis) => {
             setManitoResult(data);
+            setLoading(false);
           })
           .catch((err) => console.log(err));
         getManitiAnalysis(login.guestId)
@@ -51,13 +54,13 @@ function ResultSlidesPage() {
       })
       .catch((err) => {
         console.log(err);
-        setErr(true);
+        navigate('/result/error');
       });
   }, []);
 
   return (
     <>
-      {err || loading ? (
+      {loading ? (
         <div>
           <Loading />
         </div>

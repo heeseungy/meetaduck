@@ -15,7 +15,6 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 function ResultPage() {
   const login = useRecoilValue(loginState);
   const setcurrentTime = useSetRecoilState(currentTimeState);
-  const currentTime = useRecoilValue(currentTimeState);
   const partyStatus = useRecoilValue(partyStatusState);
   const [loading, setLoading] = useState(true);
   const [myProfile, setMyProfile] = useState<ListProfile>(MY_PROFILE);

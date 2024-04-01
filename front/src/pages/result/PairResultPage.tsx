@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import Card from '@/components/commons/Card';
 import ResultCountCard from '@/components/result/ResultCountCard';
 import ResultDoughnutChart from '@/components/result/ResultDoughnutChart';

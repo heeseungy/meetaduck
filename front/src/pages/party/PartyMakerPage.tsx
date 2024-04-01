@@ -12,7 +12,7 @@ import { partyInfoService } from '@/services/partyStartService';
 import styles from '@/styles/party/PartyMaker.module.css';
 import { Party } from '@/types/party';
 import { ListProfile } from '@/types/user.interface';
-import { ArrowsCounterClockwise } from '@phosphor-icons/react';
+import { ArrowsClockwise } from '@phosphor-icons/react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Swal from 'sweetalert2';
 
@@ -161,7 +161,7 @@ function PartyMakerPage() {
           <div className={`FontS ${styles.SubTitle}`}>
             참여 현황
             <div onClick={refreshClickHandler} className={styles.marginL}>
-              <ArrowsCounterClockwise weight="bold" size={16} />
+              <ArrowsClockwise weight="bold" size={16} />
             </div>
           </div>
           <span className="FontS">{joinNumber}명 참여중</span>

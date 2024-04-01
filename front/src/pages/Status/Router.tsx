@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import ErrorPage from '@/pages/Status/ErrorPage';
+import ResultErrorPage from '@/pages/Status/ResultErrorPage';
 import ChatDetailPage from '@/pages/chatting/ChattingDetailPage';
 import ChattingPage from '@/pages/chatting/ChattingPage';
 import HintInputFormPage from '@/pages/hint/HintInputFormPage';
@@ -13,7 +14,6 @@ import PartyMakerPage from '@/pages/party/PartyMakerPage';
 import PartyPage from '@/pages/party/PartyPage';
 import ResultPage from '@/pages/result/ResultPage';
 import RootPage from '@/pages/root/RootPage';
-import RabbitTestPage from '@/pages/webSocketTest/RabbitTestPage';
 
 import ProtectedRoutes from './ProtectedRoutes';
 
@@ -45,7 +45,7 @@ export default function Router() {
           </Route>
           <Route path={'/chatdetail/:chatId'} element={<ChatDetailPage />} />
         </Route>
-        <Route path={'/rabbit'} element={<RabbitTestPage />} />
+        <Route path={'/result/error'} element={<ResultErrorPage />} />
         <Route path={'*'} element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
