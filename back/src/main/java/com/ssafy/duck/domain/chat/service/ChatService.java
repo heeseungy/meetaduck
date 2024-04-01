@@ -97,8 +97,8 @@ public class ChatService {
         template.convertAndSend("message.exchange", "chats." + chatId + ".messages", savedMessage);
     }
 
-    //    @Scheduled(cron = "0 0 9 * * *", zone = "Asia/Seoul")
-    @Scheduled(cron = "0 */1 * * * *", zone = "Asia/Seoul")
+        @Scheduled(cron = "0 0 9 * * *", zone = "Asia/Seoul")
+//    @Scheduled(cron = "0 */ * * * *", zone = "Asia/Seoul")
 //    @Scheduled(fixedDelay = 600000)
     public void sendTopic() {
         int dayOfMonth = LocalDate.now().getDayOfMonth();
