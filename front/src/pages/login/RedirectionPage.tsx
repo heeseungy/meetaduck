@@ -29,7 +29,7 @@ function RedirectionPage() {
     })
       .then((response) => {
         sessionStorage.setItem('JWT', response.data.jwtToken);
-        if (response.data.partyId !== 0) {
+        if (response.data.partyId !== 0 || response.data.partyId !== 1) {
           partyInfoService(response.data.partyId)
             .then((data) => {
               if (data.deleted !== true) {

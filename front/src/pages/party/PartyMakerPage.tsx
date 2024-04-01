@@ -23,16 +23,11 @@ function PartyMakerPage() {
   const login = useRecoilValue(loginState);
   const [refreshTime, setRefreshTime] = useState('');
   const [participants, setParticipants] = useState<ListProfile[]>([]);
-  const [endDate, setEndDate] = useState<string>(
-    '',
-    //   () => {
-    //   const date = new Date(); // 현재 날짜와 시간을 가져옵니다.
-    //   date.setDate(date.getDate() + 3); // 현재 날짜에 3일을 더합니다.
-    //   return date.toISOString(); // ISO 8601 문자열 형식으로 변환합니다.
-    // }
-  );
+  const [endDate, setEndDate] = useState<string>('');
   const [selectedHour, setSelectedHour] = useState(0); // 시간 상태 변수
   const [selectedMinute, setSelectedMinute] = useState(0); // 분 상태 변수
+  const [refreshToggle, setRefreshToggle] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -92,7 +87,6 @@ function PartyMakerPage() {
                 showConfirmButton: false,
                 timer: 1500,
               });
-              // window.alert('파티가 시작됩니다.');
               navigate('/hintinputform');
             } else if (data.deleted) {
               partyLeaveService(login.guestId).then(() => {
@@ -115,7 +109,6 @@ function PartyMakerPage() {
                   showConfirmButton: false,
                   timer: 1500,
                 });
-                // window.alert('삭제된 파티입니다.');
                 navigate('/party');
               });
             }
@@ -124,6 +117,7 @@ function PartyMakerPage() {
   }, []);
 
   const refreshClickHandler = async () => {
+    setRefreshToggle(true);
     try {
       const usersInfo = await Axios.get(`/api/guests/all/${party.partyId}`, {
         headers: {
@@ -147,9 +141,11 @@ function PartyMakerPage() {
           :${currentTime.getMinutes().toString().length < 2 ? `0${currentTime.getMinutes()}` : currentTime.getMinutes()}`,
       );
     } catch (err) {
-      // alert(err.response.data);
       console.log('Error refreshing party info: ', err);
     }
+    setTimeout(() => {
+      setRefreshToggle(false);
+    }, 2000);
   };
 
   const joinNumber = participants.length;
@@ -161,7 +157,7 @@ function PartyMakerPage() {
           <div className={`FontS ${styles.SubTitle}`}>
             참여 현황
             <div onClick={refreshClickHandler} className={styles.marginL}>
-              <ArrowsClockwise weight="bold" size={16} />
+              <ArrowsClockwise weight="bold" size={16} className={`${refreshToggle && styles.RefreshAnimation}`} />
             </div>
           </div>
           <span className="FontS">{joinNumber}명 참여중</span>

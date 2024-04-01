@@ -30,8 +30,38 @@
 }
 
 .ResultRetry {
-  width: 5rem;
-  height: 5rem;
+  width: 3rem;
+  height: 3rem;
+  background-color: #eea23e;
+  border-radius: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+}
+
+.RefreshAnimation {
+  animation: RefreshA 1s;
+  display: inline-block;
+  animation-delay: 1ms;
+}
+
+@keyframes RefreshA {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-359deg);
+  }
+}
+
+.PartyLeave {
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  z-index: 999999;
+  width: 3rem;
+  height: 3rem;
   background-color: #eea23e;
   border-radius: 5rem;
   display: flex;

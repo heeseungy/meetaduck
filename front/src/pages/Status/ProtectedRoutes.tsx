@@ -45,7 +45,7 @@ export default function PrivateRoute({ status }: PrivateRouteProps): React.React
     if (loginState === null) {
       //loginState에 값이 null 이면 login page
       return <Navigate to="/" />;
-    } else if (partyState === null || loginState.partyId === 0) {
+    } else if (partyState === null || loginState.partyId === 0 || loginState.partyId === 1) {
       // partyState가 없는 경우 혹은 partyId가 0일 경우 party Page partycreate page
       return <Outlet />;
     } else {
@@ -58,7 +58,7 @@ export default function PrivateRoute({ status }: PrivateRouteProps): React.React
     if (loginState === null) {
       //loginState에 값이 null 이면 login page || redirection page
       return <Navigate to="/" />;
-    } else if (partyState === null || loginState.partyId === 0) {
+    } else if (partyState === null || loginState.partyId === 0 || loginState.partyId === 1) {
       // partyState가 없는 경우 혹은 partyId가 0일 경우 party Page
       return <Navigate to="/party" />;
     } else if (partyState.endTime === null || partyState.endTime === '') {
@@ -72,7 +72,7 @@ export default function PrivateRoute({ status }: PrivateRouteProps): React.React
     if (loginState === null) {
       //loginState에 값이 null 이면 login page || redirection page
       return <Navigate to="/" />;
-    } else if (partyState === null || loginState.partyId === 0) {
+    } else if (partyState === null || loginState.partyId === 0 || loginState.partyId === 1) {
       // partyState가 없는 경우 혹은 partyId가 0일 경우 party Page
       return <Navigate to="/party" />;
     } else if (partyState.endTime === null || partyState.endTime === '') {
@@ -87,7 +87,7 @@ export default function PrivateRoute({ status }: PrivateRouteProps): React.React
     if (loginState === null) {
       //loginState에 값이 null 이면 login page || redirection page
       return <Navigate to="/" />;
-    } else if (partyState === null || loginState.partyId === 0) {
+    } else if (partyState === null || loginState.partyId === 0 || loginState.partyId === 1) {
       // partyState가 없는 경우 혹은 partyId가 0일 경우 party Page
       return <Navigate to="/party" />;
     } else if (partyState.endTime === null || partyState.endTime === '') {

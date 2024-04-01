@@ -164,3 +164,18 @@
 .marginTop {
   margin-top: 4rem;
 }
+
+.RefreshAnimation {
+  animation: RefreshA 1s;
+  display: inline-block;
+  animation-delay: 1ms;
+}
+
+@keyframes RefreshA {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}

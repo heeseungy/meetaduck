@@ -12,3 +12,16 @@ export async function partyLeaveService(guestId: number) {
     return Promise.reject(err);
   }
 }
+
+export async function partyLeaveCompleteService(guestId: number) {
+  try {
+    const response = await Axios.patch(`/api/guests/${guestId}/leave`, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem('JWT')}`,
+      },
+    });
+    return response.data;
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
