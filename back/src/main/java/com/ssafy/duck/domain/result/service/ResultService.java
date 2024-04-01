@@ -301,19 +301,29 @@ public class ResultService {
     public ResultRes postResultAgain(Long partyId) {
         System.out.println("post result again ");
 
-        // party_id로 result 삭제하기
-        int deletedCount = resultRepository.deleteAllByGuestPartyPartyId(partyId);
-        System.out.println("delete count " + deletedCount);
-        reserveAnalysis(partyId);
-        updateResult(partyId);
 
-        // 여기서 result 확인하기
-        // partyid로 result개수랑 partyid로 guest개수 확인해서 일치하는지 확인 -> 일치하면  true, 불일치하면 false
+        // 파티아이디로 전체 guest id 가져오기
+        List<GuestRes> guestList = guestService.getAllGuestByPartyId(partyId);
+        for (GuestRes guestRes : guestList) {
+            int deleted = resultRepository.deleteByGuestId(guestRes.getGuestId());
+            System.out.println("guest " + guestRes.getGuestId() + " deleted " + deleted);
+        }
+
+        // party_id로 result 삭제하기
+//        int deletedCount = resultRepository.deleteAllByGuestPartyPartyId(partyId);
+//        System.out.println("delete count " + deletedCount);
+        reserveAnalysis(partyId);
+
+        updateResult(partyId);
+//
+//        // 여기서 result 확인하기
+//        // partyid로 result개수랑 partyid로 guest개수 확인해서 일치하는지 확인 -> 일치하면  true, 불일치하면 false
         int newResultCount = resultRepository.countByGuestPartyPartyId(partyId);
-        int guestCount = guestService.getAllGuestByPartyId(partyId).size();
-        if(newResultCount == guestCount)
-            return ResultRes.builder().isSuccess(true).build();
-        else
-            return ResultRes.builder().isSuccess(false).build();
+        int guestCount = guestList.size();
+        System.out.println("result count " + newResultCount + " guestCount " + guestCount);
+//        if(newResultCount == guestCount)
+//            return ResultRes.builder().isSuccess(true).build();
+//        else
+        return ResultRes.builder().isSuccess(false).build();
     }
 }

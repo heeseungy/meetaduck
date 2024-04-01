@@ -52,7 +52,7 @@ public class ResultController {
         return ResponseEntity.ok(manitoResult);
     }
 
-    @PostMapping("/{partyId}")
+    @PatchMapping("/{partyId}")
     public ResponseEntity<ResultRes> postPartyResult(@PathVariable("partyId") Long partyId){
         System.out.println("post result again controller ");
 
