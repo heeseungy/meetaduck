@@ -17,7 +17,8 @@ function ResultErrorPage() {
     setRefreshToggle(true);
     resultRetry(party.partyId).then((data: { isSuccess: boolean }) => {
       if (data.isSuccess) {
-        navigate('/result');
+        console.log("data success")
+        navigate('/mission');
       } else {
         Swal.fire({
           icon: 'error',

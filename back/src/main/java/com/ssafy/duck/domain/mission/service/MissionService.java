@@ -227,7 +227,8 @@ public class MissionService {
         System.out.println("hint today : "+today);
 
         List<MissionStatus> missionStatusList = missionStatusRepository.findAllByGuestGuestIdAndGetTimeBefore(manitoId, today);
-        int failCount = missionStatusList.size() / 3; // 어제까지의 미션 개수
+        int failCount = missionStatusList.size() /3; // 어제까지의 미션 개수
+        System.out.println("calc - fail " + failCount);
         for (MissionStatus ms : missionStatusList) {
             if (ms.getSuccessTime() != null)
                 failCount--;
