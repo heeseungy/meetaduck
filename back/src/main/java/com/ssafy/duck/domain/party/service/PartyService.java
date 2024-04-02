@@ -156,14 +156,14 @@ public class PartyService {
         if (partyRes.isDeleted()) {
             throw new PartyException(PartyErrorCode.DELETED_PARTY); // 파티가 삭제된 경우
         }
-        if (partyRes.getEndTime() != null) {
-            if (partyRes.getEndTime().isBefore(TimeUtil.convertToKST(Instant.now()))) {
-                System.out.println(partyRes.getEndTime());
-                throw new PartyException(PartyErrorCode.TERMINATED_PARTY);
-            } else {
-                throw new PartyException(PartyErrorCode.PARTY_IS_IN_PROGRESS);
-            }
-        }
+//        if (partyRes.getEndTime() != null) {
+//            if (partyRes.getEndTime().isBefore(TimeUtil.convertToKST(Instant.now()))) {
+//                System.out.println(partyRes.getEndTime());
+//                throw new PartyException(PartyErrorCode.TERMINATED_PARTY);
+//            } else {
+//                throw new PartyException(PartyErrorCode.PARTY_IS_IN_PROGRESS);
+//            }
+//        }
 
         return true;
     }

@@ -261,7 +261,7 @@ public class ResultService {
         List<Guest> guestList = guestRepository.findAllByPartyId(partyId);
         // 파티 진행기간
         PartyRes party = partyService.findByPartyId(partyId);
-        int period = TimeUtil.compareDate(party.getStartTime()+"", party.getEndTime()+"", 2 );
+        int period = TimeUtil.compareDate(party.getStartTime()+"", party.getEndTime()+"", 2 )/3-1;
         System.out.println("result update period " +period + " /3 :" + (period/3-1) );
 
         for (Guest guest : guestList) {
@@ -272,7 +272,7 @@ public class ResultService {
             // 데일리 채팅 여부 : 100 * (데일리채팅여부 / 미션 총개수) * 0.3(비율)
             int chatCount = 0;
             for (int i = 0; i < period; i++) {
-                String strCreatedTime = party.getStartTime().plus(Duration.ofDays(i)).toString().substring(0, 10);
+                String strCreatedTime = party.getStartTime().plus(Duration.ofMinutes(i*3)).toString().substring(0, 16);
                 System.out.println("createdTime " + strCreatedTime);
                 Boolean isChat =messageRepository.existsByChatIdAndCreatedTimeStartingWith(guest.getChat().getChatId(), strCreatedTime);
                 chatCount +=  isChat? 1 : 0;
@@ -286,6 +286,7 @@ public class ResultService {
 
             // 내 우호도 업데이트
             Result result = resultRepository.findByGuestGuestId(guest.getGuestId());
+            System.out.println("my result " + result.getResultId());
             if(result == null)
                 throw new ResultException(ResultErrorCode.MY_RESULT_NOT_FOUND);
             System.out.println(result.toString());
