@@ -1,10 +1,8 @@
 import { ChatId } from '@/types/chat';
-import { Party, PartyStatus, StatusType } from '@/types/party';
+import { Party } from '@/types/party';
 import { LoginProfile } from '@/types/user.interface';
 import { atom, selector } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
-
-import { CHAT_ID_LIST, PARTY1 } from './dummy';
 
 const { persistAtom } = recoilPersist({
   key: 'sessionStorage',
