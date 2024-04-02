@@ -54,8 +54,9 @@ public class ResultController {
 
     @PatchMapping("/{partyId}")
     public ResponseEntity<ResultRes> postPartyResult(@PathVariable("partyId") Long partyId){
-
+        System.out.println("다시 돌리는중 " );
         ResultRes resultRes = resultService.postResultAgain(partyId);
+
 
         return ResponseEntity.ok(resultRes);
     }

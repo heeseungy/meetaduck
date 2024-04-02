@@ -286,6 +286,7 @@ public class ResultService {
 
             // 내 우호도 업데이트
             Result result = resultRepository.findByGuestGuestId(guest.getGuestId());
+            System.out.println("my result " + result.getResultId());
             if(result == null)
                 throw new ResultException(ResultErrorCode.MY_RESULT_NOT_FOUND);
             System.out.println(result.toString());

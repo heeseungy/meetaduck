@@ -13,12 +13,15 @@ function ResultErrorPage() {
   const party = useRecoilValue(partyState);
   const [refreshToggle, setRefreshToggle] = useState(false);
   const navigate = useNavigate();
+  const [isloading, setIsLoading] = useState(false)
   const retry = () => {
     setRefreshToggle(true);
-    resultRetry(party.partyId).then((data: { isSuccess: boolean }) => {
+    setIsLoading(true)
+    resultRetry(party.partyId).then((data) => {
+      setIsLoading(false)
       if (data.isSuccess) {
         console.log("data success")
-        navigate('/mission');
+        navigate('/');
       } else {
         Swal.fire({
           icon: 'error',
@@ -27,6 +30,8 @@ function ResultErrorPage() {
           timer: 1000,
         });
       }
+    }).catch((err)=>{
+      console.log(err)
     });
     setTimeout(() => {
       setRefreshToggle(false);
@@ -34,6 +39,7 @@ function ResultErrorPage() {
   };
   return (
     <>
+    {isloading&&<div style={{backgroundColor: "rgba(0,0,0,0.5)", position: 'absolute', width: '100dvw', height: '100dvh'}}>로딩중</div>}
       <div className={styles.ErrorContainer}>
         <div className={`${styles.Title}`}>
           <div className={`FontXL `}>에러페이지</div>
