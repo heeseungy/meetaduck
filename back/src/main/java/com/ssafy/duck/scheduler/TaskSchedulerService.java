@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.Instant;
 
 @RequiredArgsConstructor
@@ -19,6 +20,7 @@ public class TaskSchedulerService {
 
     public void scheduleTask(Long partyId, Instant scheduledTime) {
         System.out.println("now schedule  " + scheduledTime);
+        scheduledTime = scheduledTime.minus(Duration.ofHours(9));
         Runnable task = () -> {
             resultService.reserveAnalysis(partyId);
             resultService.updateResult(partyId);
@@ -28,6 +30,7 @@ public class TaskSchedulerService {
 
     public void scheduleChatTopic( Instant scheduledTime) {
         System.out.println("chat schedule  " + scheduledTime);
+        scheduledTime = scheduledTime.minus(Duration.ofHours(9));
         Runnable chatTask = () -> {
             chatService.sendTopic();
         };
