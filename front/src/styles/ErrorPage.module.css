@@ -69,16 +69,4 @@
   }
 }
 
-.PartyLeave {
-  position: absolute;
-  top: 0rem;
-  right: 0rem;
-  z-index: 999999;
-  width: 3rem;
-  height: 3rem;
-  background-color: #eea23e;
-  border-radius: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+

@@ -28,7 +28,7 @@ function RootPage() {
   return (
     <>
       <div className="PartyLeaveAfterComplete">
-        {partyStatus === 'Complete' && party.userId === login.userId ? <PartyLeaveButton /> : <></>}
+        {partyStatus === 'Complete' ? <PartyLeaveButton /> : <></>}
       </div>
       <Outlet />
       <MainNav />
