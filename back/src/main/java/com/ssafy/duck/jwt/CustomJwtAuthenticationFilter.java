@@ -58,7 +58,7 @@ public class CustomJwtAuthenticationFilter extends OncePerRequestFilter {
         System.out.println(requestUri);
 
         return requestUri.contains("/api/users/login") || requestUri.contains("/wss");
-    }
+}
 
 
     @Override

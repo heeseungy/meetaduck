@@ -8,7 +8,9 @@ import java.util.List;
 public interface MessageRepository extends MongoRepository<Message, String> {
     List<Message> findByChatId(Integer chatId);
 
-    Long countByChatId(Integer chatId);
+//    Long countByChatId(Integer chatId);
+    Long countByChatIdAndSenderIdIsNot(Integer chatId, Long adminId);
 
     Boolean existsByChatIdAndCreatedTimeStartingWith(Long chatId, String createdTime);
+//    Boolean existsByChatIdAndCreatedTimeStartingWithAndAndSenderIdIsNot(Long chatId, String createdTime, Long adminId);
 }

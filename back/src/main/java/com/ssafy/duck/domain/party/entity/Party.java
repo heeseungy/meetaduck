@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.time.Duration;
 import java.time.Instant;
 
 @Entity
@@ -50,7 +51,18 @@ public class Party {
     public void start(Instant endTime) {
         this.startTime = TimeUtil.convertToKST(Instant.now());
 //        this.startTime = TimeUtil.convertToKST(TimeUtil.stringToInstant("2024-03-25T20:23:00.123456789Z"));
-        this.endTime = TimeUtil.convertToKST(TimeUtil.stringToInstant(endTime.toString()));
+
+        //날짜 변환해서 그만큼 분 더하기
+        System.out.println("start start start start ");
+        int days = TimeUtil.calcDate(TimeUtil.convertToKST(Instant.now())+"", TimeUtil.convertToKST(TimeUtil.stringToInstant(endTime.toString()))+"" )+1;
+        System.out.println("days " +days);
+        Instant newEndTime = Instant.now().plus(Duration.ofMinutes(3*days));
+        System.out.println("newEndTime " + newEndTime);
+        System.out.println("newEndTime to KST " + TimeUtil.convertToKST(newEndTime));
+        System.out.println("---------------------------------+-+-+-+-");
+
+//        this.endTime = TimeUtil.convertToKST(TimeUtil.stringToInstant(endTime.toString()));
+        this.endTime = TimeUtil.convertToKST(newEndTime);
     }
 
 }

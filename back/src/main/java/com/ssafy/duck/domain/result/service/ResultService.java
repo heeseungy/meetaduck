@@ -10,14 +10,20 @@ import com.ssafy.duck.domain.mission.entity.MissionStatus;
 import com.ssafy.duck.domain.mission.repository.MissionStatusRepository;
 import com.ssafy.duck.domain.mission.service.MissionService;
 import com.ssafy.duck.domain.party.dto.response.PartyRes;
+import com.ssafy.duck.domain.party.repository.PartyRepository;
 import com.ssafy.duck.domain.party.service.PartyService;
 import com.ssafy.duck.domain.result.dto.response.MissionResultRes;
+import com.ssafy.duck.domain.result.dto.response.ResultRes;
 import com.ssafy.duck.domain.result.dto.response.ResultWithManitiRes;
 import com.ssafy.duck.domain.result.dto.response.ResultWithManitoRes;
 import com.ssafy.duck.domain.result.entity.Result;
 import com.ssafy.duck.domain.result.exception.ResultErrorCode;
 import com.ssafy.duck.domain.result.exception.ResultException;
 import com.ssafy.duck.domain.result.repository.ResultRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
+import jdk.swing.interop.SwingInterOpUtils;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
@@ -61,7 +67,7 @@ public class ResultService {
         if (manitiResult == null || manitiResult.getManitoWordcount() == null)
             throw new ResultException(ResultErrorCode.MANITI_RESULT_NOT_FOUND);
 
-        Long chatCount = messageRepository.countByChatId(myInfo.getChatId().intValue());        // 대화 빈도 계산
+        Long chatCount = messageRepository.countByChatIdAndSenderIdIsNot(myInfo.getChatId().intValue(), 1L);        // 대화 빈도 계산
         int missionCount = missionStatusRepository.countByGuestGuestIdAndSuccessTimeIsNotNull(guestId); // 미션 수행 개수
 
         ResultWithManitiRes resultRes = ResultWithManitiRes.builder()
@@ -91,7 +97,7 @@ public class ResultService {
         if (manitoResult == null || manitoResult.getManitiWordcount() == null)
             throw new ResultException(ResultErrorCode.MANITO_RESULT_NOT_FOUND);
 
-        Long chatCount = messageRepository.countByChatId(manitoInfo.getChatId().intValue());         // 대화 빈도 계산
+        Long chatCount = messageRepository.countByChatIdAndSenderIdIsNot(manitoInfo.getChatId().intValue(), 1L);         // 대화 빈도 계산
         int missionCount = missionStatusRepository.countByGuestGuestIdAndSuccessTimeIsNotNull(manitoInfo.getGuestId()); // 미션 수행 개수
 
         ResultWithManitoRes resultRes = ResultWithManitoRes.builder()
@@ -108,6 +114,8 @@ public class ResultService {
 
     // str은 항상 json 배열 형태로 들어옴
     public JSONArray stringToJson(String str) {
+        System.out.println("string To Json " + str);
+
         JSONArray jsonArray = new JSONArray();
         try {
             JSONParser parser = new JSONParser();
@@ -236,12 +244,13 @@ public class ResultService {
 
         for (Guest guest : guestList) {
             System.out.println("---------------------------- reserve guestId " + guest.getGuestId());
-            resultRestTemplate.postForEntity(
+            String sss = String.valueOf(resultRestTemplate.postForEntity(
                     fastAPIUrl + "/spark/{guestId}",
                     String.class,
                     String.class,
                     guest.getGuestId()
-            );
+            ));
+            System.out.println(sss);
             System.out.println("insert ");
         }
     }
@@ -252,8 +261,9 @@ public class ResultService {
         List<Guest> guestList = guestRepository.findAllByPartyId(partyId);
         // 파티 진행기간
         PartyRes party = partyService.findByPartyId(partyId);
-        int period = TimeUtil.calcDate(party.getStartTime().toString(), party.getEndTime().toString())-1;
-        System.out.println("period total " + period);
+        int period = TimeUtil.compareDate(party.getStartTime()+"", party.getEndTime()+"", 2 )/3-1;
+        System.out.println("result update period " +period + " /3 :" + (period/3-1) );
+
         for (Guest guest : guestList) {
             System.out.println("---------------------------- reserve ratio guestId " + guest.getGuestId());
             // 데일리미션 성공 여부 : 100 * (1 - 미션실패개수 / 미션 총개수) * 0.4(비율)
@@ -262,7 +272,7 @@ public class ResultService {
             // 데일리 채팅 여부 : 100 * (데일리채팅여부 / 미션 총개수) * 0.3(비율)
             int chatCount = 0;
             for (int i = 0; i < period; i++) {
-                String strCreatedTime = party.getStartTime().plus(Duration.ofDays(i)).toString().substring(0, 10);
+                String strCreatedTime = party.getStartTime().plus(Duration.ofMinutes(i*3)).toString().substring(0, 16);
                 System.out.println("createdTime " + strCreatedTime);
                 Boolean isChat =messageRepository.existsByChatIdAndCreatedTimeStartingWith(guest.getChat().getChatId(), strCreatedTime);
                 chatCount +=  isChat? 1 : 0;
@@ -276,6 +286,7 @@ public class ResultService {
 
             // 내 우호도 업데이트
             Result result = resultRepository.findByGuestGuestId(guest.getGuestId());
+            System.out.println("my result " + result.getResultId());
             if(result == null)
                 throw new ResultException(ResultErrorCode.MY_RESULT_NOT_FOUND);
             System.out.println(result.toString());
@@ -294,4 +305,32 @@ public class ResultService {
         }
     }
 
+    public ResultRes postResultAgain(Long partyId) {
+        System.out.println("post result again " + partyId);
+        reserveAnalysis(partyId);
+        updateResult(partyId);
+
+        // partyid로 result개수랑 partyid로 guest개수 확인해서 일치하는지 확인 -> 일치하면  true, 불일치하면 false
+        int newResultCount = resultRepository.countByGuestPartyPartyId(partyId);
+        int guestCount =guestService.getAllGuestByPartyId(partyId).size();
+
+        System.out.println("result count " + newResultCount + " guestCount " + guestCount);
+        if(newResultCount == guestCount)
+            return ResultRes.builder().isSuccess(true).build();
+        else
+            return ResultRes.builder().isSuccess(false).build();
+    }
+
+    public int deleteResult(Long partyId) {
+        // 파티아이디로 전체 guest id 가져오기
+        List<GuestRes> guestList = guestService.getAllGuestByPartyId(partyId);
+        for (GuestRes guestRes : guestList) {
+            Result result = resultRepository.findByGuestGuestId(guestRes.getGuestId());
+            if (result == null)
+                continue;
+            resultRepository.deleteById(result.getResultId());
+            System.out.println("guest " + guestRes.getGuestId());
+        }
+        return 1;
+    }
 }

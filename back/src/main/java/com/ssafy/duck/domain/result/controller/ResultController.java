@@ -3,6 +3,7 @@ package com.ssafy.duck.domain.result.controller;
 import com.ssafy.duck.common.TimeUtil;
 import com.ssafy.duck.domain.mission.service.MissionService;
 import com.ssafy.duck.domain.result.dto.response.MissionResultRes;
+import com.ssafy.duck.domain.result.dto.response.ResultRes;
 import com.ssafy.duck.domain.result.dto.response.ResultWithManitiRes;
 import com.ssafy.duck.domain.result.dto.response.ResultWithManitoRes;
 import com.ssafy.duck.domain.result.service.ResultService;
@@ -49,6 +50,15 @@ public class ResultController {
     public ResponseEntity<ResultWithManitoRes> getMeAndManitoResult(@PathVariable("guestId") Long guestId) {
         ResultWithManitoRes manitoResult = resultService.findMeManitoResult(guestId);
         return ResponseEntity.ok(manitoResult);
+    }
+
+    @PatchMapping("/{partyId}")
+    public ResponseEntity<ResultRes> postPartyResult(@PathVariable("partyId") Long partyId){
+        System.out.println("다시 돌리는중 " );
+        ResultRes resultRes = resultService.postResultAgain(partyId);
+
+
+        return ResponseEntity.ok(resultRes);
     }
 
 

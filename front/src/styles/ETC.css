@@ -45,3 +45,9 @@
 .slick-next:before {
   color: #eea23e;
 }
+
+.PartyLeaveAfterComplete {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}

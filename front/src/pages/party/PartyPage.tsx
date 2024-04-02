@@ -30,7 +30,6 @@ function PartyPage() {
         },
       });
       console.log(response);
-      // Axios.get(`/api/guests/all/${partyId}`)
       setParty((prevPartyState) => ({
         ...prevPartyState,
         accessCode: accessCode,
@@ -41,20 +40,12 @@ function PartyPage() {
         partyId: response.data.partyId,
       }));
       navigate('/partymaker');
-      // navigate('/partymaker', {
-      //   state: {
-      //     accessCode: response.data.accessCode,
-      //     partyName: response.data.partyName,
-      //     partyId:  response.data.partyId,
-      //   },
-      // });
     } catch (err) {
       Swal.fire({
         icon: 'error',
         html: '입력 코드가 올바르지 않습니다',
         confirmButtonColor: '#eea23e',
       });
-      // alert('입력 코드가 올바르지 않습니다');
       console.log('err :', err);
     }
   };
@@ -98,7 +89,6 @@ function PartyPage() {
           fields={6}
           name="accessCode"
           inputMode="verbatim"
-          autoFocus={true}
           {...props}
         />
       </div>

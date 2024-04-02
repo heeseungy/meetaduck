@@ -13,7 +13,6 @@ import Swal from 'sweetalert2';
 
 function PartyCreatePage() {
   const [partyName, setPartyName] = useState('');
-  const [nameCount, setNameCount] = useState(0);
   const navigate = useNavigate();
 
   const login = useRecoilValue(loginState);
@@ -45,18 +44,24 @@ function PartyCreatePage() {
         },
       );
 
-      setLogin((prevLoginState) => ({
-        ...prevLoginState,
-        partyId: response.data.partyId,
-      }));
-      setParty((prevPartyState) => ({
-        ...prevPartyState,
-        accessCode: response.data.accessCode,
-        partyName: partyName,
-        userId: login.userId,
-        partyId: response.data.partyId,
-      }));
-      navigate('/partymaker');
+      if (response.data.partyId === 1) {
+        return;
+      } else {
+        setLogin((prevLoginState) => ({
+          ...prevLoginState,
+          partyId: response.data.partyId,
+        }));
+        setParty(() => ({
+          accessCode: response.data.accessCode,
+          partyName: partyName,
+          userId: login.userId,
+          partyId: response.data.partyId,
+          endTime: '',
+          startTime: '',
+          deleted: false,
+        }));
+        navigate('/partymaker');
+      }
     } catch (err) {
       console.log(err);
       // alert(err);
@@ -89,13 +94,6 @@ function PartyCreatePage() {
           파티열기
         </Button>
       </div>
-      {/* <div className={styles.noPartySection}>
-        <div>오늘의 명언(삭제예정)</div>
-        <div>먼저핀꽃은 먼저진다</div>
-        <div>남보다 먼저 공을 세우려고</div>
-        <div>조급히 서둘것이 아니다</div>
-        <div>– 채근담</div>
-      </div> */}
     </div>
   );
 }

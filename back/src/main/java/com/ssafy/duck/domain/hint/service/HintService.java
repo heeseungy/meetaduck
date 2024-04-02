@@ -79,14 +79,14 @@ public class HintService {
     }
 
     // 힌트status에 질문 저장
-    public void set(List<Hint> hintList, Long partyId) {
+    public void set(int period, List<Hint> hintList, Long partyId) {
         // 파티아이디로 전체 guest id 가져오기
         List<GuestRes> guestList = guestService.getAllGuestByPartyId(partyId);
 
         //마니또 기간 계산
         Party party = partyRepository.findByPartyId(partyId)
                 .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
-        int period = TimeUtil.calcDate(party.getStartTime().toString(), party.getEndTime().toString()) - 1;
+//        int period = TimeUtil.calcDate(party.getStartTime().toString(), party.getEndTime().toString()) - 1;
         System.out.println("hint period " +period);
 
         Collections.shuffle(hintList);
@@ -118,12 +118,15 @@ public class HintService {
         // 마니또 종료 여부 확인
         Party party = partyRepository.findByPartyId(myInfo.getPartyId())
                 .orElseThrow(() -> new PartyException(PartyErrorCode.NOT_FOUND_PARTY));
-        boolean isEnd = TimeUtil.calcDate(TimeUtil.convertToKST(Instant.now()).toString(), party.getEndTime().toString()) == 0;
+        int isEndSec = TimeUtil.compareDate(TimeUtil.convertToKST(Instant.now()).toString(), party.getEndTime().toString(), 1);
+        System.out.println("isEnd Sec " + isEndSec);
         List<HintStatusRes> hintStatusResList = new ArrayList<>();
         List<HintStatus> hintStatusList = hintStatusRepository.findAllByGuestGuestId(manitoInfo.getGuestId());
 
         // 파티 종료 or 예상 마니또 있는지 확인. 있으면 hint status 전부 가져오기
-        if (myInfo.getVotedId() != 0L || isEnd) {
+        if (myInfo.getVotedId() != 0L || isEndSec <1) {
+            int fail = missionService.calcMissionFailCount(guestId);
+            System.out.println("fail -------------- " + fail);
             for (HintStatus hs : hintStatusList) {
                 Hint hint = hintRepository.findById(hs.getHint().getHintId())
                         .orElseThrow(() -> new HintException(HintErrorCode.QUESTION_NOT_FOUND));
