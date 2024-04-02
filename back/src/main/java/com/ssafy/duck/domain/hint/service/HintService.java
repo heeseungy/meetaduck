@@ -125,6 +125,8 @@ public class HintService {
 
         // 파티 종료 or 예상 마니또 있는지 확인. 있으면 hint status 전부 가져오기
         if (myInfo.getVotedId() != 0L || isEndSec <1) {
+            int fail = missionService.calcMissionFailCount(guestId);
+            System.out.println("fail -------------- " + fail);
             for (HintStatus hs : hintStatusList) {
                 Hint hint = hintRepository.findById(hs.getHint().getHintId())
                         .orElseThrow(() -> new HintException(HintErrorCode.QUESTION_NOT_FOUND));

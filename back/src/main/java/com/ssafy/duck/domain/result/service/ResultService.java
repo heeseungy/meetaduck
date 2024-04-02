@@ -114,6 +114,8 @@ public class ResultService {
 
     // str은 항상 json 배열 형태로 들어옴
     public JSONArray stringToJson(String str) {
+        System.out.println("string To Json " + str);
+
         JSONArray jsonArray = new JSONArray();
         try {
             JSONParser parser = new JSONParser();
