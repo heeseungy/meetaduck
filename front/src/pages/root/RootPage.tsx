@@ -18,7 +18,7 @@ function RootPage() {
   useEffect(() => {
     partyInfoService(party.partyId).then((data)=>{
       setParty(data)
-      if (party.deleted) {
+      if (data.deleted) {
         setLogin((prevLoginState) => ({
           ...prevLoginState,
           guestId: 0,
@@ -44,7 +44,7 @@ function RootPage() {
       }
     })
   },[]);
-  
+
   return (
     <>
       <div className="PartyLeaveAfterComplete">
