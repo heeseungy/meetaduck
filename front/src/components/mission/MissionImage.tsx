@@ -11,7 +11,7 @@ function MissionImage({ day, mission, nickname }: MissionImageProps) {
   return (
     <div>
       <div className={`${styles.MissionDate} ${styles.CardTitle}`}>
-        <div className={`FontMTitle FontBasic`}>{day}일차</div>
+        <div className={`FontMTitle FontBasic`}>{day+1}일차</div>
         <div className={`FontXS FontBasic ${styles.MissionContentBox}`}>
           <div>{nickname}님에게 </div>
           <div>{mission[day].missionContent}</div>
