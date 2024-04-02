@@ -99,7 +99,7 @@ public class ChatService {
 
 //        @Scheduled(cron = "0 0 9 * * *", zone = "Asia/Seoul")
 //    @Scheduled(cron = "0 */3 * * * *", zone = "Asia/Seoul")
-    @Scheduled(fixedDelay = 180000)
+//    @Scheduled(fixedDelay = 180000)
     public void sendTopic() {
         int dayOfMonth = LocalDate.now().getDayOfMonth();
         Topic topic = topicRepository.findByTopicId(Long.valueOf(dayOfMonth))

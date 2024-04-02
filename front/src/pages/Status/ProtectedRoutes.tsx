@@ -94,7 +94,10 @@ export default function PrivateRoute({ status }: PrivateRouteProps): React.React
       return <Navigate to="/partymaker" />;
     } else if (finishHintInput === null) {
       return <Navigate to="/hintinputform" />;
-    } else {
+    } else if (partyState.deleted === 1 ){
+      return <Navigate to='/party' />
+    }
+    else {
       return <Outlet />;
     }
   } else {
