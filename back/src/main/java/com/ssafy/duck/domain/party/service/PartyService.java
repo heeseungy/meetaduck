@@ -135,7 +135,8 @@ public class PartyService {
             System.out.println("dd" + TimeUtil.stringToInstant(startReq.getEndTime()));
             throw new PartyException(PartyErrorCode.THE_TIME_IS_SET_INCORRECTLY);   // 현재 일보다 이전 날짜를 입력 했을 때
         }
-        if (TimeUtil.calcDate(TimeUtil.convertToKST(Instant.now()) + "", TimeUtil.convertToKST(TimeUtil.stringToInstant(startReq.getEndTime()))+"") < 3 || TimeUtil.calcDate(TimeUtil.convertToKST(Instant.now()) + "", TimeUtil.convertToKST(TimeUtil.stringToInstant(startReq.getEndTime()))+"") > 7) {
+        if (TimeUtil.calcDate(TimeUtil.convertToKST(Instant.now()) + "", TimeUtil.convertToKST(TimeUtil.stringToInstant(startReq.getEndTime()))+"")+1 < 3
+                || TimeUtil.calcDate(TimeUtil.convertToKST(Instant.now()) + "", TimeUtil.convertToKST(TimeUtil.stringToInstant(startReq.getEndTime()))+"")+1 > 7) {
             throw new PartyException(PartyErrorCode.MAXIMUM_OF_3_TO_7_DAYS_ALLOWED);    // 설정한 날짜가 3일보다 작거나, 7일보다 클 경우
         }
         // 인원 수가 3명보다 적을 때

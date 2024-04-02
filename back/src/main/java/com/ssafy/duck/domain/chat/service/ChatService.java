@@ -100,8 +100,8 @@ public class ChatService {
 //        @Scheduled(cron = "0 0 9 * * *", zone = "Asia/Seoul")
 //    @Scheduled(cron = "0 */3 * * * *", zone = "Asia/Seoul")
 //    @Scheduled(fixedDelay = 180000)
-    public void sendTopic() {
-        int dayOfMonth = LocalDate.now().getDayOfMonth();
+    public void sendTopic(int index) {
+        int dayOfMonth = LocalDate.now().getDayOfMonth()+index;
         Topic topic = topicRepository.findByTopicId(Long.valueOf(dayOfMonth))
                 .orElseThrow(() -> new ChatException(ChatErrorCode.NOT_FOUND_TOPIC));
 
