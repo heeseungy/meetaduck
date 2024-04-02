@@ -138,6 +138,7 @@ function ChattingInputArea({ stompClient, senderId }: { stompClient: Client | nu
               </button>
               <textarea
                 placeholder="메시지를 입력하세요"
+                maxLength={200}
                 value={newMessage}
                 onKeyDown={(e) => pressEnter(e)}
                 onChange={(e) => setNewMessage(e.target.value)}

@@ -3,15 +3,16 @@ import styles from '@/styles/mission/MissionCompletePage.module.css';
 import { MissionResult } from '@/types/mission';
 
 interface MissionImageProps {
+  days: string[];
   day: number;
   mission: MissionResult[];
   nickname: string;
 }
-function MissionImage({ day, mission, nickname }: MissionImageProps) {
+function MissionImage({ days, day, mission, nickname }: MissionImageProps) {
   return (
     <div>
       <div className={`${styles.MissionDate} ${styles.CardTitle}`}>
-        <div className={`FontMTitle FontBasic`}>2/26</div>
+        <div className={`FontMTitle FontBasic`}>{days[day]}</div>
         <div className={`FontXS FontBasic ${styles.MissionContentBox}`}>
           <div>{nickname}님에게 </div>
           <div>{mission[day].missionContent}</div>
