@@ -1,10 +1,10 @@
 import { Doughnut } from 'react-chartjs-2';
 
 import { ResultDoughnutChartProps } from '@/types/result';
-import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
+import { ArcElement, Chart as ChartJS, Legend } from 'chart.js';
 
 // 라이브러리 등록
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(ArcElement, Legend);
 
 function ResultDoughnutChart(resultDoughnutChartProps: ResultDoughnutChartProps) {
   const data = {
@@ -25,11 +25,8 @@ function ResultDoughnutChart(resultDoughnutChartProps: ResultDoughnutChartProps)
       legend: {
         display: false,
       },
-      // legend: {
-      //   position: 'top' as const,
-      // },
       title: {
-        display: true,
+        display: false,
         text: 'Chart.js Line Chart',
       },
     },

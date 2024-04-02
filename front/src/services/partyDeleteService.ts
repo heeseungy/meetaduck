@@ -1,5 +1,22 @@
 import { Axios } from './axios';
 
+export async function partyDeleteService(accessCode: string, userId: number) {
+  try {
+    const response = await Axios.delete(`/api/parties`, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem('JWT')}`,
+      },
+      data: {
+        accessCode: accessCode,
+        userId: userId,
+      },
+    });
+    return response.data;
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
+
 export async function partyLeaveService(guestId: number) {
   try {
     const response = await Axios.delete(`/api/guests/${guestId}`, {

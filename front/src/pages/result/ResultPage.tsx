@@ -25,13 +25,10 @@ function ResultPage() {
       setMyProfile(data);
       console.log(data);
     });
-  }, []);
-
-  useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 2000);
-  }, [partyStatus]);
+  }, []);
 
   if (loading) {
     console.log('resultPage Loading');

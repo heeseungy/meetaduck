@@ -98,3 +98,17 @@
   justify-content: center;
   align-items: center;
 }
+
+.NoData {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Chart {
+  height: 8rem;
+}
+
+.Word {
+  height: 100px;
+}

@@ -74,11 +74,28 @@ function MissionManitoPage(props: MissionManitoProps) {
   // 미션 넘기는 function
   function newMission() {
     if (nextMissionList.length) {
-      missionNewService(nextMissionList[0].missionStatusId).then((data) => {
-        missionTodayService(login.guestId).then((data) => {
-          setMissionList(data);
-          console.log(missionList);
-        });
+      Swal.fire({
+        icon: 'warning',
+        title: '새로운 미션을 받으시겠습니까?',
+        text: '미션을 갱신 시 이전 미션으로 돌아갈 수 없습니다.',
+        confirmButtonColor: '#eea23e',
+        showCancelButton: true,
+      }).then((data) => {
+        if (data.isConfirmed) {
+          missionNewService(nextMissionList[0].missionStatusId).then((data) => {
+            missionTodayService(login.guestId).then((data) => {
+              setMissionList(data);
+              console.log(missionList);
+            });
+          });
+        }
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        html: '오늘은 더이상 새로고침 할 수 없어요.',
+        showConfirmButton: false,
+        timer: 1500,
       });
     }
   }
@@ -189,7 +206,7 @@ function MissionManitoPage(props: MissionManitoProps) {
                   <ArrowsClockwise size={20} />
                 </div>
               ) : (
-                <ArrowsClockwise color="#b3aa99" size={20} />
+                <ArrowsClockwise color="#b3aa99" size={20} onClick={newMission} />
               )}
             </div>
           )}
