@@ -15,7 +15,7 @@ export type ResultListProps = {
 };
 
 export type ResultDoughnutChartProps = {
-  ratio: number
+  ratio: number;
 };
 
 export type WordType = {
