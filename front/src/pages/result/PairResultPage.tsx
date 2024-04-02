@@ -1,3 +1,4 @@
+import missionAfter from '@/assets/images/missionAfter.png';
 import Card from '@/components/commons/Card';
 import ResultCountCard from '@/components/result/ResultCountCard';
 import ResultDoughnutChart from '@/components/result/ResultDoughnutChart';
@@ -46,25 +47,49 @@ function PairResultPage(pairResultProps: PairResultProps) {
             <div className={`FontMBold ${styles.MarginBottom1_5}`}>
               {pairResultProps.tag === 1 ? '마니또 단어' : '내 단어'}
             </div>
-            <div className={styles.WordCloud}>
-              {pairResultProps.tag === 1 ? (
-                <WordCloud {...{ width: 130, height: 100, data: result.wordcount }} />
+            {pairResultProps.tag === 1 ? (
+              result.wordcount.length > 0 ? (
+                <div className={styles.WordCloud}>
+                  <WordCloud {...{ width: 130, height: 100, data: result.wordcount }} />
+                </div>
               ) : (
+                <div className={`FontXS FontBasic ${styles.NoData} ${styles.Word}`}>
+                  <div>분석할 데이터가 없어요😥</div>
+                </div>
+              )
+            ) : result.myWordcount.length > 0 ? (
+              <div className={styles.WordCloud}>
                 <WordCloud {...{ width: 130, height: 100, data: result.myWordcount }} />
-              )}
-            </div>
+              </div>
+            ) : (
+              <div className={`FontXS FontBasic ${styles.NoData} ${styles.Word}`}>
+                <div>분석할 데이터가 없어요😥</div>
+              </div>
+            )}
           </div>
           <div className={styles.Column}>
             <div className={`FontMBold ${styles.MarginBottom1_5}`}>
               {pairResultProps.tag === 1 ? '내 단어' : '마니띠 단어'}
             </div>
-            <div className={styles.WordCloud}>
-              {pairResultProps.tag === 1 ? (
-                <WordCloud {...{ width: 130, height: 100, data: result.myWordcount }} />
+            {pairResultProps.tag === 1 ? (
+              result.myWordcount.length > 0 ? (
+                <div className={styles.WordCloud}>
+                  <WordCloud {...{ width: 130, height: 100, data: result.myWordcount }} />
+                </div>
               ) : (
+                <div className={`FontXS FontBasic ${styles.NoData} ${styles.Word}`}>
+                  <div>분석할 데이터가 없어요😥</div>
+                </div>
+              )
+            ) : result.wordcount.length > 0 ? (
+              <div className={styles.WordCloud}>
                 <WordCloud {...{ width: 130, height: 100, data: result.wordcount }} />
-              )}
-            </div>
+              </div>
+            ) : (
+              <div className={`FontXS FontBasic ${styles.NoData} ${styles.Word}`}>
+                <div>분석할 데이터가 없어요😥</div>
+              </div>
+            )}
           </div>
         </div>
         <div className={styles.Row}>
@@ -87,7 +112,13 @@ function PairResultPage(pairResultProps: PairResultProps) {
             </div>
 
             <div className={styles.DoughnutChartContainer}>
-              <ResultDoughnutChart {...{ ratio: result.ratio }} />
+              {result.ratio === -1 ? (
+                <div className={`FontXS FontBasic ${styles.NoData} ${styles.Chart}`}>
+                  <div>분석할 데이터가 없어요😥</div>
+                </div>
+              ) : (
+                <ResultDoughnutChart {...{ ratio: result.ratio }} />
+              )}
             </div>
           </div>
         </div>

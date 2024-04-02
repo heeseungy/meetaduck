@@ -1,13 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 
 import { loginState, partyState } from '@/recoil/atom';
-import { partyLeaveCompleteService } from '@/services/partyDeleteService';
+import { partyDeleteService } from '@/services/partyDeleteService';
 import styles from '@/styles/ErrorPage.module.css';
 import { SignOut } from '@phosphor-icons/react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Swal from 'sweetalert2';
 
 export default function PartyLeaveButton() {
+  const party = useRecoilValue(partyState);
   const setParty = useSetRecoilState(partyState);
   const login = useRecoilValue(loginState);
   const setLogin = useSetRecoilState(loginState);
@@ -15,12 +16,12 @@ export default function PartyLeaveButton() {
   const partyLeave = () => {
     Swal.fire({
       icon: 'warning',
-      html: '파티를 나가시겠습니까?',
+      html: '파티를 삭제하시겠습니까?',
       confirmButtonColor: '#eea23e',
       showCancelButton: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        partyLeaveCompleteService(login.guestId)
+        partyDeleteService(party.accessCode, login.userId)
           .then(() => {
             setLogin((prevLogin) => ({
               ...prevLogin,
