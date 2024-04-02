@@ -7,12 +7,10 @@ import MissionFirstPage from '@/pages/mission/MissionFirstPage';
 import MissionManitiPage from '@/pages/mission/MissionManitiPage';
 import MissionManitoPage from '@/pages/mission/MissionManitoPage';
 import { currentTimeState, loginState, partyState, partyStatusState } from '@/recoil/atom';
-import { MISSION_RESULT_LIST } from '@/recoil/dummy';
 import { completeMissionLoad, manitoNickname } from '@/services/missionTodayService';
 import styles from '@/styles/mission/Mission.module.css';
 import { MissionResultList } from '@/types/mission';
-import { Role } from '@/types/party';
-import { StatusType } from '@/types/party';
+import { Role, StatusType } from '@/types/party';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 function MissionPage() {

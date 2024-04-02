@@ -2,9 +2,8 @@ import { ChatId } from '@/types/chat';
 import { Answer, Hint } from '@/types/hint.ts';
 import { MissionContent, MissionResult, MissionResultList } from '@/types/mission';
 import { Party, PartyStatus, StatusType } from '@/types/party';
-import { ResultListItemProps } from '@/types/result';
-import { ManitoResultAnalysis, ResultAnalysis } from '@/types/result';
-import { ListProfile, LoginProfile, ManitiProfile } from '@/types/user.interface';
+import { ManitoResultAnalysis, ResultListItemProps } from '@/types/result';
+import { ListProfile, ManitiProfile } from '@/types/user.interface';
 
 // // 로그인 시 필요한 데이터
 // export const MY_INFO: LoginProfile = {

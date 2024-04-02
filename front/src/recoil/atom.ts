@@ -1,10 +1,8 @@
 import { ChatId } from '@/types/chat';
-import { Party, PartyStatus, StatusType } from '@/types/party';
+import { Party } from '@/types/party';
 import { LoginProfile } from '@/types/user.interface';
 import { atom, selector } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
-
-import { CHAT_ID_LIST, PARTY1 } from './dummy';
 
 const { persistAtom } = recoilPersist({
   key: 'sessionStorage',
@@ -55,7 +53,7 @@ export const partyStatusState = selector({
     } else {
       // const endTime = new Date(date2);
       const endTime = new Date(new Date(date2).getTime() - 9 * 60 * 60 * 1000);
-      console.log("end time ", endTime)
+      console.log('end time ', endTime);
       const currentTime = new Date(now);
       // const currentTime = new Date(new Date(now).getTime() + 100 * 60 * 60 * 1000);
       // const before24Time = new Date(endTime.getTime() - 24 * 60 * 60 * 1000);

@@ -5,8 +5,7 @@ import MissionImage from '@/components/mission/MissionImage';
 import MissionSlider from '@/components/mission/MissionSlider';
 import styles from '@/styles/mission/MissionCompletePage.module.css';
 import { MissionResultList } from '@/types/mission';
-import { Role } from '@/types/party';
-import { Party } from '@/types/party';
+import { Party, Role } from '@/types/party';
 
 interface MissionCompletePageProps {
   role: number;
@@ -23,8 +22,8 @@ function MissionCompletePage({ role, party, nickname, missionResultList }: Missi
   const startTime = new Date(party.startTime);
   const endTime = new Date(party.endTime);
   // const date = mission.length;
-  const date = Math.ceil(Math.abs((endTime.getTime() - startTime.getTime()) / (24 * 60 * 1000))); 
-  console.log("mission complete date", date)
+  const date = Math.ceil(Math.abs((endTime.getTime() - startTime.getTime()) / (24 * 60 * 1000)));
+  console.log('mission complete date', date);
   let days: string[] = [];
   for (let i = 0; i < date; i++) {
     const d = new Date();
