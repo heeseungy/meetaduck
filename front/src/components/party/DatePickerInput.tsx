@@ -2,12 +2,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
-import dayjs, { Dayjs } from 'dayjs';
-
-import { partyState } from '@/recoil/atom';
-import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { useEffect } from 'react';
-
+import dayjs from 'dayjs';
 
 function DatePickerInput({ setEndDate }) {
   const datePickerFormat = 'YYYY-MM-DD';

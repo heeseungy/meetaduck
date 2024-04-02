@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import Slider, { Settings } from 'react-slick';
 
-import styles from '@/styles/vote/VoteCarouselList.module.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 

@@ -7,11 +7,9 @@ import Card from '@/components/commons/Card';
 import HintInputQuestion from '@/components/hint/HintInputQuestion';
 import { loginState } from '@/recoil/atom';
 // Recoil을 이용한 상태 관리에서 사용되는 loginState 상태
-import { hintPageService } from '@/services/hintPageService';
 // 힌트 페이지 관련 서비스 로직을 처리하는 함수
 import styles from '@/styles/hint/HintInputFormPage.module.css';
 // CSS 모듈 스타일
-import { Answer } from '@/types/hint';
 // 힌트 관련 타입 정의
 import { useRecoilValue } from 'recoil';
 
