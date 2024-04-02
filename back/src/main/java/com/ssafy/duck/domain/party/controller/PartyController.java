@@ -95,7 +95,7 @@ public class PartyController {
             PartyRes party = partyService.find(startReq.getAccessCode());
             taskSchedulerService.scheduleTask(partyRes.getPartyId(), party.getEndTime().minus(Duration.ofMinutes(1)) );  // 여기 확인
             for(int i = 0; i<period; i++){
-                taskSchedulerService.scheduleChatTopic(party.getStartTime().plus(Duration.ofMinutes(i*3))   );
+                taskSchedulerService.scheduleChatTopic(party.getStartTime().plus(Duration.ofMinutes(i*3)),i   );
             }
 //            taskSchedulerService.scheduleTask(partyRes.getPartyId(), TimeUtil.convertToKST(TimeUtil.stringToInstant(startReq.getEndTime()).minus(Duration.ofMinutes(5))) );
             return ResponseEntity.ok().build();

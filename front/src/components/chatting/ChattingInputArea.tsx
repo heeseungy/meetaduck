@@ -64,14 +64,25 @@ function ChattingInputArea({ stompClient, senderId }: { stompClient: Client | nu
           // window.alert('이미지 파일을 업로드해주세요.');
           // console.log(error.message);
         });
+      e.target.value = '';
     }
   };
 
   // s3파일 업로드 함수
   const uploadFile = (file: File) => {
+    // 현재 날짜와 시간을 yyyyMMddHHmmss 형식의 문자열로 변환
+    const now = new Date();
+    const timestamp = `${now.getFullYear()}${('0' + (now.getMonth() + 1)).slice(-2)}${('0' + now.getDate()).slice(-2)}${('0' + now.getHours()).slice(-2)}${('0' + now.getMinutes()).slice(-2)}${('0' + now.getSeconds()).slice(-2)}`;
+
+    // 원본 파일 이름에서 확장자를 추출
+    const fileExtension = file.name.split('.').pop();
+
+    // 현재 시간을 포함한 새로운 파일 이름 생성
+    const fileNameWithTimestamp = `image-${timestamp}.${fileExtension}`;
+
     const uploadParams = {
       Bucket: 's10p22c108', // 버킷 이름
-      Key: file.name, // 저장될 파일 이름
+      Key: fileNameWithTimestamp, // 저장될 파일 이름
       Body: file, // 파일 객체
     };
 

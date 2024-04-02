@@ -28,11 +28,11 @@ public class TaskSchedulerService {
         taskScheduler.schedule(task, scheduledTime);
     }
 
-    public void scheduleChatTopic( Instant scheduledTime) {
+    public void scheduleChatTopic( Instant scheduledTime, int index) {
         System.out.println("chat schedule  " + scheduledTime);
         scheduledTime = scheduledTime.minus(Duration.ofHours(9));
         Runnable chatTask = () -> {
-            chatService.sendTopic();
+            chatService.sendTopic(index);
         };
         taskScheduler.schedule(chatTask, scheduledTime);
     }

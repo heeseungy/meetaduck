@@ -1,0 +1,68 @@
+.PartyLeave {
+  position: absolute;
+  top: 5rem;
+  right: 0rem;
+  z-index: 999999;
+  width: 20rem;
+  height: 5rem;
+  /* background-color: #eea23e; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.ImageBox {
+  position: relative;
+}
+.PartyLeave img {
+  width: 5rem;
+  rotate: -25deg;
+  position: absolute;
+  bottom: -1.5rem;
+  /* background-color: aqua; */
+}
+
+.ToggleActive {
+  transition: transform 0.5s ease-out;
+  /* transform: ; */
+  transform: translate(-10.3rem) rotate(25deg);
+}
+
+.ToggleHidden {
+  transition: transform 0.5s ease-out;
+  transform: translate(8.3rem);
+}
+.DeleteBox {
+  background-color: #ff5952;
+  color: white;
+}
+
+.TextBox {
+  background-color: #e5e5e7;
+  color: #4d4637;
+}
+
+.Box {
+  border-radius: 1rem;
+  right: 3rem;
+  bottom: 0rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 10rem;
+  height: 2rem;
+}
+
+.ToggleTextActive {
+  transition: transform 0.5s ease-out;
+  transform: translate(0rem);
+}
+
+.ToggleTextHidden {
+  transition: transform 0.3s ease-out;
+  transform: translate(15rem);
+}

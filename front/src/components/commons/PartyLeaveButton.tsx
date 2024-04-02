@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import voteAfter from '@/assets/images/voteAfter.png';
 import { loginState, partyState } from '@/recoil/atom';
 import { partyDeleteService } from '@/services/partyDeleteService';
-import styles from '@/styles/ErrorPage.module.css';
-import { SignOut } from '@phosphor-icons/react';
+import styles from '@/styles/commons/PartyLeaveButton.module.css';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Swal from 'sweetalert2';
 
@@ -13,6 +14,7 @@ export default function PartyLeaveButton() {
   const login = useRecoilValue(loginState);
   const setLogin = useSetRecoilState(loginState);
   const navigate = useNavigate();
+  const [btnToggle, setBtnToggle] = useState(false);
   const partyLeave = () => {
     Swal.fire({
       icon: 'warning',
@@ -52,8 +54,29 @@ export default function PartyLeaveButton() {
     });
   };
   return (
-    <div className={`${styles.PartyLeave}`} onClick={partyLeave}>
-      <SignOut size={32} color="#ffffff" />
+    <div className={`${styles.PartyLeave}`}>
+      <div
+        onClick={() => {
+          setBtnToggle(!btnToggle);
+        }}
+        className={`${styles.ImageBox} ${styles.ToggleActive} ${btnToggle ? styles.ToggleActive : styles.ToggleHidden}`}
+      >
+        <img src={voteAfter} alt="" />
+      </div>
+      <div
+        className={`FontS ${party.userId === login.userId ? styles.DeleteBox : styles.TextBox} ${styles.Box} ${btnToggle ? styles.ToggleTextActive : styles.ToggleTextHidden}`}
+      >
+        {party.userId === login.userId ? (
+          <div className={`FontSTitle ${styles.Delete}`} onClick={partyLeave}>
+            파티 삭제
+          </div>
+        ) : (
+          <>
+            <div>파티 주최자만</div>
+            <div> 파티를 종료할 수 있어요.</div>
+          </>
+        )}
+      </div>
     </div>
   );
 }

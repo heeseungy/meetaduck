@@ -9,7 +9,7 @@ function MainNav() {
   console.log(location);
   return (
     <>
-      <nav className={styles.wrapper}>
+      <nav className={styles.wrapper} style={{zIndex:2}}>
         <div>
           <Link to="/mission">
             {location.pathname === '/mission' ? (
