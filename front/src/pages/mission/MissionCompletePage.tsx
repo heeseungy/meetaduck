@@ -69,7 +69,7 @@ function MissionCompletePage({ role, party, nickname, missionResultList }: Missi
           ))}
         </MissionSlider>
       </div>
-      <MissionImage {...{ days: days, day: checkedDay, mission: mission, nickname: nickname }} />
+      <MissionImage {...{ day: checkedDay, mission: mission, nickname: nickname }} />
     </div>
   );
 
