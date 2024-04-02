@@ -22,10 +22,10 @@ function MissionCompletePage({ role, party, nickname, missionResultList }: Missi
   // 날짜계산
   const startTime = new Date(party.startTime);
   const endTime = new Date(party.endTime);
-  // const date = mission.length; 
+  // const date = mission.length;
   // const date = Math.ceil(Math.abs((endTime.getTime() - startTime.getTime()) / (24 * 60 * 1000)));
   const date = Math.ceil(Math.abs((endTime.getTime() - startTime.getTime()) / (3 * 60 * 1000) - 1));
-  console.log('mission complete date', date); 
+  console.log('mission complete date', date);
   let days: string[] = [];
   for (let i = 0; i < date; i++) {
     const d = new Date();
@@ -69,7 +69,7 @@ function MissionCompletePage({ role, party, nickname, missionResultList }: Missi
           ))}
         </MissionSlider>
       </div>
-      <MissionImage {...{ day: checkedDay, mission: mission, nickname: nickname }} />
+      <MissionImage {...{ days: days, day: checkedDay, mission: mission, nickname: nickname }} />
     </div>
   );
 
@@ -78,7 +78,7 @@ function MissionCompletePage({ role, party, nickname, missionResultList }: Missi
       {role === Role.Manito ? (
         <div className={`FontMTitle FontBasic ${styles.TitleContainer}`}>
           <p>
-            진행기간 <span className={`FontRed`}>{date} </span>일 중
+            진행기간 <span className={`FontRed`}>{date + 1} </span>일 중
           </p>
           <p>
             총 <span className={`FontRed`}>{count} </span>개의 미션을 수행했어요!
