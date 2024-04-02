@@ -22,7 +22,8 @@ function MissionCompletePage({ role, party, nickname, missionResultList }: Missi
   const startTime = new Date(party.startTime);
   const endTime = new Date(party.endTime);
   // const date = mission.length;
-  const date = Math.ceil(Math.abs((endTime.getTime() - startTime.getTime()) / (24 * 60 * 1000)));
+  // const date = Math.ceil(Math.abs((endTime.getTime() - startTime.getTime()) / (24 * 60 * 1000)));
+  const date = Math.ceil(Math.abs((endTime.getTime() - startTime.getTime()) / (3 * 60 * 1000) - 1));
   console.log('mission complete date', date);
   let days: string[] = [];
   for (let i = 0; i < date; i++) {
