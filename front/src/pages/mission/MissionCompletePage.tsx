@@ -78,7 +78,7 @@ function MissionCompletePage({ role, party, nickname, missionResultList }: Missi
       {role === Role.Manito ? (
         <div className={`FontMTitle FontBasic ${styles.TitleContainer}`}>
           <p>
-            진행기간 <span className={`FontRed`}>{date + 1} </span>일 중
+            진행기간 <span className={`FontRed`}>{date} </span>일 중
           </p>
           <p>
             총 <span className={`FontRed`}>{count} </span>개의 미션을 수행했어요!
