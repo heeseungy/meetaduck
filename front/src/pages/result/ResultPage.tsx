@@ -30,41 +30,29 @@ function ResultPage() {
     }, 2000);
   }, []);
 
-  if (loading) {
-    console.log('resultPage Loading');
-    return <Loading />;
-  } else {
-    if (StatusType[partyStatus] === StatusType.Todo) {
-      // 시작 전
-      return <div>아직 파티가 시작하지 않았습니다.</div>;
-    } else if (StatusType[partyStatus] === StatusType.Complete) {
-      // 결과 발표
-      // return <div>여보세용</div>;
-      return <ResultSlides />;
-    } else if (StatusType[partyStatus] === StatusType.Before24) {
-      // 24시간 전부터
-      if (myProfile.votedId === 0) {
-        return (
-          <>
-            <VoteBefore24Page {...{ guestId: myProfile.guestId, myProfile: myProfile, setMyProfile: setMyProfile }} />
-          </>
-        );
-      } else {
-        return (
-          <>
-            <VoteAfterPage />
-          </>
-        );
-      }
-    } else {
-      // 진행 중
-      return (
-        <>
-          <VoteInProgressPage />
-        </>
-      );
-    }
-  }
-}
 
+  const A = <div>아직 파티가 시작하지 않았습니다.</div>;
+  const B = <ResultSlides />;
+  const C =  <VoteBefore24Page {...{ guestId: myProfile.guestId, myProfile: myProfile, setMyProfile: setMyProfile }} />
+  const D =             <VoteAfterPage />;
+  const E =           <VoteInProgressPage />
+  
+  const StatusResult = {
+    'Todo': A, 'Complete': B, 'Before24':{'C': C, 'D': D}, 'InProgress': E
+  }
+  return (
+
+    <>
+ {loading? 
+  <div style={{position: 'absolute',top:'0rem', zIndex: 1}}>
+    <Loading />
+  </div>
+ :<></>
+} 
+{partyStatus==='Before24'? myProfile.votedId===0? StatusResult['Before24'].C: StatusResult['Before24'].D  :StatusResult[partyStatus]}
+
+</>
+
+)
+}
 export default ResultPage;
