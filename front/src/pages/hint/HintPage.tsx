@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import HintInProgressPage from '@/pages/hint/HintInProgressPage';
 import HintNonePage from '@/pages/hint/HintNonePage';
