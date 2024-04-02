@@ -64,6 +64,7 @@ function ChattingInputArea({ stompClient, senderId }: { stompClient: Client | nu
           // window.alert('이미지 파일을 업로드해주세요.');
           // console.log(error.message);
         });
+      e.target.value = '';
     }
   };
 
