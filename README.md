@@ -10,7 +10,7 @@
 ## 개발 기간
 
 | 2024.02.19 ~ 2024.04.05 (7주) |
-| ----------------------- |
+| ----------------------------- |
 
 ## 개요
 
@@ -19,18 +19,16 @@
 Meet A Duck ! 은 새로운 만남 속에서 새로운 사람들과 친밀감을 형성하는 단계에서 활용도가 높으며,
 활동적인 분위기 속에서 **AI(KoELECTRA)**를 통해 상호 간의 **친밀도**를 측정하고, 나의 채팅 내역을 **BigData(Spark)** 로 처리하여 **언어 습관** 을 확인 할 수 있는 온라인 마니또 서비스입니다.
 
-
 ## 팀 소개
 
-
-| 팀원     | 역할      |
-| -------- | --------- |
-| 😈전원빈 | 팀장, BE  |
-| 👶강지수 | FE        |
-| 😁김현영 | BE        |
-| 👩안준선 | FE        |
-| 😄양희승 | BE        |
-| 👦최지웅 | BE        |
+| 팀원     | 역할     |
+| -------- | -------- |
+| 😈전원빈 | 팀장, BE |
+| 👶강지수 | FE       |
+| 😁김현영 | BE       |
+| 👩안준선 | FE       |
+| 😄양희승 | BE       |
+| 👦최지웅 | BE       |
 
 ## 🔨 기술 스택 🔨
 
@@ -42,9 +40,7 @@ Meet A Duck ! 은 새로운 만남 속에서 새로운 사람들과 친밀감을
 ![Gradle](https://img.shields.io/badge/Gradle-02303A.svg?style=for-the-badge&logo=Gradle&logoColor=white)
 ![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)
 
-
 **Frontend**
-
 
 ![React](http://img.shields.io/badge/react-61DAFB.svg?style=for-the-badge&logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
@@ -52,12 +48,10 @@ Meet A Duck ! 은 새로운 만남 속에서 새로운 사람들과 친밀감을
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 ![PWA](https://img.shields.io/badge/PWA-5A0FC8.svg?style=for-the-badge&logo=PWA&logoColor=white)
 
-
 **Database**
 
 ![MySQL](https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=white)
-
 
 **Deploy**
 
@@ -67,8 +61,8 @@ Meet A Duck ! 은 새로운 만남 속에서 새로운 사람들과 친밀감을
 ![Jenkins](https://img.shields.io/badge/jenkins-%232C5263.svg?style=for-the-badge&logo=jenkins&logoColor=white)
 ![RabbitMQ](https://img.shields.io/badge/RabbitMQ-FF6600.svg?style=for-the-badge&logo=RabbitMQ&logoColor=white)
 ![Amazon S3](https://img.shields.io/badge/amazon--s3-%23569A31.svg?style=for-the-badge&logo=amazon-s3&logoColor=white)
-<!-- ![Amazon EC2](https://img.shields.io/badge/amazon--ec2-FF9900.svg?style=for-the-badge&logo=amazonec2&logoColor=white) -->
 
+<!-- ![Amazon EC2](https://img.shields.io/badge/amazon--ec2-FF9900.svg?style=for-the-badge&logo=amazonec2&logoColor=white) -->
 
 **BIGDATA**
 
@@ -77,7 +71,6 @@ Meet A Duck ! 은 새로운 만남 속에서 새로운 사람들과 친밀감을
 ![Spark](https://img.shields.io/badge/spark-E25A1C.svg?style=for-the-badge&logo=apachespark&logoColor=white)
 ![Uvicorn](https://img.shields.io/badge/uvicorn-D82390.svg?style=for-the-badge&logo=gunicorn&logoColor=white)
 
-
 **AI**
 
 ![Jupyter](https://img.shields.io/badge/jupyter-F37626.svg?style=for-the-badge&logo=jupyter&logoColor=white)
@@ -85,7 +78,6 @@ Meet A Duck ! 은 새로운 만남 속에서 새로운 사람들과 친밀감을
 ![scikit-learn](https://img.shields.io/badge/scikitlearn-F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white)
 ![numpy](https://img.shields.io/badge/numpy-013243.svg?style=for-the-badge&logo=numpy&logoColor=white)
 ![Pandas](https://img.shields.io/badge/pandas-150458.svg?style=for-the-badge&logo=pandas&logoColor=white)
-
 
 **Collaboration**
 
@@ -99,11 +91,13 @@ Meet A Duck ! 은 새로운 만남 속에서 새로운 사람들과 친밀감을
 # 파일 구조
 
 ## FRONTEND
+
 ```ini
 향후추가
 ```
 
 ## BACKEND
+
 ```ini
 back
  ┣ gradle
@@ -295,6 +289,7 @@ back
  ┣ localhost.p12
  ┗ settings.gradle
 ```
+
 </details>
 
 # 시스템 아키텍처
@@ -306,26 +301,32 @@ back
 ## WireFrame
 
 ### 전체 와이어 프레임
+
 ![전체_와이어_프레임](/uploads/06c1b7b715699e792882857e4c685596/전체_와이어_프레임.png)
 
 ### 로그인 & 파티 시작
+
 ![로그인_파티생성_대기_와이어프레임](/uploads/6bc209032ca2fa4ce2ef63eed408edfb/로그인_파티생성_대기_와이어프레임.png)
 
 ### 미션
+
 ![미션_와이어프레임](/uploads/d2542d83702a83908cfd1cf36ab9cb92/미션_와이어프레임.png)
 
 ### 채팅
+
 ![채팅_와이어프레임](/uploads/02728d468ecf241b6553dde16ee1189c/채팅_와이어프레임.png)
 
 ### 힌트
+
 ![힌트_와이어프레임](/uploads/62493453bfb019b7debf77a5ad1fb2d9/힌트_와이어프레임.png)
 
 ### 결과
+
 ![결과_와이어프레임_종료전_](/uploads/423c40e178ea9d953f1d39167f1bc4d8/결과_와이어프레임_종료전_.png)
 
 ### 파티 종료 후
-![파티_종료_후_와이어프레임](/uploads/6e58b6d3ae41c6dccda3fe12ab80f24a/파티_종료_후_와이어프레임.png)
 
+![파티_종료_후_와이어프레임](/uploads/6e58b6d3ae41c6dccda3fe12ab80f24a/파티_종료_후_와이어프레임.png)
 
 # ERD
 
@@ -336,6 +337,7 @@ back
 ### 1. 사용자
 
 - 파티
+
   - 소셜 로그인(Kakao)
   - 파티 생성
   - 파티 참가
@@ -343,28 +345,31 @@ back
   - 파티 삭제
 
 - 미션
-   - 미션 수행
-   - 마니또의 미션 확인
+
+  - 미션 수행
+  - 마니또의 미션 확인
 
 - 채팅
-    - 실시간 그룹채팅
-    - 실시간 마니또와 채팅
-    - 실시간 마니띠와 채팅
+
+  - 실시간 그룹채팅
+  - 실시간 마니또와 채팅
+  - 실시간 마니띠와 채팅
 
 - 힌트
-    - 힌트 작성
-    - 마니또의 힌트 조회
+
+  - 힌트 작성
+  - 마니또의 힌트 조회
 
 - 결과
-   - 예상 마니또 투표
-   - (종료 후) 힌트 전체 조회
-   - (종료 후) AI기반 친밀도 분석결과조회
-   - (종료 후) 빅데이터 기반 WordCloud 제공
-   - (종료 후) 예상 마니또 투표 결과
-   - (종료 후) 대화 빈도/횟수 조회
-   - (종료 후) 미션 수행횟수 조회
-   - (종료 후) 긍정어 부정어 사용비율 조회
-   
+  - 예상 마니또 투표
+  - (종료 후) 힌트 전체 조회
+  - (종료 후) AI기반 친밀도 분석결과조회
+  - (종료 후) 빅데이터 기반 WordCloud 제공
+  - (종료 후) 예상 마니또 투표 결과
+  - (종료 후) 대화 빈도/횟수 조회
+  - (종료 후) 미션 수행횟수 조회
+  - (종료 후) 긍정어 부정어 사용비율 조회
+
 ---
 
 - 메인 화면
@@ -379,18 +384,19 @@ back
 
 ### 2. 화면 사진 넣을 곳
 
-- 2-1. 
+- 2-1.
 
   ![]()
 
-
 # 컨벤션
+
 ### Branch
+
 ```javascript
 - 주요 브랜치 (항상 유지)
     - **master**
         - 항상 배포 가능한 브랜치 (백업)
-    
+
     - **develop**
         - 배포 브랜치(main)의 다음 버전을 준비하는 브랜치
         - 개발된 모든 코드의 통합 장소
@@ -399,15 +405,18 @@ back
         - 특정 기능을 개발하는 브랜치
         - develop 브랜치에서 생성, 기능 개발 후 develop 브랜치로 병합
         - e.g. `feature/be/login`, `feature/fe/logou`
-    
+
     - **hotfix**
         - 배포 브랜치의 현재 버전에서 버그가 생겼을 때 긴급 수정을 위한 브랜치
         - main 브랜치에서 생성, 버그 수정 후 main 및 develop 브랜치로 병합
         - e.g. `hotfix/20240111`, `hotfix/#5`
 ```
+
 ### Commit
+
 - 커밋 메시지 구조
   - 개행 2번씩.
+
 ```text
 type: <subject>
 
@@ -417,6 +426,7 @@ type: <subject>
 ```
 
 - type
+
 ```javascript
 - feat: 기능 추가
 - fix: 버그 수정
@@ -431,6 +441,7 @@ type: <subject>
 ```
 
 - subject
+
 ```javascript
 1. 최대 50글자까지 작성
 2. 특수기호 사용 금지 (마침표 등)
@@ -441,12 +452,14 @@ type: <subject>
 ```
 
 - body
+
 ```javascript
 1. 생략 가능
 2. '어떻게'보다는 '무엇을', '왜' 변경했는지 작성
 ```
 
 - footer
+
 ```python
 1. 생략 가능
 2. GitLab 연동
@@ -456,3 +469,10 @@ type: <subject>
 6. Related to #<이슈번호>
 7. e.g. `Fixes: #47`, `Related to: #32, 21`
 ```
+
+# DATA
+
+네이버 영화 리뷰 : https://github.com/e9t/nsmc
+네이버쇼핑, Steam 플랫폼 리뷰 데이터 : https://github.com/bab2min/corpus
+한국어 단발성 대화 데이터셋 : https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100
+감성 대화 말뭉치 : https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&aihubDataSe=realm&dataSetSn=86
