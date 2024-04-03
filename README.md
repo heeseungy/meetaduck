@@ -472,7 +472,7 @@ type: <subject>
 
 # DATA
 
--네이버 영화 리뷰 : https://github.com/e9t/nsmc
--네이버쇼핑, Steam 플랫폼 리뷰 데이터 : https://github.com/bab2min/corpus
--한국어 단발성 대화 데이터셋 : https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100
--감성 대화 말뭉치 : https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&aihubDataSe=realm&dataSetSn=86
+-네이버 영화 리뷰 : https://github.com/e9t/nsmc<br/>
+-네이버쇼핑, Steam 플랫폼 리뷰 데이터 : https://github.com/bab2min/corpus<br/>
+-한국어 단발성 대화 데이터셋 : https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100<br/>
+-감성 대화 말뭉치 : https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&aihubDataSe=realm&dataSetSn=86<br/>
