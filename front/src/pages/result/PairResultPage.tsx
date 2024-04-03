@@ -38,7 +38,7 @@ function PairResultPage(pairResultProps: PairResultProps) {
             src={pairResultProps.tag === 1 ? manito!.thumbnailUrl : maniti!.thumbnailUrl}
             alt=""
           />
-          <div className="FontSBold">우호도 {result!.favorability}점</div>
+          <div className="FontSBold">친밀도 {result!.favorability}점</div>
         </div>
       </div>
       <div>
