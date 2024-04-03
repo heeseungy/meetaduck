@@ -49,7 +49,9 @@ function ChatListArea({ tag, messages }: { tag: string; messages: MessageRes[] }
                         ${
                           createdTime.getUTCHours() < 12
                             ? `0${createdTime.getUTCHours()}`
-                            : createdTime.getUTCHours() < 22
+                            : createdTime.getUTCHours() <= 12?
+                             createdTime.getUTCHours() :
+                            createdTime.getUTCHours() < 22
                               ? `0${createdTime.getUTCHours() - 12}`
                               : createdTime.getUTCHours() - 12
                         }
@@ -93,7 +95,9 @@ function ChatListArea({ tag, messages }: { tag: string; messages: MessageRes[] }
                         ${
                           createdTime.getUTCHours() < 12
                             ? `0${createdTime.getUTCHours()}`
-                            : createdTime.getUTCHours() < 22
+                            : createdTime.getUTCHours() <= 12?
+                             createdTime.getUTCHours() :
+                            createdTime.getUTCHours() < 22
                               ? `0${createdTime.getUTCHours() - 12}`
                               : createdTime.getUTCHours() - 12
                         }
