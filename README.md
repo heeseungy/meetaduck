@@ -607,8 +607,8 @@ back
   - (종료 후) 긍정어 부정어 사용비율 조회
 
 ---
-
-- 파티
+# 사용자 화면
+## 파티
 
 ![01파티생성](/uploads/7c5f921759e7cce2adfd8804bebb08c9/01파티생성.gif)
 
@@ -616,7 +616,9 @@ back
 
 ![03파티참가](/uploads/55feeb7f462927feab438e9dae1e38a1/03파티참가.gif)
 
-- 미션
+---
+
+## 미션
 
 ![11미션새로고침](/uploads/6c19a342ed61ac93a65d02ee1b7ce39c/11미션새로고침.gif)
 
@@ -624,17 +626,23 @@ back
 
 ![13미션확인](/uploads/a0d7744145f369ba40e587055e0de4dc/13미션확인.gif)
 
-- 힌트
+---
+
+## 힌트
 
 ![04힌트입력](/uploads/0da125e55b5c3a114c8d4b4f4fdbdc97/04힌트입력.gif)
 
 ![15힌트](/uploads/9ecbe82f0caf4ebd945c21e535605d7f/15힌트.gif)
 
-- 채팅
+---
+
+## 채팅
 
 ![14채팅](/uploads/628dc8e87e7ba784cd160206e22b89e0/14채팅.gif)
 
-- 결과
+---
+
+## 결과
 
 ![16투표](/uploads/ba869e2dabdca89f1703be10af1b0e9a/16투표.gif)
 
@@ -644,11 +652,15 @@ back
 
 ![23결과](/uploads/00b67cc4048ec78e2724f657d3421de6/23결과.gif)
 
-- 종료
+---
+
+## 종료
 
 ![24파티삭제](/uploads/39940b0f6316a2de2eb6efaf7c22456d/24파티삭제.gif)
 
 ![25참가자나가기](/uploads/ebbcf4ea1ab647c0a3646802304865d6/25참가자나가기.gif)
+
+---
 
 # 컨벤션
 
