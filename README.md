@@ -93,200 +93,436 @@ Meet A Duck ! 은 새로운 만남 속에서 새로운 사람들과 친밀감을
 ## FRONTEND
 
 ```ini
-향후추가
+front
+ ┣ public
+ ┃ ┣ icons
+ ┃ ┃ ┣ apple-touch-icon-144x144.png
+ ┃ ┃ ┣ apple-touch-icon-152x152.png
+ ┃ ┃ ┣ apple-touch-icon-72x72.png
+ ┃ ┃ ┣ apple-touch-icon-76x76.png
+ ┃ ┃ ┣ favicon-128.png
+ ┃ ┃ ┣ favicon-16x16.png
+ ┃ ┃ ┣ favicon-196x196.png
+ ┃ ┃ ┣ favicon-32x32.png
+ ┃ ┃ ┣ favicon-96x96.png
+ ┃ ┃ ┣ mstile-310x310.png
+ ┃ ┃ ┗ RubberDuckBase.png
+ ┃ ┣ manifest.json
+ ┃ ┗ reset.css
+ ┣ src
+ ┃ ┣ assets
+ ┃ ┃ ┣ fonts
+ ┃ ┃ ┗ images
+ ┃ ┣ components
+ ┃ ┃ ┣ chatting
+ ┃ ┃ ┃ ┣ ChatListArea.tsx
+ ┃ ┃ ┃ ┣ ChattingHeader.tsx
+ ┃ ┃ ┃ ┗ ChattingInputArea.tsx
+ ┃ ┃ ┣ commons
+ ┃ ┃ ┃ ┣ Button.tsx
+ ┃ ┃ ┃ ┣ Card.tsx
+ ┃ ┃ ┃ ┣ Carousel.tsx
+ ┃ ┃ ┃ ┣ Frame.tsx
+ ┃ ┃ ┃ ┣ Input.tsx
+ ┃ ┃ ┃ ┣ Loading.tsx
+ ┃ ┃ ┃ ┣ PartyLeaveButton.tsx
+ ┃ ┃ ┃ ┣ ProfileName.tsx
+ ┃ ┃ ┃ ┗ Slides.tsx
+ ┃ ┃ ┣ hint
+ ┃ ┃ ┃ ┣ HintChats.tsx
+ ┃ ┃ ┃ ┣ HintInputQuestion.tsx
+ ┃ ┃ ┃ ┣ HintMessage.tsx
+ ┃ ┃ ┃ ┗ HintProfile.tsx
+ ┃ ┃ ┣ mission
+ ┃ ┃ ┃ ┣ MissionImage.tsx
+ ┃ ┃ ┃ ┗ MissionSlider.tsx
+ ┃ ┃ ┣ navbar
+ ┃ ┃ ┃ ┗ MainNav.tsx
+ ┃ ┃ ┣ party
+ ┃ ┃ ┃ ┣ DatePickerInput.tsx
+ ┃ ┃ ┃ ┗ ShareButton.tsx
+ ┃ ┃ ┣ result
+ ┃ ┃ ┃ ┣ ResultCountCard.tsx
+ ┃ ┃ ┃ ┣ ResultDoughnutChart.tsx
+ ┃ ┃ ┃ ┣ ResultList.tsx
+ ┃ ┃ ┃ ┣ ResultListItem.tsx
+ ┃ ┃ ┃ ┣ ResultListItemProfile.tsx
+ ┃ ┃ ┃ ┗ WordCloud.tsx
+ ┃ ┃ ┗ vote
+ ┃ ┃ ┃ ┣ VoteCard.tsx
+ ┃ ┃ ┃ ┣ VoteCarouselItem.tsx
+ ┃ ┃ ┃ ┣ VoteCarouselList.tsx
+ ┃ ┃ ┃ ┣ VoteCarouselListItem.tsx
+ ┃ ┃ ┃ ┣ VoteRadioButton.tsx
+ ┃ ┃ ┃ ┣ VoteRadioButtonList.tsx
+ ┃ ┃ ┃ ┗ VoteRadioButtonProfileName.tsx
+ ┃ ┣ pages
+ ┃ ┃ ┣ chatting
+ ┃ ┃ ┃ ┣ ChattingDetailPage.tsx
+ ┃ ┃ ┃ ┗ ChattingPage.tsx
+ ┃ ┃ ┣ hint
+ ┃ ┃ ┃ ┣ HintInProgressPage.tsx
+ ┃ ┃ ┃ ┣ HintInputFormPage.tsx
+ ┃ ┃ ┃ ┣ HintNonePage.tsx
+ ┃ ┃ ┃ ┣ HintPage.tsx
+ ┃ ┃ ┃ ┗ HintResultPage.tsx
+ ┃ ┃ ┣ login
+ ┃ ┃ ┃ ┣ LoginPage.tsx
+ ┃ ┃ ┃ ┗ RedirectionPage.tsx
+ ┃ ┃ ┣ mission
+ ┃ ┃ ┃ ┣ MissionCompletePage.tsx
+ ┃ ┃ ┃ ┣ MissionFirstPage.tsx
+ ┃ ┃ ┃ ┣ MissionManitiPage.tsx
+ ┃ ┃ ┃ ┣ MissionManitoPage.tsx
+ ┃ ┃ ┃ ┣ MissionPage.tsx
+ ┃ ┃ ┃ ┗ MissionTodayPage.tsx
+ ┃ ┃ ┣ party
+ ┃ ┃ ┃ ┣ PartyCreatePage.tsx
+ ┃ ┃ ┃ ┣ PartyMakerPage.tsx
+ ┃ ┃ ┃ ┗ PartyPage.tsx
+ ┃ ┃ ┣ result
+ ┃ ┃ ┃ ┣ PairResultPage.tsx
+ ┃ ┃ ┃ ┣ ResultPage.tsx
+ ┃ ┃ ┃ ┣ ResultPairListPage.tsx
+ ┃ ┃ ┃ ┗ ResultSlidesPage.tsx
+ ┃ ┃ ┣ root
+ ┃ ┃ ┃ ┗ RootPage.tsx
+ ┃ ┃ ┣ Status
+ ┃ ┃ ┃ ┣ ErrorPage.tsx
+ ┃ ┃ ┃ ┣ ProtectedRoutes.tsx
+ ┃ ┃ ┃ ┣ ResultErrorPage.tsx
+ ┃ ┃ ┃ ┗ Router.tsx
+ ┃ ┃ ┗ vote
+ ┃ ┃ ┃ ┣ VoteAfterPage.tsx
+ ┃ ┃ ┃ ┣ VoteBefore24Page.tsx
+ ┃ ┃ ┃ ┗ VoteInProgressPage.tsx
+ ┃ ┣ recoil
+ ┃ ┃ ┣ atom.ts
+ ┃ ┃ ┗ dummy.ts
+ ┃ ┣ services
+ ┃ ┃ ┣ axios.ts
+ ┃ ┃ ┣ chatListLoadService.ts
+ ┃ ┃ ┣ chatSendImageService.ts
+ ┃ ┃ ┣ chatSendMessageService.ts
+ ┃ ┃ ┣ chatService.ts
+ ┃ ┃ ┣ HintInputQuestionService.ts
+ ┃ ┃ ┣ hintPageService.ts
+ ┃ ┃ ┣ loginService.ts
+ ┃ ┃ ┣ missionTodayService.ts
+ ┃ ┃ ┣ partyDeleteService.ts
+ ┃ ┃ ┣ partyStartService.ts
+ ┃ ┃ ┣ resultService.ts
+ ┃ ┃ ┣ settingFCM.ts
+ ┃ ┃ ┣ updateHintAnswersService.ts
+ ┃ ┃ ┗ voteService.ts
+ ┃ ┣ styles
+ ┃ ┃ ┣ chatting
+ ┃ ┃ ┃ ┣ ChatListArea.module.css
+ ┃ ┃ ┃ ┣ ChattingDetailPage.module.css
+ ┃ ┃ ┃ ┣ ChattingHeader.module.css
+ ┃ ┃ ┃ ┣ ChattingInputArea.module.css
+ ┃ ┃ ┃ ┗ ChattingPage.module.css
+ ┃ ┃ ┣ commons
+ ┃ ┃ ┃ ┣ Button.module.css
+ ┃ ┃ ┃ ┣ Card.module.css
+ ┃ ┃ ┃ ┣ Frame.module.css
+ ┃ ┃ ┃ ┣ Input.module.css
+ ┃ ┃ ┃ ┣ PartyLeaveButton.module.css
+ ┃ ┃ ┃ ┗ ProfileName.module.css
+ ┃ ┃ ┣ hint
+ ┃ ┃ ┃ ┣ HintChats.module.css
+ ┃ ┃ ┃ ┣ HintInputFormPage.module.css
+ ┃ ┃ ┃ ┣ HintInputQuestion.module.css
+ ┃ ┃ ┃ ┣ HintMessage.module.css
+ ┃ ┃ ┃ ┣ HintPage.module.css
+ ┃ ┃ ┃ ┗ HintProfile.module.css
+ ┃ ┃ ┣ login
+ ┃ ┃ ┃ ┗ LoginPage.module.css
+ ┃ ┃ ┣ mission
+ ┃ ┃ ┃ ┣ Mission.module.css
+ ┃ ┃ ┃ ┣ MissionCompletePage.module.css
+ ┃ ┃ ┃ ┗ MissionSlider.module.css
+ ┃ ┃ ┣ party
+ ┃ ┃ ┃ ┣ Partyjoin.module.css
+ ┃ ┃ ┃ ┗ PartyMaker.module.css
+ ┃ ┃ ┣ result
+ ┃ ┃ ┃ ┣ ResultCountCard.module.css
+ ┃ ┃ ┃ ┣ ResultListItem.module.css
+ ┃ ┃ ┃ ┣ ResultListItemProfile.module.css
+ ┃ ┃ ┃ ┗ ResultPage.module.css
+ ┃ ┃ ┣ vote
+ ┃ ┃ ┃ ┣ VoteAfterPage.module.css
+ ┃ ┃ ┃ ┣ VoteBefore24Page.module.css
+ ┃ ┃ ┃ ┣ VoteCard.module.css
+ ┃ ┃ ┃ ┣ VoteCarouselList.module.css
+ ┃ ┃ ┃ ┣ VoteInProgressPage.module.css
+ ┃ ┃ ┃ ┗ VoteRadioButton.module.css
+ ┃ ┃ ┣ webSocket
+ ┃ ┃ ┃ ┗ TestPage2.module.css
+ ┃ ┃ ┣ Colors.css
+ ┃ ┃ ┣ ErrorPage.module.css
+ ┃ ┃ ┣ ETC.css
+ ┃ ┃ ┣ MainNav.module.css
+ ┃ ┃ ┗ Typography.css
+ ┃ ┣ types
+ ┃ ┃ ┣ button.ts
+ ┃ ┃ ┣ chat.ts
+ ┃ ┃ ┣ chatMessage.ts
+ ┃ ┃ ┣ hint.ts
+ ┃ ┃ ┣ mission.ts
+ ┃ ┃ ┣ party.ts
+ ┃ ┃ ┣ result.ts
+ ┃ ┃ ┣ user.interface.ts
+ ┃ ┃ ┗ vote.ts
+ ┃ ┣ App.tsx
+ ┃ ┣ main.tsx
+ ┃ ┗ vite-env.d.ts
+ ┣ .env
+ ┣ .eslintrc.js
+ ┣ .gitignore
+ ┣ .prettierrc
+ ┣ Dockerfile
+ ┣ index.html
+ ┣ j10c108.p.ssafy.io-key.pem
+ ┣ j10c108.p.ssafy.io.pem
+ ┣ Jenkinsfile
+ ┣ localhost-key.pem
+ ┣ localhost.pem
+ ┣ package-lock.json
+ ┣ package.json
+ ┣ README.md
+ ┣ sw.js
+ ┣ tsconfig.json
+ ┣ tsconfig.node.json
+ ┗ vite.config.ts
 ```
 
 ## BACKEND
 
 ```ini
 back
- ┣ gradle
- ┃ ┗ wrapper
- ┃ ┃ ┣ gradle-wrapper.jar
- ┃ ┃ ┗ gradle-wrapper.properties
- ┣ src
- ┃ ┗ main
- ┃ ┃ ┣ java
- ┃ ┃ ┃ ┗ com
- ┃ ┃ ┃ ┃ ┗ ssafy
- ┃ ┃ ┃ ┃ ┃ ┗ duck
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ common
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ BaseTimeEntity.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ TimeUtil.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ config
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ CorsMvcConfig.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ RabbitConfig.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ RabbitProperties.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ SchedulerConfig.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ SecurityConfig.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ StompConfig.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ domain
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ chat
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ controller
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ChatController.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ RabbitStompController.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ dto
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ request
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MessageReq.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ response
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ChatRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MessageRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ entity
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Chat.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Message.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ Topic.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ChatErrorCode.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ChatException.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ repository
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ChatRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MessageRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ TopicRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ service
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ChatService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ guest
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ controller
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ GuestController.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ dto
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ request
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ GuestReq.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ VoteReq.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ response
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ GuestRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ PairRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ VoteRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ entity
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ Guest.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ GuestErrorCode.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ GuestException.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ repository
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ GuestRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ service
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ GuestService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ hint
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ controller
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ HintController.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ dto
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ request
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ HintReq.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ HintStatusReq.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ response
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ HintRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ HintStatusRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ entity
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Hint.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ HintStatus.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ HintErrorCode.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ HintException.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ repository
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ HintRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ HintStatusRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ service
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ HintService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ mission
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ controller
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MissionController.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ dto
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ request
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MissionImageUpdateReq.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MissionPassReq.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MissionSuccessReq.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ response
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MissionRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MyManitoMissionRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ entity
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Mission.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MissionStatus.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MissionErrorCode.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MissionException.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ repository
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MissionRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MissionStatusRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ service
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MissionService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ party
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ controller
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ PartyController.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ dto
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ request
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ CreateReq.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ DeleteReq.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ StartReq.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ response
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ CreateRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ PartyRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ entity
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ Party.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ PartyErrorCode.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ PartyException.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ repository
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ PartyRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ service
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ PartyService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ result
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ controller
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ResultController.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ dto
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ model
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Favorability.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ FavorabilityProjection.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ request
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ResultReq.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ response
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MissionResultRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ResultRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ResultWithManitiRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ResultWithManitoRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ entity
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ Result.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ResultErrorCode.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ResultException.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ repository
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ResultRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ service
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ResultService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ user
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ controller
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ UserController.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ dto
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ model
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ KakaoUserInfo.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ OAuthToken.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ request
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ UserSignUpReq.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ response
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ UserRes.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ entity
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ User.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ UserErrorCode.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ UserException.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ repository
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ UserRepository.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ service
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ UserService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ GlobalExceptionHandler.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ jwt
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ CustomJwtAuthenticationFilter.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ JwtProperties.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ scheduler
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ TaskSchedulerService.java
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ DuckApplication.java
- ┃ ┃ ┗ resources
+ ┣ .gradle
+ ┣ .idea
+ ┣ build
+ ┃ ┣ classes
+ ┃ ┃ ┗ java
+ ┃ ┃ ┃ ┗ main
+ ┃ ┃ ┃ ┃ ┣ com
+ ┃ ┃ ┃ ┃ ┃ ┗ ssafy
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ duck
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ common
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ BaseTimeEntity.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ TimeUtil.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ config
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ CorsMvcConfig.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ RabbitConfig.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ RabbitProperties.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ SchedulerConfig.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ SecurityConfig.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ StompConfig.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ domain
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ chat
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ controller
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ChatController.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ RabbitStompController.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ dto
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ request
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MessageReq$MessageReqBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MessageReq.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ response
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ChatRes$ChatResBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ChatRes.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MessageRes$MessageResBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MessageRes.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ entity
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Chat$ChatBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Chat.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Message$MessageBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Message.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Topic$TopicBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ Topic.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ChatErrorCode.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ChatException.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ repository
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ChatRepository.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MessageRepository.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ TopicRepository.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ service
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ChatService.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ guest
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ controller
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ GuestController.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ dto
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ request
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ GuestReq.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ VoteReq.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ response
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ GuestRes$GuestResBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ GuestRes.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ PairRes$PairResBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ PairRes.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ VoteRes$VoteResBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ VoteRes.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ entity
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Guest$GuestBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ Guest.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ GuestErrorCode.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ GuestException.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ repository
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ GuestRepository.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ service
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ GuestService.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ hint
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ controller
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ HintController.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ dto
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ request
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ HintReq.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ HintStatusReq$HintStatusReqBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ HintStatusReq.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ response
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ HintRes$HintResBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ HintRes.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ HintStatusRes$HintStatusResBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ HintStatusRes.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ entity
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Hint$HintBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Hint.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ HintStatus$HintStatusBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ HintStatus.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ HintErrorCode.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ HintException.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ repository
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ HintRepository.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ HintStatusRepository.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ service
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ HintService.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ mission
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ controller
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MissionController.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ dto
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ request
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MissionImageUpdateReq.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MissionPassReq$MissionPassReqBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MissionPassReq.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MissionSuccessReq.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ response
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MissionRes$MissionResBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MissionRes.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MyManitoMissionRes$MyManitoMissionResBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MyManitoMissionRes.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ entity
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Mission$MissionBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Mission.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MissionStatus$MissionStatusBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MissionStatus.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MissionErrorCode.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MissionException.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ repository
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MissionRepository.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MissionStatusRepository.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ service
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ MissionService.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ party
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ controller
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ PartyController.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ dto
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ request
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ CreateReq$CreateReqBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ CreateReq.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ DeleteReq$DeleteReqBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ DeleteReq.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ StartReq$StartReqBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ StartReq.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ response
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ CreateRes$CreateResBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ CreateRes.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ PartyRes$PartyResBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ PartyRes.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ entity
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Party$PartyBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ Party.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ PartyErrorCode.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ PartyException.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ repository
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ PartyRepository.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ service
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ PartyService.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ result
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ controller
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ResultController.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ dto
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ model
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Favorability.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ FavorabilityProjection.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ request
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ResultReq.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ response
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MissionResultRes$MissionResultResBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ MissionResultRes.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ResultRes$ResultResBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ResultRes.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ResultWithManitiRes$ResultWithManitiResBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ResultWithManitiRes.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ResultWithManitoRes$ResultWithManitoResBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ResultWithManitoRes.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ entity
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ Result$ResultBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ Result.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ ResultErrorCode.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ResultException.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ repository
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ResultRepository.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ service
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ ResultService.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ user
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ controller
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ UserController.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ dto
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ model
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ KakaoUserInfo$Account$Profile.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ KakaoUserInfo$Account.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ KakaoUserInfo.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ OAuthToken.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ request
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ UserSignUpReq$UserSignUpReqBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ UserSignUpReq.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ response
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ UserRes$UserResBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ UserRes.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ entity
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ User$UserBuilder.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ User.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ UserErrorCode.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ UserException.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ repository
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ UserRepository.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ service
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ UserService.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ exception
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ GlobalExceptionHandler.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ jwt
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ CustomJwtAuthenticationFilter.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ JwtAuthInterceptor.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ JwtErrorCode.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ JwtException.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ JwtProperties.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ scheduler
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ TaskSchedulerService.class
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ DuckApplication.class
  ┣ .gitignore
  ┣ build.gradle
  ┣ Dockerfile
  ┣ gradlew
  ┣ gradlew.bat
  ┣ Jenkinsfile
- ┣ keystore.p12
- ┣ localhost.p12
  ┗ settings.gradle
 ```
 
@@ -372,21 +608,47 @@ back
 
 ---
 
-- 메인 화면
-  ![메인화면]()
-
 - 파티
 
-  ![파티 생성]()
+![01파티생성](/uploads/7c5f921759e7cce2adfd8804bebb08c9/01파티생성.gif)
 
-- 파티
-  ![]()
+![02파티시작](/uploads/f8c6bc3016b8cd94c2508165f510679c/02파티시작.gif)
 
-### 2. 화면 사진 넣을 곳
+![03파티참가](/uploads/55feeb7f462927feab438e9dae1e38a1/03파티참가.gif)
 
-- 2-1.
+- 미션
 
-  ![]()
+![11미션새로고침](/uploads/6c19a342ed61ac93a65d02ee1b7ce39c/11미션새로고침.gif)
+
+![12미션제출](/uploads/46f53141879684942a55ea02e2a8bb0f/12미션제출.gif)
+
+![13미션확인](/uploads/a0d7744145f369ba40e587055e0de4dc/13미션확인.gif)
+
+- 힌트
+
+![04힌트입력](/uploads/0da125e55b5c3a114c8d4b4f4fdbdc97/04힌트입력.gif)
+
+![15힌트](/uploads/9ecbe82f0caf4ebd945c21e535605d7f/15힌트.gif)
+
+- 채팅
+
+![14채팅](/uploads/628dc8e87e7ba784cd160206e22b89e0/14채팅.gif)
+
+- 결과
+
+![16투표](/uploads/ba869e2dabdca89f1703be10af1b0e9a/16투표.gif)
+
+![21힌트확인](/uploads/d4d8cf21275bea2c202106a83e762862/21힌트확인.gif)
+
+![22미션](/uploads/19043eb60e5773c2c29946e77a278eeb/22미션.gif)
+
+![23결과](/uploads/00b67cc4048ec78e2724f657d3421de6/23결과.gif)
+
+- 종료
+
+![24파티삭제](/uploads/39940b0f6316a2de2eb6efaf7c22456d/24파티삭제.gif)
+
+![25참가자나가기](/uploads/ebbcf4ea1ab647c0a3646802304865d6/25참가자나가기.gif)
 
 # 컨벤션
 
