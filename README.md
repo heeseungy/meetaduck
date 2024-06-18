@@ -90,9 +90,14 @@ Meet A Duck ! 은 새로운 만남 속에서 새로운 사람들과 친밀감을
 
 # 파일 구조
 
-## FRONTEND
+<br>
 
-```ini
+<details>
+<summary>
+<b>Front</b>
+</summary>
+
+```log
 front
  ┣ public
  ┃ ┣ icons
@@ -296,10 +301,16 @@ front
  ┣ tsconfig.node.json
  ┗ vite.config.ts
 ```
+</details>
 
-## BACKEND
+<br>
 
-```ini
+<details>
+<summary>
+<b>Back</b>
+</summary>
+
+```log
 back
  ┣ .gradle
  ┣ .idea
@@ -528,9 +539,13 @@ back
 
 </details>
 
+<br>
+<br>
+<hr>
+
 # 시스템 아키텍처
 
-![시스템아키텍처](/uploads/cc1443628232deb6f709993f73930e49/System_Architecture.png)
+![System Architecture](https://github.com/heeseungy/meetaduck/assets/50705621/79ae0033-0d10-42a5-9eca-87c39fbf43b1)
 
 # 화면 정의서
 
@@ -538,35 +553,35 @@ back
 
 ### 전체 와이어 프레임
 
-![전체_와이어_프레임](/uploads/06c1b7b715699e792882857e4c685596/전체_와이어_프레임.png)
+![전체 와이어 프레임](https://github.com/heeseungy/meetaduck/assets/50705621/175eb8cd-8d73-4615-9167-3caca7e757d6)
 
 ### 로그인 & 파티 시작
 
-![로그인_파티생성_대기_와이어프레임](/uploads/6bc209032ca2fa4ce2ef63eed408edfb/로그인_파티생성_대기_와이어프레임.png)
+![로그인 파티생성 대기_와이어프레임](https://github.com/heeseungy/meetaduck/assets/50705621/14af09c2-6344-4218-9001-11251ff8d4d7)
 
 ### 미션
 
-![미션_와이어프레임](/uploads/d2542d83702a83908cfd1cf36ab9cb92/미션_와이어프레임.png)
+![미션_와이어프레임](https://github.com/heeseungy/meetaduck/assets/50705621/892c67ce-021a-41df-9823-e9f4ca3acffd)
 
 ### 채팅
 
-![채팅_와이어프레임](/uploads/02728d468ecf241b6553dde16ee1189c/채팅_와이어프레임.png)
+![채팅_와이어프레임](https://github.com/heeseungy/meetaduck/assets/50705621/9b754030-338c-4d95-aaf5-e55f0543e67f)
 
 ### 힌트
 
-![힌트_와이어프레임](/uploads/62493453bfb019b7debf77a5ad1fb2d9/힌트_와이어프레임.png)
+![힌트_와이어프레임](https://github.com/heeseungy/meetaduck/assets/50705621/11a2d017-0128-43df-a2b2-4b2b844265c2)
 
 ### 결과
 
-![결과_와이어프레임_종료전_](/uploads/423c40e178ea9d953f1d39167f1bc4d8/결과_와이어프레임_종료전_.png)
+![결과_와이어프레임(종료전)](https://github.com/heeseungy/meetaduck/assets/50705621/e9dbd362-f266-48ba-b2a0-e3b5c4a08595)
 
 ### 파티 종료 후
 
-![파티_종료_후_와이어프레임](/uploads/6e58b6d3ae41c6dccda3fe12ab80f24a/파티_종료_후_와이어프레임.png)
+![파티_종료_후_와이어프레임](https://github.com/heeseungy/meetaduck/assets/50705621/f3f8528c-b82e-446c-a1c6-b19ec08cd557)
 
 # ERD
 
-![ERD](/uploads/9a2ecd9e6644bdb2e818e294020073a9/ERD.png)
+![ERD](https://github.com/heeseungy/meetaduck/assets/50705621/f9122faf-2326-4c26-a947-a7a5eb57afc4)
 
 ## 서비스 소개 (주요 기능)
 
@@ -610,55 +625,55 @@ back
 # 사용자 화면
 ## 파티
 
-![01파티생성](/uploads/7c5f921759e7cce2adfd8804bebb08c9/01파티생성.gif)
+![01파티생성](https://github.com/heeseungy/meetaduck/assets/50705621/ba8b4d11-ca0e-4d1c-961e-e5e6165e55e9)
 
-![02파티시작](/uploads/f8c6bc3016b8cd94c2508165f510679c/02파티시작.gif)
+![02파티시작](https://github.com/heeseungy/meetaduck/assets/50705621/c14f3d5d-cbaf-40a0-8ba2-5d132e29be6b)
 
-![03파티참가](/uploads/55feeb7f462927feab438e9dae1e38a1/03파티참가.gif)
+![03파티참가](https://github.com/heeseungy/meetaduck/assets/50705621/3581e283-223d-4fc6-b236-a9a8f086a3d3)
 
 ---
 
 ## 미션
 
-![11미션새로고침](/uploads/6c19a342ed61ac93a65d02ee1b7ce39c/11미션새로고침.gif)
+![11미션새로고침](https://github.com/heeseungy/meetaduck/assets/50705621/76124458-8622-49b5-a921-8043667cc652)
 
-![12미션제출](/uploads/46f53141879684942a55ea02e2a8bb0f/12미션제출.gif)
+![12미션제출](https://github.com/heeseungy/meetaduck/assets/50705621/ef061afe-67ac-4b26-a1b7-5a72570282a0)
 
-![13미션확인](/uploads/a0d7744145f369ba40e587055e0de4dc/13미션확인.gif)
+![13미션확인](https://github.com/heeseungy/meetaduck/assets/50705621/05152010-92b6-49a7-85e9-b85cd6688e3a)
 
 ---
 
 ## 힌트
 
-![04힌트입력](/uploads/0da125e55b5c3a114c8d4b4f4fdbdc97/04힌트입력.gif)
+![04힌트입력](https://github.com/heeseungy/meetaduck/assets/50705621/b00dac0a-cfa7-4035-9544-22bdc27dabdc)
 
-![15힌트](/uploads/9ecbe82f0caf4ebd945c21e535605d7f/15힌트.gif)
+![15힌트](https://github.com/heeseungy/meetaduck/assets/50705621/54e0fec9-7166-45da-abd9-7bebd5c2930c)
 
 ---
 
 ## 채팅
 
-![14채팅](/uploads/628dc8e87e7ba784cd160206e22b89e0/14채팅.gif)
+![14채팅](https://github.com/heeseungy/meetaduck/assets/50705621/ef675cb0-d399-4265-9943-b43b6ef584d5)
 
 ---
 
 ## 결과
 
-![16투표](/uploads/ba869e2dabdca89f1703be10af1b0e9a/16투표.gif)
+![16투표](https://github.com/heeseungy/meetaduck/assets/50705621/71032896-e458-4de5-a01c-189440dc6d98)
 
-![21힌트확인](/uploads/d4d8cf21275bea2c202106a83e762862/21힌트확인.gif)
+![21힌트확인](https://github.com/heeseungy/meetaduck/assets/50705621/929f8028-13ba-4db4-9043-76d8644b698b)
 
-![22미션](/uploads/19043eb60e5773c2c29946e77a278eeb/22미션.gif)
+![22미션](https://github.com/heeseungy/meetaduck/assets/50705621/8e963157-a7a2-45fc-98e2-7bb8e9a5663f)
 
-![23결과](/uploads/00b67cc4048ec78e2724f657d3421de6/23결과.gif)
+![23결과](https://github.com/heeseungy/meetaduck/assets/50705621/548260b8-e8a9-44b3-a7fa-479dbf9b9d92)
 
 ---
 
 ## 종료
 
-![24파티삭제](/uploads/39940b0f6316a2de2eb6efaf7c22456d/24파티삭제.gif)
+![24파티삭제](https://github.com/heeseungy/meetaduck/assets/50705621/3ca4e693-c027-493f-9d2d-7e4befbbf6fb)
 
-![25참가자나가기](/uploads/ebbcf4ea1ab647c0a3646802304865d6/25참가자나가기.gif)
+![25참가자나가기](https://github.com/heeseungy/meetaduck/assets/50705621/38af35ef-1ee6-473e-b6b3-34be5e9c2c10)
 
 ---
 
